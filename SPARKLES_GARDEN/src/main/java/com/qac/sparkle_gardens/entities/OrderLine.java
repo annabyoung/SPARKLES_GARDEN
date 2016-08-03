@@ -1,5 +1,11 @@
 package com.qac.sparkle_gardens.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 /**
  * 
  * @author Damien Lloyd
@@ -7,26 +13,39 @@ package com.qac.sparkle_gardens.entities;
  */
 public class OrderLine 
 {
-	private String orderID;
-	private String serialNumber;
+	@OneToMany
+	@JoinColumn(name = "order_fk", nullable = false)
+	private Order order;
 	
-	/**
-	 * Default constructor
-	 */
-	OrderLine()
-	{
-		this.orderID = "";
-		this.serialNumber = "";
-	}
+	@OneToMany
+	@JoinColumn(name = "products_fk", nullable = false)
+	private List<Product> products;
 	
 	/**
 	 * Create OrderLine from Product and Order
 	 * @param p The product
 	 * @param o The order
 	 */
-	OrderLine(Product p, Order o)
+	OrderLine(Order o)
 	{
-		this.orderID = o.getOrderID();
-		this.serialNumber = p.getSerialNumber();
+		this.order = o;
+	}
+	
+	/**
+	 * Add product to the order line
+	 * @param p Product to add
+	 */
+	void addProduct(Product p)
+	{
+		this.products.add(p);
+	}
+	
+	/**
+	 * Retrieve list of products in order line
+	 * @return products
+	 */
+	List<Product> getProducts()
+	{
+		return products;
 	}
 }
