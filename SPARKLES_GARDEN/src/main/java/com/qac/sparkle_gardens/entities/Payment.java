@@ -1,5 +1,7 @@
 package com.qac.sparkle_gardens.entities;
-
+/*
+ * Allen will work on this
+ */
 public class Payment 
 {
 	private String paymentID;
