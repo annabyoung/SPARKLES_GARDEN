@@ -1,14 +1,27 @@
 package com.qac.sparkle_gardens.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * 
  * @author Damien Lloyd
  *
  */
+@Entity
+@Table (name = "order")
 public class Order 
 {
+	@Id
+	@Column (name = "orderID")
 	private String orderID;
+	
+	@Column (name = "quantity", nullable = false)
 	private int quantity;
+	
+	@Column (name = "priceTotal", nullable = false)
 	private int priceTotal;
 	
 	/**
@@ -17,6 +30,16 @@ public class Order
 	public Order()
 	{
 		
+	}
+	
+	/**
+	 * Construct Order with values
+	 */
+	public Order(String id, int quantity, int priceTotal)
+	{
+		this.orderID = id;
+		this.quantity = quantity;
+		this.priceTotal = priceTotal;
 	}
 	
 	/**
