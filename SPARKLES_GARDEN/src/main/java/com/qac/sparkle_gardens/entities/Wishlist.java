@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+
 /**
  * 
  * @author Tyler Deans
@@ -22,26 +23,34 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "Wishlist")
 public class Wishlist {
+	/**
+	 * Annotation for Wishlist table
+	 */
 	@Id 
 	@Column(name = "wishlistID")
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int wishlistID;
+	private Long wishlistID;
 	
 	@OneToOne
 	@JoinColumn(name = "customer_fk", nullable = false)
 	@NotNull
-	private int customerID;
+	private String customerID;
 	
 	@OneToMany
 	@JoinColumn(name="product_fk", nullable = false)
 	// the list of products in wishlist
 	private List<Product> products;
-
-	public int getCustomerID() {
+	
+	
+	public Wishlist(String custid, List<Product> products) {
+		customerID = custid;
+		this.products = products;
+	}
+	public String getCustomerID() {
 		return customerID;
 	}
 	
-	public void setCustomerID(int customerID) {
+	public void setCustomerID(String customerID) {
 		this.customerID = customerID;
 	}
 
@@ -53,7 +62,7 @@ public class Wishlist {
 		this.products = products;
 	}
 	
-	public int getWishlist() {
+	public Long getWishlist() {
 		return wishlistID;
 	}
 	
