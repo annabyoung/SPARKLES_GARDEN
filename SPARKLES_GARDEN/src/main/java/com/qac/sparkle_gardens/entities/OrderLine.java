@@ -3,6 +3,7 @@ package com.qac.sparkle_gardens.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
@@ -11,6 +12,7 @@ import javax.persistence.OneToMany;
  * @author Damien Lloyd
  *
  */
+@Entity
 public class OrderLine 
 {
 	@OneToMany
@@ -26,7 +28,7 @@ public class OrderLine
 	 * @param p The product
 	 * @param o The order
 	 */
-	OrderLine(Order o)
+	public OrderLine(Order o)
 	{
 		this.order = o;
 	}
@@ -44,8 +46,26 @@ public class OrderLine
 	 * Retrieve list of products in order line
 	 * @return products
 	 */
-	List<Product> getProducts()
+	public List<Product> getProducts()
 	{
 		return products;
+	}
+	
+	/**
+	 * Set order in order line
+	 * @param o Order to be set
+	 */
+	public void setOrder(Order o)
+	{
+		this.order = o;
+	}
+	
+	/**
+	 * Get order in order line
+	 * @return order
+	 */
+	public Order getOrder()
+	{
+		return order;
 	}
 }
