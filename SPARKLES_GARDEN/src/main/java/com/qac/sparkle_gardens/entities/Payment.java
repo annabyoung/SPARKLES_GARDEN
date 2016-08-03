@@ -7,12 +7,16 @@ public class Payment
 	private String cardNumber;
 	private String expiryDate;
 	
-	Payment()
-	{
-		this.paymentID = "";
-		this.name = "";
-		this.cardNumber = "";
-		this.expiryDate = "";
+	public Payment(){
+		
+	}
+	
+	public Payment(String paymentID, String name, String cardNumber, String expiryDate) {
+		super();
+		this.paymentID = paymentID;
+		this.name = name;
+		this.cardNumber = cardNumber;
+		this.expiryDate = expiryDate;
 	}
 
 	public String getPaymentID() 

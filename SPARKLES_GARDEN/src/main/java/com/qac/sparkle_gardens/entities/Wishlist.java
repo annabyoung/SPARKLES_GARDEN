@@ -1,7 +1,12 @@
 package com.qac.sparkle_gardens.entities;
-
+/**
+ * 
+ * @author Tyler Deans
+ *
+ */
 public class Wishlist {
 	private int customerID;
+	// the list of products in wishlist
 	private int[] products;
 
 	public int getCustomerID() {
