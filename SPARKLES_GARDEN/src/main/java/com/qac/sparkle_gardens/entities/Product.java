@@ -16,15 +16,41 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * 
+ * @author Annabelle Young
+ * 
+ * Product class that defines ability to find a product by any of its attributes, which includes the ID, name, amount of its stock, and its price.
+ * There are defined functions to allow retrieval of all of the product's attributes and the ability to set the values for everything except for product ID.
+ *
+ */
+
 @Entity
-@NamedQueries({@NamedQuery(name = OrderLine.FIND_BY_PRODUCT_NAME, query = "SELECT a FROM Product a WHERE a.productName = :productName"),})
+
+//Queries to find products by different attributes
+@NamedQueries({
+	@NamedQuery(name = Product.FIND_BY_PRODUCT_ID, 
+		query = "SELECT a FROM Product a WHERE a.productID = :productID"),
+	@NamedQuery(name = Product.FIND_BY_PRODUCT_NAME, 
+		query = "SELECT a FROM Product a WHERE a.productName = :productName"),
+	@NamedQuery(name = Product.FIND_BY_STOCK_LEVEL, 
+		query = "SELECT a FROM Product a WHERE a.stockLevel = :stockLevel"),
+	@NamedQuery(name = Product.FIND_BY_PRICE, 
+		query = "SELECT a FROM Product a WHERE a.price = :price")
+	
+})
 
 @Table (name = "products")
 public class Product {
+	/*
+	 * To do:
+	 * Product Image
+	 * Product Description
+	*/
 	@Id
 	@Column (name = "productID")
 	@GeneratedValue  (strategy = GenerationType.IDENTITY)//
-	private Long productID;
+	private String productID;
 	
 	@Column (name = "productName", nullable = false, length = 225)
 	@NotNull
@@ -41,12 +67,26 @@ public class Product {
 	@Size (min = 0, max = 100000)
 	private float price;
 	
+	//Many products to one wish list
 	@ManyToOne
 	@JoinColumn(name="wishlist_fk", nullable = false)
 	private Wishlist wishlist;
 	
+	//One product to many order lines
+	@OneToMany
+	@JoinColumn(name="orderline_fk", nullable = false)
+	private List<OrderLine> orderline;
+	
+	//setting Strings for queries to find Product by its attributes
+	public static final String FIND_BY_PRODUCT_ID= "Product.getProductID()";
+	public static final String FIND_BY_PRODUCT_NAME= "Product.getProductName()";
+	public static final String FIND_BY_STOCK_LEVEL= "Product.getStockLevel()";
+	public static final String FIND_BY_PRICE= "Product.getPrice()";	
+	
+	//blank constructor for Product
 	public Product() {	}
 	
+	//constructor for Product
 	public Product(String productName, int stockLevel, float price){	
 		this.productName = productName;	
 		this.stockLevel = stockLevel;
@@ -59,7 +99,9 @@ public class Product {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public Long getProductID() {
+	
+	//Retrieve Product ID
+	public String getProductID() {
 		return productID;
 	}
 	
@@ -76,6 +118,7 @@ public class Product {
 		this.price = price;
 	}
 	
-	public static final String FIND_BY_PRODUCT_NAME= "Product.getProductName";
+	
+	
 	
 }

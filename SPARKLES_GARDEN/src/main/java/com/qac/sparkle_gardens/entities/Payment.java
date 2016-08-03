@@ -38,6 +38,7 @@ public class Payment {
 	@Pattern(regexp="[0-9]{2}/[0-9]{2}",
             message="{invalid.expirationDate}")
 	private String expirationDate;
+	private String issueNumber;
 	
 	public static final String FIND_BY_CARD_NUMBER = "Payment.getCardNumber";
 	public static final String FIND_BY_PID = "Payment.getPid";
