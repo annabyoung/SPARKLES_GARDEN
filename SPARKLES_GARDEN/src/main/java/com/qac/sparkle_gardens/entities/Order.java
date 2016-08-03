@@ -2,7 +2,7 @@ package com.qac.sparkle_gardens.entities;
 
 public class Order 
 {
-	private int orderID;
+	private String orderID;
 	private int quantity;
 	private int priceTotal;
 	
@@ -11,12 +11,12 @@ public class Order
 		
 	}
 
-	public int getOrderID() 
+	public String getOrderID() 
 	{
 		return orderID;
 	}
 
-	public void setOrderID(int orderID) 
+	public void setOrderID(String orderID) 
 	{
 		this.orderID = orderID;
 	}
@@ -40,5 +40,4 @@ public class Order
 	{
 		this.priceTotal = priceTotal;
 	}
-
 }
