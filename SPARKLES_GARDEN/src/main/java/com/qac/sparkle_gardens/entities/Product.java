@@ -4,6 +4,17 @@ public class Product {
 	private String productName, serialNumber;
 	private int stockLevel;
 	private float price;
+	
+	public Product(){		
+	}
+	
+	public Product(String productName, String serialNumber, int stockLevel, float price) {
+		this.productName = productName;
+		this.serialNumber = serialNumber;
+		this.stockLevel = stockLevel;
+		this.price = price;
+	}
+	
 	public String getProductName() {
 		return productName;
 	}
