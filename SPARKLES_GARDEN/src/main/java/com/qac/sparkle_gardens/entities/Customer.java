@@ -1,16 +1,67 @@
 package com.qac.sparkle_gardens.entities;
 
+import javax.persistence.*;
+import javax.validation.constraints.*;
+/**
+ * 
+ * @author Sean Connelly 
+ * 
+ */
+//**Seannelly**//
+
+ @Entity
+ @Table (name = "customers")
+
+ @NamedQueries ({
+	 @NamedQuery (name = Customer.FIND_BY_FIRST_NAME, 
+			      query="SELECT a FROM Customer a WHERE a.firstName = :firstName"),
+	 @NamedQuery (name = Customer.FIND_BY_LAST_NAME, 
+		      query="SELECT a FROM Customer a WHERE a.lastName = :lastName"),
+	 @NamedQuery (name = Customer.FIND_BY_EMAIL, 
+		      query="SELECT a FROM Customer a WHERE a.EMAIL = :email"),
+	 @NamedQuery (name = Customer.FIND_BY_CREDIT_STATUS, 
+		      query="SELECT a FROM Customer a WHERE a.creditStatus = :creditStatus"),
+	 @NamedQuery (name = Customer.FIND_BY_ADDRESS, 
+		      query="SELECT a FROM Customer a WHERE a.address = :Address")
+ })
+ 
+ 
 public class Customer {
+	 
+	@Id
+	@Column (name ="accountID")
+	@OneToMany 
+	// not sure what the foreign key looks like 
+	@JoinColumn(name = "PUT SOMETHING HERE ", nullable = false)
+	//this may or may not be a thing in this thing 
 	
-	private int accountID;
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	private String accountID;
+	
+	@Column (name="first name")
+	@NotNull
+	@Size (min =3, max =255)
 	private String firstName;
+
+	@Column (name="last name")
+	@NotNull 
+	@Size (min =3, max =255)
 	private String lastName;
-	private String email;
+	
+	@Column (name="email")
+	@Size (min =3, max =255)
+	private String email;  
+	
+	@Column (name="credit status")
+	@Size (min =3, max =255)
 	private String creditStatus;
+	
+	@Column (name="address")
+	@Size (min =10, max =255)
 	private String address;
 	
 	
-	public Customer(int accountID, String firstName, String lastName, String email, String creditStatus,
+	public Customer(String accountID, String firstName, String lastName, String email, String creditStatus,
 			String address) {
 		super();
 		this.accountID = accountID;
@@ -32,7 +83,7 @@ public class Customer {
 	}
 
 
-	public int getAccountID() {
+	public String getAccountID() {
 		return accountID;
 	}
 
@@ -85,6 +136,12 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
+	
+	
+	public static final String FIND_BY_FIRST_NAME = "Customer.getFirstName()";
+	public static final String FIND_BY_LAST_NAME = "Customer.getLastName()";
+	public static final String FIND_BY_EMAIL = "Customer.getEmail()";
+	public static final String FIND_BY_CREDIT_STATUS = "Customer.getCreditStatus()";
+	public static final String FIND_BY_ADDRESS = "Customer.getAddress()";
 	
 }

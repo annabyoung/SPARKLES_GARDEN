@@ -11,21 +11,34 @@ public class OrderLineRepositoryOffline
 {
 	private OrderLineInitialData initialData;
 	
+	/**
+	 * Default constructor
+	 */
 	public OrderLineRepositoryOffline()
 	{
 		initialData = new OrderLineInitialData();
 	}
-
+	
+	/**
+	 * Add orderline to order line data. Persists beyond SLC
+	 */
 	public void persistOrderLine(OrderLine ol) 
 	{
 		initialData.addOrderLine(ol);
 	}
-
+	
+	/**
+	 * Add list of orderlines to current list
+	 */
 	public void persistOrderLines(List<OrderLine> ol) 
 	{
 		initialData.setOrderLines(ol);
 	}
-
+	
+	/**
+	 * Find orderline by the order ID
+	 * @param ID of the order
+	 */
 	public OrderLine findByID(String orderID) 
 	{
 		List<OrderLine> ol = initialData.getOrderLines();
@@ -38,12 +51,19 @@ public class OrderLineRepositoryOffline
 		}
 		return o;
 	}
-
+	
+	/**
+	 * Get order lines list
+	 */
 	public List<OrderLine> getOrderLines() 
 	{
 		return initialData.getOrderLines();
 	}
-
+	
+	/**
+	 * Update orderline in list based on the ol object
+	 * Warning: expensive operation
+	 */
 	public void updateOrderLine(OrderLine ol) 
 	{
 		List<OrderLine> _ol = initialData.getOrderLines();
@@ -55,7 +75,10 @@ public class OrderLineRepositoryOffline
 				o = _ol.set(i, o);
 		}
 	}
-
+	
+	/**
+	 * Removes orderline from list
+	 */
 	public void removeOrderLine(OrderLine ol)
 	{
 		List<OrderLine> _ol = initialData.getOrderLines();
