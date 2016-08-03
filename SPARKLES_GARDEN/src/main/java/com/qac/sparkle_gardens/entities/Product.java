@@ -17,7 +17,19 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@NamedQueries({@NamedQuery(name = OrderLine.FIND_BY_PRODUCT_NAME, query = "SELECT a FROM Product a WHERE a.productName = :productName"),})
+
+//Queries to find products by different attributes
+@NamedQueries({
+	@NamedQuery(name = Product.FIND_BY_PRODUCT_ID, 
+		query = "SELECT a FROM Product a WHERE a.productID = :productID"),
+	@NamedQuery(name = Product.FIND_BY_PRODUCT_NAME, 
+		query = "SELECT a FROM Product a WHERE a.productName = :productName"),
+	@NamedQuery(name = Product.FIND_BY_STOCK_LEVEL, 
+		query = "SELECT a FROM Product a WHERE a.stockLevel = :stockLevel"),
+	@NamedQuery(name = Product.FIND_BY_PRICE, 
+		query = "SELECT a FROM Product a WHERE a.price = :price")
+	
+})
 
 @Table (name = "products")
 public class Product {
@@ -41,9 +53,15 @@ public class Product {
 	@Size (min = 0, max = 100000)
 	private float price;
 	
+	//Many products to one wish list
 	@ManyToOne
 	@JoinColumn(name="wishlist_fk", nullable = false)
 	private Wishlist wishlist;
+	
+	//One product to many order lines
+	@OneToMany
+	@JoinColumn(name="orderline_fk", nullable = false)
+	private List<OrderLine> orderline;
 	
 	public Product() {	}
 	
@@ -76,6 +94,10 @@ public class Product {
 		this.price = price;
 	}
 	
-	public static final String FIND_BY_PRODUCT_NAME= "Product.getProductName";
+	public static final String FIND_BY_PRODUCT_ID= "Product.getProductID()";
+	public static final String FIND_BY_PRODUCT_NAME= "Product.getProductName()";
+	public static final String FIND_BY_STOCK_LEVEL= "Product.getStockLevel()";
+	public static final String FIND_BY_PRICE= "Product.getPrice()";
+	
 	
 }
