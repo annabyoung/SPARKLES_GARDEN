@@ -2,13 +2,14 @@ package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.List;
 
-import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.repositories.OrderLineRepository;
+import javax.inject.*;
 
 public class OrderLineRepositoryOffline 
 	implements OrderLineRepository
 {
+	@Inject
 	private OrderLineInitialData initialData;
 	
 	/**
@@ -62,7 +63,6 @@ public class OrderLineRepositoryOffline
 	
 	/**
 	 * Update orderline in list based on the ol object
-	 * Warning: expensive operation
 	 */
 	public void updateOrderLine(OrderLine ol) 
 	{

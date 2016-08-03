@@ -6,6 +6,7 @@ public class Payment
 	private String name;
 	private String cardNumber;
 	private String expiryDate;
+	private String issueNumber;
 	
 	public Payment(){
 		
