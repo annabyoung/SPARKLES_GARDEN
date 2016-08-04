@@ -1,6 +1,7 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
-import java.util.List;
+import java.util.ArrayList;
+
 import com.qac.sparkle_gardens.entities.Order;
 
 /**
@@ -11,7 +12,7 @@ import com.qac.sparkle_gardens.entities.Order;
  */
 public class OrderInitialData 
 {
-	private List<Order> orders;
+	private ArrayList<Order> orders;
 	
 	/**
 	 * Default constructor for OrderInitialData; constructs
@@ -19,11 +20,11 @@ public class OrderInitialData
 	 */
 	public OrderInitialData()
 	{
-		orders.add(new Order("OD01", 4, 40));
-		orders.add(new Order("OD02", 1, 100));
-		orders.add(new Order("OD03", 10, 60));
-		orders.add(new Order("OD04", 5, 37));
-		orders.add(new Order("OD05", 2, 10));
+		orders.add(new Order("OD01", "C001", 4, 40));
+		orders.add(new Order("OD02", "C002", 1, 100));
+		orders.add(new Order("OD03", "C003", 10, 60));
+		orders.add(new Order("OD04", "C001", 5, 37));
+		orders.add(new Order("OD05", "C003", 2, 10));
 	}
 	
 	/**
@@ -39,7 +40,7 @@ public class OrderInitialData
 	 * Get list of orders
 	 * @return orders
 	 */
-	public List<Order> getOrders()
+	public ArrayList<Order> getOrders()
 	{
 		return orders;
 	}
@@ -48,7 +49,7 @@ public class OrderInitialData
 	 * Concurrently set all orders in a list by another
 	 * @param orders
 	 */
-	public void setOrders(List<Order> orders)
+	public void setOrders(ArrayList<Order> orders)
 	{
 		this.orders = orders;
 	}

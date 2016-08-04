@@ -15,8 +15,11 @@ import javax.persistence.Table;
 public class Order 
 {
 	@Id
-	@Column (name = "orderID")
+	@Column (name = "orderID", nullable = false)
 	private String orderID;
+	
+	@Column (name = "customerID", nullable = false)
+	private String customerID;
 	
 	@Column (name = "quantity", nullable = false)
 	private int quantity;
@@ -35,9 +38,10 @@ public class Order
 	/**
 	 * Construct Order with values
 	 */
-	public Order(String id, int quantity, int priceTotal)
+	public Order(String order_id, String customer_id, int quantity, int priceTotal)
 	{
-		this.orderID = id;
+		this.orderID = order_id;
+		this.customerID = customer_id;
 		this.quantity = quantity;
 		this.priceTotal = priceTotal;
 	}

@@ -1,6 +1,6 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.repositories.OrderLineRepository;
@@ -31,7 +31,7 @@ public class OrderLineRepositoryOffline
 	/**
 	 * Add list of orderlines to current list
 	 */
-	public void persistOrderLines(List<OrderLine> ol) 
+	public void persistOrderLines(ArrayList<OrderLine> ol) 
 	{
 		initialData.setOrderLines(ol);
 	}
@@ -42,12 +42,12 @@ public class OrderLineRepositoryOffline
 	 */
 	public OrderLine findByID(String orderID) 
 	{
-		List<OrderLine> ol = initialData.getOrderLines();
+		ArrayList<OrderLine> ol = initialData.getOrderLines();
 		OrderLine o = null;
 		
 		for (int i = 0; i < ol.size(); i++)
 		{
-			if (ol.get(i).getOrder().getOrderID() == orderID)
+			if (ol.get(i).getOrderID() == orderID)
 				o = ol.get(i);
 		}
 		return o;
@@ -56,7 +56,7 @@ public class OrderLineRepositoryOffline
 	/**
 	 * Get order lines list
 	 */
-	public List<OrderLine> getOrderLines() 
+	public ArrayList<OrderLine> getOrderLines() 
 	{
 		return initialData.getOrderLines();
 	}
@@ -64,14 +64,14 @@ public class OrderLineRepositoryOffline
 	/**
 	 * Update orderline in list based on the ol object
 	 */
-	public void updateOrderLine(OrderLine ol) 
+	public void updateOrderLine(String orderID) 
 	{
-		List<OrderLine> _ol = initialData.getOrderLines();
+		ArrayList<OrderLine> _ol = initialData.getOrderLines();
 		OrderLine o = null;
 		
 		for (int i = 0; i < _ol.size(); i++)
 		{
-			if (_ol.get(i).getOrder().equals(_ol))
+			if (_ol.get(i).getOrderID().equals(_ol))
 				o = _ol.set(i, o);
 		}
 	}
@@ -79,15 +79,14 @@ public class OrderLineRepositoryOffline
 	/**
 	 * Removes orderline from list
 	 */
-	public void removeOrderLine(OrderLine ol)
+	public void removeOrderLine(String orderID)
 	{
-		List<OrderLine> _ol = initialData.getOrderLines();
-		OrderLine o = null;
+		ArrayList<OrderLine> _ol = initialData.getOrderLines();
 		
 		for (int i = 0; i < _ol.size(); i++)
 		{
-			if (_ol.get(i).getOrder().equals(_ol))
-				o = _ol.remove(i);
+			if (_ol.get(i).getOrderID().equals(_ol))
+				_ol.remove(i);
 		}
 	}
 }
