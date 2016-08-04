@@ -1,6 +1,6 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
@@ -29,7 +29,7 @@ public class OrderRepositoryOffline
 	/**
 	 * Concurrently add orders to the list in the bean
 	 */
-	public void persistOrders(List<Order> o) 
+	public void persistOrders(ArrayList<Order> o) 
 	{
 		initialData.setOrders(o);
 	}
@@ -40,7 +40,7 @@ public class OrderRepositoryOffline
 	 */
 	public Order findByID(String orderID) 
 	{
-		List<Order> ol = initialData.getOrders();
+		ArrayList<Order> ol = initialData.getOrders();
 		Order o = null;
 		
 		for (int i = 0; i < ol.size(); i++)
@@ -54,7 +54,7 @@ public class OrderRepositoryOffline
 	/**
 	 * Get list of orders from bean
 	 */
-	public List<Order> getOrders() 
+	public ArrayList<Order> getOrders() 
 	{
 		return initialData.getOrders();
 	}
@@ -64,7 +64,7 @@ public class OrderRepositoryOffline
 	 */
 	public void updateOrder(Order o) 
 	{
-		List<Order> ol = initialData.getOrders();
+		ArrayList<Order> ol = initialData.getOrders();
 		
 		for (int i = 0; i < ol.size(); i++)
 		{
@@ -78,7 +78,7 @@ public class OrderRepositoryOffline
 	 */
 	public void removeOrder(Order o) 
 	{
-		List<Order> ol = initialData.getOrders();
+		ArrayList<Order> ol = initialData.getOrders();
 		
 		for (int i = 0; i < ol.size(); i++)
 		{
