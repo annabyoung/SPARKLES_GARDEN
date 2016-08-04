@@ -2,6 +2,8 @@ package com.qac.sparkle_gardens.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import com.qac.sparkle_gardens.util.CreditStatus;
 /**
  * 
  * @author Sean Connelly 
@@ -34,7 +36,7 @@ public class Customer {
 	// not sure what the foreign key looks like or if this is correct 
 	@JoinColumn(name = "accountID_fk ", nullable = false)
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private String accountID;
+	private long accountID;
 	
 	@Column (name="first name")
 	@NotNull
@@ -52,7 +54,7 @@ public class Customer {
 	
 	@Column (name="credit status")
 	@Size (min =3, max =255)
-	private String creditStatus;
+	private CreditStatus creditStatus;
 	
 	@Column (name="address")
 	@Size (min =10, max =255)
@@ -62,7 +64,7 @@ public class Customer {
 	public Customer() {
 		//blank constructor 
 	}
-	public Customer(String accountID, String firstName, String lastName, String email, String creditStatus,
+	public Customer(long accountID, String firstName, String lastName, String email, CreditStatus creditStatus,
 			String address) {
 		super();
 		this.accountID = accountID;
@@ -74,7 +76,7 @@ public class Customer {
 	}
 
 
-	public Customer(String firstName, String lastName, String email, String creditStatus, String address) {
+	public Customer(String firstName, String lastName, String email, CreditStatus creditStatus, String address) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -85,7 +87,7 @@ public class Customer {
 
 
 	//getters and setters 
-	public String getAccountID() {
+	public long getAccountID() {
 		return accountID;
 	}
 
@@ -120,12 +122,12 @@ public class Customer {
 	}
 
 
-	public String getCreditStatus() {
+	public CreditStatus getCreditStatus() {
 		return creditStatus;
 	}
 
 
-	public void setCreditStatus(String creditStatus) {
+	public void setCreditStatus(CreditStatus creditStatus) {
 		this.creditStatus = creditStatus;
 	}
 
