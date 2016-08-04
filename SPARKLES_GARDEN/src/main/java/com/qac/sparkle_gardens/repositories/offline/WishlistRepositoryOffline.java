@@ -17,8 +17,15 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		initialData.addWishlist(wishlist);
 	}
 	
-	public void persistWishlists(ArrayList<Wishlist> lists) {
-		
+	public Wishlist findById(String id) {
+		ArrayList<Wishlist> list = initialData.getWishlists();
+		Wishlist wish = new Wishlist();
+		for (int index = 0; index < list.size(); index++) {
+			if (list.get(index).getWishlistId().equals(id)) {
+				wish = list.get(index);
+			}
+		}
+		return wish;
 	}
 	
 	// Read all the wishlists
