@@ -31,10 +31,8 @@ public class Customer {
 	@Id
 	@Column (name ="accountID")
 	@OneToMany 
-	// not sure what the foreign key looks like 
-	@JoinColumn(name = "PUT SOMETHING HERE ", nullable = false)
-	//this may or may not be a thing in this thing 
-	
+	// not sure what the foreign key looks like or if this is correct 
+	@JoinColumn(name = "accountID_fk ", nullable = false)
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private String accountID;
 	
@@ -60,7 +58,10 @@ public class Customer {
 	@Size (min =10, max =255)
 	private String address;
 	
-	
+	//constructors 
+	public Customer() {
+		//blank constructor 
+	}
 	public Customer(String accountID, String firstName, String lastName, String email, String creditStatus,
 			String address) {
 		super();
@@ -83,6 +84,7 @@ public class Customer {
 	}
 
 
+	//getters and setters 
 	public String getAccountID() {
 		return accountID;
 	}
@@ -137,7 +139,7 @@ public class Customer {
 		this.address = address;
 	}
 	
-	
+	//named queries for each attribute 
 	public static final String FIND_BY_FIRST_NAME = "Customer.getFirstName()";
 	public static final String FIND_BY_LAST_NAME = "Customer.getLastName()";
 	public static final String FIND_BY_EMAIL = "Customer.getEmail()";
