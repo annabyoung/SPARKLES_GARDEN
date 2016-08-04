@@ -55,11 +55,14 @@ public class Wishlist {
 	@Size (min = 0, max = 100000)
 	private double price;
 	
+	public Wishlist () {
+		this.customerId = "";
+	}
 	public Wishlist(String customerId, ArrayList<Product> product) {
 		this.customerId = customerId;
 		this.product = product;
 	}
-	public String getcustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 

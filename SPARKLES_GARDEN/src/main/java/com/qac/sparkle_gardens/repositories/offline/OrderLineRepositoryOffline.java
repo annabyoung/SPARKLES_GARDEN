@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.repositories.OrderLineRepository;
+import com.qac.sparkle_gardens.util.MethodAuthor;
+
 import javax.inject.*;
 
 public class OrderLineRepositoryOffline 
@@ -46,7 +48,7 @@ public class OrderLineRepositoryOffline
 		
 		for (int i = 0; i < ol.size(); i++)
 		{
-			if (ol.get(i).getOrderID() == orderID)
+			if (ol.get(i).getOrderID() == orderID) 
 				return ol.get(i);
 		}
 		return null;
@@ -61,35 +63,34 @@ public class OrderLineRepositoryOffline
 	}
 	
 	/**
-	 * Update orderline in list based on the order ID
-	 * @param The order ID of the order to remove
+	 * Update orderline in list based on the ol object
 	 */
+	@MethodAuthor(author="Damien")
 	public void updateOrderLine(String orderID) 
 	{
 		ArrayList<OrderLine> _ol = initialData.getOrderLines();
+		OrderLine o = null;
 		
 		for (int i = 0; i < _ol.size(); i++)
 		{
-			if (_ol.get(i).getOrderID() == orderID)
-			{
-				_ol.set(i, this.findByID(orderID));
+			if (_ol.get(i).getOrderID().equals(_ol)) {
+				o = _ol.set(i, o);
 				break;
 			}
 		}
 	}
 	
 	/**
-	 * Removes orderline from list by the orderID
-	 * @param The order ID of the order to remove
+	 * Removes orderline from list
 	 */
+	@MethodAuthor(author="Damien")
 	public void removeOrderLine(String orderID)
 	{
 		ArrayList<OrderLine> _ol = initialData.getOrderLines();
 		
 		for (int i = 0; i < _ol.size(); i++)
 		{
-			if (_ol.get(i).getOrderID() == orderID)
-			{	
+			if (_ol.get(i).getOrderID().equals(_ol)) {
 				_ol.remove(i);
 				break;
 			}
