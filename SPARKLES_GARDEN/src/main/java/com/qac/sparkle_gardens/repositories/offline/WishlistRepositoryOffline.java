@@ -2,7 +2,6 @@ package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
 
-import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
 /**
