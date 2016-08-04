@@ -16,12 +16,12 @@ import javax.persistence.OneToMany;
 public class OrderLine 
 {
 	@OneToMany
-	@JoinColumn(name = "order_fk", nullable = false)
-	private Order order;
+	@JoinColumn(name = "orderID", nullable = false)
+	private String orderID;
 	
 	@OneToMany
-	@JoinColumn(name = "products_fk", nullable = false)
-	private List<Product> products;
+	@JoinColumn(name = "productID", nullable = false)
+	private ArrayList<String> products;
 	
 	/**
 	 * Create OrderLine from Product and Order
@@ -30,7 +30,7 @@ public class OrderLine
 	 */
 	public OrderLine(Order o)
 	{
-		this.order = o;
+		this.orderID = o.getOrderID();
 	}
 	
 	/**
@@ -39,14 +39,14 @@ public class OrderLine
 	 */
 	void addProduct(Product p)
 	{
-		this.products.add(p);
+		this.products.add(p.getProductID());
 	}
 	
 	/**
 	 * Retrieve list of products in order line
 	 * @return products
 	 */
-	public List<Product> getProducts()
+	public ArrayList<String> getProducts()
 	{
 		return products;
 	}
@@ -57,15 +57,15 @@ public class OrderLine
 	 */
 	public void setOrder(Order o)
 	{
-		this.order = o;
+		this.orderID = o.getOrderID();
 	}
 	
 	/**
 	 * Get order in order line
 	 * @return order
 	 */
-	public Order getOrder()
+	public String getOrderID()
 	{
-		return order;
+		return orderID;
 	}
 }
