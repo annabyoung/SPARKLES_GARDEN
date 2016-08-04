@@ -65,7 +65,7 @@ public class Product {
 	@Column (name = "price", nullable = false, length = 100000)
 	@NotNull
 	@Size (min = 0, max = 100000)
-	private float price;
+	private double price;
 	
 	//Many products to one wish list
 	@ManyToOne
@@ -87,7 +87,7 @@ public class Product {
 	public Product() {	}
 	
 	//constructor for Product
-	public Product(String productName, int stockLevel, float price){	
+	public Product(String productName, int stockLevel, double price){	
 		this.productName = productName;	
 		this.stockLevel = stockLevel;
 		this.price = price;}
@@ -111,7 +111,7 @@ public class Product {
 	public void setStockLevel(int stockLevel) {
 		this.stockLevel = stockLevel;
 	}
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 	public void setPrice(float price) {
