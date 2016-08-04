@@ -7,6 +7,9 @@ import com.qac.sparkle_gardens.entities.Wishlist;
 public interface WishlistRepository {
 	public void persistWishlist(Wishlist wishlist);
 	
+	// Locate the wishlist by ID
+	public Wishlist findById(String Id); 
+	
 	// Returns all the wishlists
 	public ArrayList<Wishlist> getWishlists();
 	
