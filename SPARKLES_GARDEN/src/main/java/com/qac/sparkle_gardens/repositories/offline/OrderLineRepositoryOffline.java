@@ -43,14 +43,13 @@ public class OrderLineRepositoryOffline
 	public OrderLine findByID(String orderID) 
 	{
 		ArrayList<OrderLine> ol = initialData.getOrderLines();
-		OrderLine o = null;
 		
 		for (int i = 0; i < ol.size(); i++)
 		{
 			if (ol.get(i).getOrderID() == orderID)
-				o = ol.get(i);
+				return ol.get(i);
 		}
-		return o;
+		return null;
 	}
 	
 	/**
@@ -72,7 +71,10 @@ public class OrderLineRepositoryOffline
 		for (int i = 0; i < _ol.size(); i++)
 		{
 			if (_ol.get(i).getOrderID() == orderID)
+			{
 				_ol.set(i, this.findByID(orderID));
+				break;
+			}
 		}
 	}
 	
@@ -87,7 +89,10 @@ public class OrderLineRepositoryOffline
 		for (int i = 0; i < _ol.size(); i++)
 		{
 			if (_ol.get(i).getOrderID() == orderID)
+			{	
 				_ol.remove(i);
+				break;
+			}
 		}
 	}
 }
