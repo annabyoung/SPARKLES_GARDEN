@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
 
+/**
+ * Enables holding of data outside a server
+ * @author Damien Lloyd
+ *
+ */
 public class OrderRepositoryOffline 
 	implements OrderRepository
 {

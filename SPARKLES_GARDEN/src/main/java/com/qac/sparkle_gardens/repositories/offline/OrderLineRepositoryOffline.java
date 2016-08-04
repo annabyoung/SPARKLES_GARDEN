@@ -62,22 +62,23 @@ public class OrderLineRepositoryOffline
 	}
 	
 	/**
-	 * Update orderline in list based on the ol object
+	 * Update orderline in list based on the order ID
+	 * @param The order ID of the order to remove
 	 */
 	public void updateOrderLine(String orderID) 
 	{
 		ArrayList<OrderLine> _ol = initialData.getOrderLines();
-		OrderLine o = null;
 		
 		for (int i = 0; i < _ol.size(); i++)
 		{
-			if (_ol.get(i).getOrderID().equals(_ol))
-				o = _ol.set(i, o);
+			if (_ol.get(i).getOrderID() == orderID)
+				_ol.set(i, this.findByID(orderID));
 		}
 	}
 	
 	/**
-	 * Removes orderline from list
+	 * Removes orderline from list by the orderID
+	 * @param The order ID of the order to remove
 	 */
 	public void removeOrderLine(String orderID)
 	{
@@ -85,7 +86,7 @@ public class OrderLineRepositoryOffline
 		
 		for (int i = 0; i < _ol.size(); i++)
 		{
-			if (_ol.get(i).getOrderID().equals(_ol))
+			if (_ol.get(i).getOrderID() == orderID)
 				_ol.remove(i);
 		}
 	}

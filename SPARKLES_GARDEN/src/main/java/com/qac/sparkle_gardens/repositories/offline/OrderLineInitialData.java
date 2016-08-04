@@ -2,6 +2,8 @@ package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
 
+import javax.inject.Singleton;
+
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 
@@ -10,6 +12,7 @@ import com.qac.sparkle_gardens.entities.OrderLine;
  * @author Damien Lloyd
  *
  */
+@Singleton
 public class OrderLineInitialData 
 {
 	private ArrayList<OrderLine> orderLines;
