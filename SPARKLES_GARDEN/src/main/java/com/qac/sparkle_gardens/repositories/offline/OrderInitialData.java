@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.repositories;
+package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.List;
 import com.qac.sparkle_gardens.entities.Order;
