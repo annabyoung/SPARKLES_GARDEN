@@ -26,7 +26,7 @@ public class Payment {
 	//this may or may not be a thing in this thing 
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long pid;
+	private String pid;
 	@Column(name = "customerName", nullable = false, length = 225)
 	@Size(min = 2, max = 225)
 	private String cardOwnerName;
@@ -35,16 +35,16 @@ public class Payment {
 	@Column(name = "cardNumber", nullable = false, length = 16)
 	private String cardNumber;
 	@Column(name = "expirationDate", nullable = false, length = 5)
-	@Pattern(regexp="[0-9]{2}/[0-9]{2}",
+	@Pattern(regexp="[0-1][0-9]/[0-9]{2}",
             message="{invalid.expirationDate}")
 	private String expirationDate;
-	private String issueNumber;
+	
+	//private String issueNumber;
 	
 	public static final String FIND_BY_CARD_NUMBER = "Payment.getCardNumber";
 	public static final String FIND_BY_PID = "Payment.getPid";
 
 	public Payment() {
-
 	}
 
 	public Payment(String customerName, String cardNumber, String expirationDate) {
@@ -54,7 +54,7 @@ public class Payment {
 		this.expirationDate = expirationDate;
 	}
 	
-	public Long getPid(){
+	public String getPid(){
 		return pid;
 	}
 

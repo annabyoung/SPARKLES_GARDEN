@@ -1,13 +1,12 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Payment;
-import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.repositories.PaymentInitialData;
+import com.qac.sparkle_gardens.repositories.PaymentRepository;
 
 public class PaymentRepositoryOffline implements PaymentRepository
 {
@@ -15,22 +14,27 @@ public class PaymentRepositoryOffline implements PaymentRepository
 	PaymentInitialData initialPaymentData;
 	
 	public void persistPayment(Payment p) {
-	  initialPaymentData.addPayment(p);
+		initialPaymentData.addPayment(p);
 	}
 	public ArrayList<Payment> listPayments() {
-	return initialPaymentData.getPayments(); 
+		return initialPaymentData.getPayments(); 
 	}
 	public void persistPayments(ArrayList<Payment> p) {
 		// TODO Auto-generated method stub
 		
 	}
-	public Payment findByName(String name) {
+	public Payment findByID(String id) {
 		// TODO Auto-generated method stub
+		for (Payment p : initialPaymentData.getPayments()){
+			if(id == p.getPid()){
+				return p;
+			}
+		}
 		return null;
 	}
 	public ArrayList<Payment> getPayments() {
 		// TODO Auto-generated method stub
-		return null;
+		return initialPaymentData.getPayments();
 	}
 	public void updatePayment(Payment p) {
 		// TODO Auto-generated method stub
@@ -38,6 +42,6 @@ public class PaymentRepositoryOffline implements PaymentRepository
 	}
 	public void removePayment(Payment p) {
 		// TODO Auto-generated method stub
-		
+		//initialPaymentData.getPayments()...
 	}
 }
