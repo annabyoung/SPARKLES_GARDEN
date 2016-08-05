@@ -100,6 +100,10 @@ public class Order
 		lines.remove(ol);
 	}
 	
+	/**
+	 * Get all the OrderLines in the Order
+	 * @return
+	 */
 	public ArrayList<OrderLine> getOrderLines()
 	{
 		return lines;
