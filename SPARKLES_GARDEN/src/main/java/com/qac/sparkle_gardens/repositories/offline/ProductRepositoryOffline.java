@@ -6,8 +6,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.repositories.ProductRepository;
+import com.qac.sparkle_gardens.util.ProductInitalData;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.entities.ProductInitalData;
 
 public class ProductRepositoryOffline implements ProductRepository{
 	@Inject

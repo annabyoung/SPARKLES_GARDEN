@@ -1,9 +1,11 @@
-package com.qac.sparkle_gardens.entities;
+package com.qac.sparkle_gardens.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Singleton;
+
+import com.qac.sparkle_gardens.entities.Product;
 
 /**
  * 
