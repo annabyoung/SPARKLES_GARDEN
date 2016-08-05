@@ -9,7 +9,8 @@ import com.qac.sparkle_gardens.entities.OrderLine;
 
 /**
  * OrderInitialData contains initial data that will hold orders offline.
- * It allows you to add orders to a list thereof
+ * It allows you to add orders to a list thereof.
+ * 
  * @author Damien Lloyd
  *
  */

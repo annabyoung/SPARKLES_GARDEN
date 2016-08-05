@@ -99,4 +99,9 @@ public class Order
 	{
 		lines.remove(ol);
 	}
+	
+	public ArrayList<OrderLine> getOrderLines()
+	{
+		return lines;
+	}
 }
