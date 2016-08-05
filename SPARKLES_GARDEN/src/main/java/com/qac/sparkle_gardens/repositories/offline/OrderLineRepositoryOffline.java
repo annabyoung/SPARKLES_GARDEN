@@ -8,6 +8,11 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
 
 import javax.inject.*;
 
+/**
+ * This class contains initial data and provides an interface to adding order lines, etc
+ * @author Damien Lloyd
+ *
+ */
 public class OrderLineRepositoryOffline 
 	implements OrderLineRepository
 {
