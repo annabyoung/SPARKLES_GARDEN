@@ -21,19 +21,49 @@ public class ProductRepositoryOffline implements ProductRepository{
 	public void persistProducts(List<Product> p) {
 		
 	}
-	
+	//find a product by ID
 	public Product findByProductID(long productID){
+		for (Product p : initialData.getProducts()){ //search through all products in product list
+			if (productID == p.getProductID()){ //check if the product's ID in product list matches the ID requested
+				return p;
+			}
+		}
 		return null;
 	}
-	
+	//find a product by name
 	public Product findByProductName(String productName) {
+		for (Product p : initialData.getProducts()){ //search through all products in product list
+			if (productName.equals(p.getProductName())){ //check if the product in product list matches the name of product requested
+				return p;
+			}
+		}
 		return null;
 	}
-
-	public Product findByProductPrice(double price){
-		return null;
+	//Search for products by price
+	public ArrayList<Product> findByProductPrice(double price){
+		ArrayList<Product> productsByPrice = new ArrayList<>();
+		for (Product p : initialData.getProducts()){ //search through all products in product list
+			if (price == p.getPrice()){ //check if the product in list matches the price requested
+				productsByPrice.add(p); //add all products that are the same price as the price requested
+			}
+		}
+		return productsByPrice;
 	}
 	
+	/**
+	 * Need to implement searching by product tag
+	 * 
+	 * public ArrayList<Product> findByProductTags(double price){
+		ArrayList<Product> productsByPrice = new ArrayList<>();
+		for (Product p : initialData.getProducts()){ //search through all products in product list
+			if (price == p.getPrice()){ //check if the product in list matches the price requested
+				productsByPrice.add(p); //add all products that are the same price as the price requested
+			}
+		}
+		return productsByPrice;
+	}
+	 */
+	//retrieve all products
 	public ArrayList<Product> getProducts() {
 		return (ArrayList<Product>) initialData.getProducts();
 	}
@@ -41,7 +71,7 @@ public class ProductRepositoryOffline implements ProductRepository{
 	public void createProduct(Product p) {
 		
 	}
-
+	//update the product
 	public void updateProduct(Product p) {
 		ArrayList<Product> ps =
 			(ArrayList<Product>) initialData.getProducts();

@@ -20,12 +20,13 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
 @Stateless
 public class ProductService {
 	@Inject ProductRepository productRepository;
-	//add items - to order and to wishlist
-	
-	
-	//display items
-	//search items
-	//item info
+	/**
+	 * Things to implement:
+		 * add items - to order and to wishlist
+		 * display items
+		 * search items
+		 * item info
+	*/
 	
 	/**
 	 * Check if the product is in stock, if it's not then a message should display
@@ -48,8 +49,6 @@ public class ProductService {
 		return (p.getStockLevel() <= ol.getQuantity());
 	}
 	
-	/**
-	 * Need to implement searching by product tag
-	 */
+	
 
 }
