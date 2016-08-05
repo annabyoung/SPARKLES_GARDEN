@@ -69,41 +69,73 @@ public class OrderLine
 		this.price = price;
 	}
 	
+	/**
+	 * Return the orderID of the OrderLine it pertains to
+	 * @return orderID
+	 */
 	public long getOrderID() 
 	{
 		return orderID;
 	}
-
+	
+	/**
+	 * Set the orderID the OrderLine relates to
+	 * @param orderID
+	 */
 	public void setOrderID(long orderID) 
 	{
 		this.orderID = orderID;
 	}
-
+	
+	/**
+	 * Return the productID of the OrderLine
+	 * @return productID
+	 */
 	public long getProductID() 
 	{
 		return productID;
 	}
-
+	
+	/**
+	 * Set the productID of the product
+	 * @param productID
+	 */
 	public void setProductID(long productID) 
 	{
 		this.productID = productID;
 	}
-
+	
+	/**
+	 * Get the quantity of the desired product to be ordered
+	 * @return quantity
+	 */
 	public int getQuantity() 
 	{
 		return quantity;
 	}
-
+	
+	/**
+	 * Set the quantity of the product to be ordered
+	 * @param quantity
+	 */
 	public void setQuantity(int quantity) 
 	{
 		this.quantity = quantity;
 	}
-
+	
+	/**
+	 * Get the individual price of the product to be ordered
+	 * @return price
+	 */
 	public double getPrice() 
 	{
 		return price;
 	}
-
+	
+	/**
+	 * Set the individual price of the product to be ordered
+	 * @param price
+	 */
 	public void setPrice(double price) 
 	{
 		this.price = price;

@@ -47,7 +47,7 @@ public class OrderRepositoryOffline
 	 * Find order by its String id
 	 * @param orderID The id of the Order
 	 */
-	public Order get(long orderID) 
+	public Order getOrder(long orderID) 
 	{
 		ArrayList<Order> ol = initialData.getOrders();
 		
