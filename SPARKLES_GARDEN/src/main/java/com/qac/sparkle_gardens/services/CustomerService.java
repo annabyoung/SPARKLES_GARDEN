@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
+import com.qac.sparkle_gardens.util.CreditStatus;
 
 /**
  * 
@@ -32,11 +33,25 @@ public class CustomerService {
 		return false;
 	}
 	
+	/**
+	 * Checks to make sure the login details are correct.
+	 * If account does not exist -1
+	 * If password doesnt match -2
+	 * If account cannot be accessed -3
+	 * If valid returns the Account ID
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	public long getUserIDAtLogin(String email, String password) {
 		Customer customer = customerRepository.findByEmail(email);
 		if(!customer.equals(null)) {
-			if(customer.getPassword().equals(password))
+			if(customer.getPassword().equals(password)) {
+				if(customer.getCreditStatus().equals(CreditStatus.REGECTED) || customer.getCreditStatus().equals(CreditStatus.VALIDATING) || customer.getCreditStatus().equals(CreditStatus.DEACTIVATED))
+					return -3;
 				return customer.getAccountID();
+				}
 			return -2;
 		}
 		return -1;
@@ -44,11 +59,6 @@ public class CustomerService {
 	
 	//account conversion
 	
-	//logging out
-	
-	//request catalogue
-	
 	//updating details
 	
-	//changing address
 }
