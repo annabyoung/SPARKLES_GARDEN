@@ -8,7 +8,7 @@ public interface WishlistRepository {
 	public void persistWishlist(Wishlist wishlist);
 	
 	// Locate the wishlist by ID
-	public Wishlist findById(String Id); 
+	public Wishlist findById(long id); 
 	
 	// Returns all the wishlists
 	public ArrayList<Wishlist> getWishlists();

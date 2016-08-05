@@ -33,7 +33,7 @@ public class Wishlist {
 	@Id
 	@Column (name = "wishlistID")
 	@GeneratedValue  (strategy = GenerationType.IDENTITY)
-	private String wishlistId;
+	private long wishlistId;
 	
 	@OneToOne
 	@JoinColumn(name = "customerID", nullable = false)
@@ -77,10 +77,10 @@ public class Wishlist {
 	public ArrayList<Product> getproduct() {
 		return product;
 	}
-	public String getWishlistId() {
+	public long getWishlistId() {
 		return wishlistId;
 	}
-	public void setWishlistId(String wishlistId) {
+	public void setWishlistId(long wishlistId) {
 		this.wishlistId = wishlistId;
 	}
 

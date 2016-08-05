@@ -17,11 +17,11 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		initialData.addWishlist(wishlist);
 	}
 	
-	public Wishlist findById(String id) {
+	public Wishlist findById(long id) {
 		ArrayList<Wishlist> list = initialData.getWishlists();
 		Wishlist wish = new Wishlist();
 		for (int index = 0; index < list.size(); index++) {
-			if (list.get(index).getWishlistId().equals(id)) {
+			if (list.get(index).getWishlistId() == id) {
 				wish = list.get(index);
 			}
 		}
