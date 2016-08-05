@@ -1,9 +1,17 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Singleton;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
+
+/**
+ * 
+ * @author Tyler Deans
+ * Creates dummy data for the repository
+ *
+ */
 @Singleton
 public class WishlistInitialData {
 	private ArrayList<Wishlist> wishlists = new ArrayList<Wishlist>();
@@ -14,8 +22,8 @@ public class WishlistInitialData {
 		products.add(new Product("Cookie Gnomonster", 2300, 5.50));
 		products.add(new Product("Gnomzilla", 5000, 6.00));
 		
-		wishlists.add(new Wishlist("CM024", products));
-		wishlists.add(new Wishlist("CM025", products));
+		wishlists.add(new Wishlist((long) 24, products));
+		wishlists.add(new Wishlist((long) 25, products));
 	}
 	
 	public ArrayList<Wishlist> getWishlists() {
@@ -26,7 +34,7 @@ public class WishlistInitialData {
 		wishlists.add(wishlist);
 	}
 	
-	public void setWishlists(ArrayList<Wishlist> wishlists) {
-		this.wishlists = wishlists;
+	public void setWishlists(List<Wishlist> wishlists) {
+		this.wishlists = (ArrayList<Wishlist>) wishlists;
 	}
 }
