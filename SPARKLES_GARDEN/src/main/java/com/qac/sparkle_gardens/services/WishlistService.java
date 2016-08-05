@@ -1,7 +1,11 @@
 package com.qac.sparkle_gardens.services;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+
+import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
 
@@ -30,6 +34,7 @@ public class WishlistService {
 	
 	/**
 	 * deletes the wishlist
+	 * @param id
 	 */
 	public void deleteWishlist(long id) {
 		Wishlist wishlist;
@@ -37,8 +42,14 @@ public class WishlistService {
 		wishlistRepository.removeWishlist(wishlist);
 	}
 	
-	public void createWishlist() {
-		
+	/**
+	 *  Creates a new wishlist
+	 * @param accountId
+	 * @param list
+	 */
+	public void createWishlist(long accountId, List<Product> list) {
+		Wishlist wish = new Wishlist(accountId, list);
+		wishlistRepository.persistWishlist(wish);
 	}
 	
 }

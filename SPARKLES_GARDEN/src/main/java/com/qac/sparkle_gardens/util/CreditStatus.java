@@ -25,5 +25,5 @@ public enum CreditStatus {
 	/**
 	 * Customers application for an account was rejected
 	 */
-	REGECTED
+	REJECTED
 }

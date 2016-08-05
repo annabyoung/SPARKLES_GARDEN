@@ -19,6 +19,10 @@ import com.qac.sparkle_gardens.util.CreditStatus;
 public class CardService {
 	@Inject PaymentRepository paymentRepository;
 	
+	public CardService(){
+		
+	}
+	
 	/**
 	 * Check to make sure that the card details are valid.
 	 * 
