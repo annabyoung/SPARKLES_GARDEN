@@ -64,20 +64,18 @@ public class Customer {
 	public Customer() {
 		//blank constructor 
 	}
-	public Customer(long accountID, String firstName, String lastName, String email, CreditStatus creditStatus,
-			String address) {
-		super();
-		this.accountID = accountID;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.creditStatus = creditStatus;
-		this.address = address;
-	}
+//	public Customer(long accountID, String firstName, String lastName, String email, CreditStatus creditStatus,
+//			String address) {
+//		this.accountID = accountID;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.email = email;
+//		this.creditStatus = creditStatus;
+//		this.address = address;
+//	}
 
 
 	public Customer(String firstName, String lastName, String email, CreditStatus creditStatus, String address) {
-		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
