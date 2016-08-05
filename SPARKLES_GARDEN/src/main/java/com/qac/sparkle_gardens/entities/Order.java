@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * 
@@ -15,16 +16,20 @@ import javax.persistence.Table;
 public class Order 
 {
 	@Id
+	@NotNull
 	@Column (name = "orderID", nullable = false)
 	private String orderID;
 	
 	@Column (name = "customerID", nullable = false)
+	@NotNull
 	private String customerID;
 	
 	@Column (name = "quantity", nullable = false)
+	@NotNull
 	private int quantity;
 	
 	@Column (name = "priceTotal", nullable = false)
+	@NotNull
 	private int priceTotal;
 	
 	/**
