@@ -18,56 +18,32 @@ public class OrderLine
 	@OneToMany
 	@NotNull
 	@JoinColumn(name = "orderID", nullable = false)
-	private String orderID;
+	private long orderID;
 	
 	@OneToMany
 	@NotNull
 	@JoinColumn(name = "productID", nullable = false)
-	private ArrayList<String> products;
+	private long productID;
 	
-	/**
-	 * Create OrderLine from Product and Order
-	 * @param p The product
-	 * @param o The order
-	 */
-	public OrderLine(Order o)
+	private int quantity; // Quantity of Products of productID
+	
+	private double price; // The price of the product of productID
+	
+	public OrderLine()
 	{
-		this.orderID = o.getOrderID();
+		price = 0;
+		quantity = 0;
 	}
 	
-	/**
-	 * Add product to the order line
-	 * @param p Product to add
-	 */
-	void addProduct(Product p)
+	public OrderLine(long productID, int quantity, double price)
 	{
-		this.products.add(p.getProductID());
+		setProduct(productID, quantity, price);
 	}
 	
-	/**
-	 * Retrieve list of products in order line
-	 * @return products
-	 */
-	public ArrayList<String> getProducts()
+	public void setProduct(long productID, int quantity, double price)
 	{
-		return products;
-	}
-	
-	/**
-	 * Set order in order line
-	 * @param o Order to be set
-	 */
-	public void setOrder(Order o)
-	{
-		this.orderID = o.getOrderID();
-	}
-	
-	/**
-	 * Get order in order line
-	 * @return order
-	 */
-	public String getOrderID()
-	{
-		return orderID;
+		this.productID = productID;
+		this.quantity = quantity;
+		this.price = price;
 	}
 }
