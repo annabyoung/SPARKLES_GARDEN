@@ -54,7 +54,10 @@ public class CustomerService {
 				}
 			return -2;
 		}
-		return -1;
+		else {
+			return -1;
+		}
+		
 	}
 	
 	//account conversion
