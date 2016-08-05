@@ -56,6 +56,7 @@ public class Customer {
 	@Size (min =3, max =255)
 	private CreditStatus creditStatus;
 	
+	//TODO: Convert address into an Entity
 	@Column (name="address")
 	@Size (min =10, max =255)
 	private String address;
