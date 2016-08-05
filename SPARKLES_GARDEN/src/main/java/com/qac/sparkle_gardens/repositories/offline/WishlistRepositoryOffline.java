@@ -15,7 +15,11 @@ import com.qac.sparkle_gardens.repositories.WishlistRepository;
 public class WishlistRepositoryOffline implements WishlistRepository{
 	@Inject private WishlistInitialData initialData;
 	
-	// Add a wishlist
+	/**
+	 * @param Wishlist wishlist
+	 * 
+	 * Add a wishlist
+	 */
 	public void persistWishlist(Wishlist wishlist) {
 		initialData.addWishlist(wishlist);
 	}
@@ -23,7 +27,11 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	public void persistWishlists(List<Wishlist> wishlists) {
 		
 	}
-	
+	/**
+	 * Finds a wishlist according to the ID
+	 * @param id
+	 * @return
+	 */
 	public Wishlist findById(long id) {
 		ArrayList<Wishlist> list = initialData.getWishlists();
 		Wishlist wish = new Wishlist();
@@ -36,6 +44,9 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	}
 	
 	// Read all the wishlists
+	/**
+	 * @para
+	 */
 	public ArrayList<Wishlist> getWishlists() {
 		return initialData.getWishlists();
 	}
@@ -43,7 +54,6 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	// Update wishlist
 	public void updateWishlist(Wishlist wish) {
 		ArrayList<Wishlist> list = initialData.getWishlists();
-		
 		for (int index = 0; index < list.size(); index++) {
 			if (list.get(index).equals(wish)) {
 				list.set(index, wish);

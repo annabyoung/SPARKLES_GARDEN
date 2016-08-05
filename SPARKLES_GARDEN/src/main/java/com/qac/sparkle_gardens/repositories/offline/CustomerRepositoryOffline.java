@@ -31,8 +31,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			initialData.setCustomer(customers);
 		}
 		
-		
-		public Customer findByID(long accountID){
+		public Customer findByID(long accountID) {
 			ArrayList<Customer> theCustomers = initialData.getCustomers();
 			for (int i=0; i<theCustomers.size(); i++)
 			{

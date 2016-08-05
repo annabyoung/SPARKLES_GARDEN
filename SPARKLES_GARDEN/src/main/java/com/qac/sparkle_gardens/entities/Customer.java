@@ -57,6 +57,7 @@ public class Customer {
 	@Size (min =3, max =255)
 	private CreditStatus creditStatus;
 	
+	//TODO: Convert address into an Entity
 	@Column (name="address")
 	@Size (min =10, max =255)
 	private String address;
@@ -69,6 +70,7 @@ public class Customer {
 	public Customer() {
 		//blank constructor 
 	}
+	
 	public Customer(long accountID, String firstName, String lastName, String email, CreditStatus creditStatus,
 			String address, String password) {
 		this.accountID = accountID;
@@ -79,7 +81,6 @@ public class Customer {
 		this.address = address;
 		this.password = password;
 	}
-
 
 	public Customer(String firstName, String lastName, String email, CreditStatus creditStatus, String address, String password) {
 		this.firstName = firstName;

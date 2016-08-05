@@ -48,7 +48,7 @@ public class CustomerService {
 		Customer customer = customerRepository.findByEmail(email);
 		if(!customer.equals(null)) {
 			if(customer.getPassword().equals(password)) {
-				if(customer.getCreditStatus().equals(CreditStatus.REGECTED) || customer.getCreditStatus().equals(CreditStatus.VALIDATING) || customer.getCreditStatus().equals(CreditStatus.DEACTIVATED))
+				if(customer.getCreditStatus().equals(CreditStatus.REJECTED) || customer.getCreditStatus().equals(CreditStatus.VALIDATING) || customer.getCreditStatus().equals(CreditStatus.DEACTIVATED))
 					return -3;
 				return customer.getAccountID();
 				}
@@ -60,5 +60,4 @@ public class CustomerService {
 	//account conversion
 	
 	//updating details
-	
 }
