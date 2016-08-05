@@ -50,7 +50,7 @@ public class Product {
 	@Id
 	@Column (name = "productID")
 	@GeneratedValue  (strategy = GenerationType.IDENTITY)//
-	private String productID;
+	private long productID;
 	
 	@Column (name = "productName", nullable = false, length = 225)
 	@NotNull
@@ -101,7 +101,7 @@ public class Product {
 	}
 	
 	//Retrieve Product ID
-	public String getProductID() {
+	public long getProductID() {
 		return productID;
 	}
 	

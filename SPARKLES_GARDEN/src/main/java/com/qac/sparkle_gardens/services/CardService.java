@@ -28,7 +28,7 @@ public class CardService {
 	 * @return
 	 */
 	public boolean validateCardDetails(String customerName, String cardNumber, String expirationDate) {
-		if (customerName.isEmpty() || cardNumber.isEmpty() || expirationDate.isEmpty() && cardNumber.matches("[0-9]{16}")) {
+		if (customerName.isEmpty() || cardNumber.isEmpty() || expirationDate.isEmpty() && !cardNumber.matches("[0-9]{16}")) {
 			return checkInDate(expirationDate);
 		}
 		return false;
@@ -41,15 +41,21 @@ public class CardService {
 	 * @return
 	 */
 	public boolean checkInDate(String expirationDate) {
-		Integer year = Integer.parseInt(expirationDate.substring(3));
-		String currentDate = Calendar.getInstance().getTime().toString();
-		Integer currentYear = Integer.parseInt(currentDate.substring(24));
-		if (year < currentYear)
+
+		java.util.Date currentDate = new java.util.Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(currentDate);
+		int currentMonth = 1 + calendar.get(Calendar.MONTH);
+		int currentYear = calendar.get(Calendar.YEAR);
+		
+		Integer cardYear = Integer.parseInt(expirationDate.substring(3));
+		if (cardYear < currentYear)
 			return false;
-		if (year == currentYear) {
-			Integer month = Integer.parseInt(expirationDate.substring(0, 2));
-			if (month > Calendar.getInstance().getTime().getMonth()+1)
+		if (cardYear == currentYear) {
+			Integer cardMonth = Integer.parseInt(expirationDate.substring(0, 2));
+			if (cardMonth > currentMonth){
 				return true;
+			}
 			return false;
 		}
 		return true;
@@ -59,13 +65,13 @@ public class CardService {
 	 * Check to make sure that the card has not been registered by a blacklisted customer
 	 * 
 	 * @param cardNumber
-	 * @param expiryDate
+	 * @param expirationDate
 	 * @return
 	 */
-	public boolean checkNotBlacklisted(String cardNumber, String expiryDate) {
+	public boolean checkNotBlacklisted(String cardNumber, String expirationDate) {
 		ArrayList<Payment> payments = (ArrayList<Payment>) paymentRepository.findByCardNumber(cardNumber);
 		for(Payment payment:payments) {
-			if (payment.getExpiryDate().equals(expiryDate) && payment.getCustomer().getCreditStatus().equals(CreditStatus.BLACKLISTED))
+			if (payment.getExpirationDate().equals(expirationDate) && payment.getCustomer().getCreditStatus().equals(CreditStatus.BLACKLISTED))
 				return false;
 		}
 		return true;

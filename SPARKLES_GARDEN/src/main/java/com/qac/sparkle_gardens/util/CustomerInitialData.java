@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.repositories.offline;
+package com.qac.sparkle_gardens.util;
 
 import java.util.ArrayList;
 
