@@ -69,14 +69,19 @@ public class Wishlist {
 	public long getCustomerId() {
 		return acccountId;
 	}
-
-	public String getProductName() {
+   /** I don't know if I need this 
+    * It depends on how the products are in a list or 
+    * each product ID matches to a customer ID
+    * public String getProductName() {
 		return productName;
-	}
+	* }
 	
-	public double getPrice() {
+	* public double getPrice() {
 		return price;
-	}
+	* }
+    * 
+    */
+	
 	
 	public ArrayList<Product> getproduct() {
 		return product;
