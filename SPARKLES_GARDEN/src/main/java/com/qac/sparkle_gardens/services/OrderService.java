@@ -5,14 +5,10 @@ import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.repositories.OrderLineRepository;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
-
-
-import deprecated.OrderLineRepository;
+import com.qac.sparkle_gardens.repositories.ProductRepository;
 
 /**
  * The OrderService provides the functionality required for 
@@ -69,5 +65,31 @@ public class OrderService
 			return 0.0;
 		
 		return totalPrice;
+	}
+	
+	/**
+	 * Generate an invoice from the Order relating to
+	 * orderID. The invoice will include word of appreciation
+	 * as well as listing the products, their quantity and the total price
+	 * of each OrderLine.
+	 * 
+	 * @param orderID
+	 * @return This function will return a String which will be the invoice itself.
+	 */
+	public String generateInvoice(long orderID)
+	{
+		String invoice = "";
+		ProductRepository pr;
+		
+		invoice += "\n\n\n----------------------------------------------";
+		
+		invoice += "Thank you for shopping at NBGardens!\n";
+		invoice += "You have purchased the following items: \n";
+		
+		//invoice += pr.
+				
+		invoice += "\n\n\n----------------------------------------------";
+		
+		return invoice;
 	}
 }
