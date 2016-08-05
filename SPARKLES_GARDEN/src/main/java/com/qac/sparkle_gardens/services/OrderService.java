@@ -58,7 +58,7 @@ public class OrderService
 		
 		for (OrderLine i : lines)
 		{
-			totalPrice += (i.getPrice() * i.getQuantity());
+			totalPrice += (i.getProduct().getPrice() * i.getQuantity());
 		}
 		
 		if (totalPrice == 0)
@@ -79,17 +79,36 @@ public class OrderService
 	public String generateInvoice(long orderID)
 	{
 		String invoice = "";
-		ProductRepository pr;
+		ArrayList<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
 		
 		invoice += "\n\n\n----------------------------------------------";
 		
 		invoice += "Thank you for shopping at NBGardens!\n";
 		invoice += "You have purchased the following items: \n";
 		
-		//invoice += pr.
+		for (OrderLine i : lines)
+		{
+			invoice += "\n\nProduct = " + i.getProduct().getProductName() + "\n" + 
+						"   Quantity = " + i.getQuantity() + "\n" + 
+						    "Price = " + (i.getProduct().getPrice() * i.getQuantity()) + "\n\n";
+		}
 				
 		invoice += "\n\n\n----------------------------------------------";
 		
 		return invoice;
+	}
+	
+	/**
+	 * This function returns the product price multiplied by the quantity.
+	 * It's a handy and useful function where it is required to determine
+	 * a total product's price based on quantity. If you want the total price
+	 * of an entire order, see getTotalPrice(..).
+	 * @param p The product in question
+	 * @param quantity The quantity thereof
+	 * @return
+	 */
+	public double getPrice(Product p, int quantity)
+	{
+		return (p.getPrice() * quantity);
 	}
 }

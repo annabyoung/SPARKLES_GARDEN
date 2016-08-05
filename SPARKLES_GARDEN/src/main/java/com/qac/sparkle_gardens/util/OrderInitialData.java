@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
+import com.qac.sparkle_gardens.entities.Product;
 
 /**
  * OrderInitialData contains initial data that will hold orders offline.
@@ -33,18 +34,18 @@ public class OrderInitialData
 		orders.add(new Order(5, 5));
 		
 		// Add order line to order by productID, quantity & price
-		orders.get(0).addOrderLine(new OrderLine(30, 3, 30));
-		orders.get(0).addOrderLine(new OrderLine(29, 2, 12));
+		orders.get(0).addOrderLine(new OrderLine(new Product("Pretty trainers", 3, 30), 3));
+		orders.get(0).addOrderLine(new OrderLine(new Product("Funky gnome", 5, 12), 2));
 		
-		orders.get(1).addOrderLine(new OrderLine(1337, 1, 100));
+		orders.get(1).addOrderLine(new OrderLine(new Product("Awesome boots", 3, 100), 1));
 		
-		orders.get(2).addOrderLine(new OrderLine(193, 2, 50));
+		orders.get(2).addOrderLine(new OrderLine(new Product("Amazing watch", 1, 50), 2));
 		
-		orders.get(3).addOrderLine(new OrderLine(50, 10, 600));
-		orders.get(3).addOrderLine(new OrderLine(99, 2, 40));
-		orders.get(3).addOrderLine(new OrderLine(9202, 12, 2313));
+		orders.get(3).addOrderLine(new OrderLine(new Product("Superduper gaming rig!", 2, 600), 10));
+		orders.get(3).addOrderLine(new OrderLine(new Product("Great socks!", 10, 40), 2));
+		orders.get(3).addOrderLine(new OrderLine(new Product("Allen's Mac", 1, 231), 12));
 		
-		orders.get(4).addOrderLine(new OrderLine(34, 1, 200));
+		orders.get(4).addOrderLine(new OrderLine(new Product("Impressive glasses", 2, 200), 1));
 	}
 	
 	/**

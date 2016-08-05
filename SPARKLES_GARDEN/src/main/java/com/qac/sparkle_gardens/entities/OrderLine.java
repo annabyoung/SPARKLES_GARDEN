@@ -8,8 +8,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
- * The OrderLine class contains information regarding one product,
- * its quantity, and its price. Note: the quantity of the product
+ * The OrderLine class contains information regarding one product &
+ * its quantity. Note: the quantity of the product
  * in the OrderLine is NOT equal to the quantity of the product's stock level.
  * 
  * @author Damien Lloyd
@@ -23,35 +23,28 @@ public class OrderLine
 	@JoinColumn(name = "orderID", nullable = false)
 	private long orderID;
 
-	@OneToMany
-	@NotNull
-	@JoinColumn(name = "productID", nullable = false)
-	private long productID;
+	private Product product;
 	
-	private int quantity; // Quantity of Products of productID
-	
-	private double price; // The price of the product of productID
+	private int quantity; // Quantity of Product ordered
 	
 	/**
 	 * Default constructor of OrderLine. 
 	 */
 	public OrderLine()
 	{
-		price = 0;
+		product = new Product();
 		quantity = 0;
 	}
 	
 	/**
-	 * Create OrderLine from a product's ID, the quantity ordered
-	 * and the INDIVIDUAL price.
+	 * Create OrderLine from a product's ID & the quantity ordered.
 	 * 
 	 * @param productID
 	 * @param quantity Quantity of product order. This is not stock level!
-	 * @param price This is not total price! Input the product's price only
 	 */
-	public OrderLine(long productID, int quantity, double price)
+	public OrderLine(Product product, int quantity)
 	{
-		setProduct(productID, quantity, price);
+		setProduct(product, quantity);
 	}
 	
 	/**
@@ -60,13 +53,11 @@ public class OrderLine
 	 * 
 	 * @param productID The ID of the product to be ordered
 	 * @param quantity The quantity of the product to be ordered
-	 * @param price The individual price of the product (not total)
 	 */
-	public void setProduct(long productID, int quantity, double price)
+	public void setProduct(Product product, int quantity)
 	{
-		this.productID = productID;
+		this.product = product;
 		this.quantity = quantity;
-		this.price = price;
 	}
 	
 	/**
@@ -91,18 +82,18 @@ public class OrderLine
 	 * Return the productID of the OrderLine
 	 * @return productID
 	 */
-	public long getProductID() 
+	public Product getProduct() 
 	{
-		return productID;
+		return product;
 	}
 	
 	/**
 	 * Set the productID of the product
 	 * @param productID
 	 */
-	public void setProductID(long productID) 
+	public void setProduct(Product product) 
 	{
-		this.productID = productID;
+		this.product = product;
 	}
 	
 	/**
@@ -121,23 +112,5 @@ public class OrderLine
 	public void setQuantity(int quantity) 
 	{
 		this.quantity = quantity;
-	}
-	
-	/**
-	 * Get the individual price of the product to be ordered
-	 * @return price
-	 */
-	public double getPrice() 
-	{
-		return price;
-	}
-	
-	/**
-	 * Set the individual price of the product to be ordered
-	 * @param price
-	 */
-	public void setPrice(double price) 
-	{
-		this.price = price;
 	}
 }
