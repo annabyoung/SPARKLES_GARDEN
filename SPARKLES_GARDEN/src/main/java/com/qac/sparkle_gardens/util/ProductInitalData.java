@@ -21,9 +21,15 @@ public class ProductInitalData {
 	private ArrayList<Product> products = new ArrayList<Product>();
 	
 	public ProductInitalData(){
-		products.add(new Product("The Great American Challenge", 50, 79.99));
-		products.add(new Product("Fleshlight Original", 100, 99.99));
-		products.add(new Product("The Screaming O", 500, 19.99));
+		Product p = new Product("The Great American Challenge", 50, 79.99);
+		p.setProductTags("Dildo");
+		products.add(p);
+		p = new Product("Fleshlight Original", 100, 99.99);
+		p.setProductTags("Masturbator");
+		products.add(p);
+		p = new Product("The Screaming O", 500, 19.99);
+		p.setProductTags("Vibrating");
+		products.add(p);
 	}
 	
 	public List<Product> getProducts(){
