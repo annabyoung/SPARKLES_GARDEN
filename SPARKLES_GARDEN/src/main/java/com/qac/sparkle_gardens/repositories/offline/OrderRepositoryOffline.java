@@ -2,18 +2,21 @@ package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
 import com.qac.sparkle_gardens.util.OrderInitialData;
 
 /**
- * Enables holding of data outside a server
+ * The OrderRepositoryOffline class 
  * @author Damien Lloyd
  *
  */
 public class OrderRepositoryOffline 
 	implements OrderRepository
 {
+	@Inject
 	private OrderInitialData initialData;
 	
 	/**
@@ -44,17 +47,16 @@ public class OrderRepositoryOffline
 	 * Find order by its String id
 	 * @param orderID The id of the Order
 	 */
-	public Order findByID(String orderID) 
+	public Order get(long orderID) 
 	{
 		ArrayList<Order> ol = initialData.getOrders();
-		Order o = null;
 		
 		for (int i = 0; i < ol.size(); i++)
 		{
 			if (ol.get(i).getOrderID() == orderID)
-				o = ol.get(i);
+				return ol.get(i);
 		}
-		return o;
+		return null;
 	}
 	
 	/**
@@ -65,30 +67,16 @@ public class OrderRepositoryOffline
 		return initialData.getOrders();
 	}
 	
-	/** 
-	 * Update order in the bean
-	 */
-	public void updateOrder(Order o) 
-	{
-		ArrayList<Order> ol = initialData.getOrders();
-		
-		for (int i = 0; i < ol.size(); i++)
-		{
-			if (ol.get(i).equals(o))
-				ol.set(i, o);
-		}
-	}
-	
 	/**
 	 * Remove order from the bean
 	 */
-	public void removeOrder(Order o) 
+	public void removeOrder(long orderID) 
 	{
 		ArrayList<Order> ol = initialData.getOrders();
 		
 		for (int i = 0; i < ol.size(); i++)
 		{
-			if (ol.get(i).equals(o))
+			if (ol.get(i).getOrderID() == orderID)
 				ol.remove(i);
 		}
 	}

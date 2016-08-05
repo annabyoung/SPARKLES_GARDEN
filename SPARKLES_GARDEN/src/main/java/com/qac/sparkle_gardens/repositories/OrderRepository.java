@@ -7,9 +7,12 @@ import com.qac.sparkle_gardens.entities.Order;
 public interface OrderRepository 
 {
 	public void persistOrder(Order o);
+	
 	public void persistOrders(ArrayList<Order> o);
-	public Order findByID(String orderID);
+	
+	public Order get(long orderID);
+	
 	public ArrayList<Order> getOrders();
-	public void updateOrder(Order o);
-	public void removeOrder(Order o);
+	
+	public void removeOrder(long orderID);
 }

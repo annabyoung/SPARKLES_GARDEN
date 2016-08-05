@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.inject.Singleton;
 
 import com.qac.sparkle_gardens.entities.Order;
+import com.qac.sparkle_gardens.entities.OrderLine;
 
 /**
  * OrderInitialData contains initial data that will hold orders offline.
@@ -23,11 +24,26 @@ public class OrderInitialData
 	 */
 	public OrderInitialData()
 	{
-		orders.add(new Order("OD01", "C001", 4, 40));
-		orders.add(new Order("OD02", "C002", 1, 100));
-		orders.add(new Order("OD03", "C003", 10, 60));
-		orders.add(new Order("OD04", "C001", 5, 37));
-		orders.add(new Order("OD05", "C003", 2, 10));
+		// Create order with orderID & customerID
+		orders.add(new Order(1, 1)); 
+		orders.add(new Order(2, 2));
+		orders.add(new Order(3, 3));
+		orders.add(new Order(4, 4));
+		orders.add(new Order(5, 5));
+		
+		// Add order line to order by productID, quantity & price
+		orders.get(0).addOrderLine(new OrderLine(30, 3, 30));
+		orders.get(0).addOrderLine(new OrderLine(29, 2, 12));
+		
+		orders.get(1).addOrderLine(new OrderLine(1337, 1, 100));
+		
+		orders.get(2).addOrderLine(new OrderLine(193, 2, 50));
+		
+		orders.get(3).addOrderLine(new OrderLine(50, 10, 600));
+		orders.get(3).addOrderLine(new OrderLine(99, 2, 40));
+		orders.get(3).addOrderLine(new OrderLine(9202, 12, 2313));
+		
+		orders.get(4).addOrderLine(new OrderLine(34, 1, 200));
 	}
 	
 	/**

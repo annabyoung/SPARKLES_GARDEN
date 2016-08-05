@@ -1,11 +1,9 @@
-package com.qac.sparkle_gardens.repositories.offline;
+package deprecated;
 
 import java.util.ArrayList;
 
 import com.qac.sparkle_gardens.entities.OrderLine;
-import com.qac.sparkle_gardens.repositories.OrderLineRepository;
 import com.qac.sparkle_gardens.util.MethodAuthor;
-import com.qac.sparkle_gardens.util.OrderLineInitialData;
 
 import javax.inject.*;
 
@@ -54,8 +52,8 @@ public class OrderLineRepositoryOffline
 		
 		for (int i = 0; i < ol.size(); i++)
 		{
-			if (ol.get(i).getOrderID() == orderID) 
-				return ol.get(i);
+			//if (ol.get(i).getOrderID() == orderID) 
+			//	return ol.get(i);
 		}
 		return null;
 	}
@@ -79,10 +77,11 @@ public class OrderLineRepositoryOffline
 		
 		for (int i = 0; i < _ol.size(); i++)
 		{
-			if (_ol.get(i).getOrderID().equals(_ol)) {
-				o = _ol.set(i, o);
-				break;
-			}
+			//if (_ol.get(i).getOrderID().equals(_ol)) 
+			//{
+			//	o = _ol.set(i, o);
+				//break;
+			//}
 		}
 	}
 	
@@ -96,10 +95,11 @@ public class OrderLineRepositoryOffline
 		
 		for (int i = 0; i < _ol.size(); i++)
 		{
-			if (_ol.get(i).getOrderID().equals(_ol)) {
-				_ol.remove(i);
-				break;
-			}
+			//if (_ol.get(i).getOrderID().equals(_ol)) 
+			//{
+			//	_ol.remove(i);
+			//	break;
+			//}
 		}
 	}
 }

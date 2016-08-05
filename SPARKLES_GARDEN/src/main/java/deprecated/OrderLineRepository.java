@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.repositories;
+package deprecated;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,7 @@
 package com.qac.sparkle_gardens.entities;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
+ * The Order class contains all the order lines along with 
+ * the orderID and the customerID. This class does not hold 
+ * all the products themselves; see OrderLine if you want to access
+ * what products an Order has.
  * 
  * @author Damien Lloyd
- *
  */
 @Entity
 @Table (name = "order")
@@ -27,6 +32,9 @@ public class Order
 	@NotNull
 	private long customerID;
 	
+	// List of orderlines in the order
+	private ArrayList<OrderLine> lines;
+	
 	/**
 	 * Default constructor
 	 */
@@ -36,12 +44,23 @@ public class Order
 	}
 	
 	/**
-	 * Construct Order with values
+	 * Construct Order with credentials such as orderID and customerID.
 	 */
-	public Order(long order_id, long customer_id)
+	public Order(long orderID, long customerID)
 	{
-		this.orderID = order_id;
-		this.customerID = customer_id;
+		setCredentials(orderID, customerID);
+	}
+	
+	/**
+	 * Set the order ID and customerID
+	 * 
+	 * @param orderID
+	 * @param customerID
+	 */
+	public void setCredentials(long orderID, long customerID) 
+	{
+		this.orderID = orderID;
+		this.customerID = customerID;
 	}
 	
 	/**
@@ -54,11 +73,30 @@ public class Order
 	}
 	
 	/**
-	 * Set the order ID
-	 * @param orderID
+	 * Get customer ID
+	 * @return customerID
 	 */
-	public void setOrderID(long orderID) 
+	public long getCustomerID()
 	{
-		this.orderID = orderID;
+		return customerID;
+	}
+	
+	/**
+	 * This adds an OrderLine object into
+	 * an order. See OrderLine for what it contains.
+	 * @param ol
+	 */
+	public void addOrderLine(OrderLine ol)
+	{
+		lines.add(ol);
+	}
+	
+	/**
+	 * Remove an OrderLine object from the list.
+	 * @param ol
+	 */
+	public void removeOrderLine(OrderLine ol)
+	{
+		lines.remove(ol);
 	}
 }

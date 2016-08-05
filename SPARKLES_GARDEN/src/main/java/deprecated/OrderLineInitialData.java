@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.util;
+package deprecated;
 
 import java.util.ArrayList;
 
@@ -22,8 +22,8 @@ public class OrderLineInitialData
 	 */
 	public OrderLineInitialData()
 	{
-		orderLines.add(new OrderLine(new Order("OD01", "C001", 1, 10)));
-		orderLines.add(new OrderLine(new Order("OD01", "C002", 4, 40)));
+		//orderLines.add(new OrderLine(new Order("OD01", "C001", 1, 10)));
+		//orderLines.add(new OrderLine(new Order("OD01", "C002", 4, 40)));
 	}
 	
 	/**
