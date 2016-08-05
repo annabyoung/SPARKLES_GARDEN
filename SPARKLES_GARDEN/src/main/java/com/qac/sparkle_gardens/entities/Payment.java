@@ -72,11 +72,11 @@ public class Payment {
 		this.cardNumber = cardNumber;
 	}
 
-	public String getExpiryDate() {
+	public String getExpirationDate() {
 		return expirationDate;
 	}
 
-	public void setExpiryDate(String expirationDate) {
+	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
 	}
 	
