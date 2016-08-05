@@ -39,7 +39,10 @@ public class CustomerService {
 				return customer.getAccountID();
 			return -2;
 		}
-		return -1;
+		else {
+			return -1;
+		}
+		
 	}
 	
 	//account conversion
