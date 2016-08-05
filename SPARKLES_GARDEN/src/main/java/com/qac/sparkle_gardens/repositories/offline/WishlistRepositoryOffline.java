@@ -1,20 +1,27 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
+
 /**
  * 
  * @author Tyler Deans
  *
  */
+
 public class WishlistRepositoryOffline implements WishlistRepository{
 	@Inject private WishlistInitialData initialData;
 	
 	// Add a wishlist
 	public void persistWishlist(Wishlist wishlist) {
 		initialData.addWishlist(wishlist);
+	}
+	
+	public void persistWishlists(List<Wishlist> wishlists) {
+		
 	}
 	
 	public Wishlist findById(long id) {

@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,6 +37,8 @@ import javax.validation.constraints.Size;
 	@NamedQuery(name = Product.FIND_BY_STOCK_LEVEL, 
 		query = "SELECT a FROM Product a WHERE a.stockLevel = :stockLevel"),
 	@NamedQuery(name = Product.FIND_BY_PRICE, 
+		query = "SELECT a FROM Product a WHERE a.price = :price"),
+	@NamedQuery(name = Product.FIND_BY_TAG, 
 		query = "SELECT a FROM Product a WHERE a.price = :price")
 	
 })
@@ -67,6 +70,10 @@ public class Product {
 	@Size (min = 0, max = 100000)
 	private double price;
 	
+	@Column (name = "productTags", nullable = false)
+	@NotNull
+	private ArrayList<String> productTags;
+	
 	//Many products to one wish list
 	@ManyToOne
 	@JoinColumn(name="wishlist_fk", nullable = false)
@@ -82,6 +89,7 @@ public class Product {
 	public static final String FIND_BY_PRODUCT_NAME= "Product.getProductName()";
 	public static final String FIND_BY_STOCK_LEVEL= "Product.getStockLevel()";
 	public static final String FIND_BY_PRICE= "Product.getPrice()";	
+	public static final String FIND_BY_TAG= "Product.getProductTags()";	
 	
 	//blank constructor for Product
 	public Product() {	}
@@ -116,6 +124,14 @@ public class Product {
 	}
 	public void setPrice(float price) {
 		this.price = price;
+	}
+
+	public ArrayList<String> getProductTags() {
+		return productTags;
+	}
+
+	public void setProductTags(String productTag) {
+		this.productTags.add(productTag);
 	}
 	
 	

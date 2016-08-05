@@ -1,7 +1,7 @@
 package com.qac.sparkle_gardens.entities;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,10 +36,14 @@ public class Wishlist {
 	private long wishlistId;
 	
 	@OneToOne
-	@JoinColumn(name = "customerID", nullable = false)
+	@JoinColumn(name = "accountID", nullable = false)
 	@NotNull
-	private String customerId;
+	private long acccountId;
 	
+	/**
+	 * A wishlist would have a list of products associated with one
+	 * customer
+	 */
 	@OneToMany
 	@JoinColumn(name="product_fk", nullable = false)
 	// the list of products in wishlist
@@ -56,14 +60,14 @@ public class Wishlist {
 	private double price;
 	
 	public Wishlist () {
-		this.customerId = "";
+		this.acccountId = 0;
 	}
-	public Wishlist(String customerId, ArrayList<Product> product) {
-		this.customerId = customerId;
-		this.product = product;
+	public Wishlist(long acccountId, List<Product> product) {
+		this.acccountId = acccountId;
+		this.product = (ArrayList<Product>) product;
 	}
-	public String getCustomerId() {
-		return customerId;
+	public long getCustomerId() {
+		return acccountId;
 	}
 
 	public String getProductName() {
