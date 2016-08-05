@@ -32,11 +32,11 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		}
 		
 		
-		public Customer findByID(String accountID){
+		public Customer findByID(long accountID){
 			ArrayList<Customer> theCustomers = initialData.getCustomers();
 			for (int i=0; i<theCustomers.size(); i++)
 			{
-				if(theCustomers.get(i).getAccountID().equals(accountID)){
+				if(theCustomers.get(i).getAccountID() == accountID){
 					return theCustomers.get(i); 
 				}
 				
@@ -91,4 +91,11 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			
 		}
 
+		@Override
+		public Customer findByEmail(String email) {
+			for (Customer customer : initialData.getCustomers())
+				if(customer.getEmail().equalsIgnoreCase(email))
+					return customer;
+			return null;
+		}
 }
