@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.repositories.OrderLineRepository;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
 
 
