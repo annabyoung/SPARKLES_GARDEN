@@ -24,20 +24,23 @@ public class Payment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String pid;
 	@Column(name = "nameOnCard", nullable = false, length = 225)
+	@NotNull
 	@Size(min = 2, max = 225)
 	private String cardOwnerName;
 	@Pattern(regexp="[0-9]{16}",
             message="{invalid.cardNumber}")
 	@Column(name = "cardNumber", nullable = false, length = 16)
+	@NotNull
 	private String cardNumber;
 	@Column(name = "expirationDate", nullable = false, length = 5)
+	@NotNull
 	@Pattern(regexp="[0-1][0-9]/[0-9]{2}",
             message="{invalid.expirationDate}")
 	private String expirationDate;
 	@JoinColumn(name="accountID_fk", nullable=false)
 	@NotNull
 	private Customer customer;
-	//private String issueNumber;
+	//private String issueNumber; 
 	
 	public static final String FIND_BY_CARD_NUMBER = "Payment.getCardNumber";
 	public static final String FIND_BY_PID = "Payment.getPid";

@@ -22,13 +22,13 @@ public class CardService {
 	/**
 	 * Check to make sure that the card details are valid.
 	 * 
-	 * @param customerName
+	 * @param cardOwnerName
 	 * @param cardNumber
 	 * @param expirationDate
 	 * @return
 	 */
-	public boolean validateCardDetails(String customerName, String cardNumber, String expirationDate) {
-		if (customerName.isEmpty() || cardNumber.isEmpty() || expirationDate.isEmpty() && !cardNumber.matches("[0-9]{16}")) {
+	public boolean validateCardDetails(String cardOwnerName, String cardNumber, String expirationDate) {
+		if (!cardOwnerName.isEmpty() || !cardNumber.isEmpty() || !expirationDate.isEmpty() && cardNumber.matches("[0-9]{16}")) {
 			return checkInDate(expirationDate);
 		}
 		return false;
