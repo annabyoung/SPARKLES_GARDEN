@@ -15,6 +15,8 @@ public interface ProductRepository {
 	public void persistProducts(List<Product> p);
 	
 	public Product findByProductName(String productName);
+	public Product findByProductID(long productID);
+	public Product findByProductPrice(double price);
 	public ArrayList<Product> getProducts();
 	
 	//Create, remove, update and delete products

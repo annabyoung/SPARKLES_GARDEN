@@ -22,15 +22,22 @@ public class ProductRepositoryOffline implements ProductRepository{
 		
 	}
 	
+	public Product findByProductID(long productID){
+		return null;
+	}
+	
 	public Product findByProductName(String productName) {
 		return null;
 	}
 
+	public Product findByProductPrice(double price){
+		return null;
+	}
+	
 	public ArrayList<Product> getProducts() {
 		return (ArrayList<Product>) initialData.getProducts();
 	}
 		
-	//To be implemented later
 	public void createProduct(Product p) {
 		
 	}
