@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.repositories;
+package com.qac.sparkle_gardens.repositories.offline;
 import java.util.ArrayList;
 
 import javax.inject.Singleton;

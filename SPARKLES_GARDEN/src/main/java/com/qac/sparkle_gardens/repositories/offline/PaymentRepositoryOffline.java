@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Payment;
-import com.qac.sparkle_gardens.repositories.PaymentInitialData;
 import com.qac.sparkle_gardens.repositories.PaymentRepository;
 
 public class PaymentRepositoryOffline implements PaymentRepository
