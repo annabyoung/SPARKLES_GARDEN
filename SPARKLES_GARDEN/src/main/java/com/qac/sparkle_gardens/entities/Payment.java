@@ -1,6 +1,7 @@
 package com.qac.sparkle_gardens.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -19,15 +20,10 @@ import javax.validation.constraints.Size;
 
 public class Payment {
 	@Id
-	@Column(name = "pid")
-	
-	@OneToMany 
-	@JoinColumn(name = "Order_fk", nullable = false)
-	//this may or may not be a thing in this thing 
-	
+	@Column(name = "pid")	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String pid;
-	@Column(name = "customerName", nullable = false, length = 225)
+	@Column(name = "nameOnCard", nullable = false, length = 225)
 	@Size(min = 2, max = 225)
 	private String cardOwnerName;
 	@Pattern(regexp="[0-9]{16}",
@@ -38,7 +34,9 @@ public class Payment {
 	@Pattern(regexp="[0-1][0-9]/[0-9]{2}",
             message="{invalid.expirationDate}")
 	private String expirationDate;
-	
+	@JoinColumn(name="accountID_fk", nullable=false)
+	@NotNull
+	private Customer customer;
 	//private String issueNumber;
 	
 	public static final String FIND_BY_CARD_NUMBER = "Payment.getCardNumber";
@@ -47,11 +45,11 @@ public class Payment {
 	public Payment() {
 	}
 
-	public Payment(String customerName, String cardNumber, String expirationDate) {
-		super();
+	public Payment(String customerName, String cardNumber, String expirationDate, Customer customer) {
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
+		this.customer = customer;
 	}
 	
 	public String getPid(){
@@ -81,4 +79,7 @@ public class Payment {
 	public void setExpiryDate(String expirationDate) {
 		this.expirationDate = expirationDate;
 	}
+	
+	public Customer getCustomer() { return customer; }
+	public void setCustomer(Customer customer) { this.customer = customer; }
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  * 
@@ -15,10 +16,12 @@ import javax.persistence.OneToMany;
 public class OrderLine 
 {
 	@OneToMany
+	@NotNull
 	@JoinColumn(name = "orderID", nullable = false)
 	private String orderID;
 	
 	@OneToMany
+	@NotNull
 	@JoinColumn(name = "productID", nullable = false)
 	private ArrayList<String> products;
 	
