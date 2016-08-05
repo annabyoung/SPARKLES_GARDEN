@@ -3,7 +3,9 @@ package com.qac.sparkle_gardens.services;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.Product;
+import com.qac.sparkle_gardens.repositories.OrderLineRepository;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
 
 @Stateless
@@ -12,13 +14,19 @@ public class OrderService
 	@Inject
 	OrderRepository repository;
 	
-	public boolean isProductInStock(Product p)
+	@Inject
+	OrderLineRepository ol_repository;
+
+	public boolean isOrderEmpty(String orderID)
 	{
-		if (p.getStockLevel() < 0)
-			return false;
-		
-		return true;
+		if (repository.findByID(orderID).getQuantity() == 0)
+			return true;
+		return false;
 	}
 	
-	public boolean isOrderEmpty()
+	public double getTotalPrice(String orderID)
+	{
+		int q = repository.findByID(orderID).getQuantity();
+		
+	}
 }
