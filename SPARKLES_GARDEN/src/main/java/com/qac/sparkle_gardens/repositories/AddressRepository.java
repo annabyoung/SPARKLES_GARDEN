@@ -2,16 +2,24 @@ package com.qac.sparkle_gardens.repositories;
 
 import java.util.List;
 import com.qac.sparkle_gardens.entities.Address;
-import com.qac.sparkle_gardens.entities.Wishlist;
 
+/**
+ * 
+ * @author Tyler Deans
+ *
+ */
 public interface AddressRepository {
-	public void persistWishlist(Wishlist wishlist);
-	public void persistWishlists(List<Wishlist> wishlists);
+	// Creates an address
+	public void persistAddress(Address address);
+	
+	// Creates a list of addresses
+	public void persistAddresses(List<Address> addresss);
+	
 	// Locate an address by ID
-	public Address findById(long id); 
+	public Address findByCustomerId(long id); 
 	
 	// Returns all the addresses
-	public List<Address> getAddress();
+	public List<Address> getAddresses();
 	
 	// Update as address
 	public void updateAddress(Address address);

@@ -15,7 +15,8 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
 public class Payment {
 
 	@Id
-	@Column(name = "paymentID")
+	@Column(name = "paymentID", nullable = false, unique = true)
+	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long paymentID;
 	@Column(name = "customerID", nullable = false)

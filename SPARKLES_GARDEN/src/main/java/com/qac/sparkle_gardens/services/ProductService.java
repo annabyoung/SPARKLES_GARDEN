@@ -3,6 +3,8 @@
  */
 package com.qac.sparkle_gardens.services;
 
+import java.util.ArrayList;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
@@ -38,8 +40,7 @@ public class ProductService {
 	}
 	
 	/**
-	 * Add item to orderline
-	 * If the product has enough stock to meet the orderline's request, return true and add to orderline
+	 * If the product has enough stock to meet the request, return true and decrement stock
 	 * if the product does not have enough stock to meet orderline's request, output error message
 	 * 
 	 * Additional functionality to be added later
@@ -49,22 +50,15 @@ public class ProductService {
 	 * stock is returned if customer cancels order, or removes items from order
 	 * stock should be returned if customer doesn't complete order within a certain time frame
 	 * 
-	 */
-	public void addItemToOrderline(Product p, OrderLine orderline){
-		int quantityRequest = orderline.getQuantity();
-		if (checkIfEnoughQuantity(p, quantityRequest)){
-			orderline.setProduct(p, quantityRequest);
-			//Decrementing stock may need to go somewhere else, since it doesn't decrement here
-			p.setStockLevel(p.getStockLevel() - quantityRequest);
-		}
-		System.out.println("Request exceeds stock level");
-	}
-	
-	/**
+	 *
 	 * Decrement stock when order is being finalized
 	 */
 	
-	
+	public void decrementProductQuantity(Product p, int quantityRequest){
+		if (checkIfEnoughQuantity(p, quantityRequest)){
+			p.setStockLevel(p.getStockLevel() - quantityRequest);
+		}
+	}
 	
 	
 	/**
@@ -82,6 +76,15 @@ public class ProductService {
 	}
 	
 	/**
+	 * Retrieve product's info from productID
+	 * Find the product from its ID and return its description
+	 */
+	public String getProductDescriptionFromID(long productID){
+		Product p = getProductByID(productID);
+		return p.getProductDescription();
+	}
+	
+	/**
 	 * Check if the quantity request exceeds product's stocklevel/quantity 
 	 * if the stock level is less than or equal to quantity requested, true will be returned
 	 * if there is not enough stock to meet the quantity requested, false will be returned
@@ -90,10 +93,44 @@ public class ProductService {
 		return (p.getStockLevel() <= quantityRequested);
 	}
 	
-
+	/**
+	 * 
+	 * Use a product's ID to find the whole product, including its other attributes
+	 */
 	public Product getProductByID(long productID){
 		return productRepository.findByProductID(productID);
 	}
 	
+	/**
+	 * Search items within a price range
+	 * @param minimumPrice
+	 * @param maximumPrice
+	 * @return prodcutsInRange which is all the products within the price range the customer is searching for
+	 */
+	public ArrayList<Product> findProductsByPriceRange(double minimumPrice, double maximumPrice){		
+		ArrayList<Product> productsInRange = new ArrayList<>();
+		for(Product p : productRepository.getProducts()){
+			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
+				productsInRange.add(p);
+			}
+		}
+		return productsInRange;
+	}
+	
+	/**
+	 * Search items with certain tags
+	 */
+	public ArrayList<Product> findProductsByTags(String[] tags){
+		ArrayList<Product> productsWithTags = new ArrayList<>();
+		for(Product p : productRepository.getProducts()){
+			
+		}
+		return productsWithTags;
+	}
+	
+	/*public void searchProducts(){
+		for
+	}
+	*/
 
 }
