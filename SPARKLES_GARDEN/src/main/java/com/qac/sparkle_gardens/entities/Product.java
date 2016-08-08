@@ -75,6 +75,11 @@ public class Product {
 	@Size (min = 0, max = 100000)
 	private double price;
 	
+	@Column (name = "productDescription", nullable = false, length = 225)
+	@NotNull
+	@Size (min = 2, max = 225)
+	private String productDescription;
+	
 	@Column (name = "productTags", nullable = false)
 	@NotNull
 	private ArrayList<String> productTags;
@@ -105,7 +110,11 @@ public class Product {
 		this.stockLevel = stockLevel;
 		this.price = price;}
 		
-	
+	/**
+	 * 
+	 * the getters and setters for product attributes
+	 * 
+	 */
 	public String getProductName() {
 		return productName;
 	}
@@ -131,6 +140,14 @@ public class Product {
 		this.price = price;
 	}
 	
+	public String getProductDescription() {
+		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
+	}
+
 	/**
 	 * This may be useful for the front end later on, maybe not
 	 */

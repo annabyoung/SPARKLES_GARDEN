@@ -28,6 +28,8 @@ public class ProductService {
 		 * item info
 	*/
 	
+	
+	
 	/**
 	 * Add item to wishlist
 	 */
@@ -41,18 +43,34 @@ public class ProductService {
 	 * if the product does not have enough stock to meet orderline's request, output error message
 	 * 
 	 * Additional functionality to be added later
+	 * 
+	 * stock is decremented when order is being finalized, 
+	 * as soon as customer pushes 'checkout'
+	 * stock is returned if customer cancels order, or removes items from order
+	 * stock should be returned if customer doesn't complete order within a certain time frame
+	 * 
 	 */
 	public void addItemToOrderline(Product p, OrderLine orderline){
-		if (checkIfEnoughQuantity(p, orderline.getQuantity())){
-			orderline.setProduct(p, orderline.getQuantity());
+		int quantityRequest = orderline.getQuantity();
+		if (checkIfEnoughQuantity(p, quantityRequest)){
+			orderline.setProduct(p, quantityRequest);
+			//Decrementing stock may need to go somewhere else, since it doesn't decrement here
+			p.setStockLevel(p.getStockLevel() - quantityRequest);
 		}
 		System.out.println("Request exceeds stock level");
 	}
+	
+	/**
+	 * Decrement stock when order is being finalized
+	 */
+	
+	
 	
 	
 	/**
 	 * Check if the product is in stock, if it's not then a message should display
 	 * to let the customer know that it is back order
+	 * 
 	 */
 	public boolean checkInStock(Product p){
 		if (p.getStockLevel() == 0)
@@ -72,6 +90,9 @@ public class ProductService {
 		return (p.getStockLevel() <= quantityRequested);
 	}
 	
+	public Product getProductByID(long productID){
+		return productRepository.findByProductID(productID);
+	}
 	
 
 }
