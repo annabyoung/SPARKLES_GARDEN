@@ -21,13 +21,13 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
 @Stateless
 public class OrderService 
 {
-	private static long orderID = 0;
+	private static long ORDER_ID = 0;
 	
 	@Inject
 	OrderRepository repository;
 	
 	@Inject
-	ArrayList<OrderLine> lines;
+	ArrayList<OrderLine> basket;
 	
 	/**
 	 * Checks if the orderID is empty. If all the OrderLines have a
@@ -35,7 +35,7 @@ public class OrderService
 	 * @param orderID
 	 * @return
 	 */
-	public boolean isOrderEmpty(Order o)
+	public boolean isOrderEmpty(long orderID)
 	{
 		ArrayList<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
 		int totalQuantity = 0;
@@ -59,7 +59,7 @@ public class OrderService
 	 * @param price
 	 * @return true if the order passes, false if otherwise
 	 */
-	public boolean checkOrderLine(int quantity, int price, int stocklevel)
+	public boolean checkOrderLine(int quantity, double price, int stocklevel)
 	{
 		if (quantity < 0 || price < 0)
 			return false;
@@ -76,9 +76,9 @@ public class OrderService
 	 * @param lines - The list of OrderLines to be passed
 	 * @return
 	 */
-	public double getTotalPrice(ArrayList<OrderLine> lines)
+	public double getTotalPrice(long orderID)
 	{
-		//ArrayList<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
+		ArrayList<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
 		double totalPrice = 0;
 		
 		for (OrderLine i : lines)
@@ -97,9 +97,9 @@ public class OrderService
 	 * The order ID is a numerical decimal value.
 	 * @return The identification number of the order
 	 */
-	public long generateOrderID()
+	private long generateOrderID()
 	{
-		return ++orderID;
+		return ++ORDER_ID;
 	}
 	
 	/**
@@ -147,9 +147,28 @@ public class OrderService
 		return (p.getPrice() * quantity);
 	}
 	
-	public void addProduct(Product p, int quantity)
+	public boolean addProductToBasket(Product p, int quantity)
 	{
-		this.lines.add(new OrderLine(p, quantity));
+		if (!checkOrderLine(quantity, p.getPrice(), p.getStockLevel()))
+			return false;
+		
+		basket.add(new OrderLine(p, quantity));
+		
+		return true;
+	}
+	
+	public boolean createOrder(long customerID)
+	{
+		long id = generateOrderID();
+		repository.persistOrder(new Order(id, customerID));
+		
+		if (basket.isEmpty())
+			return false;
+		
+		for (OrderLine i : basket)
+			repository.getOrder(id).addOrderLine(i);
+		
+		return true;
 	}
 	
 	public Order getOrder(long orderID)

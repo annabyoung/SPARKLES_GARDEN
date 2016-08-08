@@ -3,6 +3,8 @@
  */
 package com.qac.sparkle_gardens.services;
 
+import java.util.ArrayList;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
@@ -91,10 +93,44 @@ public class ProductService {
 		return (p.getStockLevel() <= quantityRequested);
 	}
 	
-
+	/**
+	 * 
+	 * Use a product's ID to find the whole product, including its other attributes
+	 */
 	public Product getProductByID(long productID){
 		return productRepository.findByProductID(productID);
 	}
 	
+	/**
+	 * Search items within a price range
+	 * @param minimumPrice
+	 * @param maximumPrice
+	 * @return prodcutsInRange which is all the products within the price range the customer is searching for
+	 */
+	public ArrayList<Product> findProductsByPriceRange(double minimumPrice, double maximumPrice){		
+		ArrayList<Product> productsInRange = new ArrayList<>();
+		for(Product p : productRepository.getProducts()){
+			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
+				productsInRange.add(p);
+			}
+		}
+		return productsInRange;
+	}
+	
+	/**
+	 * Search items with certain tags
+	 */
+	public ArrayList<Product> findProductsByTags(String[] tags){
+		ArrayList<Product> productsWithTags = new ArrayList<>();
+		for(Product p : productRepository.getProducts()){
+			
+		}
+		return productsWithTags;
+	}
+	
+	/*public void searchProducts(){
+		for
+	}
+	*/
 
 }
