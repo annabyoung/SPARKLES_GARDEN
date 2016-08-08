@@ -1,6 +1,7 @@
 package com.qac.sparkle_gardens.entities;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -28,7 +29,11 @@ import javax.validation.constraints.Size;
 
 @Entity
 
-//Queries to find products by different attributes
+/**Queries to find products by different attributes
+ * 
+ * No database yet so we can't use these.
+ *
+ */
 @NamedQueries({
 	@NamedQuery(name = Product.FIND_BY_PRODUCT_ID, 
 		query = "SELECT a FROM Product a WHERE a.productID = :productID"),
@@ -126,10 +131,33 @@ public class Product {
 		this.price = price;
 	}
 
-	public ArrayList<String> getProductTags() {
-		return productTags;
+	//Display all the tags associated with a product
+	public void displayProductTags() {
+		Iterator<String> iter = productTags.iterator();
+		while (iter.hasNext()){
+			System.out.println(iter.next());
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * Search through the arraylist of tags associated with each product
+	 * if the tag requested is found inside the arraylist, return true
+	 * if the tag requested is not found, return false
+	 *
+	 */
+	public boolean checkProductTags(String tag) {
+		Iterator<String> iter = productTags.iterator();
+		while (iter.hasNext()){
+			if (tag.equals(iter.next())){
+				return true;
+			}
+		}
+		return false;
 	}
 
+	//Since tags is an arraylist of String, each tag must be added
 	public void setProductTags(String productTag) {
 		this.productTags.add(productTag);
 	}
