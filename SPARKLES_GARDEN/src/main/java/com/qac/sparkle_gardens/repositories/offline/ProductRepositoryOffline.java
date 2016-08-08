@@ -57,7 +57,7 @@ public class ProductRepositoryOffline implements ProductRepository{
 	 public ArrayList<Product> findByProductTag(String tag){
 		ArrayList<Product> productsByPrice = new ArrayList<>();
 		for (Product p : initialData.getProducts()){ //search through all products in product list
-			if (p.checkProductTags(tag)){ //check if the product in list matches the tag requested
+			if (p.findProductTags(tag)){ //check if the product in list matches the tag requested
 				productsByPrice.add(p); //add all products that are the same tag as the tag requested
 			}
 		}

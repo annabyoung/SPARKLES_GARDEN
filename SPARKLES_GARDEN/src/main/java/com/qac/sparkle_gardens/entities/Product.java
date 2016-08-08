@@ -130,7 +130,10 @@ public class Product {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-
+	
+	/**
+	 * This may be useful for the front end later on, maybe not
+	 */
 	//Display all the tags associated with a product
 	public void displayProductTags() {
 		Iterator<String> iter = productTags.iterator();
@@ -140,6 +143,11 @@ public class Product {
 		
 	}
 	
+	//Get all product tags, returns arraylist<string> of a product's tags
+	public ArrayList<String> getProductTags(){
+		return new ArrayList<String>(productTags);
+	}
+	
 	/**
 	 * 
 	 * Search through the arraylist of tags associated with each product
@@ -147,7 +155,7 @@ public class Product {
 	 * if the tag requested is not found, return false
 	 *
 	 */
-	public boolean checkProductTags(String tag) {
+	public boolean findProductTags(String tag) {
 		Iterator<String> iter = productTags.iterator();
 		while (iter.hasNext()){
 			if (tag.equals(iter.next())){
@@ -157,8 +165,12 @@ public class Product {
 		return false;
 	}
 
-	//Since tags is an arraylist of String, each tag must be added
-	public void setProductTags(String productTag) {
+	/**Since tags is an arraylist of String, each tag must be added
+	 * 
+	 * To implement: add an array of Strings so that tags don't have to be added one at a time
+	 * i.e. addProductTags(String[] blah) { go through array and add all tags
+	 */
+	public void addProductTags(String productTag) {
 		this.productTags.add(productTag);
 	}
 	

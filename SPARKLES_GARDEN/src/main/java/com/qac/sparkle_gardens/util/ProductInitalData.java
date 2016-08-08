@@ -22,13 +22,13 @@ public class ProductInitalData {
 	
 	public ProductInitalData(){
 		Product p = new Product("The Great American Challenge", 50, 79.99);
-		p.setProductTags("Dildo");
+		p.addProductTags("Dildo");
 		products.add(p);
 		p = new Product("Fleshlight Original", 100, 99.99);
-		p.setProductTags("Masturbator");
+		p.addProductTags("Masturbator");
 		products.add(p);
 		p = new Product("The Screaming O", 500, 19.99);
-		p.setProductTags("Vibrating");
+		p.addProductTags("Vibrating");
 		products.add(p);
 	}
 	

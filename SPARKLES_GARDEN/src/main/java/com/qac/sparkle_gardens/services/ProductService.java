@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.OrderLine;
+import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 
 /**
@@ -22,11 +23,32 @@ public class ProductService {
 	@Inject ProductRepository productRepository;
 	/**
 	 * Things to implement:
-		 * add items - to order and to wishlist
 		 * display items
 		 * search items
 		 * item info
 	*/
+	
+	/**
+	 * Add item to wishlist
+	 */
+	public void addItemToWishlist(Product p, Wishlist wishlist){
+		
+	}
+	
+	/**
+	 * Add item to orderline
+	 * If the product has enough stock to meet the orderline's request, return true and add to orderline
+	 * if the product does not have enough stock to meet orderline's request, output error message
+	 * 
+	 * Additional functionality to be added later
+	 */
+	public void addItemToOrderline(Product p, OrderLine orderline){
+		if (checkIfEnoughQuantity(p, orderline.getQuantity())){
+			orderline.setProduct(p, orderline.getQuantity());
+		}
+		System.out.println("Request exceeds stock level");
+	}
+	
 	
 	/**
 	 * Check if the product is in stock, if it's not then a message should display
@@ -42,11 +64,12 @@ public class ProductService {
 	}
 	
 	/**
-	 * Check if the orderline's quantity request exceeds product's stocklevel/quantity 
+	 * Check if the quantity request exceeds product's stocklevel/quantity 
+	 * if the stock level is less than or equal to quantity requested, true will be returned
+	 * if there is not enough stock to meet the quantity requested, false will be returned
 	 */
-	public boolean checkIfEnoughQuantity(Product p, OrderLine ol){
-		//if quantity of items exceeds or equals orderline's quantity request then true will be returned, otherwise false
-		return (p.getStockLevel() <= ol.getQuantity());
+	public boolean checkIfEnoughQuantity(Product p, int quantityRequested){
+		return (p.getStockLevel() <= quantityRequested);
 	}
 	
 	
