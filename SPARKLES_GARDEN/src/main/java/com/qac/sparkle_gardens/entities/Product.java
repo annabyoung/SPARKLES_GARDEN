@@ -24,6 +24,8 @@ import javax.validation.constraints.Size;
  * 
  * Product class that defines ability to find a product by any of its attributes, which includes the ID, name, amount of its stock, and its price.
  * There are defined functions to allow retrieval of all of the product's attributes and the ability to set the values for everything except for product ID.
+ * 
+ * Send messages to IMS
  *
  */
 
@@ -75,9 +77,8 @@ public class Product {
 	@Size (min = 0, max = 100000)
 	private double price;
 	
-	@Column (name = "productDescription", nullable = false, length = 225)
+	@Column (name = "productDescription", nullable = false)
 	@NotNull
-	@Size (min = 2, max = 225)
 	private String productDescription;
 	
 	@Column (name = "productTags", nullable = false)
