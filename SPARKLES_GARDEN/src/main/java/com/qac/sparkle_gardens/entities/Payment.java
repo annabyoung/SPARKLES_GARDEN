@@ -2,8 +2,8 @@ package com.qac.sparkle_gardens.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
+import com.qac.sparkle_gardens.util.PaymentStatus;
 
 /*
  * @author Allen Su
@@ -13,28 +13,7 @@ import javax.validation.constraints.Size;
 
 
 public class Payment {
-//	@Id
-//	@Column(name = "pid")	
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private Long pid;
-//	@Column(name = "nameOnCard", nullable = false, length = 225)
-//	@NotNull
-//	@Size(min = 2, max = 225)
-//	private String cardOwnerName;
-//	@Pattern(regexp="[0-9]{16}",
-//            message="{invalid.cardNumber}")
-//	@Column(name = "cardNumber", nullable = false, length = 16)
-//	@NotNull
-//	private String cardNumber;
-//	@Column(name = "expirationDate", nullable = false, length = 5)
-//	@NotNull
-//	@Pattern(regexp="[0-1][0-9]/[0-9]{2}",
-//            message="{invalid.expirationDate}")
-//	private String expirationDate;
-//	@JoinColumn(name="accountID_fk", nullable=false)
-//	@NotNull
-//	private Customer customer;
-	//private String issueNumber; 
+
 	@Id
 	@Column(name = "paymentID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,9 +24,11 @@ public class Payment {
 	@Column(name = "cardID", nullable = false)
 	@NotNull
 	private long cardID;
-	@Column(name = "paidAmount", nullable = false)
-	@NotNull
+	@Column(name = "paidAmount")
 	private long paidAmount;
+	@Column(name = "paymentStatus", nullable = false)
+	@NotNull
+	private PaymentStatus paymentStatus;
 
 	public Payment() {
 	}
