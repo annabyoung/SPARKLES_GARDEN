@@ -20,7 +20,8 @@ import javax.validation.constraints.Size;
 
 public class Card {
 	@Id
-	@Column(name = "cardId")	
+	@Column(name = "cardId", nullable = false, unique = true)
+	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String cardId;
 	@Column(name = "nameOnCard", nullable = false, length = 225)
