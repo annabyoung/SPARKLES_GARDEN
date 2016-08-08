@@ -13,9 +13,9 @@ public class PaymentInitialData
 	
 	public PaymentInitialData()
 	{
-		Payments.add(new Payment("Bill", "5472123442349876", "05/16", new Customer()));
-		Payments.add(new Payment("Steve", "5472123442349876", "0/16", new Customer()));
-		Payments.add(new Payment("Bill", "547212344249876", "05/16", new Customer()));
+		Payments.add(new Payment());
+		Payments.add(new Payment());
+		Payments.add(new Payment());
 	}
 	
 	public void addPayment(Payment p)

@@ -6,7 +6,9 @@ import java.util.Calendar;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Payment;
+import com.qac.sparkle_gardens.repositories.CardRepository;
 import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
 
@@ -18,6 +20,7 @@ import com.qac.sparkle_gardens.util.CreditStatus;
 @Stateless
 public class CardService {
 	@Inject PaymentRepository paymentRepository;
+	@Inject CardRepository cardRepository;
 	
 	public CardService(){
 		
@@ -73,9 +76,9 @@ public class CardService {
 	 * @return
 	 */
 	public boolean checkNotBlacklisted(String cardNumber, String expirationDate) {
-		ArrayList<Payment> payments = (ArrayList<Payment>) paymentRepository.findByCardNumber(cardNumber);
-		for(Payment payment:payments) {
-			if (payment.getExpirationDate().equals(expirationDate) && payment.getCustomer().getCreditStatus().equals(CreditStatus.BLACKLISTED))
+		ArrayList<Card> cards = (ArrayList<Card>) cardRepository.findByCardNumber(cardNumber);
+		for(Card card:cards) {
+			if (card.getExpirationDate().equals(expirationDate) && card.getCustomer().getCreditStatus().equals(CreditStatus.BLACKLISTED))
 				return false;
 		}
 		return true;
