@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 
 /**
@@ -49,15 +48,22 @@ public class Wishlist {
 	// the list of products in wishlist
 	private ArrayList<Product> product;
 	
-	@Column (name = "productName", nullable = false, length = 225)
-	@NotNull
-	@Size (min = 2, max = 225)
-	private String productName;
+	/**
+	 * I am not sure if I need to use these properties
+	 * because the products are in a list.
+	 * 
+	 * 
+	 * @Column (name = "productName", nullable = false, length = 225)
+	 * @NotNull
+	 * @Size (min = 2, max = 225)
+	 * private String productName;
 	
-	@Column (name = "price", nullable = false, length = 100000)
-	@NotNull
-	@Size (min = 0, max = 100000)
-	private double price;
+	 * @Column (name = "price", nullable = false, length = 100000)
+	 * @NotNull
+	 * @Size (min = 0, max = 100000)
+	*  private double price;
+	 */
+	
 	
 	public Wishlist () {
 		this.acccountId = 0;
@@ -69,14 +75,19 @@ public class Wishlist {
 	public long getCustomerId() {
 		return acccountId;
 	}
-
-	public String getProductName() {
+	/**
+	 * If product name and price are separate columns in the database table then 
+	 * these methods are necessary. I am not sure if they necessary.
+	 * 
+	 * public String getProductName() {
 		return productName;
-	}
+	 }
 	
-	public double getPrice() {
+	 * public double getPrice() {
 		return price;
-	}
+	 }
+	 */
+	
 	
 	public ArrayList<Product> getproduct() {
 		return product;
