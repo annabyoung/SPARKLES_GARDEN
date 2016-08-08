@@ -151,4 +151,9 @@ public class OrderService
 	{
 		this.lines.add(new OrderLine(p, quantity));
 	}
+	
+	public Order getOrder(long orderID)
+	{
+		return repository.getOrder(orderID);
+	}
 }

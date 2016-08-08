@@ -90,16 +90,10 @@ public class ProductService {
 		return (p.getStockLevel() <= quantityRequested);
 	}
 	
-<<<<<<< HEAD
+
 	public Product getProductByID(long productID){
 		return productRepository.findByProductID(productID);
 	}
 	
-=======
-	public Product getProduct(long productID)
-	{
-		// TODO: Use ProductRepository
-	}
->>>>>>> 7482936f47e69bf0297c2a902bdde17b12b9dcfd
 
 }
