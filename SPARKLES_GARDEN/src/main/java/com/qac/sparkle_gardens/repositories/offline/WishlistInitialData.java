@@ -9,7 +9,7 @@ import com.qac.sparkle_gardens.entities.Wishlist;
 /**
  * 
  * @author Tyler Deans
- * Creates dummy data for the repository
+ * Creates dummy data for the wishlist repository
  *
  */
 @Singleton

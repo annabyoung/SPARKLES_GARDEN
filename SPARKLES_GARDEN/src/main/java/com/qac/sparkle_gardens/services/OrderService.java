@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
@@ -20,8 +21,13 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
 @Stateless
 public class OrderService 
 {
+	private static long orderID = 0;
+	
 	@Inject
 	OrderRepository repository;
+	
+	@Inject
+	ArrayList<OrderLine> lines;
 	
 	/**
 	 * Checks if the orderID is empty. If all the OrderLines have a
@@ -29,7 +35,7 @@ public class OrderService
 	 * @param orderID
 	 * @return
 	 */
-	public boolean isOrderEmpty(long orderID)
+	public boolean isOrderEmpty(Order o)
 	{
 		ArrayList<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
 		int totalQuantity = 0;
@@ -46,14 +52,33 @@ public class OrderService
 	}
 	
 	/**
+	 * This function checks the order, ensuring the price is
+	 * not negative, and the quantity ordered is agreeable
+	 * with that product's stock levels.
+	 * @param quantity
+	 * @param price
+	 * @return true if the order passes, false if otherwise
+	 */
+	public boolean checkOrderLine(int quantity, int price, int stocklevel)
+	{
+		if (quantity < 0 || price < 0)
+			return false;
+		
+		if (quantity < stocklevel)
+			return false;
+		
+		return true;
+	}
+	
+	/**
 	 * Return the total price of the order from all the 
 	 * OrderLines therein.
-	 * @param orderID
+	 * @param lines - The list of OrderLines to be passed
 	 * @return
 	 */
-	public double getTotalPrice(long orderID)
+	public double getTotalPrice(ArrayList<OrderLine> lines)
 	{
-		ArrayList<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
+		//ArrayList<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
 		double totalPrice = 0;
 		
 		for (OrderLine i : lines)
@@ -65,6 +90,16 @@ public class OrderService
 			return 0.0;
 		
 		return totalPrice;
+	}
+	
+	/**
+	 * Generates a orderID that is unique and relates to an order.
+	 * The order ID is a numerical decimal value.
+	 * @return The identification number of the order
+	 */
+	public long generateOrderID()
+	{
+		return ++orderID;
 	}
 	
 	/**
@@ -110,5 +145,10 @@ public class OrderService
 	public double getPrice(Product p, int quantity)
 	{
 		return (p.getPrice() * quantity);
+	}
+	
+	public void addProduct(Product p, int quantity)
+	{
+		this.lines.add(new OrderLine(p, quantity));
 	}
 }

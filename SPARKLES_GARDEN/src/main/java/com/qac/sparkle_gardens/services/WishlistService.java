@@ -1,10 +1,8 @@
 package com.qac.sparkle_gardens.services;
 
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
@@ -50,6 +48,16 @@ public class WishlistService {
 	public void createWishlist(long accountId, List<Product> list) {
 		Wishlist wish = new Wishlist(accountId, list);
 		wishlistRepository.persistWishlist(wish);
+	}
+	
+	/**
+	 * Adds a product to a wishlist
+	 * This can be used in another service
+	 * @param product
+	 * @param wishlist
+	 */
+	public void addProduct(Product product, long wishlistId) {
+		wishlistRepository.addProductToList(product, wishlistId);
 	}
 	
 }

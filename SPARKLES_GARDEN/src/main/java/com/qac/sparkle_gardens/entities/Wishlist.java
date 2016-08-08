@@ -47,7 +47,7 @@ public class Wishlist {
 	@OneToMany
 	@JoinColumn(name="product_fk", nullable = false)
 	// the list of products in wishlist
-	private ArrayList<Product> product;
+	private ArrayList<Product> products;
 	
 	@Column (name = "productName", nullable = false, length = 225)
 	@NotNull
@@ -62,11 +62,11 @@ public class Wishlist {
 	public Wishlist () {
 		this.acccountId = 0;
 	}
-	public Wishlist(long acccountId, List<Product> product) {
+	public Wishlist(long acccountId, List<Product> products) {
 		this.acccountId = acccountId;
-		this.product = (ArrayList<Product>) product;
+		this.products = (ArrayList<Product>) products;
 	}
-	public long getCustomerId() {
+	public long getAccountId() {
 		return acccountId;
 	}
    /** I don't know if I need this 
@@ -84,7 +84,11 @@ public class Wishlist {
 	
 	
 	public ArrayList<Product> getproduct() {
-		return product;
+		return products;
+	}
+	
+	public void addProduct(Product product) {
+		products.add(product);
 	}
 	public long getWishlistId() {
 		return wishlistId;
