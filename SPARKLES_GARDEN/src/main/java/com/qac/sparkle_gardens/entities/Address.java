@@ -1,7 +1,5 @@
 package com.qac.sparkle_gardens.entities;
 
-import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,15 +31,15 @@ public class Address {
 	private long addressId;
 	
 	@ManyToOne
-	@JoinColumn(name="customer_fk", nullable = false)
-	private Customer customer;
+	@JoinColumn(name="customerID", nullable = false)
+	private long customerId;
 	
 
-	public Customer getCustomer() {
-		return customer;
+	public long getCustomerId() {
+		return customerId;
 	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomer(long customerId) {
+		this.customerId = customerId;
 	}
 
 	//The number of the building
@@ -74,10 +72,18 @@ public class Address {
 	@Size (min = 1, max = 20)
 	private String postCode;
 	
-	
-	public Address(Customer customer, int buildingNum, String streetName, String city, String county, 
+	public Address() {
+		this.customerId = 0;
+		this.buildingNum = 0;
+		this.streetName = "";
+		this.city = "";
+		this.county = "";
+		this.country = "";
+		this.postCode = "";
+	}
+	public Address(long customerId, int buildingNum, String streetName, String city, String county, 
 			String country, String postCode) {
-		this.customer = customer;
+		this.customerId = customerId;
 		this.buildingNum = buildingNum;
 		this.streetName = streetName;
 		this.city = city;

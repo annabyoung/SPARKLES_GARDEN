@@ -27,7 +27,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	}
 	
 	public void persistWishlists(List<Wishlist> wishlists) {
-		
+		initialData.setWishlists(wishlists);
 	}
 	/**
 	 * Finds a wishlist according to the ID
