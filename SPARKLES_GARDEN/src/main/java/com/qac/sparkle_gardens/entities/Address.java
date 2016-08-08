@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,15 +32,16 @@ public class Address {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long addressId;
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="customer_fk", nullable = false)
-	private ArrayList<Customer> customers;
+	private Customer customer;
 	
-	public ArrayList<Customer> getCustomers() {
-		return customers;
+
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setCustomers(ArrayList<Customer> customers) {
-		this.customers = customers;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	//The number of the building
@@ -74,9 +75,9 @@ public class Address {
 	private String postCode;
 	
 	
-	public Address(long addressId, int buildingNum, String streetName, String city, String county, 
+	public Address(Customer customer, int buildingNum, String streetName, String city, String county, 
 			String country, String postCode) {
-		this.addressId = addressId;
+		this.customer = customer;
 		this.buildingNum = buildingNum;
 		this.streetName = streetName;
 		this.city = city;

@@ -3,6 +3,8 @@ package com.qac.sparkle_gardens.repositories.offline;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+
+import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
 
@@ -43,10 +45,18 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		return wish;
 	}
 	
-	// Read all the wishlists
 	/**
-	 * @para
+	 * This method adds a product to the wishlist
+	 * @param product
+	 * @param wishId
 	 */
+	public void addProductToList(Product product, long wishId) {
+		// Creates a wishlist object based on the given ID
+		Wishlist aList = findById(wishId); 
+		aList.addProduct(product); // adds the product to the list
+		updateWishlist(aList); // updates the original list with the updated lists
+	}
+	// Read all the wishlists
 	public ArrayList<Wishlist> getWishlists() {
 		return initialData.getWishlists();
 	}

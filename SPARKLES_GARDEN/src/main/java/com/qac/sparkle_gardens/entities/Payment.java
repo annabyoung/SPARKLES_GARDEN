@@ -6,83 +6,81 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /*
- * @author Allen Su.
+ * @author Allen Su
  */
 @Entity
 @Table(name = "Payments")
 
-@NamedQueries ({
-	 @NamedQuery (name = Payment.FIND_BY_CARD_NUMBER, 
-			      query="SELECT a FROM Payments a WHERE a.cardNumber = :cardNumber"),
-	 @NamedQuery (name = Payment.FIND_BY_PID, 
-	 			query="SELECT a FROM Payments a WHERE a.pid = :pid")
-})
 
 public class Payment {
-	@Id
-	@Column(name = "pid")	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String pid;
-	@Column(name = "nameOnCard", nullable = false, length = 225)
-	@NotNull
-	@Size(min = 2, max = 225)
-	private String cardOwnerName;
-	@Pattern(regexp="[0-9]{16}",
-            message="{invalid.cardNumber}")
-	@Column(name = "cardNumber", nullable = false, length = 16)
-	@NotNull
-	private String cardNumber;
-	@Column(name = "expirationDate", nullable = false, length = 5)
-	@NotNull
-	@Pattern(regexp="[0-1][0-9]/[0-9]{2}",
-            message="{invalid.expirationDate}")
-	private String expirationDate;
-	@JoinColumn(name="accountID_fk", nullable=false)
-	@NotNull
-	private Customer customer;
+//	@Id
+//	@Column(name = "pid")	
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private Long pid;
+//	@Column(name = "nameOnCard", nullable = false, length = 225)
+//	@NotNull
+//	@Size(min = 2, max = 225)
+//	private String cardOwnerName;
+//	@Pattern(regexp="[0-9]{16}",
+//            message="{invalid.cardNumber}")
+//	@Column(name = "cardNumber", nullable = false, length = 16)
+//	@NotNull
+//	private String cardNumber;
+//	@Column(name = "expirationDate", nullable = false, length = 5)
+//	@NotNull
+//	@Pattern(regexp="[0-1][0-9]/[0-9]{2}",
+//            message="{invalid.expirationDate}")
+//	private String expirationDate;
+//	@JoinColumn(name="accountID_fk", nullable=false)
+//	@NotNull
+//	private Customer customer;
 	//private String issueNumber; 
-	
-	public static final String FIND_BY_CARD_NUMBER = "Payment.getCardNumber";
-	public static final String FIND_BY_PID = "Payment.getPid";
+	@Id
+	@Column(name = "paymentID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long paymentID;
+	@Column(name = "customerID", nullable = false)
+	@NotNull
+	private long customerID;
+	@Column(name = "cardID", nullable = false)
+	@NotNull
+	private long cardID;
+	@Column(name = "paidAmount", nullable = false)
+	@NotNull
+	private long paidAmount;
 
 	public Payment() {
 	}
 
-	public Payment(String customerName, String cardNumber, String expirationDate, Customer customer) {
-		this.cardOwnerName = customerName;
-		this.cardNumber = cardNumber;
-		this.expirationDate = expirationDate;
-		this.customer = customer;
-	}
-	
-	public String getPid(){
-		return pid;
+	public Payment(long customerID, long cardID) {
+		super();
+		this.customerID = customerID;
+		this.cardID = cardID;
 	}
 
-	public String getCardOwnerName() {
-		return cardOwnerName;
+	public long getPaymentID() {
+		return paymentID;
 	}
 
-	public void setCardOwnerName(String name) {
-		this.cardOwnerName = name;
+	public void setPaymentID(long paymentID) {
+		this.paymentID = paymentID;
 	}
 
-	public String getCardNumber() {
-		return cardNumber;
+	public long getCustomerID() {
+		return customerID;
 	}
 
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
+	public void setCustomerID(long customerID) {
+		this.customerID = customerID;
 	}
 
-	public String getExpirationDate() {
-		return expirationDate;
+	public long getCardID() {
+		return cardID;
 	}
 
-	public void setExpirationDate(String expirationDate) {
-		this.expirationDate = expirationDate;
+	public void setCardID(long cardID) {
+		this.cardID = cardID;
 	}
-	
-	public Customer getCustomer() { return customer; }
-	public void setCustomer(Customer customer) { this.customer = customer; }
+
 }
+	

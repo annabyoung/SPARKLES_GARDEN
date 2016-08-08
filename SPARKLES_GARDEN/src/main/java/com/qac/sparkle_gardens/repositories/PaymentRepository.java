@@ -10,7 +10,7 @@ public interface PaymentRepository {
 
 	public void persistPayments(ArrayList<Payment> p);
 
-	public Payment findByID(String id);
+	public Payment findByID(long id);
 	public List<Payment> findByCardNumber(String cardNumber);
 
 	public ArrayList<Payment> getPayments();
