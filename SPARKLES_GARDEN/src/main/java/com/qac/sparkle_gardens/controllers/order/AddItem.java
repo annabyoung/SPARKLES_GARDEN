@@ -6,6 +6,8 @@ import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.services.ProductService;
 
+@Named (value = "addItem")
+@SessionScoped
 public class AddItem 
 {
 	@Inject
@@ -18,15 +20,13 @@ public class AddItem
 	private int quantity = 0;
 	private int price = 0;
 
-	public String addItem(long productID, int quantity, int price)
+	public String addItem()
 	{
 		Product p = pService.getProduct(productID);
-		
+
 		if (!pService.checkInStock(p))
 			return "product_not_in_stock";
-		
-		service.
-		
+
 		service.addProduct(p, quantity);
 		
 		return "home";

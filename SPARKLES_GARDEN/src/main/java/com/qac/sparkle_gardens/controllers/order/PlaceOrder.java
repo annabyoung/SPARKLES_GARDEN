@@ -16,15 +16,13 @@ import com.qac.sparkle_gardens.services.OrderService;
 public class PlaceOrder 
 {
 	private long orderID = 0;
-	private int quantity = 0;
-	private int price = 0;
 	
 	@Inject
 	OrderService service;
 	
-	public String placeOrder(Product id)
+	public String placeOrder()
 	{
-		order.addOrderLine(new );
+		
 		return "home";
 	}
 }
