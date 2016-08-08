@@ -1,6 +1,8 @@
 package com.qac.sparkle_gardens.controllers.order;
 
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.services.OrderService;
@@ -22,12 +24,12 @@ public class AddItem
 
 	public String addItem()
 	{
-		Product p = pService.getProduct(productID);
+		Product p = pService.getProductByID(productID);
 
 		if (!pService.checkInStock(p))
 			return "product_not_in_stock";
 
-		service.addProduct(p, quantity);
+		service.addProductToBasket(p, quantity);
 		
 		return "home";
 	}
