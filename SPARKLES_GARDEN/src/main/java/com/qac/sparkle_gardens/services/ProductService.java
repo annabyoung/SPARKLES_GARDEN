@@ -72,6 +72,5 @@ public class ProductService {
 		return (p.getStockLevel() <= quantityRequested);
 	}
 	
-	
 
 }
