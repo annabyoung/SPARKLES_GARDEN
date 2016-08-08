@@ -4,13 +4,14 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.qac.sparkle_gardens.util.CreditStatus;
+import com.qac.sparkle_gardens.entities.Address;
 
 /**
  * 
  * @author Sean Connelly 
  * 
  */
-//**Seannelly**//
+
 
  @Entity
  @Table (name = "customers")
@@ -28,7 +29,7 @@ import com.qac.sparkle_gardens.util.CreditStatus;
 		      query="SELECT a FROM Customer a WHERE a.address = :Address")
  })
  
- 
+ // may need to make new address query?
 public class Customer {
 	 
 	@Id
@@ -60,7 +61,7 @@ public class Customer {
 	//TODO: Convert address into an Entity
 	@Column (name="address")
 	@Size (min =10, max =255)
-	private String address;
+	private Address address;
 
 	@Column (name="password")
 	@Size (min =6, max =255)
@@ -72,7 +73,7 @@ public class Customer {
 	}
 	
 	public Customer(long accountID, String firstName, String lastName, String email, CreditStatus creditStatus,
-			String address, String password) {
+			Address address, String password) {
 		this.accountID = accountID;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -82,7 +83,7 @@ public class Customer {
 		this.password = password;
 	}
 
-	public Customer(String firstName, String lastName, String email, CreditStatus creditStatus, String address, String password) {
+	public Customer(String firstName, String lastName, String email, CreditStatus creditStatus, Address address, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -138,13 +139,13 @@ public class Customer {
 	}
 
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
 	public String getPassword() { return password; }
 	
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 	
@@ -156,5 +157,5 @@ public class Customer {
 	public static final String FIND_BY_EMAIL = "Customer.getEmail()";
 	public static final String FIND_BY_CREDIT_STATUS = "Customer.getCreditStatus()";
 	public static final String FIND_BY_ADDRESS = "Customer.getAddress()";
-	
+	//TODO: address is an entity now. probably need to rework this 
 }
