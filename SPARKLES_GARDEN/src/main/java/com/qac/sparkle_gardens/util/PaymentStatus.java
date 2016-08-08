@@ -1,0 +1,18 @@
+package com.qac.sparkle_gardens.util;
+
+public enum PaymentStatus {
+	/**
+	 * Payment is yet to be paid
+	 */
+	UNPAID,
+	
+	/**
+	 * Payment is paid.
+	 */
+	PAID,
+	
+	/**
+	 * Payment is overdue.
+	 */
+	OVERDUE,
+}
