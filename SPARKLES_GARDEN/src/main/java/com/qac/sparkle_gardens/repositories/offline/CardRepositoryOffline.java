@@ -27,7 +27,7 @@ public class CardRepositoryOffline implements CardRepository
 		// TODO Auto-generated method stub
 		
 	}
-	public Card findByID(String id) {
+	public Card findByID(long id) {
 		// TODO Auto-generated method stub
 		for (Card c : initialCardData.getCards()){
 			if(id == c.getCardId()){
@@ -62,5 +62,19 @@ public class CardRepositoryOffline implements CardRepository
 	public void addCard(Card c) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public Card findByID(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Card findByCardNumberAndExpiration(String cardNumber, String expirationDate) {
+		for (Card c : initialCardData.getCards()){
+			if(cardNumber == c.getCardNumber() && c.getExpirationDate() == expirationDate){
+				return c;
+			}
+		}
+		return null;
 	}
 }

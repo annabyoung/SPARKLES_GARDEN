@@ -50,10 +50,6 @@ public class CardService {
 		return error;
 	}
 
-	public void setError(String error) {
-		this.error = error;
-	}
-
 	/**
 	 * Check to make sure the card is in date
 	 * 
