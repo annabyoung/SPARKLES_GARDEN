@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.controllers.order;
+package com.qac.sparkle_gardens.controllers;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -8,6 +8,11 @@ import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.services.ProductService;
 
+/**
+ * Add item to the basket; last step before placing an order.
+ * @author Damien Lloyd
+ *
+ */
 @Named (value = "addItem")
 @SessionScoped
 public class AddItem
