@@ -1,6 +1,6 @@
-package com.qac.sparkle_gardens.controllers;
+package com.qac.sparkle_gardens.controllers.wishlist;
 
-import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import com.qac.sparkle_gardens.entities.Product;
@@ -35,7 +35,7 @@ public class WishlistController {
 	 * Gets all the products in the wishlist
 	 * @return
 	 */
-	public ArrayList<Product> getProducts() {
-		
+	public List<Product> getProducts(String wishlistName) {
+		return wishlistService.getProducts(wishlistName);
 	}
 }

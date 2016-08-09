@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.controllers.order;
+package com.qac.sparkle_gardens.controllers.product;
 
 import java.util.ArrayList;
 
@@ -24,10 +24,10 @@ import javax.inject.Inject;
 public class SearchItemsController {
 	@Inject
 	ProductService productService;
-	@Inject
-	Product product;
+	
 	
 	private ArrayList<String> searchQuery = new ArrayList<>();
+	private String error = "";
 	
 	/**
 	 * 
@@ -36,7 +36,9 @@ public class SearchItemsController {
 	 * @return search
 	 */
 	public String searchItems(){
-		
+		if (searchQuery.isEmpty()){
+			error = "Please enter what you're searching for";
+		}
 		return "search";
 	}
 	

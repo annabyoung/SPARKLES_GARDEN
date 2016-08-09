@@ -68,4 +68,7 @@ public class WishlistService {
 		wishlistRepository.addProductToList(product, wishlistId);
 	}
 	
+	public List<Product> getProducts(String wishlistName) {
+		return wishlistRepository.getProducts(wishlistName);
+	}
 }
