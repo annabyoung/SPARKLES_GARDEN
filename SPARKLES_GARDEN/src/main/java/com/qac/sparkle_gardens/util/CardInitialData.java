@@ -5,7 +5,11 @@ import javax.inject.Singleton;
 
 import com.qac.sparkle_gardens.entities.Card;
 
+/**
+ * deprecated in favour of InitialData (9/8/16)
+ */
 @Singleton
+@Deprecated
 public class CardInitialData 
 {
 	private ArrayList<Card> Cards = new ArrayList<Card>();
