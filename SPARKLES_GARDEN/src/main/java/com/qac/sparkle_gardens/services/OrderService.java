@@ -9,7 +9,6 @@ import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
-import com.qac.sparkle_gardens.repositories.ProductRepository;
 
 /**
  * The OrderService provides the functionality required for 
@@ -21,8 +20,6 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
 @Stateless
 public class OrderService 
 {
-	private static long ORDER_ID = 0;
-	
 	@Inject
 	OrderRepository repository;
 	
@@ -93,16 +90,6 @@ public class OrderService
 	}
 	
 	/**
-	 * Generates a orderID that is unique and relates to an order.
-	 * The order ID is a numerical decimal value.
-	 * @return The identification number of the order
-	 */
-	private long generateOrderID()
-	{
-		return ++ORDER_ID;
-	}
-	
-	/**
 	 * Generate an invoice from the Order relating to
 	 * orderID. The invoice will include word of appreciation
 	 * as well as listing the products, their quantity and the total price
@@ -134,19 +121,11 @@ public class OrderService
 	}
 	
 	/**
-	 * This function returns the product price multiplied by the quantity.
-	 * It's a handy and useful function where it is required to determine
-	 * a total product's price based on quantity. If you want the total price
-	 * of an entire order, see getTotalPrice(..).
-	 * @param p The product in question
-	 * @param quantity The quantity thereof
-	 * @return
+	 * Add product to the basket with quantity
+	 * @param p Product
+	 * @param quantity Desired quantity
+	 * @return If product can be added or not
 	 */
-	public double getPrice(Product p, int quantity)
-	{
-		return (p.getPrice() * quantity);
-	}
-	
 	public boolean addProductToBasket(Product p, int quantity)
 	{
 		if (!checkOrderLine(quantity, p.getPrice(), p.getStockLevel()))
@@ -157,20 +136,72 @@ public class OrderService
 		return true;
 	}
 	
-	public boolean createOrder(long customerID)
+	/**
+	 * Remove item from the basket by quantity
+	 * @param p Product to be removed
+	 * @return
+	 */
+	public boolean removeItemFromBasket(Product p)
 	{
-		long id = generateOrderID();
-		repository.persistOrder(new Order(id, customerID));
-		
+		for (int i = 0; i < basket.size(); i++)
+		{
+			if (basket.get(i).getProduct().equals(p))
+			{
+				basket.remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Is basket empty?
+	 * @return
+	 */
+	public boolean isBasketEmpty()
+	{
+		return basket.isEmpty();
+	}
+	
+	/**
+	 * Clears all 
+	 * @return
+	 */
+	public boolean clearBasket()
+	{
 		if (basket.isEmpty())
 			return false;
 		
+		return basket.removeAll(basket);
+	}
+	
+	/**
+	 * Create Order with the orderlines of the basket transferred.
+	 * The ID of the order is automatically generated.
+	 * @param customerID
+	 * @return
+	 */
+	public boolean createOrder(boolean payLater)
+	{
+		if (basket.isEmpty())
+			return false;
+		
+		Order o = new Order();
+		o.setPayLater(payLater);
+		
 		for (OrderLine i : basket)
-			repository.getOrder(id).addOrderLine(i);
+			o.addOrderLine(i);
+		
+		repository.persistOrder(o);
 		
 		return true;
 	}
 	
+	/**
+	 * Returns Order based on order ID
+	 * @param orderID
+	 * @return The Order
+	 */
 	public Order getOrder(long orderID)
 	{
 		return repository.getOrder(orderID);

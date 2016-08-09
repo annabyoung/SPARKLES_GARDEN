@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 /**
  * The Order class contains all the order lines along with 
@@ -32,6 +33,10 @@ public class Order
 	@NotNull
 	private long customerID;
 	
+	@Column (name = "payLater?", nullable = true)
+	@Null
+	private boolean payLater;
+	
 	// List of orderlines in the order
 	private ArrayList<OrderLine> lines;
 	
@@ -48,19 +53,7 @@ public class Order
 	 */
 	public Order(long orderID, long customerID)
 	{
-		setCredentials(orderID, customerID);
-	}
-	
-	/**
-	 * Set the order ID and customerID
-	 * 
-	 * @param orderID
-	 * @param customerID
-	 */
-	public void setCredentials(long orderID, long customerID) 
-	{
-		this.orderID = orderID;
-		this.customerID = customerID;
+		
 	}
 	
 	/**
@@ -107,5 +100,15 @@ public class Order
 	public ArrayList<OrderLine> getOrderLines()
 	{
 		return lines;
+	}
+	
+	/**
+	 * Is the order buy-now-pay-later? If yes, 
+	 * feed me a boolean!
+	 * @param payLater
+	 */
+	public void setPayLater(boolean payLater)
+	{
+		this.payLater = payLater;
 	}
 }

@@ -1,7 +1,5 @@
 package com.qac.sparkle_gardens.entities;
 
-import java.util.ArrayList;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -20,8 +18,8 @@ public class OrderLine
 {
 	@OneToMany
 	@NotNull
-	@JoinColumn(name = "orderID", nullable = false)
-	private long orderID;
+	@JoinColumn(name = "productID", nullable = false)
+	private long productID;
 
 	private Product product;
 	
@@ -64,18 +62,18 @@ public class OrderLine
 	 * Return the orderID of the OrderLine it pertains to
 	 * @return orderID
 	 */
-	public long getOrderID() 
+	public long getProductID() 
 	{
-		return orderID;
+		return productID;
 	}
 	
 	/**
 	 * Set the orderID the OrderLine relates to
 	 * @param orderID
 	 */
-	public void setOrderID(long orderID) 
+	public void setProductID(long productID) 
 	{
-		this.orderID = orderID;
+		this.productID = productID;
 	}
 	
 	/**

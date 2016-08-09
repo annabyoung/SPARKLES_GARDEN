@@ -1,45 +1,44 @@
 package com.qac.sparkle_gardens.controllers.order;
 
-import java.util.ArrayList;
-
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.qac.sparkle_gardens.entities.Order;
-import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.repositories.OrderRepository;
 import com.qac.sparkle_gardens.services.OrderService;
-import com.qac.sparkle_gardens.services.ProductService;
 
+/**
+ * 
+ * @author Damien Lloyd
+ *
+ */
 @Named (value = "placeOrder")
 @SessionScoped
 public class PlaceOrder 
-{
-	private long orderID = 0;
-	
+{	
 	@Inject
 	OrderService service;
 	
-	@Inject
-	ProductService pService;
+	double totalPrice = 0;
 	
-	long customerID;
-	
-	public String placeOrder()
+	/**
+	 * Place order with order ID
+	 * @param orderID
+	 * @return
+	 */
+	public String placeOrder(long orderID, boolean payLater)
 	{
-		service.createOrder(customerID);
+		if (service.isOrderEmpty(orderID))
+			return "home";
+		
+		service.createOrder(payLater);
+		service.generateInvoice(orderID);
+		totalPrice = service.getTotalPrice(orderID);
 		
 		return "home";
 	}
-
-	public long getCustomerID() 
+	
+	public double getTotalPrice()
 	{
-		return customerID;
-	}
-
-	public void setCustomerID(long customerID) 
-	{
-		this.customerID = customerID;
+		return totalPrice;
 	}
 }

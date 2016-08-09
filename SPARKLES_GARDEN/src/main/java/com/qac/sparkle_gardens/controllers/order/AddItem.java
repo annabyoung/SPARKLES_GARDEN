@@ -10,7 +10,7 @@ import com.qac.sparkle_gardens.services.ProductService;
 
 @Named (value = "addItem")
 @SessionScoped
-public class AddItem 
+public class AddItem
 {
 	@Inject
 	OrderService service;
@@ -18,11 +18,15 @@ public class AddItem
 	@Inject
 	ProductService pService;
 	
-	private long productID = 0;
 	private int quantity = 0;
 	private int price = 0;
-
-	public String addItem()
+	
+	/**
+	 * Get Add item to the basket by its product ID
+	 * @param productID
+	 * @return
+	 */
+	public String addItem(long productID)
 	{
 		Product p = pService.getProductByID(productID);
 
@@ -34,31 +38,19 @@ public class AddItem
 		return "home";
 	}
 	
-	public long getProductID() 
-	{
-		return productID;
-	}
-
-	public void setProductID(long productID) 
-	{
-		this.productID = productID;
-	}
-
-	public int getQuantity() 
-	{
-		return quantity;
-	}
-
+	/**
+	 * Set quantity of product desired
+	 * @param quantity
+	 */
 	public void setQuantity(int quantity) 
 	{
 		this.quantity = quantity;
 	}
-
-	public int getPrice() 
-	{
-		return price;
-	}
-
+	
+	/**
+	 * Set price of product desired
+	 * @param price
+	 */
 	public void setPrice(int price) 
 	{
 		this.price = price;

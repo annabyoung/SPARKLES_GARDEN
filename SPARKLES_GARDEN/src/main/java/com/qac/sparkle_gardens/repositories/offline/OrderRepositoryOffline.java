@@ -18,35 +18,22 @@ public class OrderRepositoryOffline
 {
 	@Inject
 	private OrderInitialData initialData;
-	
-	/**
-	 * Default constructor for order repository; initialises with dummy data
-	 */
+
 	public OrderRepositoryOffline() 
 	{
 		initialData = new OrderInitialData();
 	}
 	
-	/**
-	 * Add order to the bean
-	 */
 	public void persistOrder(Order o) 
 	{
 		initialData.addOrder(o);
 	}
 	
-	/**
-	 * Concurrently add orders to the list in the bean
-	 */
 	public void persistOrders(ArrayList<Order> o) 
 	{
 		initialData.setOrders(o);
 	}
 	
-	/**
-	 * Find order by its String id
-	 * @param orderID The id of the Order
-	 */
 	public Order getOrder(long orderID) 
 	{
 		ArrayList<Order> ol = initialData.getOrders();
@@ -59,17 +46,11 @@ public class OrderRepositoryOffline
 		return null;
 	}
 	
-	/**
-	 * Get list of orders from bean
-	 */
 	public ArrayList<Order> getOrders() 
 	{
 		return initialData.getOrders();
 	}
 	
-	/**
-	 * Remove order from the bean
-	 */
 	public void removeOrder(long orderID) 
 	{
 		ArrayList<Order> ol = initialData.getOrders();
