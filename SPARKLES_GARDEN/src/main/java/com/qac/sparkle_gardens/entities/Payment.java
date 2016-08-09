@@ -34,32 +34,61 @@ public class Payment {
 	public Payment() {
 	}
 
+	/**
+	 * 
+	 * @param customerID
+	 * @param cardID
+	 */
 	public Payment(long customerID, long cardID) {
 		super();
 		this.customerID = customerID;
 		this.cardID = cardID;
 	}
 
+	/**
+	 * 
+	 * @return paymentID
+	 */
 	public long getPaymentID() {
 		return paymentID;
 	}
 
+	/**
+	 * 
+	 * @param paymentID
+	 */
 	public void setPaymentID(long paymentID) {
 		this.paymentID = paymentID;
 	}
 
+	/**
+	 * 
+	 * @return customerID
+	 */
 	public long getCustomerID() {
 		return customerID;
 	}
 
+	/**
+	 * 
+	 * @param customerID
+	 */
 	public void setCustomerID(long customerID) {
 		this.customerID = customerID;
 	}
 
+	/**
+	 * 
+	 * @return cardID
+	 */
 	public long getCardID() {
 		return cardID;
 	}
 
+	/**
+	 * 
+	 * @param cardID
+	 */
 	public void setCardID(long cardID) {
 		this.cardID = cardID;
 	}

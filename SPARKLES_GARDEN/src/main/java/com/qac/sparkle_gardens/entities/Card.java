@@ -11,12 +11,9 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "Cards")
 
-@NamedQueries ({
-	 @NamedQuery (name = Card.FIND_BY_CARD_NUMBER, 
-			      query="SELECT a FROM Cards a WHERE a.cardNumber = :cardNumber"),
-	 @NamedQuery (name = Card.FIND_BY_cardId, 
-	 			query="SELECT a FROM Cards a WHERE a.cardId = :cardId")
-})
+@NamedQueries({
+		@NamedQuery(name = Card.FIND_BY_CARD_NUMBER, query = "SELECT a FROM Cards a WHERE a.cardNumber = :cardNumber"),
+		@NamedQuery(name = Card.FIND_BY_cardId, query = "SELECT a FROM Cards a WHERE a.cardId = :cardId") })
 
 public class Card {
 	@Id
@@ -28,26 +25,25 @@ public class Card {
 	@NotNull
 	@Size(min = 2, max = 225)
 	private String cardOwnerName;
-	@Pattern(regexp="[0-9]{16}",
-            message="{invalid.cardNumber}")
+	@Pattern(regexp = "[0-9]{16}", message = "{invalid.cardNumber}")
 	@Column(name = "cardNumber", nullable = false, length = 16)
 	@NotNull
 	private String cardNumber;
 	@Column(name = "expirationDate", nullable = false, length = 5)
 	@NotNull
-	@Pattern(regexp="[0-1][0-9]/[0-9]{2}",
-            message="{invalid.expirationDate}")
+	@Pattern(regexp = "[0-1][0-9]/[0-9]{2}", message = "{invalid.expirationDate}")
 	private String expirationDate;
-	@JoinColumn(name="accountID_fk", nullable=false)
+	@JoinColumn(name = "accountID_fk", nullable = false)
 	@NotNull
 	private Customer customer;
-	//private String issueNumber; 
-	
+	// private String issueNumber;
+
 	public static final String FIND_BY_CARD_NUMBER = "Card.getCardNumber";
 	public static final String FIND_BY_cardId = "Card.getcardId";
 
 	public Card() {
 	}
+
 	/**
 	 * 
 	 * @param customerName
@@ -61,17 +57,19 @@ public class Card {
 		this.expirationDate = expirationDate;
 		this.customer = customer;
 	}
-	
+
 	/**
 	 * Returns Card ID
+	 * 
 	 * @return
 	 */
-	public String getCardId(){
+	public String getCardId() {
 		return cardId;
 	}
 
 	/**
 	 * Returns name of owner of card.
+	 * 
 	 * @return cardId
 	 */
 	public String getCardOwnerName() {
@@ -80,6 +78,7 @@ public class Card {
 
 	/**
 	 * Allows corrections for Card Owner Name
+	 * 
 	 * @param name
 	 */
 	public void setCardOwnerName(String name) {
@@ -88,6 +87,7 @@ public class Card {
 
 	/**
 	 * Returns card Number
+	 * 
 	 * @return cardNumber
 	 */
 	public String getCardNumber() {
@@ -96,6 +96,7 @@ public class Card {
 
 	/**
 	 * Set card number
+	 * 
 	 * @param cardNumber
 	 */
 	public void setCardNumber(String cardNumber) {
@@ -104,7 +105,7 @@ public class Card {
 
 	/**
 	 * 
-	 * @return
+	 * @return expirationDate
 	 */
 	public String getExpirationDate() {
 		return expirationDate;
@@ -117,14 +118,21 @@ public class Card {
 	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
 	}
+
 	/**
 	 * 
 	 * @return customer;
 	 */
-	public Customer getCustomer() { return customer; }
+	public Customer getCustomer() {
+		return customer;
+	}
+
 	/**
 	 * Set's Card's customer.
+	 * 
 	 * @param customer
 	 */
-	public void setCustomer(Customer customer) { this.customer = customer; }
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 }
