@@ -1,10 +1,19 @@
-package com.qac.sparkle_gardens.controllers.order;
+package com.qac.sparkle_gardens.controllers;
 
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.services.ProductService;
 
+/**
+ * Remove an item from the basket.
+ * @author Damien Lloyd
+ *
+ */
+@Named (value = "removeItem")
+@SessionScoped
 public class RemoveItem 
 {
 	@Inject

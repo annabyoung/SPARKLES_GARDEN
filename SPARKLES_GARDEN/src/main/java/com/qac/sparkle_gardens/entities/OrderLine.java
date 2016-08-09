@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -23,6 +24,8 @@ public class OrderLine
 
 	private Product product;
 	
+	@Column
+	@NotNull
 	private int quantity; // Quantity of Product ordered
 	
 	/**
