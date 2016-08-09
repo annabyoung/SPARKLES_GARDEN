@@ -28,12 +28,6 @@ public class ProductService {
 	private ArrayList<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
 	private ArrayList<String> tags = new ArrayList<>();
 		
-	/**
-	 * Add item to wishlist
-	 */
-	public void addItemToWishlist(Product p, Wishlist wishlist){
-		
-	}
 	
 	/**
 	 * If the product has enough stock to meet the request, return true and decrement stock
@@ -49,7 +43,7 @@ public class ProductService {
 	 *
 	 * Decrement stock when order is being finalized
 	 */
-	
+	@Deprecated
 	public void decrementProductQuantity(Product p, int quantityRequest){
 		if (checkIfEnoughQuantity(p, quantityRequest)){
 			p.setStockLevel(p.getStockLevel() - quantityRequest);
