@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.controllers.wishlist;
+package com.qac.sparkle_gardens.controllers;
 
 import java.util.List;
 import javax.inject.Inject;
