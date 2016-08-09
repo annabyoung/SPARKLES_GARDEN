@@ -25,7 +25,8 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
 public class ProductService {
 	@Inject ProductRepository productRepository;
 	
-	private ArrayList<Product> productList = new ArrayList<Product>();
+	private ArrayList<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
+	private ArrayList<String> tags = new ArrayList<>();
 		
 	/**
 	 * Add item to wishlist
@@ -102,7 +103,7 @@ public class ProductService {
 	 * @param maximumPrice
 	 * @return prodcutsInRange which is all the products within the price range the customer is searching for
 	 */
-	public ArrayList<Product> findProductsByPriceRange(double minimumPrice, double maximumPrice){		
+	public ArrayList<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
 		ArrayList<Product> productsInRange = new ArrayList<>();
 		for(Product p : productRepository.getProducts()){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
@@ -116,56 +117,35 @@ public class ProductService {
 	/**
 	 * Search for items with all of the requested tags 
 	 * This checks for products that contain all of the tags a customer is searching for
-	 * An arrayList of products with all tags is returned, these are to be displayed first for the customer
+	 * These are to be displayed first for the customer
 	 * 
-	 * @param tags
-	 * @return productsWithAllTags
-	 */
-	public ArrayList<Product> findProductsWithAllTags(ArrayList<String> tags){
-		ArrayList<Product> productsWithAllTags = new ArrayList<>();
-		for(Product p : productRepository.getProducts()){
-			if (p.getProductTags().containsAll(tags)){
-				productsWithAllTags.add(p);
-			}
-		}
-		productList.addAll(productsWithAllTags);
-		return productsWithAllTags;
-	}
-	
-	/**
-	 * Search for items with some of the requested tags
+	 * Search for items with one or more of the requested tags
 	 * This checks for products that contain some of the tags a customer is searching for
-	 * An arrayList of products that have some of the requested tags is returned, these are to be displayed after
-	 * the products that contain all of the tags requested
+	 * These are to be displayed after the products that contain all of the tags requested
 	 * 
 	 * May implement sorting items by those with most tags in common with search request
 	 * 
-	 * @param tags
-	 * @return productsWithSubsetOfTags
+	 * @param input
+	 * @return productsWithTags
 	 */
-	public ArrayList<Product> findProductsWithSubsetOfTags(ArrayList<String> tags){
+
+	
+	public ArrayList<Product> createProductListByTags(String input){
+		tags = convertStringToArrayList(input);
+		ArrayList<Product> productsWithTags = new ArrayList<>();
+		ArrayList<Product> productsWithAllTags = new ArrayList<>();
 		ArrayList<Product> productsWithSubsetOfTags = new ArrayList<>();
 		for(Product p : productRepository.getProducts()){
-			if(!Collections.disjoint(p.getProductTags(), tags)){
+			if (p.getProductTags().containsAll(tags)){
+				productsWithAllTags.add(p);
+			} else if (!Collections.disjoint(p.getProductTags(), tags)){
 				productsWithSubsetOfTags.add(p);
 			}
 		}
-		productList.addAll(productsWithSubsetOfTags);
-		return productsWithSubsetOfTags;
-	}
-	
-	/**
-	 * Put all products matching search results into one arraylist<product>
-	 * 
-	 * @param productsWithAllTags
-	 * @param productsWithSubsetOfTags
-	 * @return searchResults
-	 */
-	public ArrayList<Product> mergeSearchResults(ArrayList<Product> productsWithAllTags, ArrayList<Product> productsWithSubsetOfTags){
-		ArrayList<Product> searchResults = new ArrayList<>();
-		searchResults.addAll(productsWithAllTags);
-		searchResults.addAll(productsWithSubsetOfTags);
-		return searchResults;
+		productList.addAll(productsWithTags);
+		productsWithTags.addAll(productsWithAllTags);
+		productsWithTags.addAll(productsWithSubsetOfTags);
+		return productsWithTags;
 	}
 	
 	/**
@@ -192,8 +172,8 @@ public class ProductService {
 	 * @return false, true
 	 */
 	
-	public boolean validateResultsOfSearch(ArrayList<Product> productsWithTags){
-		if (productsWithTags.isEmpty()){
+	public boolean validateResultsOfSearch(ArrayList<Product> productList){
+		if (productList.isEmpty()){
 			return false;
 		}
 		return true;
