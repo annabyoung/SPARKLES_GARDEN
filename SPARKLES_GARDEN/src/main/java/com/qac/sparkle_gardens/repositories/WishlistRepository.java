@@ -39,6 +39,9 @@ public interface WishlistRepository {
 	// overloaded method with accountId parameter
 	public void removeProduct(Product product, long accountId);
 	
+	// checks if a product is in a wishlist
+	public boolean inWishlist(Product product, long accountId);
+	
 	//Returns all the products in a wishlist
 	public List<Product> getProducts(String wishlistName);
 }
