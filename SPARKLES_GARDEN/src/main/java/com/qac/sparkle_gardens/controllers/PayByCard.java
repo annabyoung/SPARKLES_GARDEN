@@ -52,25 +52,7 @@ public class PayByCard {
 		error = "";
 		return "#"; //placeholders
 	}
-	
-	public String refundCard(Payment p){
-		
-		switch(p.getPaymentStatus()){
-		case PAID:
-			//payout.
-			break;
-		case PENDING:
-			p.setPaymentStatus(PaymentStatus.VOID);
-			error = "";
-			break;
-		case OVERDUE:
-			//have to confirm business rules.
-			break;
-		default:
-			error = "Previous Payment Status Error";
-		}
-		return "#";
-	}
+
 	
 	/**
 	 * Checks whether or not the card is valid. Returns errors if card format,
