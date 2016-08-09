@@ -1,16 +1,8 @@
-/*Sets the background colour of the banner*/
-h1{
-	background-color: #097F10;
-}
-/*Sets the header of the login page*/
-h2{
-	font-size: 36px;
-	text-align: center;
-}
 /*unifies the input fields text box so they're the same size*/
 input{
 	display: inline-block; 
 	float: center;
+	width: 275px
 }
 /*Ensures the labels of input fields are aligned and spaced*/
 label{
@@ -21,7 +13,22 @@ label{
     text-align: right;
 	padding-bottom:15px;
 }
-/*Formats the form where all the user input fields will be found*/
+h2{
+	font-size: 36px;
+	text-align: center;
+}
+
+#banner{
+	background-color: #097F10;
+}
+
+#logo{
+	margin-left: auto;
+    margin-right: auto;
+	left: 50%;
+    transform: translate(375%, 0%);
+	}
+	
 #formdiv{
 	background-color: #FEF1D6;
 	border-style: solid;
@@ -31,19 +38,10 @@ label{
 	font-size:20px;
 	font-style: bold;
 }
-/*centres the logo of within the header*/
-#logo{
-	margin-left: auto;
-    margin-right: auto;
-	left: 50%;
-    transform: translate(375%, 0%);
-	}
-
-/*Pads the input fields so they're aligned */	
 #inputfields{
 	padding-right: 250px; 
 }
-/*Underlines and fixes the contact link  to the bottom right of the page*/
+
 #contact{
 	text-decoration: underline;
 	position: fixed;
@@ -51,6 +49,3 @@ label{
 	right: 0;
 	padding-right: 15px;
 }
-	
-
-
