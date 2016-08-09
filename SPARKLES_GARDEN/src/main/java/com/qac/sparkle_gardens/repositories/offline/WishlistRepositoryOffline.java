@@ -2,6 +2,7 @@ package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Product;
@@ -120,6 +121,20 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		Wishlist aList = findByAccountId(accountId);
 		aList.removeProduct(product);
 		updateWishlist(aList);
+	}
+	
+	/**
+	 * Checks if a given product is in a wishlist
+	 * @param product
+	 * @param accountId
+	 */
+	public boolean inWishlist(Product product, long accountId) {
+		Wishlist list = findByAccountId(accountId);
+		if (list.inWishlist(product.getProductID())) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	// Read all the wishlists

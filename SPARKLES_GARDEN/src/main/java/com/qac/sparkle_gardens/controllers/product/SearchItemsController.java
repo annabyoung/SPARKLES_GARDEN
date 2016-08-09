@@ -16,7 +16,7 @@ import javax.inject.Inject;
  * @author Annabelle Young
  * 
  * Search Items controller
- * This controller handles the search queries of customers
+ * This controller handles the search queries of customers and returns list of products based on search parameters
  *
  */
 @Named(value="search")
@@ -25,21 +25,34 @@ public class SearchItemsController {
 	@Inject
 	ProductService productService;
 	
-	
-	private ArrayList<String> searchQuery = new ArrayList<>();
+	private ArrayList<Product> searchQueryByTags = new ArrayList<>();
+	private ArrayList<Product> searchQueryByPrice = new ArrayList<>();
 	private String error = "";
 	
 	/**
 	 * 
-	 * Takes the search query and calls appropriate functions from ProductService
+	 * Takes the search query and validates that there are search results
+	 * Return search page with results if not empty
+	 * Otherwise, return blank search page
 	 * 
 	 * @return search
 	 */
-	public String searchItems(){
-		if (searchQuery.isEmpty()){
-			error = "Please enter what you're searching for";
+	public String searchItemsByTags(){
+		if (productService.validateResultsOfSearch(searchQueryByTags)){
+			//ProductList = searchResults?!?!
+			return "search";
 		}
-		return "search";
+		
+		return "blank_search";
+	}
+	
+	public String searchItemsByPrice(){
+		if (productService.validateResultsOfSearch(searchQueryByPrice)){
+			//ProductList = searchResults?!?!
+			return "search";
+		}
+		
+		return "blank_search";
 	}
 	
 }
