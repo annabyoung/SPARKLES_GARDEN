@@ -60,14 +60,37 @@ public class WishlistService {
 	
 	/**
 	 * Adds a product to a wishlist
-	 * This can be used in another service
 	 * @param product
-	 * @param wishlist
+	 * @param wishlistId
 	 */
 	public void addProduct(Product product, long wishlistId) {
 		wishlistRepository.addProductToList(product, wishlistId);
 	}
 	
+	/**
+	 * Overloaded addProduct method
+	 * if the name of the wislist is passed instead of the wishlist ID
+	 * @param product
+	 * @param wishlistName
+	 */
+	public void addProduct(Product product, String wishlistName) {
+		wishlistRepository.addProductToList(product, wishlistName);
+	}
+	
+	/**
+	 * Removes a product from a wishlist
+	 * @param product
+	 * @param wishlistName
+	 */
+	public void removeProduct(Product product, String wishlistName) {
+		wishlistRepository.removeProduct(product, wishlistName);
+	}
+	
+	/**
+	 * 
+	 * @param wishlistName
+	 * @return
+	 */
 	public List<Product> getProducts(String wishlistName) {
 		return wishlistRepository.getProducts(wishlistName);
 	}
