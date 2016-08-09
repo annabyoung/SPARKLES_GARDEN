@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.controllers.product;
+package com.qac.sparkle_gardens.controllers;
 
 import java.util.ArrayList;
 
