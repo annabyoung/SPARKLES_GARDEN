@@ -121,6 +121,4 @@ public class Payment {
 	public void setCardID(long cardID) {
 		this.cardID = cardID;
 	}
-
 }
-	
