@@ -85,6 +85,20 @@ public class Wishlist {
 	}
 	
 	/**
+	 * Checks if the product is in a wishlist
+	 * @param productId
+	 * @return
+	 */
+	public boolean inWishlist(long productId) {
+		for (int index = 0; index < products.size(); index++) {
+			if (products.get(index).getProductID() == productId) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * 
 	 * Getters and setters for wishlist attributes
 	 */
