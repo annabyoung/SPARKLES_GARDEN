@@ -29,11 +29,12 @@ public class Order
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long orderID;
 	
+	@Id
 	@Column (name = "customerID", nullable = false)
 	@NotNull
-	private long customerID;
+	private Customer customer;
 	
-	@Column (name = "payLater?", nullable = true)
+	@Column (name = "payLater", nullable = true)
 	@Null
 	private boolean payLater;
 	
@@ -51,9 +52,10 @@ public class Order
 	/**
 	 * Construct Order with credentials such as orderID and customerID.
 	 */
-	public Order(long orderID, long customerID)
+	public Order(long orderID, Customer customer)
 	{
-		
+		this.orderID = orderID;
+		this.customer = customer;
 	}
 	
 	/**
@@ -66,12 +68,12 @@ public class Order
 	}
 	
 	/**
-	 * Get customer ID
+	 * Get customer
 	 * @return customerID
 	 */
-	public long getCustomerID()
+	public Customer getCustomer()
 	{
-		return customerID;
+		return customer;
 	}
 	
 	/**

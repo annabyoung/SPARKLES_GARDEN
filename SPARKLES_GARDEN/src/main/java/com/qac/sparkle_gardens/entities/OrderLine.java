@@ -2,6 +2,7 @@ package com.qac.sparkle_gardens.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -17,12 +18,17 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class OrderLine 
 {
+	@Id
 	@OneToMany
 	@NotNull
 	@JoinColumn(name = "productID", nullable = false)
-	private long productID;
-
 	private Product product;
+	
+	@Id
+	@OneToMany
+	@NotNull
+	@JoinColumn (name = "orderID", nullable = false)
+	private Order order;
 	
 	@Column
 	@NotNull
@@ -52,8 +58,8 @@ public class OrderLine
 	 * Just like the Constructor, but it's a handy function nonetheless
 	 * where it takes:
 	 * 
-	 * @param productID The ID of the product to be ordered
-	 * @param quantity The quantity of the product to be ordered
+	 * @param product The product to be ordered
+	 * @param quantity The quantity of that product to be ordered
 	 */
 	public void setProduct(Product product, int quantity)
 	{
@@ -62,25 +68,7 @@ public class OrderLine
 	}
 	
 	/**
-	 * Return the orderID of the OrderLine it pertains to
-	 * @return orderID
-	 */
-	public long getProductID() 
-	{
-		return productID;
-	}
-	
-	/**
-	 * Set the orderID the OrderLine relates to
-	 * @param orderID
-	 */
-	public void setProductID(long productID) 
-	{
-		this.productID = productID;
-	}
-	
-	/**
-	 * Return the productID of the OrderLine
+	 * Return the product of the OrderLine
 	 * @return productID
 	 */
 	public Product getProduct() 
@@ -89,7 +77,7 @@ public class OrderLine
 	}
 	
 	/**
-	 * Set the productID of the product
+	 * Set the product
 	 * @param productID
 	 */
 	public void setProduct(Product product) 
