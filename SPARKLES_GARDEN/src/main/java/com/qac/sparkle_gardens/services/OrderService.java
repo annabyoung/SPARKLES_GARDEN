@@ -194,13 +194,16 @@ public class OrderService
 		o.setPayLater(payLater);
 		
 		for (OrderLine i : basket)
+		{
 			o.addOrderLine(i);
+			
+			if (w_repository.inWishlist(i.getProduct(), o.getCustomerID()))
+				w_repository.removeProduct(i.getProduct(), o.getCustomerID());
+		}
 		
 		repository.persistOrder(o);
 		
 		this.clearBasket();
-		
-		//w_repository.re
 		
 		return true;
 	}

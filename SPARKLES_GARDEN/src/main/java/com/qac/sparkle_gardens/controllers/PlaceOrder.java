@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.controllers.order;
+package com.qac.sparkle_gardens.controllers;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -9,7 +9,7 @@ import com.qac.sparkle_gardens.services.PaymentService;
 import com.qac.sparkle_gardens.services.WishlistService;
 
 /**
- * 
+ * Place an order with all the items in the basket.
  * @author Damien Lloyd
  *
  */
@@ -22,9 +22,6 @@ public class PlaceOrder
 	
 	@Inject
 	PaymentService pService;
-	
-	@Inject
-	WishlistService wService;
 	
 	double totalPrice = 0;
 	
