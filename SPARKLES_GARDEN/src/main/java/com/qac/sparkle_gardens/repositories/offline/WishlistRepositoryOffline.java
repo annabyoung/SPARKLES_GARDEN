@@ -30,7 +30,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		initialData.setWishlists(wishlists);
 	}
 	/**
-	 * Finds a wishlist according to the ID
+	 * Finds a wishlist according to the wishlist ID
 	 * @param id
 	 * @return
 	 */
@@ -39,6 +39,22 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		Wishlist wish = new Wishlist();
 		for (int index = 0; index < list.size(); index++) {
 			if (list.get(index).getWishlistId() == id) {
+				wish = list.get(index);
+			}
+		}
+		return wish;
+	}
+	
+	/**
+	 * Finds a wishlist according to the account ID
+	 * @param id
+	 * @return
+	 */
+	public Wishlist findByAccountId(long id) {
+		ArrayList<Wishlist> list = initialData.getWishlists();
+		Wishlist wish = new Wishlist();
+		for (int index = 0; index < list.size(); index++) {
+			if (list.get(index).getAccountId() == id) {
 				wish = list.get(index);
 			}
 		}
@@ -94,6 +110,18 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		aList.removeProduct(product);
 		updateWishlist(aList);
 	}
+	
+	/**
+	 * Overloaded removeProduct method
+	 * @param product
+	 * @param accountId
+	 */
+	public void removeProduct(Product product, long accountId) {
+		Wishlist aList = findByAccountId(accountId);
+		aList.removeProduct(product);
+		updateWishlist(aList);
+	}
+	
 	// Read all the wishlists
 	public List<Wishlist> getWishlists() {
 		return initialData.getWishlists();

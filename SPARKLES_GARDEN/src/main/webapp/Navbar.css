@@ -1,0 +1,44 @@
+h1{
+	background-color: #097F10;
+}
+
+#navbar ul { 
+	position: relative;
+	top: 50%;
+    transform: translateY(-80%);
+	vertical-align: top;
+	padding: 5px; 
+	list-style-type: none; 
+	text-align: left; 
+	background-color: #097F10; 
+} 
+ 
+#navbar ul li {  
+	display: inline; 
+} 
+ 
+#navbar ul li a { 
+	text-decoration: none; 
+	padding: .2em 1em; 
+	color: #000000; 
+	background-color: #D8FF9B; 
+} 
+ 
+#navbar ul li a:hover { 
+	color: #000000; 
+	background-color: #FFDF52; 
+}
+#contact{
+	text-decoration: underline;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	padding-right: 15px;
+}
+#mainbody{
+	width:1600px;
+	height:700px;
+	border:1px solid #000;
+	background-color: #FEF1D6;
+	transform: translateY(5%);
+}	 
