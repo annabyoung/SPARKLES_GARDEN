@@ -14,9 +14,10 @@ import com.qac.sparkle_gardens.entities.Product;
  * Since there is no database yet, storing data at runtime for testing purposes.
  * Functions are included to get, add, and set products.
  *
+ *deprecated in favour of InitialData (9/8/16)
  */
-
 @Singleton
+@Deprecated
 public class ProductInitalData {
 	private ArrayList<Product> products = new ArrayList<Product>();
 	

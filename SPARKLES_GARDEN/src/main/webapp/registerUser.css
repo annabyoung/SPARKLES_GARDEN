@@ -1,0 +1,51 @@
+/*unifies the input fields text box so they're the same size*/
+input{
+	display: inline-block; 
+	float: center;
+	width: 275px
+}
+/*Ensures the labels of input fields are aligned and spaced*/
+label{
+    display: inline-block;
+    float: center;
+    clear: left;
+    width: 250px;
+    text-align: right;
+	padding-bottom:15px;
+}
+h2{
+	font-size: 36px;
+	text-align: center;
+}
+
+#banner{
+	background-color: #097F10;
+}
+
+#logo{
+	margin-left: auto;
+    margin-right: auto;
+	left: 50%;
+    transform: translate(375%, 0%);
+	}
+	
+#formdiv{
+	background-color: #FEF1D6;
+	border-style: solid;
+	border-width: 1px;
+	padding-bottom: 10px;
+	text-align: center;
+	font-size:20px;
+	font-style: bold;
+}
+#inputfields{
+	padding-right: 250px; 
+}
+
+#contact{
+	text-decoration: underline;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	padding-right: 15px;
+}

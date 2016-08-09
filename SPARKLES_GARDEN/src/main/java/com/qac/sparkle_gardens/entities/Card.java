@@ -57,6 +57,21 @@ public class Card {
 		this.expirationDate = expirationDate;
 		this.customerID = customerID;
 	}
+	
+	/**
+	 * Only for the purposes of testing offline data.
+	 * @param cardID
+	 * @param customerName
+	 * @param cardNumber
+	 * @param expirationDate
+	 * @param customer
+	 */
+	public Card(long cardID, String customerName, String cardNumber, String expirationDate, long customerID) {
+		this.cardOwnerName = customerName;
+		this.cardNumber = cardNumber;
+		this.expirationDate = expirationDate;
+		this.customerID = customerID;
+	}
 
 	/**
 	 * Returns Card ID

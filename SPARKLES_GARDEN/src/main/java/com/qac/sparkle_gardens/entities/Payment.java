@@ -55,12 +55,25 @@ public class Payment {
 	 * @param customerID
 	 * @param cardID
 	 */
-	public Payment(long customerID, long cardID) {
-		super();
+	public Payment(long customerID, long cardID, long paidAmount, PaymentStatus paymentStatus) {
 		this.customerID = customerID;
 		this.cardID = cardID;
+		this.paidAmount = paidAmount;
+		this.paymentStatus = paymentStatus;
 	}
 
+	/**
+	 * 
+	 * @param customerID
+	 * @param cardID
+	 */
+	public Payment(long paymentID, long customerID, long cardID, long paidAmount, PaymentStatus paymentStatus) {
+		this.paymentID = paymentID;
+		this.customerID = customerID;
+		this.cardID = cardID;
+		this.paidAmount = paidAmount;
+		this.paymentStatus = paymentStatus;
+	}
 	/**
 	 * 
 	 * @return paymentID
@@ -108,6 +121,4 @@ public class Payment {
 	public void setCardID(long cardID) {
 		this.cardID = cardID;
 	}
-
 }
-	

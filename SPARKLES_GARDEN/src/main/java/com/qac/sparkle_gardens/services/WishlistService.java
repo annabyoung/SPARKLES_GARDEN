@@ -87,6 +87,15 @@ public class WishlistService {
 	}
 	
 	/**
+	 * Overloaded removeProduct method
+	 * @param product
+	 * @param accountId
+	 */
+	public void removeProduct(Product product, long accountId) {
+		wishlistRepository.removeProduct(product, accountId);
+	}
+	
+	/**
 	 * 
 	 * @param wishlistName
 	 * @return

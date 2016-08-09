@@ -9,6 +9,7 @@ import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
+import com.qac.sparkle_gardens.repositories.WishlistRepository;
 
 /**
  * The OrderService provides the functionality required for 
@@ -22,6 +23,9 @@ public class OrderService
 {
 	@Inject
 	OrderRepository repository;
+	
+	@Inject
+	WishlistRepository w_repository;
 	
 	@Inject
 	ArrayList<OrderLine> basket;
@@ -195,6 +199,8 @@ public class OrderService
 		repository.persistOrder(o);
 		
 		this.clearBasket();
+		
+		//w_repository.re
 		
 		return true;
 	}

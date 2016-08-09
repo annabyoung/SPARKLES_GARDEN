@@ -12,10 +12,13 @@ import com.qac.sparkle_gardens.entities.Product;
  * OrderInitialData contains initial data that will hold orders offline.
  * It allows you to add orders to a list thereof.
  * 
+ * deprecated in favour of InitialData (9/8/16)
+ * 
  * @author Damien Lloyd
  *
  */
 @Singleton
+@Deprecated
 public class OrderInitialData 
 {
 	private ArrayList<Order> orders;
