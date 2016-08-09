@@ -104,8 +104,24 @@ public class Wishlist {
 		return products;
 	}
 	
+	/**
+	 * adds a product to the product list 
+	 * @param product
+	 */
 	public void addProduct(Product product) {
 		products.add(product);
+	}
+	
+	/**
+	 * removes a product from the product list 
+	 * @param product
+	 */
+	public void removeProduct(Product product) {
+		for (int index = 0; index < products.size(); index++) {
+			if (products.get(index).getProductID() == product.getProductID()) {
+				products.remove(index);
+			}
+		}
 	}
 	
 	public long getWishlistId() {

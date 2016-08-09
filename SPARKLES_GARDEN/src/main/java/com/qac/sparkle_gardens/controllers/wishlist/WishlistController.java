@@ -19,6 +19,11 @@ public class WishlistController {
 	@Inject 
 	WishlistService wishlistService;
 	
+	/**
+	 * Creates a wishlist for a given customer
+	 * @param accountId
+	 * @param wishlistName
+	 */
 	public void createWishlist(long accountId, String wishlistName) {
 		wishlistService.createWishlist(accountId, wishlistName);
 	}
@@ -26,9 +31,19 @@ public class WishlistController {
 	/**
 	 * Adds a product to the wishlist
 	 * @param product
+	 * @param wishlistName
 	 */
 	public void addProductToWishlist(Product product, String wishlistName) {
-		
+		wishlistService.addProduct(product, wishlistName);
+	}
+	
+	/**
+	 * Removes a product from the wishlist
+	 * @param product
+	 * @param wishlistName
+	 */
+	public void removeProductFromWishlist(Product product, String wishlistName) {
+		wishlistService.removeProduct(product, wishlistName);
 	}
 	
 	/**
@@ -38,4 +53,5 @@ public class WishlistController {
 	public List<Product> getProducts(String wishlistName) {
 		return wishlistService.getProducts(wishlistName);
 	}
+	
 }

@@ -72,7 +72,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		updateWishlist(aList); // updates the original list with the updated lists
 	}
 	/**
-	 * This method adds a product to the wishlist accroding to the name 
+	 * This method adds a product to the wishlist according to the name 
 	 *  of the wishlist
 	 * @param product
 	 * @param name
@@ -82,6 +82,17 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		Wishlist aList = findByName(name); 
 		aList.addProduct(product); // adds the product to the list
 		updateWishlist(aList); // updates the original list with the updated lists
+	}
+	
+	/**
+	 * Removes a product from a wishlist
+	 * @param product
+	 * @param name
+	 */
+	public void removeProduct(Product product, String name) {
+		Wishlist aList = findByName(name);
+		aList.removeProduct(product);
+		updateWishlist(aList);
 	}
 	// Read all the wishlists
 	public List<Wishlist> getWishlists() {
