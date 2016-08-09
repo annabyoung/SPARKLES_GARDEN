@@ -24,6 +24,8 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
 @Stateless
 public class ProductService {
 	@Inject ProductRepository productRepository;
+	
+	private ArrayList<Product> productList = new ArrayList<Product>();
 		
 	/**
 	 * Add item to wishlist
@@ -107,6 +109,7 @@ public class ProductService {
 				productsInRange.add(p);
 			}
 		}
+		productList.addAll(productsInRange);
 		return productsInRange;
 	}
 	
@@ -125,7 +128,7 @@ public class ProductService {
 				productsWithAllTags.add(p);
 			}
 		}
-		findProductsWithSubsetOfTags(tags);
+		productList.addAll(productsWithAllTags);
 		return productsWithAllTags;
 	}
 	
@@ -147,6 +150,7 @@ public class ProductService {
 				productsWithSubsetOfTags.add(p);
 			}
 		}
+		productList.addAll(productsWithSubsetOfTags);
 		return productsWithSubsetOfTags;
 	}
 	
@@ -195,16 +199,11 @@ public class ProductService {
 		return true;
 	}
 	
-	/*public boolean resultsForSearch(ArrayList<String> productsWithAllTags, ArrayList<String> productsWithSubsetOfTags){
-		if (productsWithAllTags.isEmpty() && productsWithSubsetOfTags.isEmpty()){
-			System.out.println("Could not find any products with any of the tags you requested.");
-			return false;
-		}
-		else if(productsWithAllTags.isEmpty()){
-			System.out.println("Could not find any products with all tags you requested.");
-			return true;
-		}
-		return true;
+	/**
+	 * Return the list of all products that meet the search parameters
+	 */
+	public ArrayList<Product> getProductList(){
+		//There should be a query here, but we're not at that point yet
+		return productList;
 	}
-*/
 }
