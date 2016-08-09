@@ -4,6 +4,7 @@
 package com.qac.sparkle_gardens.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -118,14 +119,42 @@ public class ProductService {
 	}
 	
 	/**
-	 * Search items with certain tags
+	 * Search for items with all of the requested tags 
+	 * This checks for products that contain all of the tags a customer is searching for
+	 * An arrayList of products with all tags is returned, these are to be displayed first for the customer
+	 * 
+	 * @param tags
+	 * @return productsWithAllTags
 	 */
-	public ArrayList<Product> findProductsByTags(String[] tags){
-		ArrayList<Product> productsWithTags = new ArrayList<>();
+	public ArrayList<Product> findProductsWithAllTags(ArrayList<String> tags){
+		ArrayList<Product> productsWithAllTags = new ArrayList<>();
 		for(Product p : productRepository.getProducts()){
-			
+			if (p.getProductTags().containsAll(tags)){
+				productsWithAllTags.add(p);
+			}
 		}
-		return productsWithTags;
+		return productsWithAllTags;
+	}
+	
+	/**
+	 * Search for items with some of the requested tags
+	 * This checks for products that contain some of the tags a customer is searching for
+	 * An arrayList of products that have some of the requested tags is returned, these are to be displayed after
+	 * the products that contain all of the tags requested
+	 * 
+	 * May implement sorting items by those with most tags in common with search request
+	 * 
+	 * @param tags
+	 * @return productsWithSubsetOfTags
+	 */
+	public ArrayList<Product> findProductsWithSubsetOfTags(ArrayList<String> tags){
+		ArrayList<Product> productsWithSubsetOfTags = new ArrayList<>();
+		for(Product p : productRepository.getProducts()){
+			if(!Collections.disjoint(p.getProductTags(), tags)){
+				productsWithSubsetOfTags.add(p);
+			}
+		}
+		return productsWithSubsetOfTags;
 	}
 	
 	/*public void searchProducts(){
