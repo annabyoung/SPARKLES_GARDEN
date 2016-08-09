@@ -65,6 +65,8 @@ public class Customer {
 	
 	//TODO: Convert address into an Entity
 	@Column (name="address")
+	@OneToMany
+	@JoinColumn(name ="address_fk")
 	@Size (min =10, max =255)
 	private Address address;
 
