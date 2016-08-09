@@ -1,9 +1,10 @@
-package deprecated;
+package com.qac.sparkle_gardens.repositories;
 
 import java.util.ArrayList;
 
 import com.qac.sparkle_gardens.entities.OrderLine;
 
+@Deprecated
 public interface OrderLineRepository 
 {
 	public void persistOrderLine(OrderLine ol);

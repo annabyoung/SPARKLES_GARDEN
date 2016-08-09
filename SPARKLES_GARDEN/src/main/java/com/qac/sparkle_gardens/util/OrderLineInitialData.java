@@ -1,4 +1,4 @@
-package deprecated;
+package com.qac.sparkle_gardens.util;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,7 @@ import com.qac.sparkle_gardens.entities.OrderLine;
  *
  */
 @Singleton
+@Deprecated
 public class OrderLineInitialData 
 {
 	private ArrayList<OrderLine> orderLines;
