@@ -9,7 +9,11 @@ import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.repositories.CardRepository;
 import com.qac.sparkle_gardens.util.CardInitialData;
 
-
+/**
+ * 
+ * @author Allen Su
+ *
+ */
 public class CardRepositoryOffline implements CardRepository
 {
 	@Inject
@@ -17,6 +21,7 @@ public class CardRepositoryOffline implements CardRepository
 	@Inject
 	CardInitialData initialCardData;
 	
+
 	public void persistCard(Card c) {
 		initialCardData.addCard(c);
 	}

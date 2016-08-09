@@ -8,6 +8,11 @@ import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.repositories.CardRepository;
 import com.qac.sparkle_gardens.repositories.PaymentRepository;
 
+/**
+ * 
+ * @author Allen Su.
+ *
+ */
 public class PaymentService {
 	@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;
