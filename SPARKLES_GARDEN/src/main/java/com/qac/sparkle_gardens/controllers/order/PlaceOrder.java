@@ -6,6 +6,7 @@ import javax.inject.Named;
 
 import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.services.PaymentService;
+import com.qac.sparkle_gardens.services.WishlistService;
 
 /**
  * 
@@ -21,6 +22,9 @@ public class PlaceOrder
 	
 	@Inject
 	PaymentService pService;
+	
+	@Inject
+	WishlistService wService;
 	
 	double totalPrice = 0;
 	
