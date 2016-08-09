@@ -6,7 +6,11 @@ import javax.inject.Singleton;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Payment;
 
+/**
+ * deprecated in favour of InitialData (9/8/16)
+ */
 @Singleton
+@Deprecated
 public class PaymentInitialData 
 {
 	private ArrayList<Payment> Payments = new ArrayList<Payment>();

@@ -8,7 +8,10 @@ import com.qac.sparkle_gardens.entities.Address;
  * 
  * @author Tyler Deans
  * Dummy data for the address repository
+ * 
+ * deprecated in favour of InitialData (9/8/16)
  */
+@Deprecated
 public class AddressInitialData {
 	private List<Address> addresses = new ArrayList<Address>();
 	

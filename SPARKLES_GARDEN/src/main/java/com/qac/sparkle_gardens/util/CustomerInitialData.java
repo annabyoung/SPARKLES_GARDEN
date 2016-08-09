@@ -13,18 +13,14 @@ import com.qac.sparkle_gardens.entities.Address;
  * 
  *  only made one dummy address, should make more 
  *
+ *deprecated in favour of InitialData (9/8/16)
  */
-
 @Singleton 
+@Deprecated
 public class CustomerInitialData {
 	
 		private ArrayList<Customer> customers = new ArrayList<Customer>();
-		
-		
-		
-		
-		
-		
+			
 		public CustomerInitialData(){
  
 			Address dummyAddress= new Address(001, 123, "fake street", "Springfield", "Illinois", "USA", "123456" );
