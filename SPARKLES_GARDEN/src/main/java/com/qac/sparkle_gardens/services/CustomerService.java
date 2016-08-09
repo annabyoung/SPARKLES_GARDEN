@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
@@ -70,6 +71,21 @@ public class CustomerService {
 		}
 		return -1;
 	}
+	
+	/**
+	 * creates a new customer from input given 
+	 * 
+	 * 
+	 */
+	
+	public void makeNewCustomer(String firstName, String lastName, String email, CreditStatus creditStatus, Address address, String password, String phone){
+
+		Customer customer= new Customer();
+		
+		customerRepository.persistCustomer(customer);
+		
+	}
+	
 	
 	 
 	/**

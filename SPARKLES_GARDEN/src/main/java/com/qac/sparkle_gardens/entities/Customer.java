@@ -17,6 +17,8 @@ import com.qac.sparkle_gardens.entities.Address;
  @Table (name = "customers")
 
  @NamedQueries ({
+	 @NamedQuery (name = Customer.FIND_BY_ID, 
+		      query="SELECT a FROM Customer a WHERE a.accountID = :accountID"),
 	 @NamedQuery (name = Customer.FIND_BY_FIRST_NAME, 
 			      query="SELECT a FROM Customer a WHERE a.firstName = :firstName"),
 	 @NamedQuery (name = Customer.FIND_BY_LAST_NAME, 
@@ -26,7 +28,10 @@ import com.qac.sparkle_gardens.entities.Address;
 	 @NamedQuery (name = Customer.FIND_BY_CREDIT_STATUS, 
 		      query="SELECT a FROM Customer a WHERE a.creditStatus = :creditStatus"),
 	 @NamedQuery (name = Customer.FIND_BY_ADDRESS, 
-		      query="SELECT a FROM Customer a WHERE a.address = :Address")
+		      query="SELECT a FROM Customer a WHERE a.address = :Address"),
+	 @NamedQuery (name = Customer.FIND_BY_PHONE, 
+	          query="SELECT a FROM Customer a WHERE a.phone = :phone"),
+	 
  })
  
  // may need to make new address query?
@@ -67,13 +72,17 @@ public class Customer {
 	@Size (min =6, max =255)
 	private String password;
 	
+	@Column(name="phone")
+	@Size (min =10, max=12 )
+	private String phone; 
+	
 	//constructors 
 	public Customer() {
 		//blank constructor 
 	}
 	
 	public Customer(long accountID, String firstName, String lastName, String email, CreditStatus creditStatus,
-			Address address, String password) {
+			Address address, String password, String phone) {
 		this.accountID = accountID;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -81,15 +90,18 @@ public class Customer {
 		this.creditStatus = creditStatus;
 		this.address = address;
 		this.password = password;
+		this.phone=phone;
 	}
 
-	public Customer(String firstName, String lastName, String email, CreditStatus creditStatus, Address address, String password) {
+	public Customer(String firstName, String lastName, String email, CreditStatus creditStatus,
+					Address address, String password, String phone) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.creditStatus = creditStatus;
 		this.address = address;
 		this.password = password;
+		this.phone= phone;
 	}
 
 
@@ -143,19 +155,25 @@ public class Customer {
 		return address;
 	}
 
-	public String getPassword() { return password; }
+	
 	
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
+	public String getPassword() { return password; }
 	public void setPassword(String password) { this.password = password; }
 	
+	public void setPhone(String phone) {this.phone=phone;}
+	public String getPhone(){return this.phone;}
+	
 	//named queries for each attribute 
+	
+	public static final String FIND_BY_ID="Customer.getAccountID()";
 	public static final String FIND_BY_FIRST_NAME = "Customer.getFirstName()";
 	public static final String FIND_BY_LAST_NAME = "Customer.getLastName()";
 	public static final String FIND_BY_EMAIL = "Customer.getEmail()";
 	public static final String FIND_BY_CREDIT_STATUS = "Customer.getCreditStatus()";
 	public static final String FIND_BY_ADDRESS = "Customer.getAddress()";
+	public static final String FIND_BY_PHONE ="Customer.getPhone()";
 	//TODO: address is an entity now. probably need to rework this 
 }
