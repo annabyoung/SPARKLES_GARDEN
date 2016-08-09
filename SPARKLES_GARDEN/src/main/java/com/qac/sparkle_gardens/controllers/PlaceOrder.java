@@ -5,8 +5,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.services.OrderService;
-import com.qac.sparkle_gardens.services.PaymentService;
-import com.qac.sparkle_gardens.services.WishlistService;
 
 /**
  * Place an order with all the items in the basket.
@@ -19,9 +17,6 @@ public class PlaceOrder
 {	
 	@Inject
 	OrderService service;
-	
-	@Inject
-	PaymentService pService;
 	
 	double totalPrice = 0;
 	

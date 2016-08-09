@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.inject.Singleton;
 
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
@@ -18,7 +19,6 @@ import com.qac.sparkle_gardens.entities.Product;
  *
  */
 @Singleton
-@Deprecated
 public class OrderInitialData 
 {
 	private ArrayList<Order> orders;
@@ -30,11 +30,11 @@ public class OrderInitialData
 	public OrderInitialData()
 	{
 		// Create order with orderID & customerID
-		orders.add(new Order(1, 1)); 
-		orders.add(new Order(2, 2));
-		orders.add(new Order(3, 3));
-		orders.add(new Order(4, 4));
-		orders.add(new Order(5, 5));
+		orders.add(new Order(1, new Customer())); 
+		orders.add(new Order(2, new Customer()));
+		orders.add(new Order(3, new Customer()));
+		orders.add(new Order(4, new Customer()));
+		orders.add(new Order(5, new Customer()));
 		
 		// Add order line to order by productID, quantity & price
 		orders.get(0).addOrderLine(new OrderLine(new Product("Pretty trainers", 3, 30), 3));
