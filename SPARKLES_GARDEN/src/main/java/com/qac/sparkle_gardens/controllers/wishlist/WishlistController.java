@@ -4,6 +4,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import com.qac.sparkle_gardens.entities.Product;
+import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.services.WishlistService;
 
 /**
@@ -18,6 +19,8 @@ public class WishlistController {
 	
 	@Inject 
 	WishlistService wishlistService;
+	@Inject 
+	OrderService orderService;
 	
 	/**
 	 * Creates a wishlist for a given customer
@@ -42,8 +45,8 @@ public class WishlistController {
 	 * @param product
 	 * @param wishlistName
 	 */
-	public void removeProductFromWishlist(Product product, String wishlistName) {
-		wishlistService.removeProduct(product, wishlistName);
+	public void removeProductFromWishlist(Product product, long accountId) {
+		wishlistService.removeProduct(product, accountId);
 	}
 	
 	/**
@@ -53,5 +56,6 @@ public class WishlistController {
 	public List<Product> getProducts(String wishlistName) {
 		return wishlistService.getProducts(wishlistName);
 	}
+	
 	
 }
