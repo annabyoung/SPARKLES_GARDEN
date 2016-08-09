@@ -46,6 +46,21 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	}
 	
 	/**
+	 * Finds a wishlist according to the name of the wishlist
+	 * @param name
+	 * @return
+	 */
+	public Wishlist findByName(String name) {
+		ArrayList<Wishlist> list = initialData.getWishlists();
+		Wishlist wish = new Wishlist();
+		for (int index = 0; index < list.size(); index++) {
+			if (list.get(index).getWishlistName().equals(name)) {
+				wish = list.get(index);
+			}
+		}
+		return wish;
+	}
+	/**
 	 * This method adds a product to the wishlist
 	 * @param product
 	 * @param wishId
@@ -56,8 +71,20 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		aList.addProduct(product); // adds the product to the list
 		updateWishlist(aList); // updates the original list with the updated lists
 	}
+	/**
+	 * This method adds a product to the wishlist accroding to the name 
+	 *  of the wishlist
+	 * @param product
+	 * @param name
+	 */
+	public void addProductToList(Product product, String name) {
+		// Creates a wishlist object based on the given ID
+		Wishlist aList = findByName(name); 
+		aList.addProduct(product); // adds the product to the list
+		updateWishlist(aList); // updates the original list with the updated lists
+	}
 	// Read all the wishlists
-	public ArrayList<Wishlist> getWishlists() {
+	public List<Wishlist> getWishlists() {
 		return initialData.getWishlists();
 	}
 	
@@ -81,6 +108,15 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 			}
 		}
 		initialData.setWishlists(list);
+	}
+	
+	/**
+	 * Returns all the products in a wishlist
+	 * @param wishlist
+	 */
+	public List<Product> getProducts(String wishlistName) {
+		Wishlist list = findByName(wishlistName);
+		return list.getProducts();
 	}
 	
 }

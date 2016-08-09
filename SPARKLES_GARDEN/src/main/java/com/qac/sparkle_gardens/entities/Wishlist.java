@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 
 /**
@@ -49,29 +48,87 @@ public class Wishlist {
 	// the list of products in wishlist
 	private ArrayList<Product> products;
 	
-	@Column (name = "productName", nullable = false, length = 225)
+	@Column
 	@NotNull
-	@Size (min = 2, max = 225)
-	private String productName;
-	
-	@Column (name = "price", nullable = false, length = 100000)
-	@NotNull
-	@Size (min = 0, max = 100000)
-	private double price;
+	private String wishlistName;
 	
 	public Wishlist () {
 		this.acccountId = 0;
 	}
+	
+	public Wishlist(long acccountId, List<Product> products, String wishlistName) {
+		this.acccountId = acccountId;
+		this.products = (ArrayList<Product>) products;
+		this.wishlistName = wishlistName;
+	}
+	
+	/**
+	 * 
+	 * @param acccountId
+	 * @param products
+	 */
 	public Wishlist(long acccountId, List<Product> products) {
 		this.acccountId = acccountId;
 		this.products = (ArrayList<Product>) products;
 	}
+	/**
+	 * This constructor was created since when a wishlist is created
+	 * products may be added to the wishlist once the wishlist is created.
+	 * 
+	 * Instead of adding products and creating the wishlist at the same time.
+	 * @param acccountId
+	 * @param wishlistName
+	 */
+	public Wishlist(long acccountId, String wishlistName) {
+		this.acccountId = acccountId;
+		this.wishlistName = wishlistName;
+	}
+	
+	/**
+	 * 
+	 * Getters and setters for wishlist attributes
+	 */
+	public String getWishlistName() {
+		return wishlistName;
+	}
+
+	public void setWishlistName(String wishlistName) {
+		this.wishlistName = wishlistName;
+	}
+
 	public long getAccountId() {
 		return acccountId;
+	}
+	
+	public ArrayList<Product> getProducts() {
+		return products;
+	}
+	
+	public void addProduct(Product product) {
+		products.add(product);
+	}
+	
+	public long getWishlistId() {
+		return wishlistId;
+	}
+	
+	public void setWishlistId(long wishlistId) {
+		this.wishlistId = wishlistId;
 	}
    /** I don't know if I need this 
     * It depends on how the products are in a list or 
     * each product ID matches to a customer ID
+    * 
+    * @Column (name = "productName", nullable = false, length = 225)
+	* @NotNull
+	* @Size (min = 2, max = 225)
+	* private String productName;
+	
+	* @Column (name = "price", nullable = false, length = 100000)
+	* @NotNull
+	* @Size (min = 0, max = 100000)
+	* private double price;
+    * 
     * public String getProductName() {
 		return productName;
 	* }
@@ -83,19 +140,7 @@ public class Wishlist {
     */
 	
 	
-	public ArrayList<Product> getproduct() {
-		return products;
-	}
 	
-	public void addProduct(Product product) {
-		products.add(product);
-	}
-	public long getWishlistId() {
-		return wishlistId;
-	}
-	public void setWishlistId(long wishlistId) {
-		this.wishlistId = wishlistId;
-	}
 
 }
 
