@@ -186,4 +186,8 @@ public class ProductService {
 		//There should be a query here, but we're not at that point yet
 		return productList;
 	}
+	
+	public void clearSearchQuery(){
+		productList.clear();
+	}
 }

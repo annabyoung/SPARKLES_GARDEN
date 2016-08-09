@@ -64,4 +64,17 @@ public class SearchItemsController {
 		return "blank_search";
 	}
 	
+	/**
+	 * This will clear the search query
+	 * @return
+	 */
+	public String clearProductList(){
+		productService.clearSearchQuery();
+		return "home";
+	}
+	
+	public String getProductList(){
+		searchQueryResults = productService.getProductList();
+		return "search";
+	}
 }
