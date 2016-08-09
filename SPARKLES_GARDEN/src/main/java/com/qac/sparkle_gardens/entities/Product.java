@@ -46,7 +46,9 @@ import javax.validation.constraints.Size;
 	@NamedQuery(name = Product.FIND_BY_PRICE, 
 		query = "SELECT a FROM Product a WHERE a.price = :price"),
 	@NamedQuery(name = Product.FIND_BY_TAG, 
-		query = "SELECT a FROM Product a WHERE a.price = :price")
+		query = "SELECT a FROM Product a WHERE a.price = :price"),
+	@NamedQuery(name = "FindProductsByCustomer",
+		query = "SELECT b FROM Customer b JOIN b.customer a WHERE a.product = :product")
 	
 })
 
