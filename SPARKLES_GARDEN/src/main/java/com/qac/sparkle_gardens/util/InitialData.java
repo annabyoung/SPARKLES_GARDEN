@@ -20,17 +20,17 @@ import com.qac.sparkle_gardens.entities.Product;
  *
  */
 @Singleton
-public class InitialData {
+public class InitialData 
+{
 	private List<Address> addresses = new ArrayList<Address>();
 	private ArrayList<Card> Cards = new ArrayList<Card>();
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	private ArrayList<Order> orders;
-	@Deprecated
-	private ArrayList<OrderLine> orderLines;
 	private ArrayList<Payment> Payments = new ArrayList<Payment>();
 	private ArrayList<Product> products = new ArrayList<Product>();
 	
-	public InitialData() {
+	public InitialData() 
+	{
 		addresses.add(new Address(25, 1, "Anchorage 1", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ"));
 		Cards.add(new Card(1, "Connect", "4412345647894531", "12/12", 1));
 		Cards.add(new Card(2, "Head", "4212345647894531", "11/12", 2));
@@ -40,26 +40,33 @@ public class InitialData {
 		customers.add(new Customer("Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, dummyAddress, "password01", "0987654321"));
 		customers.add(new Customer("Joe", "Schmoe", "email999@email.com", CreditStatus.VALID, dummyAddress, "password01", "1357908642"));
 		customers.add(new Customer("Luke", "Skywalker", "theForce@deathstar.com", CreditStatus.VALID, dummyAddress, "password01", "2468097531"));
-		// Create order with orderID & customerID
-		orders.add(new Order(1, 1));
-		orders.add(new Order(2, 2));
-		orders.add(new Order(3, 3));
-		orders.add(new Order(4, 4));
-		orders.add(new Order(5, 5));
+		
+		// Create order with orderID & customer
+		orders.add(new Order(1, customers.get(0)));
+		orders.add(new Order(2, customers.get(1)));
+		orders.add(new Order(3, customers.get(2)));
+		orders.add(new Order(4, customers.get(3)));
+		orders.add(new Order(5, customers.get(4)));
+		
 		// Add order line to order by productID, quantity & price
 		orders.get(0).addOrderLine(new OrderLine(new Product("Pretty trainers", 3, 30), 3));
 		orders.get(0).addOrderLine(new OrderLine(new Product("Funky gnome", 5, 12), 2));
+		
 		orders.get(1).addOrderLine(new OrderLine(new Product("Awesome boots", 3, 100), 1));
+		
 		orders.get(2).addOrderLine(new OrderLine(new Product("Amazing watch", 1, 50), 2));
+		
 		orders.get(3).addOrderLine(new OrderLine(new Product("Superduper gaming rig!", 2, 600), 10));
 		orders.get(3).addOrderLine(new OrderLine(new Product("Great socks!", 10, 40), 2));
 		orders.get(3).addOrderLine(new OrderLine(new Product("Allen's Mac", 1, 231), 12));
+		
 		orders.get(4).addOrderLine(new OrderLine(new Product("Impressive glasses", 2, 200), 1));
-		orderLines.add(new OrderLine());
-		orderLines.add(new OrderLine());
+		
+		// Add payments
 		Payments.add(new Payment(1, 1, 1, PaymentStatus.PENDING));
 		Payments.add(new Payment(2, 2, 2, PaymentStatus.PENDING));
 		Payments.add(new Payment(3, 3, 3, PaymentStatus.PENDING));
+		
 		Product p = new Product("The Great American Challenge", 50, 79.99);
 		p.addProductTags("Dildo");
 		products.add(p);
@@ -141,39 +148,6 @@ public class InitialData {
 	public void setOrders(ArrayList<Order> orders)
 	{
 		this.orders = orders;
-	}
-	
-	/**
-	 * Get order list
-	 * @return
-	 */
-	@MethodAuthor(author="Damien Lloyd")
-	@Deprecated
-	public ArrayList<OrderLine> getOrderLines()
-	{
-		return orderLines;
-	}
-	
-	/**
-	 * Add orderline to list
-	 * @param ol
-	 */
-	@MethodAuthor(author="Damien Lloyd")
-	@Deprecated
-	public void addOrderLine(OrderLine ol)
-	{
-		orderLines.add(ol);
-	}
-	
-	/**
-	 * Set list of order lines to another
-	 * @param ol
-	 */
-	@MethodAuthor(author="Damien Lloyd")
-	@Deprecated
-	public void setOrderLines(ArrayList<OrderLine> ol)
-	{
-		orderLines = ol;
 	}
 	
 	public void addPayment(Payment p)

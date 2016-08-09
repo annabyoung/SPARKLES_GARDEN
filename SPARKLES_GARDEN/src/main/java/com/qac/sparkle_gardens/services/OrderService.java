@@ -197,8 +197,8 @@ public class OrderService
 		{
 			o.addOrderLine(i);
 			
-			if (w_repository.inWishlist(i.getProduct(), o.getCustomerID()))
-				w_repository.removeProduct(i.getProduct(), o.getCustomerID());
+			if (w_repository.inWishlist(i.getProduct(), o.getCustomer().getAccountID()))
+				w_repository.removeProduct(i.getProduct(), o.getCustomer().getAccountID());
 		}
 		
 		repository.persistOrder(o);

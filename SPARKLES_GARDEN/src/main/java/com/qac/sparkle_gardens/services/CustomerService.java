@@ -136,6 +136,8 @@ public class CustomerService {
 		case "password":
 			customerRepository.findByID(userID).setPassword(newInformation);
 			return true;
+		case "phone":
+			customerRepository.findByID(userID).setPhone(newInformation);
 			default: 
 				return false;
 		}
