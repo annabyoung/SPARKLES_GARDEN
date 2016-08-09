@@ -126,6 +126,7 @@ public class ProductService {
 				productsWithAllTags.add(p);
 			}
 		}
+		findProductsWithSubsetOfTags(tags);
 		return productsWithAllTags;
 	}
 	
@@ -151,6 +152,20 @@ public class ProductService {
 	}
 	
 	/**
+	 * Put all products matching search results into one arraylist<product>
+	 * 
+	 * @param productsWithAllTags
+	 * @param productsWithSubsetOfTags
+	 * @return searchResults
+	 */
+	public ArrayList<Product> mergeSearchResults(ArrayList<Product> productsWithAllTags, ArrayList<Product> productsWithSubsetOfTags){
+		ArrayList<Product> searchResults = new ArrayList<>();
+		searchResults.addAll(productsWithAllTags);
+		searchResults.addAll(productsWithSubsetOfTags);
+		return searchResults;
+	}
+	
+	/**
 	 * 
 	 * Customer enters into the search bar a string (i.e. "Blue Gnome")
 	 * String will be split and put into arraylist so that both "blue" and "gnome" will be searched for as product tags
@@ -161,6 +176,7 @@ public class ProductService {
 	 */
 	public ArrayList<String> convertStringToArrayList(String tags){
 		ArrayList<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tags.split(" ")));
+		
 		return tagsToSearch;
 	}
 	
@@ -172,7 +188,15 @@ public class ProductService {
 	 * @param productsWithTags
 	 * @return false, true
 	 */
-	public boolean resultsForSearch(ArrayList<String> productsWithAllTags, ArrayList<String> productsWithSubsetOfTags){
+	
+	public boolean validateResultsOfSearch(ArrayList<Product> productsWithTags){
+		if (productsWithTags.isEmpty()){
+			return false;
+		}
+		return true;
+	}
+	
+	/*public boolean resultsForSearch(ArrayList<String> productsWithAllTags, ArrayList<String> productsWithSubsetOfTags){
 		if (productsWithAllTags.isEmpty() && productsWithSubsetOfTags.isEmpty()){
 			System.out.println("Could not find any products with any of the tags you requested.");
 			return false;
@@ -183,5 +207,5 @@ public class ProductService {
 		}
 		return true;
 	}
-
+*/
 }
