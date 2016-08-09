@@ -7,7 +7,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Card;
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CardRepository;
+import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
 
@@ -20,6 +22,9 @@ import com.qac.sparkle_gardens.util.CreditStatus;
 public class CardService {
 	@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;
+	@Inject CustomerRepository customerRepository;
+	
+	private String error = "";
 	
 	public CardService(){
 		
@@ -37,9 +42,18 @@ public class CardService {
 		if (!cardOwnerName.isEmpty() || !cardNumber.isEmpty() || !expirationDate.isEmpty() && cardNumber.matches("[0-9]{16}")) {
 			return checkInDate(expirationDate);
 		}
+		error = "Check Card Details";
 		return false;
 	}
 	
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
 	/**
 	 * Check to make sure the card is in date
 	 * 
@@ -55,13 +69,16 @@ public class CardService {
 		int currentYear = calendar.get(Calendar.YEAR);
 		
 		Integer cardYear = Integer.parseInt(expirationDate.substring(3));
-		if (cardYear < currentYear)
+		if (cardYear < currentYear){
+			error = "Card has expired";
 			return false;
+		}
 		if (cardYear == currentYear) {
 			Integer cardMonth = Integer.parseInt(expirationDate.substring(0, 2));
 			if (cardMonth > currentMonth){
 				return true;
 			}
+			error = "Card has expired";
 			return false;
 		}
 		return true;
@@ -77,8 +94,13 @@ public class CardService {
 	public boolean checkNotBlacklisted(String cardNumber, String expirationDate) {
 		ArrayList<Card> cards = (ArrayList<Card>) cardRepository.findByCardNumber(cardNumber);
 		for(Card card:cards) {
-			if (card.getExpirationDate().equals(expirationDate) && card.getCustomer().getCreditStatus().equals(CreditStatus.BLACKLISTED))
-				return false;
+			if (card.getExpirationDate().equals(expirationDate)) {
+				Customer cust = customerRepository.findByID(card.getCustomerID());
+				if (cust.getCreditStatus().equals(CreditStatus.BLACKLISTED)){
+					error = "You are blacklisted";
+					return false;
+				}
+			}
 		}
 		return true;
 	}

@@ -4,6 +4,7 @@
 package com.qac.sparkle_gardens.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import javax.ejb.Stateless;
@@ -24,15 +25,7 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
 @Stateless
 public class ProductService {
 	@Inject ProductRepository productRepository;
-	/**
-	 * Things to implement:
-		 * display items
-		 * search items
-		 * item info
-	*/
-	
-	
-	
+		
 	/**
 	 * Add item to wishlist
 	 */
@@ -157,9 +150,38 @@ public class ProductService {
 		return productsWithSubsetOfTags;
 	}
 	
-	/*public void searchProducts(){
-		for
+	/**
+	 * 
+	 * Customer enters into the search bar a string (i.e. "Blue Gnome")
+	 * String will be split and put into arraylist so that both "blue" and "gnome" will be searched for as product tags
+	 * ArrayList is returned so that findProducts() can use .containsAll() 
+	 * 
+	 * @param tags
+	 * @return tagsToSearch
+	 */
+	public ArrayList<String> convertStringToArrayList(String tags){
+		ArrayList<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tags.split(" ")));
+		return tagsToSearch;
 	}
-	*/
+	
+	/**
+	 * If there are no results containing any of the tags searched, return false 
+	 * Else if there are no results containing all tags searched, but results with some tags, return true
+	 * Otherwise return true
+	 * 
+	 * @param productsWithTags
+	 * @return false, true
+	 */
+	public boolean resultsForSearch(ArrayList<String> productsWithAllTags, ArrayList<String> productsWithSubsetOfTags){
+		if (productsWithAllTags.isEmpty() && productsWithSubsetOfTags.isEmpty()){
+			System.out.println("Could not find any products with any of the tags you requested.");
+			return false;
+		}
+		else if(productsWithAllTags.isEmpty()){
+			System.out.println("Could not find any products with all tags you requested.");
+			return true;
+		}
+		return true;
+	}
 
 }

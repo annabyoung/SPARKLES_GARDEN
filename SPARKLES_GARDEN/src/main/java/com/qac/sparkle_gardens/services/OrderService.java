@@ -194,6 +194,8 @@ public class OrderService
 		
 		repository.persistOrder(o);
 		
+		this.clearBasket();
+		
 		return true;
 	}
 	
