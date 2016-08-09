@@ -21,5 +21,6 @@ public interface CardRepository {
 	public void removeCard(Card c);
 
 	public List<Card> findByCardNumber(String cardNumber);
-
+	
+	public Card findByCardNumberAndExpiration(String cardNumber, String expirationDate);
 }

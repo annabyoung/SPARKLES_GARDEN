@@ -31,6 +31,14 @@ public class WishlistService {
 	}
 	
 	/**
+	 * Retrieves all of the customer's wishlists
+	 * @return
+	 */
+	public List<Wishlist> getWishlists() {
+		return wishlistRepository.getWishlists();
+	}
+	
+	/**
 	 * deletes the wishlist
 	 * @param id
 	 */
@@ -45,8 +53,8 @@ public class WishlistService {
 	 * @param accountId
 	 * @param list
 	 */
-	public void createWishlist(long accountId, List<Product> list) {
-		Wishlist wish = new Wishlist(accountId, list);
+	public void createWishlist(long accountId, String name) {
+		Wishlist wish = new Wishlist(accountId, name);
 		wishlistRepository.persistWishlist(wish);
 	}
 	

@@ -26,10 +26,26 @@ public class Payment {
 	@NotNull
 	private long cardID;
 	@Column(name = "paidAmount")
-	private long paidAmount;
+	private double paidAmount;
 	@Column(name = "paymentStatus", nullable = false)
 	@NotNull
 	private PaymentStatus paymentStatus;
+
+	public double getPaidAmount() {
+		return paidAmount;
+	}
+
+	public void setPaidAmount(double paidAmount) {
+		this.paidAmount = paidAmount;
+	}
+
+	public PaymentStatus getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(PaymentStatus paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
 
 	public Payment() {
 	}

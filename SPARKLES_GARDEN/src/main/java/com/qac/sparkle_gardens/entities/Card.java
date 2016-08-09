@@ -20,7 +20,7 @@ public class Card {
 	@Column(name = "cardId", nullable = false, unique = true)
 	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String cardId;
+	private long cardId;
 	@Column(name = "nameOnCard", nullable = false, length = 225)
 	@NotNull
 	@Size(min = 2, max = 225)
@@ -35,7 +35,7 @@ public class Card {
 	private String expirationDate;
 	@JoinColumn(name = "accountID_fk", nullable = false)
 	@NotNull
-	private Customer customer;
+	private long customerID;
 	// private String issueNumber;
 
 	public static final String FIND_BY_CARD_NUMBER = "Card.getCardNumber";
@@ -51,11 +51,11 @@ public class Card {
 	 * @param expirationDate
 	 * @param customer
 	 */
-	public Card(String customerName, String cardNumber, String expirationDate, Customer customer) {
+	public Card(String customerName, String cardNumber, String expirationDate, long customerID) {
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
-		this.customer = customer;
+		this.customerID = customerID;
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class Card {
 	 * 
 	 * @return
 	 */
-	public String getCardId() {
+	public long getCardId() {
 		return cardId;
 	}
 
@@ -123,8 +123,8 @@ public class Card {
 	 * 
 	 * @return customer;
 	 */
-	public Customer getCustomer() {
-		return customer;
+	public long getCustomerID() {
+		return customerID;
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class Card {
 	 * 
 	 * @param customer
 	 */
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomerID(long customerID) {
+		this.customerID = customerID;
 	}
 }
