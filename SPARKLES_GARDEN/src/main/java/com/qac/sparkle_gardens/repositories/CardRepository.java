@@ -68,4 +68,11 @@ public interface CardRepository {
 	 * @return Card
 	 */
 	public Card findByCardNumberAndExpiration(String cardNumber, String expirationDate);
+	
+	/**
+	 * Finds all cards using cardNumber.
+	 * @param cardNumber
+	 * @return List<Card>
+	 */
+	public List<Card> findByCustomerID(long customerID);
 }
