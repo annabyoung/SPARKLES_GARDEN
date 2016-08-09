@@ -15,4 +15,9 @@ public enum PaymentStatus {
 	 * Payment is overdue.
 	 */
 	OVERDUE,
+	
+	/**
+	 * Payment is voided if no longer necessary. I.E refund or broken on arrival
+	 */
+	VOID
 }
