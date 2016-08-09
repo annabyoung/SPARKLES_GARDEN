@@ -25,34 +25,56 @@ public class SearchItemsController {
 	@Inject
 	ProductService productService;
 	
-	private ArrayList<Product> searchQueryByTags = new ArrayList<>();
-	private ArrayList<Product> searchQueryByPrice = new ArrayList<>();
+	private ArrayList<Product> searchQueryResults = new ArrayList<>();
+	//private ArrayList<String> searchQuery = new ArrayList<>();
 	private String error = "";
 	
 	/**
 	 * 
-	 * Takes the search query and validates that there are search results
+	 * Takes the customer's input that they put into search bar and validates that there are search results
 	 * Return search page with results if not empty
 	 * Otherwise, return blank search page
 	 * 
-	 * @return search
+	 * @return search, blank_search
 	 */
-	public String searchItemsByTags(){
-		if (productService.validateResultsOfSearch(searchQueryByTags)){
-			//ProductList = searchResults?!?!
+	public String createProductList(String customerInput){
+		searchQueryResults = productService.createProductListByTags(customerInput);
+		if (productService.validateResultsOfSearch(searchQueryResults)){
 			return "search";
 		}
-		
+		error = "No results found for your search.";
 		return "blank_search";
 	}
 	
-	public String searchItemsByPrice(){
-		if (productService.validateResultsOfSearch(searchQueryByPrice)){
-			//ProductList = searchResults?!?!
+	/**
+	 * Takes in the minimum a customer is willing to spend and the maximum that a customer is willing to spend
+	 * If there are items in that price range, then return the search page with those items
+	 * If the product list is empty then return a blank page
+	 * 
+	 * @param minimumPrice
+	 * @param maximumPrice
+	 * @return search, blank_search
+	 */
+	public String createProductList(double minimumPrice, double maximumPrice){
+		searchQueryResults = productService.createProductListByPriceRange(minimumPrice, maximumPrice);
+		if (productService.validateResultsOfSearch(searchQueryResults)){
 			return "search";
 		}
-		
+		error = "No results found for your search";
 		return "blank_search";
 	}
 	
+	/**
+	 * This will clear the search query
+	 * @return
+	 */
+	public String clearProductList(){
+		productService.clearSearchQuery();
+		return "home";
+	}
+	
+	public String getProductList(){
+		searchQueryResults = productService.getProductList();
+		return "search";
+	}
 }
