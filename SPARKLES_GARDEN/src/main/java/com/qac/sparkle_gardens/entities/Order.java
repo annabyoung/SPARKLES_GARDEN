@@ -123,6 +123,16 @@ public class Order
 	}
 	
 	/**
+	 * Retrieves whether the order is payLater
+	 * If isPayLater is true, then it is buy now pay later, otherwise it's buy now pay now
+	 * 
+	 * @return
+	 */
+	public boolean isPayLater() {
+		return payLater;
+	}
+	
+	/**
 	 * Set the state of an order. See OrderStatus
 	 * for all available states.
 	 * @param status
@@ -141,7 +151,5 @@ public class Order
 		return status;
 	}
 
-	public boolean isPayLater() {
-		return payLater;
-	}
+	
 }
