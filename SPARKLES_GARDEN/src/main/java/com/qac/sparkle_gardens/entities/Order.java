@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+import com.qac.sparkle_gardens.util.OrderStatus;
+
 /**
  * The Order class contains all the order lines along with 
  * the orderID and the customerID. This class does not hold 
@@ -38,6 +40,10 @@ public class Order
 	@Null
 	private boolean payLater;
 	
+	@Column (name = "Status", nullable = true)
+	@Null
+	private OrderStatus status;
+	
 	// List of orderlines in the order
 	private ArrayList<OrderLine> lines;
 	
@@ -46,7 +52,7 @@ public class Order
 	 */
 	public Order()
 	{
-		
+		this(0, new Customer());
 	}
 	
 	/**
@@ -54,6 +60,7 @@ public class Order
 	 */
 	public Order(long orderID, Customer customer)
 	{
+		this.status = OrderStatus.EMPTY;
 		this.orderID = orderID;
 		this.customer = customer;
 	}
@@ -112,5 +119,24 @@ public class Order
 	public void setPayLater(boolean payLater)
 	{
 		this.payLater = payLater;
+	}
+	
+	/**
+	 * Set the state of an order. See OrderStatus
+	 * for all available states.
+	 * @param status
+	 */
+	public void setStatus(OrderStatus status)
+	{
+		this.status = status;
+	}
+	
+	/**
+	 * Get the state of an order it's in.
+	 * @return
+	 */
+	public OrderStatus getStatus()
+	{
+		return status;
 	}
 }

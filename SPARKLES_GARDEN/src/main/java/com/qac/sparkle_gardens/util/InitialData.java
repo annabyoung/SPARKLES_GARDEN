@@ -48,7 +48,7 @@ public class InitialData
 		orders.add(new Order(4, customers.get(3)));
 		orders.add(new Order(5, customers.get(4)));
 		
-		// Add order line to order by productID, quantity & price
+		// Add order line to order by product, quantity & price
 		orders.get(0).addOrderLine(new OrderLine(new Product("Pretty trainers", 3, 30), 3));
 		orders.get(0).addOrderLine(new OrderLine(new Product("Funky gnome", 5, 12), 2));
 		
