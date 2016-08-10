@@ -8,7 +8,9 @@ import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CardRepository;
+import com.qac.sparkle_gardens.repositories.CustomerHasCardRepository;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
@@ -16,15 +18,15 @@ import com.qac.sparkle_gardens.util.CreditStatus;
 /**
  * This is the Card Service Bean I have made as an example
  * 
- * @author James Thompson
+ * @author Allen Su
  */
 @Stateless
 public class CardService {
 	@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;
 	@Inject CustomerRepository customerRepository;
+	@Inject CustomerHasCardRepository cardOwnershipRepository;
 	
-	private String error = "";
 	
 	public CardService(){
 		
@@ -40,16 +42,11 @@ public class CardService {
 	 */
 	public boolean validateCardDetails(String cardOwnerName, String cardNumber, String expirationDate) {
 		if (!cardOwnerName.isEmpty() || !cardNumber.isEmpty() || !expirationDate.isEmpty() && cardNumber.matches("[0-9]{16}")) {
-			return checkInDate(expirationDate);
+			return true;
 		}
-		error = "Check Card Details";
 		return false;
 	}
 	
-	public String getError() {
-		return error;
-	}
-
 	/**
 	 * Check to make sure the card is in date
 	 * 
@@ -66,7 +63,6 @@ public class CardService {
 		
 		Integer cardYear = Integer.parseInt(expirationDate.substring(3));
 		if (cardYear < currentYear){
-			error = "Card has expired";
 			return false;
 		}
 		if (cardYear == currentYear) {
@@ -74,7 +70,6 @@ public class CardService {
 			if (cardMonth > currentMonth){
 				return true;
 			}
-			error = "Card has expired";
 			return false;
 		}
 		return true;
@@ -99,6 +94,11 @@ public class CardService {
 //			}
 //		}
 		Card card = cardRepository.findByCardNumberAndExpiration(cardNumber, expirationDate);
+		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
+			if (co.getCard().equals(card) && co.getCustomer().getCreditStatus() == CreditStatus.BLACKLISTED){
+				return false;
+			}
+		}
 		return true;
 	}
 	public boolean refundCard(String cardNumber, String expirationDate){

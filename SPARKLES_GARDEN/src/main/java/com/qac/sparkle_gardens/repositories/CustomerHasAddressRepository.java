@@ -38,7 +38,7 @@ public interface CustomerHasAddressRepository {
 
 	/**
 	 * Updates a CustomerHasAddress.
-	 * @param C
+	 * @param C 
 	 */
 	public void updateCustomerHasAddress(CustomerHasAddress C);
 

@@ -16,7 +16,7 @@ public class CustomerHasAddress {
 	@JoinColumn (name="customer_fk", nullable = false)
 	@ManyToOne
 	private Customer customer;
-	
+
 	@Id
 	@JoinColumn (name="address_fk", nullable = false)
 	@ManyToOne 

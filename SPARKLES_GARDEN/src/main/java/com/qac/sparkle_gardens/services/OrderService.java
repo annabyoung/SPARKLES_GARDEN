@@ -191,18 +191,19 @@ public class OrderService
 		if (basket.isEmpty())
 			return false;
 		
-		Order o = new Order();
-		o.setPayLater(payLater);
+		Order order = new Order();
+		order.setPayLater(payLater);
 		
 		for (OrderLine i : basket)
 		{
-			o.addOrderLine(i);
+			order.addOrderLine(i);
 			
-			if (w_repository.inWishlist(i.getProduct(), o.getCustomer().getAccountID()))
-				w_repository.removeProduct(i.getProduct(), o.getCustomer().getAccountID());
+			if (w_repository.inWishlist(i.getProduct(), order.getCustomer().getAccountID()))
+				w_repository.removeProduct(i.getProduct(), order.getCustomer().getAccountID());
 		}
 		
-		repository.persistOrder(o);
+		order.setOrderStatus(OrderStatus.PLACED);
+		repository.persistOrder(order);
 		
 		this.clearBasket();
 		
@@ -220,17 +221,39 @@ public class OrderService
 	}
 	
 	/**
+	 * Gets the number of days since an order 
+	 * has been dispatched
+	 * @param orderID The id of the order enquired
+	 */
+	public boolean isEligibleForRefund(long orderID)
+	{
+		// if the # of days since dispatch > 30 days
+		// return false;
+		return true;
+	}
+	
+<<<<<<< HEAD
+	/**
+=======
+	 /**
+>>>>>>> order
 	 * Validate whether an order's status allows for cancellation.
-	 * If order is not dispatched or delivered, returns true
+	 * If order is either placed or packing, it can still be cancelled
 	 * 
 	 * @param order
-	 * @return
+	 * @return true; false
 	 */
-	public boolean validateOrderStatus (Order order){
-		OrderStatus orderStatus = order.getStatus();
-		if (orderStatus != OrderStatus.DISPATCHED && orderStatus != OrderStatus.DELIVERED){
-			return true;
-		}
+	public boolean validateOrderStatus (Order order)
+	{
+		OrderStatus orderStatus = order.getOrderStatus();
+		if (orderStatus == OrderStatus.PLACED || orderStatus == OrderStatus.PACKING)
+		{
+			orderStatus = order.getOrderStatus();
+			
+			if (orderStatus != OrderStatus.DISPATCHED && orderStatus != OrderStatus.DELIVERED)
+			{
+				return true;
+			}
 		return false;
 	}
 }

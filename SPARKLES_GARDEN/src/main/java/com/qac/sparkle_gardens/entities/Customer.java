@@ -63,13 +63,6 @@ public class Customer {
 	@Size (min =3, max =255)
 	private CreditStatus creditStatus;
 	
-	//TODO: Convert address into an Entity
-	@Column (name="address")
-	@OneToMany
-	@JoinColumn(name ="address_fk")
-	@Size (min =10, max =255)
-	private Address address;
-
 	@Column (name="password")
 	@Size (min =6, max =255)
 	private String password;
@@ -84,24 +77,22 @@ public class Customer {
 	}
 	
 	public Customer(long accountID, String firstName, String lastName, String email, CreditStatus creditStatus,
-			Address address, String password, String phone) {
+			String password, String phone) {
 		this.accountID = accountID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.creditStatus = creditStatus;
-		this.address = address;
 		this.password = password;
 		this.phone=phone;
 	}
 
 	public Customer(String firstName, String lastName, String email, CreditStatus creditStatus,
-					Address address, String password, String phone) {
+					String password, String phone) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.creditStatus = creditStatus;
-		this.address = address;
 		this.password = password;
 		this.phone= phone;
 	}
@@ -151,17 +142,7 @@ public class Customer {
 	public void setCreditStatus(CreditStatus creditStatus) {
 		this.creditStatus = creditStatus;
 	}
-
-
-	public Address getAddress() {
-		return address;
-	}
-
 	
-	
-	public void setAddress(Address address) {
-		this.address = address;
-	}
 	public String getPassword() { return password; }
 	public void setPassword(String password) { this.password = password; }
 	

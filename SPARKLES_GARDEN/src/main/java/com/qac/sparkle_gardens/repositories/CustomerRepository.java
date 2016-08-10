@@ -20,6 +20,8 @@ public interface CustomerRepository {
 	public Customer getCustomer(Customer c); //get customer
 	public void updateCustomer(Customer c); //update customer what am i updating tho? I may need more of these 
 	public void removeCustomer(Customer c); //remove customer
+	public void findCustomerAdresses(Customer c);
+	public void findCustomerCards(Customer c);
 	
 	/**
 	 * Finds a customer by their email address and returns null is no customer is found

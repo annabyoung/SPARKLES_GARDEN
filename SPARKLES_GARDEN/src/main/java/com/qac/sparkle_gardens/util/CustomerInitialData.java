@@ -13,7 +13,7 @@ import com.qac.sparkle_gardens.entities.Address;
  * 
  *  only made one dummy address, should make more 
  *
- *deprecated in favour of InitialData (9/8/16)
+ *deprecated in favor of InitialData (8/9/16)
  */
 @Singleton 
 @Deprecated

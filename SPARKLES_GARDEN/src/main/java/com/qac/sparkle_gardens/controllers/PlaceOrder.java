@@ -18,7 +18,11 @@ public class PlaceOrder
 	@Inject
 	OrderService service;
 	
-	double totalPrice = 0;
+	@Inject
+	PayByCard pay;
+	
+	String cardNumber = "", expiryDate = "";
+	String cardOwnerName = "", cvs = "";
 	
 	/**
 	 * Place order with order ID and option to pay later
@@ -31,25 +35,60 @@ public class PlaceOrder
 		if (service.isOrderEmpty(orderID))
 			return "home";
 		
-		service.createOrder(payLater);
-		service.generateInvoice(orderID);
-		totalPrice = service.getTotalPrice(orderID);
+		if (cardNumber.equals("") || cvs.equals("") || expiryDate.equals(""))
+			return "home";
+		
+		service.createOrder(payLater);	
 		
 		if (!payLater)
 		{
-			// financial magic
+			double price = service.getTotalPrice(orderID);
+			pay.payByCard(cardOwnerName, cardNumber, expiryDate, price, cvs);
 			return "home";
 		}
 		
+		service.generateInvoice(orderID);
+		
 		return "home";
 	}
-	
-	/**
-	 * Get the total price of the order
-	 * @return The total price
-	 */
-	public double getTotalPrice()
+
+	public String getCardNumber() 
 	{
-		return totalPrice;
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) 
+	{
+		this.cardNumber = cardNumber;
+	}
+
+	public String getExpiryDate() 
+	{
+		return expiryDate;
+	}
+
+	public void setExpiryDate(String expiryDate) 
+	{
+		this.expiryDate = expiryDate;
+	}
+
+	public String getCardOwnerName() 
+	{
+		return cardOwnerName;
+	}
+
+	public void setCardOwnerName(String cardOwnerName) 
+	{
+		this.cardOwnerName = cardOwnerName;
+	}
+
+	public String getCvs() 
+	{
+		return cvs;
+	}
+
+	public void setCvs(String cvs) 
+	{
+		this.cvs = cvs;
 	}
 }

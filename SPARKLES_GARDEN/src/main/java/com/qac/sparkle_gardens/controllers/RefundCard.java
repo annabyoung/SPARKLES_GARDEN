@@ -3,6 +3,7 @@ package com.qac.sparkle_gardens.controllers;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.repositories.CardRepository;
 import com.qac.sparkle_gardens.repositories.PaymentRepository;
@@ -27,14 +28,14 @@ public class RefundCard {
 	 * @param p
 	 * @return
 	 */
-	public String refundCard(Payment p){
+	public String refundCard(Order o){
 		
-		switch(p.getPaymentStatus()){
+		switch(o.getPaymentStatus()){
 		case PAID:
 			//payout.
 			break;
 		case PENDING:
-			p.setPaymentStatus(PaymentStatus.VOID);
+			o.setPaymentStatus(PaymentStatus.VOID);
 			error = "";
 			break;
 		case OVERDUE:
@@ -43,6 +44,7 @@ public class RefundCard {
 		default:
 			error = "Previous Payment Status Error";
 		}
+		error = "";     
 		return "#";
 	}
 	
