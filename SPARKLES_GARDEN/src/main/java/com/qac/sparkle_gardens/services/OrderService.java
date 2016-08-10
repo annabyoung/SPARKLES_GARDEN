@@ -221,17 +221,6 @@ public class OrderService
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Gets the number of days since an order 
-	 * has been dispatched
-	 * @param orderID The id of the order enquired
-	 */
-	public boolean isEligibleForRefund(long orderID)
-	{
-		// if the # of days since dispatch > 30 days
-		// return false;
-		return true;
-=======
 	 * Validate whether an order's status allows for cancellation.
 	 * If order is not dispatched or delivered, returns true
 	 * 
@@ -244,6 +233,5 @@ public class OrderService
 			return true;
 		}
 		return false;
->>>>>>> d96507e8ca437b791a5573efd488c9c48a3658c7
 	}
 }

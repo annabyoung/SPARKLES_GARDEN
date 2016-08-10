@@ -165,19 +165,5 @@ public class Order
 	{
 		return status;
 	}
-<<<<<<< HEAD
 
-	
-=======
-	
-	/**
-	 * Returns whether the order is buy-now-
-	 * pay-later or not.
-	 * @return payLater
-	 */
-	public boolean isPayLater() 
-	{
-		return payLater;
-	}
->>>>>>> 0247f7d1523afec1e4e2677f60a48bcf4cb6ca9b
 }
