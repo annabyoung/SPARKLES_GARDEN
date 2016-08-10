@@ -11,7 +11,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
-import com.qac.sparkle_gardens.util.MethodAuthor;
 import com.qac.sparkle_gardens.util.OrderStatus;
 
 /**

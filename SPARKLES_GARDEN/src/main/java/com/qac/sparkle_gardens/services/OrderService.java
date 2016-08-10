@@ -10,6 +10,7 @@ import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
+import com.qac.sparkle_gardens.util.OrderStatus;
 
 /**
  * The OrderService provides the functionality required for 
@@ -201,6 +202,7 @@ public class OrderService
 				w_repository.removeProduct(i.getProduct(), o.getCustomer().getAccountID());
 		}
 		
+		o.setStatus(OrderStatus.PLACED);
 		repository.persistOrder(o);
 		
 		this.clearBasket();
@@ -216,5 +218,17 @@ public class OrderService
 	public Order getOrder(long orderID)
 	{
 		return repository.getOrder(orderID);
+	}
+	
+	/**
+	 * Gets the number of days since an order 
+	 * has been dispatched
+	 * @param orderID The id of the order enquired
+	 */
+	public boolean isEligibleForRefund(long orderID)
+	{
+		// if the # of days since dispatch > 30 days
+		// return false;
+		return true;
 	}
 }
