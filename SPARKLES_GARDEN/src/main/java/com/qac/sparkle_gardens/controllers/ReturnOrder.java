@@ -1,7 +1,8 @@
-package com.qac.sparkle_gardens.entities;
+package com.qac.sparkle_gardens.controllers;
 
 import javax.inject.Inject;
 
+import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.services.CardService;
 import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.util.OrderStatus;
