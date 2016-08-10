@@ -22,12 +22,29 @@ public class CustomerHasAddress {
 	@ManyToOne 
 	private Address address;
 
+	public CustomerHasAddress() {
+		
+	}
+	
+	public CustomerHasAddress(Customer customer, Address address) {
+		this.customer = customer;
+		this.address = address;
+	}
+	
 	public Customer getCustomer() {
 		return customer;
 	}
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	
+	public long getCustomerId() {
+		return this.customer.getAccountID();
+	}
+	
+	public long getAddressId() {
+		return this.address.getAddressId();
 	}
 
 	public Address getAddress() {

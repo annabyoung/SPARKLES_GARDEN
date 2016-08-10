@@ -8,6 +8,7 @@ import javax.ejb.Singleton;
 import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Payment;
@@ -23,25 +24,30 @@ import com.qac.sparkle_gardens.entities.Wishlist;
 @Singleton
 public class InitialData 
 {
-	private List<Address> addresses = new ArrayList<Address>();
+	private ArrayList<Address> addresses = new ArrayList<Address>();
 	private ArrayList<Wishlist> wishlists = new ArrayList<Wishlist>();
 	private ArrayList<Card> Cards = new ArrayList<Card>();
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	private ArrayList<Order> orders;
 	private ArrayList<Payment> Payments = new ArrayList<Payment>();
 	private ArrayList<Product> products = new ArrayList<Product>();
+	private ArrayList<CustomerHasAddress> custAddresses = new ArrayList<CustomerHasAddress>();
 	
 	public InitialData() 
 	{
-		addresses.add(new Address(25, 1, "Anchorage 1", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ"));
+		
+		addresses.add(new Address(1, "Anchorage 1", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ"));
 		Cards.add(new Card(1, "Connect", "4412345647894531", "12/12", 1));
 		Cards.add(new Card(2, "Head", "4212345647894531", "11/12", 2));
 		Cards.add(new Card(3, "Hammer", "4552345647894531", "12/13", 3));
+		
 		Address dummyAddress = addresses.get(0);
 		customers.add(new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, dummyAddress, "password01", "1234567890"));
 		customers.add(new Customer("Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, dummyAddress, "password01", "0987654321"));
 		customers.add(new Customer("Joe", "Schmoe", "email999@email.com", CreditStatus.VALID, dummyAddress, "password01", "1357908642"));
 		customers.add(new Customer("Luke", "Skywalker", "theForce@deathstar.com", CreditStatus.VALID, dummyAddress, "password01", "2468097531"));
+		
+		custAddresses.add(new CustomerHasAddress(customers.get(3), addresses.get(0)));
 		
 		// Create order with orderID & customer
 		orders.add(new Order(1, customers.get(0)));
@@ -110,7 +116,22 @@ public class InitialData
 	public void setWishlists(List<Wishlist> wishlists) {
 		this.wishlists = (ArrayList<Wishlist>) wishlists;
 	}
+	
+	@MethodAuthor(author = "Tyler Deans")
+	public ArrayList<CustomerHasAddress> getCustomerHasAddresses() {
+		return custAddresses;
+	}
 
+	@MethodAuthor(author = "Tyler Deans")
+	public void addCustomerHasAddress(CustomerHasAddress cust) {
+		custAddresses.add(cust);
+	}
+	
+	@MethodAuthor(author = "Tyler Deans")
+	public void setCustomerHasAddresses(List<CustomerHasAddress> cust) {
+		this.custAddresses = (ArrayList<CustomerHasAddress>) cust;
+	}
+	 
 	public void addCard(Card p) {
 		this.Cards.add(p);
 	}

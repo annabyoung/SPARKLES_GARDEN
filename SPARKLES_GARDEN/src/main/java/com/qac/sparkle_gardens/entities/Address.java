@@ -31,22 +31,15 @@ public class Address {
 	private long addressId;
 	
 	@ManyToOne
-	@JoinColumn(name="customerID", nullable = false)
-	private long customerId;
+	@JoinColumn(name="cust_address", nullable = false)
+	private CustomerHasAddress custAddress;
+
 	
-
-	public long getCustomerId() {
-		return customerId;
-	}
-	public void setCustomer(long customerId) {
-		this.customerId = customerId;
-	}
-
 	//The number of the building
 	@Column
 	@NotNull
 	private int buildingNum;
-	
+
 	@Column
 	@NotNull
 	@Size (min = 1, max = 200)
@@ -73,7 +66,6 @@ public class Address {
 	private String postCode;
 	
 	public Address() {
-		this.customerId = 0;
 		this.buildingNum = 0;
 		this.streetName = "";
 		this.city = "";
@@ -81,8 +73,37 @@ public class Address {
 		this.country = "";
 		this.postCode = "";
 	}
-	public Address(long customerId, int buildingNum, String streetName, String city, String county, String country, String postCode) {
-		this.customerId = customerId;
+	
+	/**
+	 * 
+	 * @param buildingNum
+	 * @param streetName
+	 * @param city
+	 * @param county
+	 * @param country
+	 * @param postCode
+	 */
+	public Address(int buildingNum, String streetName, String city, String county, String country, String postCode) {
+		this.buildingNum = buildingNum;
+		this.streetName = streetName;
+		this.city = city;
+		this.county = county;
+		this.country = country;
+		this.postCode = postCode;
+	}
+	
+	/**
+	 * 
+	 * @param custAddress
+	 * @param buildingNum
+	 * @param streetName
+	 * @param city
+	 * @param county
+	 * @param country
+	 * @param postCode
+	 */
+	public Address(CustomerHasAddress custAddress, int buildingNum, String streetName, String city, String county, String country, String postCode) {
+		this.custAddress = custAddress;
 		this.buildingNum = buildingNum;
 		this.streetName = streetName;
 		this.city = city;
@@ -91,6 +112,19 @@ public class Address {
 		this.postCode = postCode;
 	}
 	// Getters and setters for all the attributes
+	
+	public CustomerHasAddress getCustAddress() {
+		return custAddress;
+	}
+	public void setCustAddress(CustomerHasAddress custAddress) {
+		this.custAddress = custAddress;
+	}
+	
+	// Gets the account ID using the CustomerHasAddress object
+	public long getCustomerId() {
+		return custAddress.getCustomer().getAccountID();
+	}
+	
 	public long getAddressId() {
 		return addressId;
 	}
