@@ -12,6 +12,7 @@ import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.entities.Product;
+import com.qac.sparkle_gardens.entities.Wishlist;
 
 /**
  * A single initial data object. For simplicity.
@@ -23,6 +24,7 @@ import com.qac.sparkle_gardens.entities.Product;
 public class InitialData 
 {
 	private List<Address> addresses = new ArrayList<Address>();
+	private ArrayList<Wishlist> wishlists = new ArrayList<Wishlist>();
 	private ArrayList<Card> Cards = new ArrayList<Card>();
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	private ArrayList<Order> orders;
@@ -76,6 +78,7 @@ public class InitialData
 		p = new Product("The Screaming O", 500, 19.99);
 		p.addProductTags("Vibrating");
 		products.add(p);
+		wishlists.add(new Wishlist((long) 24, products));
 	}
 
 	@MethodAuthor(author = "Tyler Deans")
@@ -91,6 +94,21 @@ public class InitialData
 	@MethodAuthor(author = "Tyler Deans")
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = (ArrayList<Address>) addresses;
+	}
+	
+	@MethodAuthor(author = "Tyler Deans")
+	public ArrayList<Wishlist> getWishlists() {
+		return wishlists;
+	}
+	
+	@MethodAuthor(author = "Tyler Deans")
+	public void addWishlist(Wishlist wishlist) {
+		wishlists.add(wishlist);
+	}
+	
+	@MethodAuthor(author = "Tyler Deans")
+	public void setWishlists(List<Wishlist> wishlists) {
+		this.wishlists = (ArrayList<Wishlist>) wishlists;
 	}
 
 	public void addCard(Card p) {
