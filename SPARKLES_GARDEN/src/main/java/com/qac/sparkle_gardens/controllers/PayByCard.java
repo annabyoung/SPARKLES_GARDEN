@@ -43,8 +43,7 @@ public class PayByCard {
 		//if(validateCardPayment())
 		Card card = cardRepository.findByCardNumberAndExpiration(cardNumber, expirationDate);
 		if (card == null){
-			card = new Card(cardOwnerName, cardNumber, expirationDate, 
-					new Customer(000, "Brazen", "Moo", "HappyCows@gmail.com", CreditStatus.VALID, new Address(), "0302", "1231233"));//HAVENT FIGURED OUT FOREIGN KEYS YET
+			card = new Card(cardOwnerName, cardNumber, expirationDate);
 			cardRepository.persistCard(card);
 		}
 		//STUFF TO BE DONE BECAUSE NO PAYMENT CLASS.
