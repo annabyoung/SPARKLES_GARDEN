@@ -85,6 +85,7 @@ public class InitialData
 		orders.get(3).addOrderLine(new OrderLine(new Product("Allen's Mac", 1, 231), 12));
 		
 		orders.get(4).addOrderLine(new OrderLine(new Product("Impressive glasses", 2, 200), 1));
+		orders.get(5).addOrderLine(new OrderLine(new Product("Gandhi's Nukes", 9001, 100000), 1));
 		
 		// Add payments
 		Payments.add(new Payment(1, 1, 1, PaymentStatus.PENDING));
