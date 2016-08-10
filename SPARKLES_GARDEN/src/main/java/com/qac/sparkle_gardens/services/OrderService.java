@@ -232,7 +232,11 @@ public class OrderService
 		return true;
 	}
 	
+<<<<<<< HEAD
 	/**
+=======
+	 /**
+>>>>>>> order
 	 * Validate whether an order's status allows for cancellation.
 	 * If order is either placed or packing, it can still be cancelled
 	 * 
@@ -244,8 +248,12 @@ public class OrderService
 		OrderStatus orderStatus = order.getOrderStatus();
 		if (orderStatus == OrderStatus.PLACED || orderStatus == OrderStatus.PACKING)
 		{
-			return true;
-		}
+			orderStatus = order.getOrderStatus();
+			
+			if (orderStatus != OrderStatus.DISPATCHED && orderStatus != OrderStatus.DELIVERED)
+			{
+				return true;
+			}
 		return false;
 	}
 }
