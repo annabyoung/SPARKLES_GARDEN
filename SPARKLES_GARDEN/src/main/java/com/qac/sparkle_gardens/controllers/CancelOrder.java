@@ -7,6 +7,7 @@ import javax.inject.Named;
 import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.util.PaymentStatus;
 import com.qac.sparkle_gardens.entities.Order;
+import com.qac.sparkle_gardens.controllers.RefundCard;
 
 /**
  * 
@@ -22,6 +23,9 @@ public class CancelOrder
 {
 	@Inject
 	OrderService service;
+	
+	@Inject
+	RefundCard refund;
 	
 	private String error = "";
 	
@@ -41,7 +45,7 @@ public class CancelOrder
 			if(order.isPayLater()){
 				order.setPaymentStatus(PaymentStatus.VOID);
 			}
-			
+			refund.refundCard(order);
 		}
 		error = "Order is not valid for cancellation.";
 		return "home";
