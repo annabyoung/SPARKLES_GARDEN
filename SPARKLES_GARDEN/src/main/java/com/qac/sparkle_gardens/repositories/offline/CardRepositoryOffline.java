@@ -10,7 +10,6 @@ import com.qac.sparkle_gardens.repositories.CardRepository;
 import com.qac.sparkle_gardens.util.InitialData;
 import com.qac.sparkle_gardens.util.MethodAuthor;
 
-import deprecated.CardInitialData;
 
 /**
  * 

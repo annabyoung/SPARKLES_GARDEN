@@ -4,9 +4,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.Order;
-import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.repositories.CardRepository;
-import com.qac.sparkle_gardens.repositories.PaymentRepository;
+//import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.util.PaymentStatus;
 
 /**
@@ -16,7 +15,7 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
  */
 @Named(value = "RefundCard")
 public class RefundCard {
-	@Inject PaymentRepository paymentRepository;
+	//@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;
 
 	private String error = "";

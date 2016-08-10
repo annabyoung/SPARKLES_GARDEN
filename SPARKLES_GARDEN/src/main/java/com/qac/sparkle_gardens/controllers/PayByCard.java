@@ -4,15 +4,10 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Card;
-import com.qac.sparkle_gardens.entities.Customer;
-import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.repositories.CardRepository;
-import com.qac.sparkle_gardens.repositories.PaymentRepository;
+//import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.services.CardService;
-import com.qac.sparkle_gardens.util.CreditStatus;
-import com.qac.sparkle_gardens.util.PaymentStatus;
 
 /**
  * 
@@ -22,7 +17,7 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
 @Named(value = "PayByCard")
 @SessionScoped
 public class PayByCard {
-	@Inject PaymentRepository paymentRepository;
+	//@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;
 	
 	private String error = "";

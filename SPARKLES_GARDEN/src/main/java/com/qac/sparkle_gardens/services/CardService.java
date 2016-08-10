@@ -13,7 +13,7 @@ import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CardRepository;
 import com.qac.sparkle_gardens.repositories.CustomerHasCardRepository;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
-import com.qac.sparkle_gardens.repositories.PaymentRepository;
+//import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
 
 /**
@@ -23,12 +23,14 @@ import com.qac.sparkle_gardens.util.CreditStatus;
  */
 @Stateless
 public class CardService {
-	@Inject PaymentRepository paymentRepository;
+	//@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;
 	@Inject CustomerRepository customerRepository;
 	@Inject CustomerHasCardRepository cardOwnershipRepository;
 	
-	
+	/**
+	 * TODO:PLACEHOLDER.
+	 */
 	public CardService(){
 		
 	}
@@ -84,16 +86,7 @@ public class CardService {
 	 * @return
 	 */
 	public boolean checkNotBlacklisted(String cardNumber, String expirationDate) {
-//		ArrayList<Card> cards = (ArrayList<Card>) cardRepository.findByCardNumber(cardNumber);
-//		for(Card card:cards) {
-//			if (card.getExpirationDate().equals(expirationDate)) {
-//				Customer cust = customerRepository.findByID(card.getCustomerID());
-//				if (cust.getCreditStatus().equals(CreditStatus.BLACKLISTED)){
-//					error = "You are blacklisted";
-//					return false;
-//				}
-//			}
-//		}
+
 		Card card = cardRepository.findByCardNumberAndExpiration(cardNumber, expirationDate);
 		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
 			if (co.getCard().equals(card) && co.getCustomer().getCreditStatus() == CreditStatus.BLACKLISTED){

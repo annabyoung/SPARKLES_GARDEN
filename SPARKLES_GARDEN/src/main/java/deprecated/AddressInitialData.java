@@ -17,7 +17,6 @@ public class AddressInitialData {
 	
 	
 	public AddressInitialData() {
-		addresses.add(new Address(25, 1, "Anchorage 1", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ"));
 	}
 	
 	public ArrayList<Address> getAddresses() {
