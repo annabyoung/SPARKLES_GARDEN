@@ -1,5 +1,47 @@
 h1{
 	background-color: #097F10;
+	height:130px;
+	margin: 0px;
+}
+#navbar-right {
+	position:fixed;
+}
+
+#login a{
+	background-color: #097F10	;
+	border: 0px;
+	border-radius: 0px 0px 5px 5px;
+	font-size: 10pt;
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: #FFFFFF;
+}
+#navbarTitle{
+	color: #FEF1D6;
+}
+#myNewNavbar{
+	background-color: #097F10;
+	border: 0px;
+	border-radius: 0px 0px 5px 5px
+}
+#myDropdown{
+	background-color:#097F10; 
+}
+#dropdown{
+	background-color: #097F10;
+	color: #FEF1D6;
+}
+#MyNavButton{
+	background-color: #097F10;
+	border: 1px solid #FEF1D6;
+}
+#myNavbar ul li a{ 
+	color: #FEF1D6; 
+}
+#myNavbar ul li a:hover { 
+	color: #FEF1D6; 
+	background-color: #FFDF52; 
 }
 #contact{
 	text-decoration: underline;
@@ -8,6 +50,11 @@ h1{
 	right: 0;
 	padding-right: 15px;
 }
-	
-
-
+#mainbody{
+	width:1600px;
+	height:700px;
+	border:1px solid #000;
+	background-color: #FEF1D6;
+	transform: translateY(5%);
+	resize: both;
+}	 
