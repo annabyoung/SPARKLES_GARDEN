@@ -221,15 +221,29 @@ public class OrderService
 	}
 	
 	/**
+	 * Gets the number of days since an order 
+	 * has been dispatched
+	 * @param orderID The id of the order enquired
+	 */
+	public boolean isEligibleForRefund(long orderID)
+	{
+		// if the # of days since dispatch > 30 days
+		// return false;
+		return true;
+	}
+	
+	/**
 	 * Validate whether an order's status allows for cancellation.
 	 * If order is either placed or packing, it can still be cancelled
 	 * 
 	 * @param order
 	 * @return true; false
 	 */
-	public boolean validateOrderStatus (Order order){
+	public boolean validateOrderStatus (Order order)
+	{
 		OrderStatus orderStatus = order.getOrderStatus();
-		if (orderStatus == OrderStatus.PLACED || orderStatus == OrderStatus.PACKING){
+		if (orderStatus == OrderStatus.PLACED || orderStatus == OrderStatus.PACKING)
+		{
 			return true;
 		}
 		return false;
