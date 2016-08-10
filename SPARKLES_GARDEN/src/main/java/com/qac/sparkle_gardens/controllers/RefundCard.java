@@ -44,6 +44,7 @@ public class RefundCard {
 		default:
 			error = "Previous Payment Status Error";
 		}
+		error = "";     
 		return "#";
 	}
 	
