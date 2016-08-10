@@ -34,11 +34,7 @@ public class Card {
 	@NotNull
 	@Pattern(regexp = "[0-1][0-9]/[0-9]{2}", message = "{invalid.expirationDate}")
 	private String expirationDate;
-	@JoinColumn(name = "accountID_fk", nullable = false)
-	@NotNull
-	private Customer customer;
-	// private String issueNumber;
-
+	
 	public static final String FIND_BY_CARD_NUMBER = "Card.getCardNumber";
 	public static final String FIND_BY_CARDID = "Card.getCardId";
 	public static final String FIND_BY_CUSTOMER = "Card.getcardId";
@@ -57,7 +53,6 @@ public class Card {
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
-		this.customer = customer;
 	}
 
 	/**
@@ -73,7 +68,6 @@ public class Card {
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
-		this.customer = customer;
 	}
 
 	/**
@@ -137,20 +131,5 @@ public class Card {
 		this.expirationDate = expirationDate;
 	}
 
-	/**
-	 * 
-	 * @return customer;
-	 */
-	public Customer getCustomerID() {
-		return customer;
-	}
 
-	/**
-	 * Set's Card's customer.
-	 * 
-	 * @param customer
-	 */
-	public void setCustomerID(Customer customer) {
-		this.customer = customer;
-	}
 }
