@@ -166,7 +166,6 @@ public class Order
 		return orderStatus;
 	}
 	
-<<<<<<< HEAD
 	/**
 	 * Retrieve the payment status of an order.
 	 * 
@@ -185,20 +184,5 @@ public class Order
 	}
 	
 	
-=======
-	public void setPaymentStatus(PaymentStatus status)
-	{
-		this.pStatus = status;
-	}
-	
-	/**
-	 * Get the state of an order it's in.
-	 * @return status
-	 */
-	public PaymentStatus getPaymentStatus()
-	{
-		return pStatus;
-	}
->>>>>>> 6a73ff46a6984c1204ea7fc808aa80b16ed4d546
 
 }
