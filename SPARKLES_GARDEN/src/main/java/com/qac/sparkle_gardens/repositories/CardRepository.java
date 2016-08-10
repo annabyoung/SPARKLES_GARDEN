@@ -10,7 +10,8 @@ import com.qac.sparkle_gardens.entities.Card;
  * @author Allen Su
  *
  */
-public interface CardRepository {
+public interface CardRepository 
+{
 	/**
 	 * Keeps cards in database.
 	 * @param Card c
@@ -28,31 +29,19 @@ public interface CardRepository {
 	 * @param id
 	 * @return Card
 	 */
-	public Card findByID(String id);
+	public Card findByID(long id);
 
 	/**
 	 * Gets all of the cards in the repository
 	 * @return
 	 */
 	public ArrayList<Card> getCards();
-	
-	/**
-	 * Adds a new card into repository. Might be useless because persist card.
-	 * @param c
-	 */
-	public void addCard(Card c);
-
-	/**
-	 * Updates a card.
-	 * @param C
-	 */
-	public void updateCard(Card C);
 
 	/**
 	 * Removes a card.
 	 * @param c
 	 */
-	public void removeCard(Card c);
+	public void removeCard(long id);
 
 	/**
 	 * Finds all cards using cardNumber.

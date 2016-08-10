@@ -2,6 +2,7 @@ package com.qac.sparkle_gardens.services;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -101,6 +102,17 @@ public class CardService {
 		}
 		return true;
 	}
+	
+	public List<Card> getCardsByCustomer(Customer customer){
+		ArrayList<Card> cardsOwnedByCustomer = new ArrayList<Card>();
+		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
+			if (co.getCustomer().equals(customer)){
+				cardsOwnedByCustomer.add(co.getCard());
+			}
+		}
+		return cardsOwnedByCustomer;
+	}
+	
 	public boolean refundCard(String cardNumber, String expirationDate){
 		return true;
 	}
