@@ -36,11 +36,12 @@ public class updateCustomer {
 	// dummy data
 
 	
-	
-		if( customerService.updateAccountDetails(username, updatedField, newInformation))
+	public String updateCustomer(long customerID)
+	{
+		/*if(customerService.updateAccountDetails(username, updatedField, newInformation))
+		{
 			String output= "successful updated information";
-		 
-			
-	
-
+		}*/
+		return "home";
+	}
 }
