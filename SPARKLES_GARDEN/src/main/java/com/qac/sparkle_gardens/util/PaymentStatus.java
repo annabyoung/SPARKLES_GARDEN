@@ -2,11 +2,7 @@ package com.qac.sparkle_gardens.util;
 
 public enum PaymentStatus 
 {
-	/**
-	 * Paid hasn't been made
-	 */
-	UNPAID,
-	
+
 	/**
 	 * Payment is yet to be paid
 	 */
