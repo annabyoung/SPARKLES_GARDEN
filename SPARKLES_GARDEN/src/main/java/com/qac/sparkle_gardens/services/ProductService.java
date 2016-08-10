@@ -26,7 +26,7 @@ public class ProductService {
 	@Inject ProductRepository productRepository;
 	
 	private ArrayList<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
-	private ArrayList<String> tags = new ArrayList<>();
+	private ArrayList<String> tags = new ArrayList<String>();
 		
 	
 	/**
