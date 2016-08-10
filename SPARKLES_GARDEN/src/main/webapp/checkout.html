@@ -16,7 +16,7 @@
 			</a>
 		</div>
 	</h1>
-	<div class="container">
+	<div class="container-fluid">
 		<form class="form-horizontal center_div" role="form" id="formdiv">
 			<h2 class="center-block">Checkout</h2>
 			<div class="form-group">
@@ -36,16 +36,19 @@
 						<option>***Card 2***</option>
 					</select>
 				</div>
+				<span>
+					<a href="registerPayment.html" class="btn btn-secondary" role="button">Add New Payment Method</a>
+				</span>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-4"> CVV: </label> 
 				<div class="col-xs-2">
-					<input class="form-control" type="text" name="cvv" required>
+					<input class="form-control" type="password" name="cvv" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-4">Billing Address: </label>
-				<div class="col-sm-5">
+				<div class="col-sm-4">
 					<select class="form-control">
 						<option>***Billing Address 1***</option>
 						<option>***Billing Address 2***</option>
@@ -54,17 +57,26 @@
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-4">Shipping Address: </label>
-				<div class="col-sm-5">
+				<div class="col-sm-4">
 					<select class="form-control">
 						<option>***Shipping Address 1***</option>
 						<option>***Shipping Address 2***</option>
 					</select>
 				</div>
+				<span>
+					<a href="registerAddress.html" class="btn btn-secondary" role="button">Add New Address</a>
+				</span>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-3">Total Cost: </label>
 			</div>
+			<div>
+				<a href="Homepage.html" class="btn btn-warning" role="button">Complete Order!</a>
+			</div>
 		</form>
+		<div>
+				<p id= "contact"><a href="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</a></p>
+		</div>
 	</div>
 	</body>
 </html>

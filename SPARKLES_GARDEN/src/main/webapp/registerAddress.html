@@ -28,12 +28,12 @@
 						<label>Postcode:</label><input type="text" name="postcode" required><br>
 						<label>Address Type:</label>
 						<select>
-							<option value="House">Billing</option>
-							<option value="Apartment">Shipping</option><br>
+							<option name="Billing">Billing</option>
+							<option name="Shipping">Shipping</option><br>
 						</select>
 						<span id="addExtraForm"></span>
 						<div>
-							<input id= "multibuttons" type="button" value ="Add another address?" onclick= showNewForm()>
+							<input type="button" onclick= showNewForm()>
 							<button type="submit">Continue to Register a Card</button>
 							
 						</div>
