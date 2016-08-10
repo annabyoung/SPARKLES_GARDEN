@@ -16,7 +16,7 @@ import com.qac.sparkle_gardens.entities.Address;
  *deprecated in favor of InitialData (8/9/16)
  */
 @Singleton 
-@Deprecated
+@Deprecated 
 public class CustomerInitialData {
 	
 		private ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -31,10 +31,10 @@ public class CustomerInitialData {
 //			customers.add(new Customer("004", "Luke", "Skywalker", "theForce@deathstar.com", "you don't need to see my credit score", "Tattooine"));
 			
 			//String firstName, String lastName, String email, CreditStatus creditStatus, Address address String password
-			customers.add(new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, dummyAddress, "password01", "1234567890"));
-			customers.add(new Customer("Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, dummyAddress, "password01", "0987654321"));
-			customers.add(new Customer("Joe", "Schmoe", "email999@email.com", CreditStatus.VALID,dummyAddress, "password01", "1357908642"));
-			customers.add(new Customer("Luke", "Skywalker", "theForce@deathstar.com", CreditStatus.VALID, dummyAddress, "password01", "2468097531"));
+			customers.add(new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD,  "password01", "1234567890"));
+			customers.add(new Customer("Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, "password01", "0987654321"));
+			customers.add(new Customer("Joe", "Schmoe", "email999@email.com", CreditStatus.VALID, "password01", "1357908642"));
+			customers.add(new Customer("Luke", "Skywalker", "theForce@deathstar.com", CreditStatus.VALID, "password01", "2468097531"));
 			 
 		}
 		

@@ -99,10 +99,14 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		}
 		
 		public void findCustomerAdresses(Customer customer){
-			//TODO: do this
+			
+			initialData.getAddresses();
+			
+			//TODO: do this return type is wrong 
 		}
 		
 		public void findCustomerCards(Customer customer){
+			initialData.getCards(); 
 			//TODO: and do this return type is wrong;  
 		}
 		

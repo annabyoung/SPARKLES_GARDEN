@@ -28,17 +28,19 @@ import com.qac.sparkle_gardens.services.AddressService;
 public class updateCustomer {
 	
 	@Inject
-	CustomerService customerService;
+	CustomerService service;
+
+	private String userID="";
+	private String updatedInformation=""; // should this maybe be an enum?
+	private String newInformation="";
 
 	
 	
-	private long userID=000000;
-	// dummy data
+	  service.updateAccountDetails(userID, updatedField, newInformation);
+			
 
-	
-	
-		if( customerService.updateAccountDetails(username, updatedField, newInformation))
-			String output= "successful updated information";
+
+private String output= "successful updated information";
 		 
 			
 	
