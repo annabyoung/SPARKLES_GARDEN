@@ -17,6 +17,12 @@ public class CustomerHasAddress {
 	@ManyToOne
 	private Customer customer;
 	
+	public CustomerHasAddress(Customer customer, Address address) {
+		super();
+		this.customer = customer;
+		this.address = address;
+	}
+
 	@Id
 	@JoinColumn (name="address_fk", nullable = false)
 	@ManyToOne 
