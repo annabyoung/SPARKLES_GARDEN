@@ -191,19 +191,19 @@ public class OrderService
 		if (basket.isEmpty())
 			return false;
 		
-		Order o = new Order();
-		o.setPayLater(payLater);
+		Order order = new Order();
+		order.setPayLater(payLater);
 		
 		for (OrderLine i : basket)
 		{
-			o.addOrderLine(i);
+			order.addOrderLine(i);
 			
-			if (w_repository.inWishlist(i.getProduct(), o.getCustomer().getAccountID()))
-				w_repository.removeProduct(i.getProduct(), o.getCustomer().getAccountID());
+			if (w_repository.inWishlist(i.getProduct(), order.getCustomer().getAccountID()))
+				w_repository.removeProduct(i.getProduct(), order.getCustomer().getAccountID());
 		}
 		
-		o.setStatus(OrderStatus.PLACED);
-		repository.persistOrder(o);
+		order.setOrderStatus(OrderStatus.PLACED);
+		repository.persistOrder(order);
 		
 		this.clearBasket();
 		
@@ -234,15 +234,15 @@ public class OrderService
 	
 	/**
 	 * Validate whether an order's status allows for cancellation.
-	 * If order is not dispatched or delivered, returns true
+	 * If order is either placed or packing, it can still be cancelled
 	 * 
 	 * @param order
-	 * @return
+	 * @return true; false
 	 */
-	public boolean validateOrderStatus(Order order)
+	public boolean validateOrderStatus (Order order)
 	{
-		OrderStatus orderStatus = order.getStatus();
-		if (orderStatus != OrderStatus.DISPATCHED && orderStatus != OrderStatus.DELIVERED)
+		OrderStatus orderStatus = order.getOrderStatus();
+		if (orderStatus == OrderStatus.PLACED || orderStatus == OrderStatus.PACKING)
 		{
 			return true;
 		}

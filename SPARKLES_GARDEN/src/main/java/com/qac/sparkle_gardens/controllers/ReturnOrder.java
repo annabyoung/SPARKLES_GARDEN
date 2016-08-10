@@ -33,7 +33,7 @@ public class ReturnOrder
 	public String returnOrder(long orderID)
 	{
 		Order o = service.getOrder(orderID);
-		o.setStatus(OrderStatus.RETURNED);
+		o.setOrderStatus(OrderStatus.RETURNED);
 		
 		if (service.isEligibleForRefund(orderID) && !o.isPayLater())
 		{
