@@ -11,8 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
-import com.qac.sparkle_gardens.util.MethodAuthor;
 import com.qac.sparkle_gardens.util.OrderStatus;
+import com.qac.sparkle_gardens.util.PaymentStatus;
 
 /**
  * The Order class contains all the order lines along with 
@@ -23,7 +23,7 @@ import com.qac.sparkle_gardens.util.OrderStatus;
  * @author Damien Lloyd
  */
 @Entity
-@Table (name = "order")
+@Table (name = "Order")
 public class Order 
 {
 	@Id
@@ -41,9 +41,17 @@ public class Order
 	@Null
 	private boolean payLater;
 	
-	@Column (name = "Status", nullable = true)
+	@Column (name = "Order Status", nullable = false)
 	@Null
 	private OrderStatus status;
+	
+	@Column (name = "Payment Status", nullable = false)
+	@NotNull
+	private PaymentStatus pStatus;
+	
+	@Column (name = "cardID", nullable = true)
+	@Null
+	private Card card;
 	
 	// List of orderlines in the order
 	private ArrayList<OrderLine> lines;
@@ -62,8 +70,15 @@ public class Order
 	public Order(long orderID, Customer customer)
 	{
 		this.status = OrderStatus.EMPTY;
+		this.pStatus = PaymentStatus.UNPAID;
 		this.orderID = orderID;
 		this.customer = customer;
+	}
+	
+	public Order(long orderID, Customer customer, Card card)
+	{
+		this(orderID, customer);
+		this.card = card;
 	}
 	
 	/**
@@ -105,7 +120,7 @@ public class Order
 	
 	/**
 	 * Get all the OrderLines in the Order
-	 * @return
+	 * @return lines
 	 */
 	public ArrayList<OrderLine> getOrderLines()
 	{
@@ -144,12 +159,25 @@ public class Order
 	
 	/**
 	 * Get the state of an order it's in.
-	 * @return
+	 * @return status
 	 */
 	public OrderStatus getStatus()
 	{
 		return status;
 	}
+<<<<<<< HEAD
 
 	
+=======
+	
+	/**
+	 * Returns whether the order is buy-now-
+	 * pay-later or not.
+	 * @return payLater
+	 */
+	public boolean isPayLater() 
+	{
+		return payLater;
+	}
+>>>>>>> 0247f7d1523afec1e4e2677f60a48bcf4cb6ca9b
 }
