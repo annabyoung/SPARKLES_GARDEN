@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
  * This composite entity was created to resolve the issue
  * of the many to many relationship between customer and address. 
  */
-public class CustomerHasAddresses {
+public class CustomerHasAddress {
 	// Composite key
 	@Id
 	@JoinColumn (name="customer_fk", nullable = false)
