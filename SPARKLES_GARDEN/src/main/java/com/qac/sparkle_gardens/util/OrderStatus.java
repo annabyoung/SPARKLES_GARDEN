@@ -16,11 +16,6 @@ public enum OrderStatus
 	EMPTY,
 	
 	/**
-	 * The order has at least one item in it
-	 */
-	BASKET,
-	
-	/**
 	 * The order has been placed, whether it's paid now or not
 	 */
 	PLACED,
@@ -31,6 +26,11 @@ public enum OrderStatus
 	PACKING,
 	
 	/**
+	 * The order has been cancelled before it is dispatched
+	 */
+	CANCELLED,
+	
+	/**
 	 * The order has been handed over to the courier for dispatch
 	 */
 	DISPATCHED,
@@ -38,5 +38,11 @@ public enum OrderStatus
 	/**
 	 * The order has been delivered to the customer
 	 */
-	DELIVERED
+	DELIVERED,
+	
+	/**
+	 * The order has been returned to the warehouse and refunded
+	 * within 30 days of delivery.
+	 */
+	RETURNED
 }
