@@ -115,7 +115,7 @@ public class CustomerService {
 	 * 
 	 * I have absolutely no idea where the data comes from for this.
 	 * lets say its a database, then should i just take in a customer object?
-	 *  
+	 *  come to think of it this may just create a new customer service?
 	 * 
 	 * @param firstName
 	 * @return
@@ -135,42 +135,42 @@ public class CustomerService {
 	 *  updates a specific item in a users details. may need to make multiple functoins
 	 *  does not work for creditStatus but should credit status 
 	 *  even be updated here? 
+	 *  for addresses updates or card see their respective service 
 	 *  
 	 *  assumes valid information set in currently. 
 	 *  returns true if update is successful.
+	 *  
 	 * @param userID
 	 * @param updatedField
 	 * @param newInformation
 	 * @return
 	 */
 	
-	public boolean updateAccountDetails(long userID, String updatedField, String newInformation)
-	{
-		if (updatedField == "firstName")
-		{
+	public boolean updateAccountDetails(long userID, String updatedField, String newInformation){
+		
+		
+		switch(updatedField){
+		case "firstName":
 			customerRepository.findByID(userID).setFirstName(newInformation);
 			return true;
-		}
-		else if (updatedField == "lastName")
-		{
+		case "lastName":
 			customerRepository.findByID(userID).setLastName(newInformation);
 			return true;
-		}
-		else if (updatedField == "email")
-		{
+		case "email":
 			customerRepository.findByID(userID).setEmail(newInformation);
 			return true;
-		}
-		else if (updatedField == "password")
-		{
+		case "password":
 			customerRepository.findByID(userID).setPassword(newInformation);
 			return true;
-		}
-		else if (updatedField == "phone")
-		{
+		case "phone":
 			customerRepository.findByID(userID).setPhone(newInformation);
-			return true;
+			
+			default: 
+				return false;
+		
 		}
-		else return false;
 	}
+	
+	
+	
 }

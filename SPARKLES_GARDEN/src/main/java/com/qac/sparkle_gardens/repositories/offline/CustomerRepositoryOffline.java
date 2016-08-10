@@ -98,13 +98,15 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			return null;
 		}
 		
-		public void findCustomerAdresses(Customer customer)
-		{
-			//TODO: do this
+		public void findCustomerAdresses(Customer customer){
+			
+			initialData.getAddresses();
+			
+			//TODO: do this return type is wrong 
 		}
 		
-		public void findCustomerCards(Customer customer)
-		{
+		public void findCustomerCards(Customer customer){
+			initialData.getCards(); 
 			//TODO: and do this return type is wrong;  
 		}
 		
