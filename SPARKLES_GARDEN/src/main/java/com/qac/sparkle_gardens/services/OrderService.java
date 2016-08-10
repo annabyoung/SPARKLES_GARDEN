@@ -10,6 +10,7 @@ import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
+import com.qac.sparkle_gardens.util.OrderStatus;
 
 /**
  * The OrderService provides the functionality required for 
@@ -216,5 +217,20 @@ public class OrderService
 	public Order getOrder(long orderID)
 	{
 		return repository.getOrder(orderID);
+	}
+	
+	/**
+	 * Validate whether an order's status allows for cancellation.
+	 * If order is not dispatched or delivered, returns true
+	 * 
+	 * @param order
+	 * @return
+	 */
+	public boolean validateOrderStatus (Order order){
+		OrderStatus orderStatus = order.getStatus();
+		if (orderStatus != OrderStatus.DISPATCHED && orderStatus != OrderStatus.DELIVERED){
+			return true;
+		}
+		return false;
 	}
 }
