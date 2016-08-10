@@ -52,10 +52,17 @@ public class Wishlist {
 	@NotNull
 	private String wishlistName;
 	
+	// default constructor
 	public Wishlist () {
 		this.acccountId = 0;
 	}
 	
+	/**
+	 * 
+	 * @param acccountId
+	 * @param products
+	 * @param wishlistName
+	 */
 	public Wishlist(long acccountId, List<Product> products, String wishlistName) {
 		this.acccountId = acccountId;
 		this.products = (ArrayList<Product>) products;

@@ -7,7 +7,8 @@ import javax.persistence.ManyToOne;
 /**
  * 
  * @author Tyler Deans
- *
+ * This composite entity was created to resolve the issue
+ * of the many to many relationship between customer and address. 
  */
 public class CustomerHasAddresses {
 	// Composite key
