@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import javax.inject.*;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
-import com.qac.sparkle_gardens.util.CustomerInitialData;
+import com.qac.sparkle_gardens.util.InitialData;
 
 /**
  * 
@@ -15,11 +15,11 @@ import com.qac.sparkle_gardens.util.CustomerInitialData;
 public class CustomerRepositoryOffline implements CustomerRepository
 {	
 	@Inject 
-	private CustomerInitialData initialData;
+	private InitialData initialData;
 	
 		public CustomerRepositoryOffline()
 		{
-			initialData = new CustomerInitialData();
+			initialData = new InitialData();
 		}
 		
 		public void persistCustomer(Customer customer){
@@ -97,4 +97,13 @@ public class CustomerRepositoryOffline implements CustomerRepository
 					return customer;
 			return null;
 		}
+		
+		public void findCustomerAdresses(Customer customer){
+			//TODO: do this
+		}
+		
+		public void findCustomerCards(Customer customer){
+			//TODO: and do this return type is wrong;  
+		}
+		
 }

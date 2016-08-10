@@ -32,13 +32,15 @@ public class updateCustomer {
 
 	
 	
-	private long username;
+	private long userID=000000;
 	// dummy data
 
-	//	
 	
-
-		customerService.updateAccountDetails(username, updatedField, newInformation);
+	
+		if( customerService.updateAccountDetails(username, updatedField, newInformation))
+			String output= "successful updated information";
+		 
+			
 	
 
 }

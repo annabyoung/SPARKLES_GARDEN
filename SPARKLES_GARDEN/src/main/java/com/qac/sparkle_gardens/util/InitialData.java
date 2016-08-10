@@ -37,11 +37,11 @@ public class InitialData
 		Cards.add(new Card(1, "Connect", "4412345647894531", "12/12", 1));
 		Cards.add(new Card(2, "Head", "4212345647894531", "11/12", 2));
 		Cards.add(new Card(3, "Hammer", "4552345647894531", "12/13", 3));
-		Address dummyAddress = addresses.get(0);
-		customers.add(new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, dummyAddress, "password01", "1234567890"));
-		customers.add(new Customer("Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, dummyAddress, "password01", "0987654321"));
-		customers.add(new Customer("Joe", "Schmoe", "email999@email.com", CreditStatus.VALID, dummyAddress, "password01", "1357908642"));
-		customers.add(new Customer("Luke", "Skywalker", "theForce@deathstar.com", CreditStatus.VALID, dummyAddress, "password01", "2468097531"));
+		
+		customers.add(new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890"));
+		customers.add(new Customer("Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, "password01", "0987654321"));
+		customers.add(new Customer("Joe", "Schmoe", "email999@email.com", CreditStatus.VALID, "password01", "1357908642"));
+		customers.add(new Customer("Luke", "Skywalker", "theForce@deathstar.com", CreditStatus.VALID, "password01", "2468097531"));
 		
 		// Create order with orderID & customer
 		orders.add(new Order(1, customers.get(0)));

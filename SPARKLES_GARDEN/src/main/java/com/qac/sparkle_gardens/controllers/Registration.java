@@ -25,12 +25,12 @@ import com.qac.sparkle_gardens.services.AddressService;
  *
  */
 
-public class Registration {
+public class Registration { 
 	
 	@Inject 
 	CustomerService customerService;
 	@Inject 
-	AddressService addressService;
+	AddressService addressService; // do i still need this?
 	
 	//how do i get data from front end? what does that look like 
 	/**
@@ -52,26 +52,25 @@ public class Registration {
 	  private String firstName=""; 
 	  private String lastName="";
 	  private String email="";
-	  private CreditStatus creditStatus= CreditStatus.VALIDATING; // this wouldn't be inputted
-	  private Address address=""; /// and this // this no no bueno.
+	  private CreditStatus creditStatus= CreditStatus.VALIDATING; // shouldn't be inputted here but will need external thingamjob to check it
 	  private String password="";
-	  private String phone="";
-	  	  
+	  private String phone=""; 
 	  public String error="";
 	  
-	 
+	   private Address address; 
+	  //address variables 
+	  
+	  
 	
 	public String makeNewCustomer(){
-		// i think i need to call address and credit controllers to make work
 		
-		//validate the addressfunction 	
-		address = addressService.createAddress(customerId, buildingNum, streetName, city, county, country, postCode);
-		
+		//address = addressService.createAddress();
+		//don't know what i'm doing here yet. this is probably its own controller 
 		
 		
 		if (customerService.validateRegistrationDetails(firstName, lastName, password, email, phone)){
-			customerService.makeNewCustomer(firstName, lastName, email, creditStatus, address, password, phone);
-			// doens't work because it wanst a credit status and address object. have to make nice and shiny; 
+			customerService.makeNewCustomer(firstName, lastName, email, creditStatus, password, phone);
+			 
 		}
 		else
 			error= "Invalid Registration details. Try again.";
