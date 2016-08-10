@@ -20,20 +20,28 @@
 				</div>
 			</h1>
 		</div>
-		<div id="formdiv">
-			<form action="javascript:submitForm()">
-				<h2> Sign In </h2>
-				<div id="inputfields"class="center-block">
-					<label>Username:</label> <input type="text" name="Username"><br>
-					<label>Password:</label> <input type="password" name="Password"><br>
-				</div>
+		<div id="formdiv" class="col-xs-12 center-block">
+			<div id="holdingdiv" class="center-block">
 				<div>
-					<input type="Submit" value="Log me in!">
+					<form action="javascript:submitForm()">
+						<h2> Sign In </h2>
+						<div id="formholder" class="center-block">
+							<div id="inputfields" class="col-lg-12 center-block">
+								<label id="login" for="Username">Username:</label><input class="form-control" id="Username" type="text"><br>
+								<label id="login" for="Password">Password:</label><input class="form-control" id="Password" type="password"><br>
+							</div>
+							<div>
+								<input type="Submit" value="Log me in!">
+							</div>
+							<div id = "registration_prompt">
+								<p> New to our online catalogue? </p>
+								<p> Click <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">here</a> to register for an online account</p>
+							</div>
+						</div>
+					</form>
 				</div>
-			</form>
-			<p> New to our online catalogue? </p>
-			<p> Click <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">here</a> to register for an online account</p>
-		</div>
+			</div>				
+		</div>	
 		<div>
 			<p id= "contact"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Contact</a></p>
 		</div>
