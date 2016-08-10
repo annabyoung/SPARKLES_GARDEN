@@ -6,11 +6,10 @@ import javax.persistence.ManyToOne;
 
 /**
  * 
- * @author Tyler Deans
- * This composite entity was created to resolve the issue
- * of the many to many relationship between customer and address. 
+ * @author Allen Su
+ *
  */
-public class CustomerHasAddresses {
+public class CustomerHasCard {
 	// Composite key
 	@Id
 	@JoinColumn (name="customer_fk", nullable = false)
@@ -18,9 +17,9 @@ public class CustomerHasAddresses {
 	private Customer customer;
 	
 	@Id
-	@JoinColumn (name="address_fk", nullable = false)
+	@JoinColumn (name="card_fk", nullable = false)
 	@ManyToOne 
-	private Address address;
+	private Card Card;
 
 	public Customer getCustomer() {
 		return customer;
@@ -30,12 +29,12 @@ public class CustomerHasAddresses {
 		this.customer = customer;
 	}
 
-	public Address getAddress() {
-		return address;
+	public Card getCard() {
+		return Card;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setCard(Card Card) {
+		this.Card = Card;
 	}
 	
 	

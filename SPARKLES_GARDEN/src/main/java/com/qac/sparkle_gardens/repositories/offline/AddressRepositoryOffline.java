@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.repositories.AddressRepository;
-import com.qac.sparkle_gardens.util.AddressInitialData;
+import com.qac.sparkle_gardens.util.InitialData;
 
 /**
  * 
@@ -15,7 +15,7 @@ import com.qac.sparkle_gardens.util.AddressInitialData;
  *
  */
 public class AddressRepositoryOffline implements AddressRepository {
-	@Inject private AddressInitialData initialData;
+	@Inject private InitialData initialData;
 	/**
 	 * Creates an address
 	 * @param address
@@ -24,18 +24,16 @@ public class AddressRepositoryOffline implements AddressRepository {
 		initialData.addAddress(address);
 	}
 	
-	// Creates a list of addresses
 	/**
-	 * 
+	 * Creates a list of addresses
 	 * @param address
 	 */
 	public void persistAddresses(List<Address> addresses) {
 		initialData.setAddresses(addresses);
 	}
 	
-	// Locate an address by ID
 	/**
-	 * 
+	 * Locate an address by the customer ID
 	 * @param id
 	 * @return
 	 */
@@ -55,9 +53,9 @@ public class AddressRepositoryOffline implements AddressRepository {
 		return initialData.getAddresses();
 	}
 	
-	// Update as address
+
 	/**
-	 * 
+	 * Updates an address
 	 * @param address
 	 */
 	public void updateAddress(Address address) {
@@ -69,9 +67,9 @@ public class AddressRepositoryOffline implements AddressRepository {
 		}
 		initialData.setAddresses(addresses);
 	}
-	//Remove address
+
 	/**
-	 * 
+	 * Removes an address
 	 * @param address
 	 */
 	public void removeAddress(Address address) {

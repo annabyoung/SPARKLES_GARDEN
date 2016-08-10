@@ -13,7 +13,8 @@ import javax.validation.constraints.Size;
 
 @NamedQueries({
 		@NamedQuery(name = Card.FIND_BY_CARD_NUMBER, query = "SELECT a FROM Cards a WHERE a.cardNumber = :cardNumber"),
-		@NamedQuery(name = Card.FIND_BY_cardId, query = "SELECT a FROM Cards a WHERE a.cardId = :cardId") })
+		@NamedQuery(name = Card.FIND_BY_CARDID, query = "SELECT a FROM Cards a WHERE a.cardId = :cardId"),
+		@NamedQuery(name = Card.FIND_BY_CUSTOMER, query = "SELECT b FROM Cards b JOIN b.Cards a WHERE a.Customer = :Customer") })
 
 public class Card {
 	@Id
@@ -35,11 +36,12 @@ public class Card {
 	private String expirationDate;
 	@JoinColumn(name = "accountID_fk", nullable = false)
 	@NotNull
-	private long customerID;
+	private Customer customer;
 	// private String issueNumber;
 
 	public static final String FIND_BY_CARD_NUMBER = "Card.getCardNumber";
-	public static final String FIND_BY_cardId = "Card.getcardId";
+	public static final String FIND_BY_CARDID = "Card.getCardId";
+	public static final String FIND_BY_CUSTOMER = "Card.getcardId";
 
 	public Card() {
 	}
@@ -51,26 +53,27 @@ public class Card {
 	 * @param expirationDate
 	 * @param customer
 	 */
-	public Card(String customerName, String cardNumber, String expirationDate, long customerID) {
+	public Card(String customerName, String cardNumber, String expirationDate, Customer customer) {
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
-		this.customerID = customerID;
+		this.customer = customer;
 	}
-	
+
 	/**
 	 * Only for the purposes of testing offline data.
+	 * 
 	 * @param cardID
 	 * @param customerName
 	 * @param cardNumber
 	 * @param expirationDate
 	 * @param customer
 	 */
-	public Card(long cardID, String customerName, String cardNumber, String expirationDate, long customerID) {
+	public Card(long cardID, String customerName, String cardNumber, String expirationDate, Customer customer) {
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
-		this.customerID = customerID;
+		this.customer = customer;
 	}
 
 	/**
@@ -138,8 +141,8 @@ public class Card {
 	 * 
 	 * @return customer;
 	 */
-	public long getCustomerID() {
-		return customerID;
+	public Customer getCustomerID() {
+		return customer;
 	}
 
 	/**
@@ -147,7 +150,7 @@ public class Card {
 	 * 
 	 * @param customer
 	 */
-	public void setCustomerID(long customerID) {
-		this.customerID = customerID;
+	public void setCustomerID(Customer customer) {
+		this.customer = customer;
 	}
 }

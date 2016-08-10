@@ -4,11 +4,14 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Card;
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.repositories.CardRepository;
 import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.services.CardService;
+import com.qac.sparkle_gardens.util.CreditStatus;
 import com.qac.sparkle_gardens.util.PaymentStatus;
 
 /**
@@ -40,7 +43,8 @@ public class PayByCard {
 		//if(validateCardPayment())
 		Card card = cardRepository.findByCardNumberAndExpiration(cardNumber, expirationDate);
 		if (card == null){
-			card = new Card(cardOwnerName, cardNumber, expirationDate, 000);//HAVENT FIGURED OUT FOREIGN KEYS YET
+			card = new Card(cardOwnerName, cardNumber, expirationDate, 
+					new Customer(000, "Brazen", "Moo", "HappyCows@gmail.com", CreditStatus.VALID, new Address(), "0302", "1231233"));//HAVENT FIGURED OUT FOREIGN KEYS YET
 			cardRepository.persistCard(card);
 		}
 		p.setCardID(card.getCardId());

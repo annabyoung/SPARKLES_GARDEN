@@ -100,4 +100,7 @@ public class CardService {
 		}
 		return true;
 	}
+	public boolean refundCard(String cardNumber, String expirationDate){
+		return true;
+	}
 }
