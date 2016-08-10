@@ -21,14 +21,14 @@ public interface CustomerHasAddressRepository {
 	 * Keeps ArrayList of CustomerHasAddresss.
 	 * @param ArrayList<CustomerHasAddress> c
 	 */
-	public void persistCustomerHasAddresss(ArrayList<CustomerHasAddress> c);
+	public void persistCustomerHasAddresses(ArrayList<CustomerHasAddress> c);
 
 
 	/**
 	 * Gets all of the CustomerHasAddresss in the repository
 	 * @return
 	 */
-	public ArrayList<CustomerHasAddress> getCustomerHasAddresss();
+	public ArrayList<CustomerHasAddress> getCustomerHasAddresses();
 	
 	/**
 	 * Adds a new CustomerHasAddress into repository. Might be useless because persist CustomerHasAddress.

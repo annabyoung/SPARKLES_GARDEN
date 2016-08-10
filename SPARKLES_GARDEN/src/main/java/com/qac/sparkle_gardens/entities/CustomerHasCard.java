@@ -26,6 +26,12 @@ public class CustomerHasCard {
 	@ManyToOne
 	private Card card;
 	
+	public CustomerHasCard(Customer customer, Card card) {
+		super();
+		this.customer = customer;
+		this.card = card;
+	}
+
 	public Customer getCustomer(){
 		return customer;
 	}
