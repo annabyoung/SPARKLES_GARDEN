@@ -43,7 +43,7 @@ public class PlaceOrder
 		if (!payLater)
 		{
 			double price = service.getTotalPrice(orderID);
-			pay.payByCard(cardOwnerName, cardNumber, expiryDate, price);
+			pay.payByCard(cardOwnerName, cardNumber, expiryDate, price, cvs);
 			return "home";
 		}
 		
