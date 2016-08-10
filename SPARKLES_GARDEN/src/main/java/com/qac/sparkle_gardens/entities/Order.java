@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+import com.qac.sparkle_gardens.util.MethodAuthor;
 import com.qac.sparkle_gardens.util.OrderStatus;
 
 /**
@@ -138,5 +139,9 @@ public class Order
 	public OrderStatus getStatus()
 	{
 		return status;
+	}
+
+	public boolean isPayLater() {
+		return payLater;
 	}
 }

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
+import com.qac.sparkle_gardens.util.InitialData;
 
 /**
  * 
@@ -16,7 +17,7 @@ import com.qac.sparkle_gardens.repositories.WishlistRepository;
  */
 
 public class WishlistRepositoryOffline implements WishlistRepository{
-	@Inject private WishlistInitialData initialData;
+	@Inject private InitialData initialData;
 	
 	/**
 	 * @param Wishlist wishlist
