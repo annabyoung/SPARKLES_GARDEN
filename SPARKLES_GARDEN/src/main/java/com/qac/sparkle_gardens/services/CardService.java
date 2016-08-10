@@ -8,7 +8,9 @@ import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CardRepository;
+import com.qac.sparkle_gardens.repositories.CustomerHasCardRepository;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
@@ -16,13 +18,14 @@ import com.qac.sparkle_gardens.util.CreditStatus;
 /**
  * This is the Card Service Bean I have made as an example
  * 
- * @author James Thompson
+ * @author Allen Su
  */
 @Stateless
 public class CardService {
 	@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;
 	@Inject CustomerRepository customerRepository;
+	@Inject CustomerHasCardRepository cardOwnershipRepository;
 	
 	private String error = "";
 	
@@ -99,6 +102,12 @@ public class CardService {
 //			}
 //		}
 		Card card = cardRepository.findByCardNumberAndExpiration(cardNumber, expirationDate);
+		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
+			if (co.getCard().equals(card) && co.getCustomer().getCreditStatus() == CreditStatus.BLACKLISTED){
+				error = "You are blacklisted";
+				return false;
+			}
+		}
 		return true;
 	}
 	public boolean refundCard(String cardNumber, String expirationDate){

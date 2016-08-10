@@ -82,14 +82,4 @@ public class CardRepositoryOffline implements CardRepository
 		}
 		return null;
 	}
-	@Override
-	public List<Card> findByCustomerID(long customerID) {
-		ArrayList<Card> cards = new ArrayList<Card>();
-		for (Card c : initialCardData.getCards()){
-			if(customerID == c.getCustomerID()){
-				cards.add(c);
-			}
-		}
-		return cards;
-	}
 }

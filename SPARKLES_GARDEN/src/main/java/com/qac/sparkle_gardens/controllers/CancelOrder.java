@@ -8,8 +8,11 @@ import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.entities.Order;
 
 /**
- * Cancel an order
- * @author Damien Lloyd
+ * 
+ * @author Annabelle Young
+ * 
+ * Allows the customer to cancel an order before it has left the warehouse.
+ * In case customer realizes they ordered incorrect quantity, item, or no longer desire the item before it is dispatched to them.
  *
  */
 @Named (value = "cancelOrder")
@@ -20,7 +23,7 @@ public class CancelOrder
 	OrderService service;
 	
 	/**
-	 * Take the order's ID, check that the order status is not yet dispatched
+	 * Take the order's ID, check that the order status is not yet dispatched or delivered
 	 * 
 	 * @param orderID
 	 * @return
@@ -28,7 +31,11 @@ public class CancelOrder
 	public String cancelOrder(long orderID)
 	{
 		Order order = service.getOrder(orderID);
-		
+		if (service.validateOrderStatus(order)){
+			if(order.isPayLater()){
+				
+			}
+		}
 		return "home";
 	}
 }

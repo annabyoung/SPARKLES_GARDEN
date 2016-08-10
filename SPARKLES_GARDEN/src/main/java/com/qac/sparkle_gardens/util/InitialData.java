@@ -34,9 +34,9 @@ public class InitialData
 	public InitialData() 
 	{
 		addresses.add(new Address(25, 1, "Anchorage 1", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ"));
-		Cards.add(new Card(1, "Connect", "4412345647894531", "12/12", 1));
-		Cards.add(new Card(2, "Head", "4212345647894531", "11/12", 2));
-		Cards.add(new Card(3, "Hammer", "4552345647894531", "12/13", 3));
+		Cards.add(new Card(1, "Connect", "4412345647894531", "12/12"));
+		Cards.add(new Card(2, "Head", "4212345647894531", "11/12"));
+		Cards.add(new Card(3, "Hammer", "4552345647894531", "12/13"));
 		
 		customers.add(new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890"));
 		customers.add(new Customer("Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, "password01", "0987654321"));

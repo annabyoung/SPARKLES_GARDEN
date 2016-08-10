@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
  *
  */
 
-public class CustomerHasCards {
+public class CustomerHasCard {
 	
 	@Id 
 	@JoinColumn(name="customer_fk", nullable = false)
