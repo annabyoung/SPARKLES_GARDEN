@@ -38,7 +38,7 @@ public class PayByCard {
 	 * @param paymentAmount
 	 * @return
 	 */
-	public String payByCard(String cardOwnerName, String cardNumber, String expirationDate, double paymentAmount){
+	public String payByCard(String cardOwnerName, String cardNumber, String expirationDate, double paymentAmount, String CVS){
 		
 		//if(validateCardPayment())
 		Card card = cardRepository.findByCardNumberAndExpiration(cardNumber, expirationDate);
@@ -47,7 +47,6 @@ public class PayByCard {
 					new Customer(000, "Brazen", "Moo", "HappyCows@gmail.com", CreditStatus.VALID, new Address(), "0302", "1231233"));//HAVENT FIGURED OUT FOREIGN KEYS YET
 			cardRepository.persistCard(card);
 		}
-		
 		//STUFF TO BE DONE BECAUSE NO PAYMENT CLASS.
 		error = "";
 		return "#"; //placeholders
