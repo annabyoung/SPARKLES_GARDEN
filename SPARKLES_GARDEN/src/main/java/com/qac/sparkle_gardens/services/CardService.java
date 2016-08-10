@@ -88,16 +88,17 @@ public class CardService {
 	 * @return
 	 */
 	public boolean checkNotBlacklisted(String cardNumber, String expirationDate) {
-		ArrayList<Card> cards = (ArrayList<Card>) cardRepository.findByCardNumber(cardNumber);
-		for(Card card:cards) {
-			if (card.getExpirationDate().equals(expirationDate)) {
-				Customer cust = customerRepository.findByID(card.getCustomerID());
-				if (cust.getCreditStatus().equals(CreditStatus.BLACKLISTED)){
-					error = "You are blacklisted";
-					return false;
-				}
-			}
-		}
+//		ArrayList<Card> cards = (ArrayList<Card>) cardRepository.findByCardNumber(cardNumber);
+//		for(Card card:cards) {
+//			if (card.getExpirationDate().equals(expirationDate)) {
+//				Customer cust = customerRepository.findByID(card.getCustomerID());
+//				if (cust.getCreditStatus().equals(CreditStatus.BLACKLISTED)){
+//					error = "You are blacklisted";
+//					return false;
+//				}
+//			}
+//		}
+		Card card = cardRepository.findByCardNumberAndExpiration(cardNumber, expirationDate);
 		return true;
 	}
 	public boolean refundCard(String cardNumber, String expirationDate){
