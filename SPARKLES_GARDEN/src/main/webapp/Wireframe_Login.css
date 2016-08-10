@@ -36,7 +36,9 @@ label{
 	left: 50%;
     margin: 0 auto;
 	}
-
+#homelike a img{
+	
+}
 /*Pads the input fields so they're aligned */	
 #inputfields{
 	padding-right: 250px; 
@@ -48,6 +50,11 @@ label{
 	bottom: 0;
 	right: 0;
 	padding-right: 15px;
+}
+#homelink{
+	width: 200px; 
+	height: 150px;
+	
 }
 	
 
