@@ -43,11 +43,11 @@ public class Order
 	
 	@Column (name = "Order Status", nullable = false)
 	@Null
-	private OrderStatus status;
+	private OrderStatus orderStatus;
 	
 	@Column (name = "Payment Status", nullable = false)
 	@NotNull
-	private PaymentStatus pStatus;
+	private PaymentStatus paymentStatus;
 	
 	@Column (name = "cardID", nullable = true)
 	@Null
@@ -69,8 +69,8 @@ public class Order
 	 */
 	public Order(long orderID, Customer customer)
 	{
-		this.status = OrderStatus.EMPTY;
-		this.pStatus = PaymentStatus.UNPAID;
+		this.orderStatus = OrderStatus.EMPTY;
+		this.paymentStatus = PaymentStatus.UNPAID;
 		this.orderID = orderID;
 		this.customer = customer;
 	}
@@ -152,18 +152,37 @@ public class Order
 	 * for all available states.
 	 * @param status
 	 */
-	public void setStatus(OrderStatus status)
+	public void setOrderStatus(OrderStatus orderStatus)
 	{
-		this.status = status;
+		this.orderStatus = orderStatus;
 	}
 	
 	/**
 	 * Get the state of an order it's in.
 	 * @return status
 	 */
-	public OrderStatus getStatus()
+	public OrderStatus getOrderStatus()
 	{
-		return status;
+		return orderStatus;
 	}
+	
+	/**
+	 * Retrieve the payment status of an order.
+	 * 
+	 */
+	public PaymentStatus getPaymentStatus() {
+		return paymentStatus;
+	}
+	
+	/**
+	 * Set the payment status of an order
+	 * See PaymentStatus for all status types
+	 * @param paymentStatus
+	 */
+	public void setPaymentStatus(PaymentStatus paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+	
+	
 
 }
