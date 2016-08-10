@@ -165,5 +165,19 @@ public class Order
 	{
 		return status;
 	}
+	
+	public void setPaymentStatus(PaymentStatus status)
+	{
+		this.pStatus = status;
+	}
+	
+	/**
+	 * Get the state of an order it's in.
+	 * @return status
+	 */
+	public PaymentStatus getPaymentStatus()
+	{
+		return pStatus;
+	}
 
 }

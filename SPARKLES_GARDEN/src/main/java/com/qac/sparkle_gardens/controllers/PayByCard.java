@@ -63,11 +63,19 @@ public class PayByCard {
 	 */
 	public String validateCardPayment(String cardOwnerName, String cardNumber, String expirationDate){
 		CardService cs = new CardService();
-		if (cs.validateCardDetails(cardOwnerName, cardNumber, expirationDate)){
-			error = "";
+		if (!cs.validateCardDetails(cardOwnerName, cardNumber, expirationDate)){
+			error = "Check Card Details";
 			return "#"; //placeholders.
 		}
-		error = cs.getError();
+		if (!cs.checkInDate(expirationDate)){
+			error = "Card has Expired";
+			return "#";
+		}
+		if (!cs.checkNotBlacklisted(cardNumber, expirationDate)){
+			error = "You are blacklisted";
+			return "#";
+		}
+		error = "";
 		return "#";
 	}
 	
