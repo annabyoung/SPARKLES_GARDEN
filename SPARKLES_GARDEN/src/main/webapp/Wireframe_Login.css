@@ -30,18 +30,17 @@ label{
 	text-align: center;
 	font-size:20px;
 	font-style: bold;
+	
 }
 /*centres the logo within the header*/
 #logo{
 	left: 50%;
     margin: 0 auto;
 	}
-#homelike a img{
-	
-}
 /*Pads the input fields so they're aligned */	
 #inputfields{
-	padding-right: 250px; 
+	/*padding-right: 250px;*/
+	margin: 0 auto;
 }
 /*Underlines and fixes the contact link  to the bottom right of the page*/
 #contact{
