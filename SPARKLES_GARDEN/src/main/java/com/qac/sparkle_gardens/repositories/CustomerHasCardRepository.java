@@ -48,7 +48,6 @@ public interface CustomerHasCardRepository {
 	 */
 	public void removeCustomerHasCard(CustomerHasCard c);
 
-
 	/**
 	 * Finds instances of Customer Owning Cards by Customers.
 	 * @param customerID

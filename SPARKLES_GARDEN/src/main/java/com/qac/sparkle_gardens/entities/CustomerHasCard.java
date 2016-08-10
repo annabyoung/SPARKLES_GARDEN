@@ -19,7 +19,13 @@ public class CustomerHasCard {
 	@Id
 	@JoinColumn (name="card_fk", nullable = false)
 	@ManyToOne 
-	private Card Card;
+	private Card card;
+
+	public CustomerHasCard(Customer customer, Card card) {
+		super();
+		this.customer = customer;
+		this.card = card;
+	}
 
 	public Customer getCustomer() {
 		return customer;
@@ -30,11 +36,11 @@ public class CustomerHasCard {
 	}
 
 	public Card getCard() {
-		return Card;
+		return card;
 	}
 
-	public void setCard(Card Card) {
-		this.Card = Card;
+	public void setCard(Card card) {
+		this.card = card;
 	}
 	
 	
