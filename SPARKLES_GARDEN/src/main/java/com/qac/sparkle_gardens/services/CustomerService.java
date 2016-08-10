@@ -144,31 +144,33 @@ public class CustomerService {
 	 * @return
 	 */
 	
-	public boolean updateAccountDetails(long userID, String updatedField, String newInformation){
-		
-		
-		switch(updatedField){
-		case "firstName":
+	public boolean updateAccountDetails(long userID, String updatedField, String newInformation)
+	{
+		if (updatedField == "firstName")
+		{
 			customerRepository.findByID(userID).setFirstName(newInformation);
 			return true;
-		case "lastName":
+		}
+		else if (updatedField == "lastName")
+		{
 			customerRepository.findByID(userID).setLastName(newInformation);
 			return true;
-		case "email":
+		}
+		else if (updatedField == "email")
+		{
 			customerRepository.findByID(userID).setEmail(newInformation);
 			return true;
-		case "password":
+		}
+		else if (updatedField == "password")
+		{
 			customerRepository.findByID(userID).setPassword(newInformation);
 			return true;
-		case "phone":
-			customerRepository.findByID(userID).setPhone(newInformation);
-			
-			default: 
-				return false;
-		
 		}
+		else if (updatedField == "phone")
+		{
+			customerRepository.findByID(userID).setPhone(newInformation);
+			return true;
+		}
+		else return false;
 	}
-	
-	
-	
 }

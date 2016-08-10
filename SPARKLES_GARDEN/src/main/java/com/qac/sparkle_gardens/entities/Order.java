@@ -75,6 +75,12 @@ public class Order
 		this.customer = customer;
 	}
 	
+	/**
+	 * Construct Order with orderID, Customer and Card
+	 * @param orderID
+	 * @param customer
+	 * @param card
+	 */
 	public Order(long orderID, Customer customer, Card card)
 	{
 		this(orderID, customer);
@@ -179,10 +185,8 @@ public class Order
 	 * See PaymentStatus for all status types
 	 * @param paymentStatus
 	 */
-	public void setPaymentStatus(PaymentStatus paymentStatus) {
+	public void setPaymentStatus(PaymentStatus paymentStatus) 
+	{
 		this.paymentStatus = paymentStatus;
 	}
-	
-	
-
 }

@@ -232,11 +232,7 @@ public class OrderService
 		return true;
 	}
 	
-<<<<<<< HEAD
-	/**
-=======
 	 /**
->>>>>>> order
 	 * Validate whether an order's status allows for cancellation.
 	 * If order is either placed or packing, it can still be cancelled
 	 * 
@@ -254,6 +250,7 @@ public class OrderService
 			{
 				return true;
 			}
+		}
 		return false;
 	}
 }

@@ -90,19 +90,21 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			
 		}
 
-		@Override
-		public Customer findByEmail(String email) {
+		public Customer findByEmail(String email) 
+		{
 			for (Customer customer : initialData.getCustomers())
 				if(customer.getEmail().equalsIgnoreCase(email))
 					return customer;
 			return null;
 		}
 		
-		public void findCustomerAdresses(Customer customer){
+		public void findCustomerAdresses(Customer customer)
+		{
 			//TODO: do this
 		}
 		
-		public void findCustomerCards(Customer customer){
+		public void findCustomerCards(Customer customer)
+		{
 			//TODO: and do this return type is wrong;  
 		}
 		
