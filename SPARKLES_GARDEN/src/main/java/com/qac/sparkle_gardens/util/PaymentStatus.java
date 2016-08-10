@@ -4,6 +4,10 @@ public enum PaymentStatus
 {
 
 	/**
+	 * Payment default status. Not paid.
+	 */
+	UNPAID,
+	/**
 	 * Payment is yet to be paid
 	 */
 	PENDING,
