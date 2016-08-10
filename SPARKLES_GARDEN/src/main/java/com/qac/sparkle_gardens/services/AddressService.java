@@ -29,12 +29,15 @@ public class AddressService {
 		Address address;
 		address = addressRepository.findByCustomerId(custId);
 		addressRepository.removeAddress(address);
+		custAddressRepository.removeCustomerHasAddress(address.getCustAddress());
+		addressRepository.removeCustomerHasAddress(address.getCustAddress(), address.getCustomerId());
 	}
 	
 	/**
 	 *  Creates a new address
 	 * @param address
 	 */
+	@Deprecated
 	public void createAddress(Address address) {
 		addressRepository.persistAddress(address);
 	}
@@ -54,6 +57,7 @@ public class AddressService {
 		CustomerHasAddress custAdd = new CustomerHasAddress(customer, address); 
 		custAddressRepository.persistCustomerHasAddress(custAdd);
 		addressRepository.persistAddress(address);
+		addressRepository.addCustomerHasAddress(custAdd, customer.getAccountID());
 	}
 	
 	
