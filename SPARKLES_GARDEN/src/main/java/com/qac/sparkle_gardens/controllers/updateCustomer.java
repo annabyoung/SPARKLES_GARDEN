@@ -25,8 +25,8 @@ import com.qac.sparkle_gardens.services.AddressService;
 @RequestScoped 
 
 
-public class updateCustomer {
-	
+public class updateCustomer 
+{
 	@Inject
 	CustomerService service;
 
@@ -34,15 +34,13 @@ public class updateCustomer {
 	private String updatedInformation=""; // should this maybe be an enum?
 	private String newInformation="";
 
-	
-	
-	  service.updateAccountDetails(userID, updatedField, newInformation);
-			
-
-
-private String output= "successful updated information";
-		 
-			
-	
-
+	public String updateCustomer(long customerID)
+	{
+		/*if(customerService.updateAccountDetails(username, updatedField, newInformation))
+		{
+			String output= "successful updated information";
+		}*/
+		//service.updateAccountDetails(userID, updatedField, newInformation);
+		return "home";
+	}
 }
