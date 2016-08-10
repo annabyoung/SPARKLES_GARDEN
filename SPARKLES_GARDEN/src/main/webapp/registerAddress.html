@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+	<head>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.js">
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="Wireframe_Login.css">
+		<title>Add Address</title>
+	</head>
+	<body>
+		<div>
+			<h1><img class="img-responsive center-block" id ="logo" src = "C:\Users\Administrator\Documents\Images\NB        Gardens-logo (3).png"
+				width= 200px height= 150px> </h1>
+		</div>
+		<div>
+			<form id="formdiv">
+				<h2>Add Address</h2>
+					<div id="inputfields">
+						<label>House number/ name:</label><input type="text" name="houseName"><br>
+						<label>Address Line 1:</label><input type="text" name="ad1"><br>
+						<label>Address Line 2:</label><input type="text" name="ad2"><br>
+						<label>City:</label><input type="text" name="city"><br>
+						<label>County:</label><input type="text" name="county"><br>
+						<label>Country:</label><input type="text" name="country"><br>
+						<label>Postcode:</label><input type="text" name="postcode"><br>
+						<label>Address Type:</label>
+						<select>
+							<option value="House">Billing</option>
+							<option value="Apartment">Shipping</option><br>
+						</select>
+						<span id="addExtraForm"></span>
+						<div>
+							<input id= "multibuttons" type="button" value ="Add another address?" onclick= showNewForm()>
+							<input id= "multibuttons" type="submit" value ="Continue to payment">
+						</div>
+					</div>
+				</div>
+			</form>
+			<div>
+				<p id= "contact"><a href="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</a></p>
+			</div>
+		</div>
+		<script src="C:\Users\Administrator\Documents\HTML\formReplication.js"></script>
+	</body>
+</html>
