@@ -7,21 +7,39 @@
 		<title>Add Payment</title>
 	</head>
 	<body>
-	<div>
-		<h1><img id ="logo" src = "C:\Users\Administrator\Documents\Images\NB        Gardens-logo (3).png"
-				width= 200px height= 150px> </h1>
+	<h1>
+	<div id="homelink" class="center-block">
+	<a href="Homepage.html">
+		<img class="img-responsive center-block" id ="logo" src = "Logo.png"
+				width= 200px height= 150px> 
+				</a>
 	</div>
+	</h1>
 	<div>
-		<form id= "formdiv">
+		<form id= "formdiv" action="Homepage.html">
 			<h2>Add a Payment Method</h2>
-			<div>
-				<label>Card Holder Name</label><input type="text" name="name" required><br>
-				<label>Card Number</label><input type="number" name="cardNum" required><br>
-				<label>Start Date</label><input type="month" name="startDate"><br>
-				<label>Expiration Date</label><input type="month" name="expDate" required><br>
-				<label>Issue Number (if applicable)</label><input type="month" name="issue"><br>
+			<div id="inputfields">
+				<label>Card Type: </label>
+				<span><img src="visaDebit.png" width= 50px height=31.75px><input id="paymentRadio" type="radio"></span>
+				<span><img src="masterCard.png" width= 50px height=30.4px><input id="paymentRadio" type="radio"></span>
+				<span><img src="maestro.png" width= 50px height=29.75px><input id="paymentRadio" type="radio"></span>
+				<span><img src="americanExpress.jpg" width= 50px height=50px><input id="paymentRadio" type="radio"></span>
 			</div>
-		</form>
-	</div>
+				<div id="inputfields">
+					<label>Card Holder Name: </label><input type="text" name="name" required><br>
+					<label>Card Number: </label><input type="text" name="cardNum" required><br>
+					<label>Start Date: </label><input type="month" name="startDate"><br>
+					<label>Expiration Date: </label><input type="month" name="expDate" required><br>
+					<label>Issue Number: </label><input type="number" name="issue"><br>
+				</div>
+				<div>
+					<input type="button" value ="Add another address?" onclick= showNewForm()>
+					<button type="submit">Complete Registration</button>
+				</div>
+			</form>
+		</div>
+		<div>
+			<p id= "contact"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Contact</a></p>
+		</div>
 	</body>
 </html>
