@@ -113,4 +113,9 @@ public class Order
 	{
 		this.payLater = payLater;
 	}
+
+	public boolean isPayLater() {
+		return payLater;
+	}
+	
 }
