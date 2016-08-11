@@ -57,7 +57,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 		ArrayList<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
 		for (int index = 0; index < custAddress.size(); index++) {
 			
-			if(custAddress.get(index).getCustomerId() == C.getCustomerId() && custAddress.get(index).getAddressId() == C.getAddressId() ) {
+			if(custAddress.get(index).getAccountId() == C.getAccountId() && custAddress.get(index).getAddressId() == C.getAddressId() ) {
 				custAddress.set(index, C);
 			}
 		}
@@ -72,7 +72,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 		ArrayList<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
 		for (int index = 0; index < custAddress.size(); index++) {
 			
-			if(custAddress.get(index).getCustomerId() == c.getCustomerId() && custAddress.get(index).getAddressId() == c.getAddressId() ) {
+			if(custAddress.get(index).getAccountId() == c.getAccountId() && custAddress.get(index).getAddressId() == c.getAddressId() ) {
 				custAddress.remove(index);
 			}
 		}
@@ -82,15 +82,15 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 
 	/**
 	 * Finds instances of Customer Owning Addresses by Customers.
-	 * @param customerID
+	 * @param accountID
 	 * @return
 	 */
-	public List<CustomerHasAddress> findByCustomerID(long customerID) {
+	public List<CustomerHasAddress> findByCustomerID(long accountID) {
 		ArrayList<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
 		ArrayList<CustomerHasAddress> customerOwned = new ArrayList<CustomerHasAddress>();
 		for (int index = 0; index < custAddress.size(); index++) {
 			
-			if(custAddress.get(index).getCustomerId() == customerID) {
+			if(custAddress.get(index).getAccountId() == accountID) {
 				customerOwned.add(custAddress.get(index));
 			}
 		}

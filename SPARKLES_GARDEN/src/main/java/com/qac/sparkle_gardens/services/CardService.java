@@ -13,7 +13,6 @@ import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CardRepository;
 import com.qac.sparkle_gardens.repositories.CustomerHasCardRepository;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
-//import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
 
 /**
@@ -23,7 +22,6 @@ import com.qac.sparkle_gardens.util.CreditStatus;
  */
 @Stateless
 public class CardService {
-	//@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;
 	@Inject CustomerRepository customerRepository;
 	@Inject CustomerHasCardRepository cardOwnershipRepository;
@@ -95,7 +93,11 @@ public class CardService {
 		}
 		return true;
 	}
-	
+	/**
+	 * Returns an ArrayList of <Card>'s based on customer.
+	 * @param customer
+	 * @return List<Card>
+	 */
 	public List<Card> getCardsByCustomer(Customer customer){
 		ArrayList<Card> cardsOwnedByCustomer = new ArrayList<Card>();
 		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
@@ -106,6 +108,12 @@ public class CardService {
 		return cardsOwnedByCustomer;
 	}
 	
+	/**
+	 * Checks if a Customer Owns a Card given both objects.
+	 * @param card
+	 * @param customer
+	 * @return
+	 */
 	public boolean checkIfCustomerOwnsCard(Card card, Customer customer){
 		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
 			if (co.getCustomer().equals(customer) && co.getCard().equals(card)){
@@ -115,6 +123,12 @@ public class CardService {
 		return false;
 	}
 	
+	/**
+	 * Refunds Card based on cardnumber and expiration.
+	 * @param cardNumber
+	 * @param expirationDate
+	 * @return
+	 */
 	public boolean refundCard(String cardNumber, String expirationDate){
 		return true;
 	}
