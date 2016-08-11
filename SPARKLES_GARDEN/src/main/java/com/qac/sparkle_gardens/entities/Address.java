@@ -1,12 +1,15 @@
 package com.qac.sparkle_gardens.entities;
 
+
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,11 +32,17 @@ public class Address {
 	@Column (name = "addressID")
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long addressId;
-	
-	@ManyToOne
-	@JoinColumn(name="cust_address", nullable = false)
-	private CustomerHasAddress custAddress;
 
+	@OneToMany
+	@JoinColumn(name="customer_fk", nullable = false)
+	private ArrayList<Customer> customers;
+	
+	public ArrayList<Customer> getCustomers() {
+		return customers;
+	}
+	public void setCustomers(ArrayList<Customer> customers) {
+		this.customers = customers;
+	}
 	
 	//The number of the building
 	@Column
@@ -65,45 +74,9 @@ public class Address {
 	@Size (min = 1, max = 20)
 	private String postCode;
 	
-	public Address() {
-		this.buildingNum = 0;
-		this.streetName = "";
-		this.city = "";
-		this.county = "";
-		this.country = "";
-		this.postCode = "";
-	}
-	
-	/**
-	 * 
-	 * @param buildingNum
-	 * @param streetName
-	 * @param city
-	 * @param county
-	 * @param country
-	 * @param postCode
-	 */
-	public Address(int buildingNum, String streetName, String city, String county, String country, String postCode) {
-		this.buildingNum = buildingNum;
-		this.streetName = streetName;
-		this.city = city;
-		this.county = county;
-		this.country = country;
-		this.postCode = postCode;
-	}
-	
-	/**
-	 * 
-	 * @param custAddress
-	 * @param buildingNum
-	 * @param streetName
-	 * @param city
-	 * @param county
-	 * @param country
-	 * @param postCode
-	 */
-	public Address(CustomerHasAddress custAddress, int buildingNum, String streetName, String city, String county, String country, String postCode) {
-		this.custAddress = custAddress;
+	public Address(long addressId, int buildingNum, String streetName, String city, String county, 
+			String country, String postCode) {
+		this.addressId = addressId;
 		this.buildingNum = buildingNum;
 		this.streetName = streetName;
 		this.city = city;
@@ -112,19 +85,7 @@ public class Address {
 		this.postCode = postCode;
 	}
 	// Getters and setters for all the attributes
-	
-	public CustomerHasAddress getCustAddress() {
-		return custAddress;
-	}
-	public void setCustAddress(CustomerHasAddress custAddress) {
-		this.custAddress = custAddress;
-	}
-	
-	// Gets the account ID using the CustomerHasAddress object
-	public long getCustomerId() {
-		return custAddress.getCustomer().getAccountID();
-	}
-	
+
 	public long getAddressId() {
 		return addressId;
 	}
@@ -180,6 +141,4 @@ public class Address {
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
-	
-	
 }
