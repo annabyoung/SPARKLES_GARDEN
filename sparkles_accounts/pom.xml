@@ -22,13 +22,4 @@
   </dependency>
 </dependencies>
 
-  <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>com.qac</groupId>
-  			<artifactId>SPARKLES_GARDEN</artifactId>
-  			<version>0.0.1</version>
-  		</dependency>
-  	</dependencies>
-  </dependencyManagement>
 </project>
