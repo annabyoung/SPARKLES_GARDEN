@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.util;
+package com.qac.sparkle_gardens.test_data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,8 @@ import com.qac.sparkle_gardens.entities.OrderLine;
 //import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
+import com.qac.sparkle_gardens.util.CreditStatus;
+import com.qac.sparkle_gardens.util.MethodAuthor;
 
 /**
  * A single initial data object. For simplicity.

@@ -3,17 +3,21 @@ package com.qac.sparkle_gardens.repositories.offline;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
-import com.qac.sparkle_gardens.util.InitialData;
+import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * 
  * @author Tyler Deans
  * I implemented the CustomerHasAddressRepository interface Allen created
  */
+@Stateless
+@Default
 public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRepository {
 	@Inject private InitialData initialData;
 	

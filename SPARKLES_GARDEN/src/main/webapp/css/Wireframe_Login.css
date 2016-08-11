@@ -23,26 +23,23 @@ label{
 }
 /*Formats the form where all the user input fields will be found*/
 #formdiv{
-	background-color: #FEF1D6;
+	margin: 0 auto;
 	border-style: solid;
 	border-width: 1px;
 	padding-bottom: 10px;
 	text-align: center;
 	font-size:20px;
 	font-style: bold;
+	width: 100%;
+	border: 1px solid #000000;
+	background-color: #FEF1D6;
 }
-/*centres the logo of within the header*/
+/*centres the logo within the header*/
 #logo{
-	margin-left: auto;
-    margin-right: auto;
 	left: 50%;
-    transform: translate(375%, 0%);
+    margin: 0 auto;
 	}
 
-/*Pads the input fields so they're aligned */	
-#inputfields{
-	padding-right: 250px; 
-}
 /*Underlines and fixes the contact link  to the bottom right of the page*/
 #contact{
 	text-decoration: underline;
@@ -51,6 +48,39 @@ label{
 	right: 0;
 	padding-right: 15px;
 }
+/*Hyperlink size for the logo*/
+#homelink{
+	width: 200px; 
+	height: 150px;
+}
+
+input[type="radio"]{
+	margin: 0 5px 0 5px;
+}
+
+#registration_prompt{
+	float:down;
+}
+
+.col-xs-12{
 	
-
-
+}
+/*Pads the input fields so they're aligned */
+#holdingdiv{
+	width: 100%;
+	float:left;
+	text-align: center;
+}
+#formholder{
+	width:50%
+}
+.form-control{
+	
+}
+select{
+	text-align: center;
+	text-align-last: center;
+}
+option{
+	text-align: center;
+}

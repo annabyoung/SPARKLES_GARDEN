@@ -55,7 +55,7 @@ public class Registration {
 	  private CreditStatus creditStatus= CreditStatus.VALIDATING; // shouldn't be inputted here but will need external thingamjob to check it
 	  private String password="";
 	  private String phone=""; 
-	  public String error="";
+	  private String error="";
 	  
 	   private Address address; 
 	  //address variables 

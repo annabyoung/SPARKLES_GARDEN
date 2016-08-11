@@ -3,19 +3,22 @@ package com.qac.sparkle_gardens.repositories.offline;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
-import com.qac.sparkle_gardens.util.InitialData;
+import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * 
  * @author Tyler Deans
  *
  */
-
+@Stateless
+@Default
 public class WishlistRepositoryOffline implements WishlistRepository{
 	@Inject private InitialData initialData;
 	
