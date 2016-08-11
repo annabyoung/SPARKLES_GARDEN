@@ -3,6 +3,9 @@ package com.qac.sparkles_accounts.entities;
 import static javax.jms.Session.AUTO_ACKNOWLEDGE;
 
 import javax.jms.JMSException;
+import javax.jms.MapMessage;
+import javax.jms.Message;
+import javax.jms.MessageListener;
 import javax.jms.Queue;
 import javax.jms.QueueConnection;
 import javax.jms.QueueConnectionFactory;
@@ -12,7 +15,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class CreditCheck {
+public class CreditCheck implements MessageListener {
 	private Context context= null;
 	private QueueConnectionFactory conFact= null;
 	private QueueConnection connect = null;
@@ -32,6 +35,14 @@ public class CreditCheck {
 		} catch (JMSException e) {
 			
 		} finally {
+			
+		}
+	}
+	
+	public void onMessage(Message messsage) {
+		try {
+			// Gets the customer data
+			MapMessage msg = (MapMessage) message;
 			
 		}
 	}
