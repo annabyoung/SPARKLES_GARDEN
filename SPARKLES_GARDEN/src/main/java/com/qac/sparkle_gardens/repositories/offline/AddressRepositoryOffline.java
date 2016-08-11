@@ -89,21 +89,4 @@ public class AddressRepositoryOffline implements AddressRepository {
 		initialData.setAddresses(addresses);
 	}
 	
-	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
-		ArrayList<Address> addresses = initialData.getAddresses();
-		for (int index = 0; index < addresses.size(); index++) {
-			if (addresses.get(index).getCustAddress().getAccountId() == accountId) {
-				custAddressRepository.addCustomerHasAddress(cust);
-			}
-		}
-	}
-	
-	public void removeCustomerHasAddress(CustomerHasAddress cust, long accountId) {
-		ArrayList<Address> addresses = initialData.getAddresses();
-		for (int index = 0; index < addresses.size(); index++) {
-			if (addresses.get(index).getCustAddress().getAccountId() == accountId) {
-				custAddressRepository.removeCustomerHasAddress(cust);
-			}
-		}
-	}
 }

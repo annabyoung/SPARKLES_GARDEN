@@ -36,12 +36,20 @@ public class CustomerHasCard {
 		return customer;
 	}
 	
+	public long getCustomerId(){
+		return customer.getAccountID();
+	}
+	
 	public void setCustomer(Customer customer){
 		this.customer = customer;
 	}
 	
 	public Card getCard(){
 		return card;
+	}
+	
+	public long getCardId(){
+		return card.getCardId();
 	}
 	
 	public void setCard(Card card){
