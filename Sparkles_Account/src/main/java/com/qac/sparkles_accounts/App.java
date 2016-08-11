@@ -1,4 +1,4 @@
-package com.qac.Sparkles_Account;
+package com.qac.sparkles_accounts;
 
 /**
  * Hello world!

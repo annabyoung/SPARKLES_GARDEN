@@ -21,5 +21,10 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>com.qac.sparkle_gardens</groupId>
+          <artifactId>SPARKLES_GARDEN</artifactId>
+          <version>0.0.1</version>
+    </dependency>
   </dependencies>
 </project>
