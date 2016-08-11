@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
+import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
 import com.qac.sparkle_gardens.test_data.InitialData;
@@ -116,5 +117,20 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 			}
 		}
 		return customerOwned;
+	}
+	
+	/**
+	 * Checks if there are any customer addresses associated with an given address
+	 * @return
+	 */
+	public boolean isCustomerId(Address address) {
+		ArrayList<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
+		
+		for (int index = 0; index < custAddress.size(); index++) {
+			if (custAddress.get(index).getAddressId() == address.getAddressId()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

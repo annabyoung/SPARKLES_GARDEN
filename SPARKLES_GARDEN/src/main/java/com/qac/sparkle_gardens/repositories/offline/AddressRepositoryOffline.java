@@ -44,7 +44,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 	 * @param id
 	 * @return
 	 */
-	public Address findByCustomerId(long accountId) {
+	public Address findByAccountId(long accountId) {
 		ArrayList<Address> list = initialData.getAddresses();
 		Address place = new Address();
 		for (int index = 0; index < list.size(); index++) {

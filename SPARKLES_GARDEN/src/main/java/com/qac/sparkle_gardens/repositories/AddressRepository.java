@@ -18,7 +18,7 @@ public interface AddressRepository {
 	public void persistAddresses(List<Address> addresss);
 	
 	// Locate an address by ID
-	public Address findByCustomerId(long id); 
+	public Address findByAccountId(long id); 
 	
 	// Returns all the addresses
 	public List<Address> getAddresses();

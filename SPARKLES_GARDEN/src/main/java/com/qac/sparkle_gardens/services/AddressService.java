@@ -18,18 +18,42 @@ public class AddressService {
 	 * @return
 	 */
 	public Address getAddress(long custId) {
-		return addressRepository.findByCustomerId(custId);
+		return addressRepository.findByAccountId(custId);
 	}
 	
 	/**
 	 * deletes the address
 	 * @param id
 	 */
-	public void deleteAddress(long custId) {
+	public void deleteAddress(long acctId, long addressId) {
 		Address address;
-		address = addressRepository.findByCustomerId(custId);
-		addressRepository.removeAddress(address);
+		address = addressRepository.findByAccountId(acctId);
+		CustomerHasAddress cust = custAddressRepository.findByAddressID(addressId);
 		custAddressRepository.removeCustomerHasAddress(address.getCustAddress());
+		/** if there are no other customers who have this associated address
+		 * then the address is removed
+		 */
+		if (!custAddressRepository.isCustomerId(address)) {
+			addressRepository.removeAddress(address);
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param customer
+	 * @param otherAddress
+	 */
+	public void deleteAddress(Customer customer, Address otherAddress) {
+		Address address = addressRepository.findByAccountId(customer.getAccountID());
+		custAddressRepository.removeCustomerHasAddress(address.getCustAddress());
+		
+		/** if there are no other customers who have this associated address
+		 * then the address is removed
+		 */
+		if (!custAddressRepository.isCustomerId(address)) {
+			addressRepository.removeAddress(address);
+		}
 		addressRepository.removeCustomerHasAddress(address.getCustAddress(), address.getAccountId());
 	}
 	
@@ -44,7 +68,7 @@ public class AddressService {
 	
 	/**
 	 * Overloaded create address method
-	 * @param customerId
+	 * @param customer
 	 * @param buildingNum
 	 * @param streetName
 	 * @param city
