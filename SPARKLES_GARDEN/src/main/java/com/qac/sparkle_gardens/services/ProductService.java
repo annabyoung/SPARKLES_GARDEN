@@ -26,7 +26,7 @@ public class ProductService {
 	@Inject ProductRepository productRepository;
 	
 	private ArrayList<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
-	private ArrayList<String> tags = new ArrayList<>();
+	private ArrayList<String> tags = new ArrayList<String>();
 		
 	
 	/**
@@ -98,7 +98,7 @@ public class ProductService {
 	 * @return prodcutsInRange which is all the products within the price range the customer is searching for
 	 */
 	public ArrayList<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
-		ArrayList<Product> productsInRange = new ArrayList<>();
+		ArrayList<Product> productsInRange = new ArrayList<Product>();
 		for(Product p : productRepository.getProducts()){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
 				productsInRange.add(p);
@@ -126,9 +126,9 @@ public class ProductService {
 	
 	public ArrayList<Product> createProductListByTags(String input){
 		tags = convertStringToArrayList(input);
-		ArrayList<Product> productsWithTags = new ArrayList<>();
-		ArrayList<Product> productsWithAllTags = new ArrayList<>();
-		ArrayList<Product> productsWithSubsetOfTags = new ArrayList<>();
+		ArrayList<Product> productsWithTags = new ArrayList<Product>();
+		ArrayList<Product> productsWithAllTags = new ArrayList<Product>();
+		ArrayList<Product> productsWithSubsetOfTags = new ArrayList<Product>();
 		for(Product p : productRepository.getProducts()){
 			if (p.getProductTags().containsAll(tags)){
 				productsWithAllTags.add(p);

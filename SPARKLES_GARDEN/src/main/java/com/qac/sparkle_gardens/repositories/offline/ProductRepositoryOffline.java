@@ -3,15 +3,21 @@ package com.qac.sparkle_gardens.repositories.offline;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.repositories.ProductRepository;
-import com.qac.sparkle_gardens.util.ProductInitalData;
+import com.qac.sparkle_gardens.test_data.InitialData;
+import com.qac.sparkle_gardens.test_data.ProductInitalData;
 import com.qac.sparkle_gardens.entities.Product;
 
-public class ProductRepositoryOffline implements ProductRepository{
+@Stateless
+@Default
+public class ProductRepositoryOffline implements ProductRepository
+{
 	@Inject
-	private ProductInitalData initialData;
+	private InitialData initialData;
 	
 	
 	public void persistProduct(Product p){
@@ -41,7 +47,7 @@ public class ProductRepositoryOffline implements ProductRepository{
 	}
 	//Search for products by price
 	public ArrayList<Product> findByProductPrice(double price){
-		ArrayList<Product> productsByPrice = new ArrayList<>();
+		ArrayList<Product> productsByPrice = new ArrayList<Product>();
 		for (Product p : initialData.getProducts()){ //search through all products in product list
 			if (price == p.getPrice()){ //check if the product in list matches the price requested
 				productsByPrice.add(p); //add all products that are the same price as the price requested
@@ -55,7 +61,7 @@ public class ProductRepositoryOffline implements ProductRepository{
 	 * return an arraylist of products with that same tag
 	 */ 
 	 public ArrayList<Product> findByProductTag(String tag){
-		ArrayList<Product> productsByPrice = new ArrayList<>();
+		ArrayList<Product> productsByPrice = new ArrayList<Product>();
 		for (Product p : initialData.getProducts()){ //search through all products in product list
 			if (p.findProductTags(tag)){ //check if the product in list matches the tag requested
 				productsByPrice.add(p); //add all products that are the same tag as the tag requested

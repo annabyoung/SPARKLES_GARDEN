@@ -9,7 +9,7 @@ import com.qac.sparkle_gardens.entities.Wishlist;
  * @author Tyler Deans
  *
  * This is the wishlist repository
- * which has the CRUD operation for the Wishlist entity
+ * which has the CRUD operations for the Wishlist entity.
  */
 
 public interface WishlistRepository {

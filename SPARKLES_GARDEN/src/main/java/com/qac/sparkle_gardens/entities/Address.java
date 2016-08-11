@@ -1,12 +1,15 @@
 package com.qac.sparkle_gardens.entities;
 
+
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,24 +32,23 @@ public class Address {
 	@Column (name = "addressID")
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long addressId;
-	
-	@ManyToOne
-	@JoinColumn(name="customerID", nullable = false)
-	private long customerId;
-	
 
-	public long getCustomerId() {
-		return customerId;
+	@OneToMany
+	@JoinColumn(name="customer_fk", nullable = false)
+	private ArrayList<Customer> customers;
+	
+	public ArrayList<Customer> getCustomers() {
+		return customers;
 	}
-	public void setCustomer(long customerId) {
-		this.customerId = customerId;
+	public void setCustomers(ArrayList<Customer> customers) {
+		this.customers = customers;
 	}
-
+	
 	//The number of the building
 	@Column
 	@NotNull
 	private int buildingNum;
-	
+
 	@Column
 	@NotNull
 	@Size (min = 1, max = 200)
@@ -72,17 +74,9 @@ public class Address {
 	@Size (min = 1, max = 20)
 	private String postCode;
 	
-	public Address() {
-		this.customerId = 0;
-		this.buildingNum = 0;
-		this.streetName = "";
-		this.city = "";
-		this.county = "";
-		this.country = "";
-		this.postCode = "";
-	}
-	public Address(long customerId, int buildingNum, String streetName, String city, String county, String country, String postCode) {
-		this.customerId = customerId;
+	public Address(long addressId, int buildingNum, String streetName, String city, String county, 
+			String country, String postCode) {
+		this.addressId = addressId;
 		this.buildingNum = buildingNum;
 		this.streetName = streetName;
 		this.city = city;
@@ -91,6 +85,7 @@ public class Address {
 		this.postCode = postCode;
 	}
 	// Getters and setters for all the attributes
+
 	public long getAddressId() {
 		return addressId;
 	}
@@ -146,6 +141,4 @@ public class Address {
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
-	
-	
 }

@@ -13,7 +13,8 @@ import javax.validation.constraints.Size;
 
 @NamedQueries({
 		@NamedQuery(name = Card.FIND_BY_CARD_NUMBER, query = "SELECT a FROM Cards a WHERE a.cardNumber = :cardNumber"),
-		@NamedQuery(name = Card.FIND_BY_cardId, query = "SELECT a FROM Cards a WHERE a.cardId = :cardId") })
+		@NamedQuery(name = Card.FIND_BY_CARDID, query = "SELECT a FROM Cards a WHERE a.cardId = :cardId"),
+		})
 
 public class Card {
 	@Id
@@ -33,13 +34,9 @@ public class Card {
 	@NotNull
 	@Pattern(regexp = "[0-1][0-9]/[0-9]{2}", message = "{invalid.expirationDate}")
 	private String expirationDate;
-	@JoinColumn(name = "accountID_fk", nullable = false)
-	@NotNull
-	private long customerID;
-	// private String issueNumber;
-
+	
 	public static final String FIND_BY_CARD_NUMBER = "Card.getCardNumber";
-	public static final String FIND_BY_cardId = "Card.getcardId";
+	public static final String FIND_BY_CARDID = "Card.getCardId";
 
 	public Card() {
 	}
@@ -51,26 +48,25 @@ public class Card {
 	 * @param expirationDate
 	 * @param customer
 	 */
-	public Card(String customerName, String cardNumber, String expirationDate, long customerID) {
+	public Card(String customerName, String cardNumber, String expirationDate) {
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
-		this.customerID = customerID;
 	}
-	
+
 	/**
 	 * Only for the purposes of testing offline data.
+	 * 
 	 * @param cardID
 	 * @param customerName
 	 * @param cardNumber
 	 * @param expirationDate
 	 * @param customer
 	 */
-	public Card(long cardID, String customerName, String cardNumber, String expirationDate, long customerID) {
+	public Card(long cardID, String customerName, String cardNumber, String expirationDate) {
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
-		this.customerID = customerID;
 	}
 
 	/**
@@ -134,20 +130,5 @@ public class Card {
 		this.expirationDate = expirationDate;
 	}
 
-	/**
-	 * 
-	 * @return customer;
-	 */
-	public long getCustomerID() {
-		return customerID;
-	}
 
-	/**
-	 * Set's Card's customer.
-	 * 
-	 * @param customer
-	 */
-	public void setCustomerID(long customerID) {
-		this.customerID = customerID;
-	}
 }

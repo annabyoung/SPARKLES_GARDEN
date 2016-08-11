@@ -2,26 +2,30 @@ package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
 
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
-import com.qac.sparkle_gardens.util.OrderInitialData;
+import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * The OrderRepositoryOffline class 
  * @author Damien Lloyd
  *
  */
+@Stateless
+@Default
 public class OrderRepositoryOffline 
 	implements OrderRepository
 {
 	@Inject
-	private OrderInitialData initialData;
+	private InitialData initialData;
 
 	public OrderRepositoryOffline() 
 	{
-		initialData = new OrderInitialData();
+		initialData = new InitialData();
 	}
 	
 	public void persistOrder(Order o) 

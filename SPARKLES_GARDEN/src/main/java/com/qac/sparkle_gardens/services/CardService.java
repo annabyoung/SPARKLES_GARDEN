@@ -2,30 +2,35 @@ package com.qac.sparkle_gardens.services;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CardRepository;
+import com.qac.sparkle_gardens.repositories.CustomerHasCardRepository;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
-import com.qac.sparkle_gardens.repositories.PaymentRepository;
+//import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
 
 /**
  * This is the Card Service Bean I have made as an example
  * 
- * @author James Thompson
+ * @author Allen Su
  */
 @Stateless
 public class CardService {
-	@Inject PaymentRepository paymentRepository;
+	//@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;
 	@Inject CustomerRepository customerRepository;
+	@Inject CustomerHasCardRepository cardOwnershipRepository;
 	
-	private String error = "";
-	
+	/**
+	 * TODO:PLACEHOLDER.
+	 */
 	public CardService(){
 		
 	}
@@ -40,16 +45,11 @@ public class CardService {
 	 */
 	public boolean validateCardDetails(String cardOwnerName, String cardNumber, String expirationDate) {
 		if (!cardOwnerName.isEmpty() || !cardNumber.isEmpty() || !expirationDate.isEmpty() && cardNumber.matches("[0-9]{16}")) {
-			return checkInDate(expirationDate);
+			return true;
 		}
-		error = "Check Card Details";
 		return false;
 	}
 	
-	public String getError() {
-		return error;
-	}
-
 	/**
 	 * Check to make sure the card is in date
 	 * 
@@ -66,7 +66,6 @@ public class CardService {
 		
 		Integer cardYear = Integer.parseInt(expirationDate.substring(3));
 		if (cardYear < currentYear){
-			error = "Card has expired";
 			return false;
 		}
 		if (cardYear == currentYear) {
@@ -74,7 +73,6 @@ public class CardService {
 			if (cardMonth > currentMonth){
 				return true;
 			}
-			error = "Card has expired";
 			return false;
 		}
 		return true;
@@ -88,16 +86,36 @@ public class CardService {
 	 * @return
 	 */
 	public boolean checkNotBlacklisted(String cardNumber, String expirationDate) {
-		ArrayList<Card> cards = (ArrayList<Card>) cardRepository.findByCardNumber(cardNumber);
-		for(Card card:cards) {
-			if (card.getExpirationDate().equals(expirationDate)) {
-				Customer cust = customerRepository.findByID(card.getCustomerID());
-				if (cust.getCreditStatus().equals(CreditStatus.BLACKLISTED)){
-					error = "You are blacklisted";
-					return false;
-				}
+
+		Card card = cardRepository.findByCardNumberAndExpiration(cardNumber, expirationDate);
+		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
+			if (co.getCard().equals(card) && co.getCustomer().getCreditStatus() == CreditStatus.BLACKLISTED){
+				return false;
 			}
 		}
+		return true;
+	}
+	
+	public List<Card> getCardsByCustomer(Customer customer){
+		ArrayList<Card> cardsOwnedByCustomer = new ArrayList<Card>();
+		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
+			if (co.getCustomer().equals(customer)){
+				cardsOwnedByCustomer.add(co.getCard());
+			}
+		}
+		return cardsOwnedByCustomer;
+	}
+	
+	public boolean checkIfCustomerOwnsCard(Card card, Customer customer){
+		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
+			if (co.getCustomer().equals(customer) && co.getCard().equals(card)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean refundCard(String cardNumber, String expirationDate){
 		return true;
 	}
 }

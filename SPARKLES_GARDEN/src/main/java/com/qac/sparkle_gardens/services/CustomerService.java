@@ -48,6 +48,28 @@ public class CustomerService {
 	
 	}
 	
+	
+	
+	/**
+	 * make sure email is proper
+	 * user@domain.com format
+	 *  need to look up how to properly parse a string in java
+	 *   
+	 *   
+	 * 
+	 * @param email
+	 * @return
+	 */
+	
+	public boolean validateEmailInputs(String email)
+	{
+		//TODO: write code 
+		return true;
+		
+	}
+	
+	
+	
 	/**
 	 * Checks to make sure the login details are correct.
 	 * If account does not exist -1
@@ -78,7 +100,7 @@ public class CustomerService {
 	 * 
 	 */
 	
-	public void makeNewCustomer(String firstName, String lastName, String email, CreditStatus creditStatus, Address address, String password, String phone){
+	public void makeNewCustomer(String firstName, String lastName, String email, CreditStatus creditStatus, String password, String phone){
 
 		Customer customer= new Customer();
 		
@@ -93,7 +115,7 @@ public class CustomerService {
 	 * 
 	 * I have absolutely no idea where the data comes from for this.
 	 * lets say its a database, then should i just take in a customer object?
-	 *  
+	 *  come to think of it this may just create a new customer service?
 	 * 
 	 * @param firstName
 	 * @return
@@ -111,9 +133,13 @@ public class CustomerService {
 	//updating details
 	/**
 	 *  updates a specific item in a users details. may need to make multiple functoins
-	 *  does not work for creditStatus (yet?)
+	 *  does not work for creditStatus but should credit status 
+	 *  even be updated here? 
+	 *  for addresses updates or card see their respective service 
+	 *  
 	 *  assumes valid information set in currently. 
 	 *  returns true if update is successful.
+	 *  
 	 * @param userID
 	 * @param updatedField
 	 * @param newInformation
@@ -138,8 +164,10 @@ public class CustomerService {
 			return true;
 		case "phone":
 			customerRepository.findByID(userID).setPhone(newInformation);
+			
 			default: 
 				return false;
+		
 		}
 	}
 	

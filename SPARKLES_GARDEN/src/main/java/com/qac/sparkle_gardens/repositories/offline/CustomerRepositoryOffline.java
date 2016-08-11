@@ -1,25 +1,29 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
+
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.*;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
-import com.qac.sparkle_gardens.util.CustomerInitialData;
+import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * 
  * @author Sean Connelly 
  *
  */
-
+@Stateless
+@Default
 public class CustomerRepositoryOffline implements CustomerRepository
 {	
 	@Inject 
-	private CustomerInitialData initialData;
+	private InitialData initialData;
 	
 		public CustomerRepositoryOffline()
 		{
-			initialData = new CustomerInitialData();
+			initialData = new InitialData();
 		}
 		
 		public void persistCustomer(Customer customer){
@@ -90,11 +94,24 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			
 		}
 
-		@Override
-		public Customer findByEmail(String email) {
+		public Customer findByEmail(String email) 
+		{
 			for (Customer customer : initialData.getCustomers())
 				if(customer.getEmail().equalsIgnoreCase(email))
 					return customer;
 			return null;
 		}
+		
+		public void findCustomerAdresses(Customer customer){
+			
+			initialData.getAddresses();
+			
+			//TODO: do this return type is wrong 
+		}
+		
+		public void findCustomerCards(Customer customer){
+			initialData.getCards(); 
+			//TODO: and do this return type is wrong;  
+		}
+		
 }

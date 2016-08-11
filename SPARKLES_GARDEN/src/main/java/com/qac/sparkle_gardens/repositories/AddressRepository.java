@@ -1,7 +1,9 @@
 package com.qac.sparkle_gardens.repositories;
 
 import java.util.List;
+
 import com.qac.sparkle_gardens.entities.Address;
+import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 
 /**
  * 
@@ -25,4 +27,7 @@ public interface AddressRepository {
 	public void updateAddress(Address address);
 	//Remove address
 	public void removeAddress(Address address);
+	
+	// Adds a CustomerHasAddress object
+	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId);
 }

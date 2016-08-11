@@ -5,11 +5,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.Card;
-import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.repositories.CardRepository;
-import com.qac.sparkle_gardens.repositories.PaymentRepository;
+//import com.qac.sparkle_gardens.repositories.PaymentRepository;
 import com.qac.sparkle_gardens.services.CardService;
-import com.qac.sparkle_gardens.util.PaymentStatus;
 
 /**
  * 
@@ -19,7 +17,7 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
 @Named(value = "PayByCard")
 @SessionScoped
 public class PayByCard {
-	@Inject PaymentRepository paymentRepository;
+	//@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;
 	
 	private String error = "";
@@ -35,20 +33,15 @@ public class PayByCard {
 	 * @param paymentAmount
 	 * @return
 	 */
-	public String payByCard(Payment p, String cardOwnerName, String cardNumber, String expirationDate, double paymentAmount){
+	public String payByCard(String cardOwnerName, String cardNumber, String expirationDate, double paymentAmount, String CVS){
 		
 		//if(validateCardPayment())
 		Card card = cardRepository.findByCardNumberAndExpiration(cardNumber, expirationDate);
 		if (card == null){
-			card = new Card(cardOwnerName, cardNumber, expirationDate, 000);//HAVENT FIGURED OUT FOREIGN KEYS YET
+			card = new Card(cardOwnerName, cardNumber, expirationDate);
 			cardRepository.persistCard(card);
 		}
-		p.setCardID(card.getCardId());
-		
-		// if (SOMETHING SOMETHING PAYMENT failed){error = "failed payment"; return "#"}
-		
-		p.setPaymentStatus(PaymentStatus.PAID);
-		
+		//STUFF TO BE DONE BECAUSE NO PAYMENT CLASS.
 		error = "";
 		return "#"; //placeholders
 	}
@@ -65,11 +58,19 @@ public class PayByCard {
 	 */
 	public String validateCardPayment(String cardOwnerName, String cardNumber, String expirationDate){
 		CardService cs = new CardService();
-		if (cs.validateCardDetails(cardOwnerName, cardNumber, expirationDate)){
-			error = "";
+		if (!cs.validateCardDetails(cardOwnerName, cardNumber, expirationDate)){
+			error = "Check Card Details";
 			return "#"; //placeholders.
 		}
-		error = cs.getError();
+		if (!cs.checkInDate(expirationDate)){
+			error = "Card has Expired";
+			return "#";
+		}
+		if (!cs.checkNotBlacklisted(cardNumber, expirationDate)){
+			error = "You are blacklisted";
+			return "#";
+		}
+		error = "";
 		return "#";
 	}
 	
