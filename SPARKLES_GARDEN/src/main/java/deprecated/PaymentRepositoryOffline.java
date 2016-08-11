@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.repositories.offline;
+package deprecated;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,8 @@ import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.repositories.PaymentRepository;
-import com.qac.sparkle_gardens.util.CardInitialData;
-import com.qac.sparkle_gardens.util.PaymentInitialData;
 
+@Deprecated
 public class PaymentRepositoryOffline implements PaymentRepository
 {
 	@Inject

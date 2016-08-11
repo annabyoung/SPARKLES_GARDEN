@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.repositories.offline;
+package deprecated;
 import java.util.ArrayList;
 
 import javax.inject.Singleton;
@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Payment;
 
+@Deprecated
 @Singleton
 public class PaymentInitialData 
 {

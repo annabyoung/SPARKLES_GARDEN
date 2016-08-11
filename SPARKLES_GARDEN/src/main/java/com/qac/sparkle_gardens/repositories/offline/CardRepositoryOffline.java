@@ -7,7 +7,9 @@ import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.repositories.CardRepository;
-import com.qac.sparkle_gardens.util.CardInitialData;
+import com.qac.sparkle_gardens.util.InitialData;
+import com.qac.sparkle_gardens.util.MethodAuthor;
+
 
 /**
  * 
@@ -17,79 +19,70 @@ import com.qac.sparkle_gardens.util.CardInitialData;
 public class CardRepositoryOffline implements CardRepository
 {
 	@Inject
-	PaymentInitialData initialPaymentData;
-	@Inject
-	CardInitialData initialCardData;
-	
+	InitialData initialData;
 
-	public void persistCard(Card c) {
-		initialCardData.addCard(c);
+	public void persistCard(Card c) 
+	{
+		initialData.addCard(c);
 	}
-	public ArrayList<Card> listCards() {
-		return initialCardData.getCards(); 
+	
+	public ArrayList<Card> listCards() 
+	{
+		return initialData.getCards(); 
 	}
-	public void persistCards(ArrayList<Card> p) {
-		// TODO Auto-generated method stub
-		
+	
+	public void persistCards(ArrayList<Card> c) 
+	{
+		initialData.setCards(c);
 	}
-	public Card findByID(long id) {
-		// TODO Auto-generated method stub
-		for (Card c : initialCardData.getCards()){
-			if(id == c.getCardId()){
+	
+	public Card findByID(long id) 
+	{
+		for (Card c : initialData.getCards())
+		{
+			if(id == c.getCardId())
+			{
 				return c;
 			}
 		}
 		return null;
 	}
-	public ArrayList<Card> getCards() {
-		// TODO Auto-generated method stub
-		return initialCardData.getCards();
+	
+	public ArrayList<Card> getCards() 
+	{
+		return initialData.getCards();
 	}
-	public void updateCard(Card p) {
-		// TODO Auto-generated method stub
+	
+	@MethodAuthor (author = "Damien Lloyd")
+	public void removeCard(long cardID) 
+	{
+		ArrayList<Card> cl = initialData.getCards();
 		
+		for (int i = 0; i < cl.size(); i++)
+		{
+			if (cl.get(i).getCardId() == cardID)
+				cl.remove(i);
+		}
 	}
-	public void removeCard(Card p) {
-		// TODO Auto-generated method stub
-		//initialCardData.getCards()...
-	}
-	@Override
-	public List<Card> findByCardNumber(String cardNumber) {
+	
+	public List<Card> findByCardNumber(String cardNumber) 
+	{
 		ArrayList<Card> cards = new ArrayList<Card>();
-		for (Card c : initialCardData.getCards()){
+		for (Card c : initialData.getCards()){
 			if(cardNumber == c.getCardNumber()){
 				cards.add(c);
 			}
 		}
 		return cards;
 	}
-	@Override
-	public void addCard(Card c) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public Card findByID(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Card findByCardNumberAndExpiration(String cardNumber, String expirationDate) {
-		for (Card c : initialCardData.getCards()){
+
+	public Card findByCardNumberAndExpiration(String cardNumber, String expirationDate) 
+	{
+		for (Card c : initialData.getCards()){
 			if(cardNumber == c.getCardNumber() && c.getExpirationDate() == expirationDate){
 				return c;
 			}
 		}
 		return null;
-	}
-	@Override
-	public List<Card> findByCustomerID(long customerID) {
-		ArrayList<Card> cards = new ArrayList<Card>();
-		for (Card c : initialCardData.getCards()){
-			if(customerID == c.getCustomerID()){
-				cards.add(c);
-			}
-		}
-		return cards;
 	}
 }

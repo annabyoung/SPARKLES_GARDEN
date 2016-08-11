@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
-import com.qac.sparkle_gardens.util.OrderInitialData;
+import com.qac.sparkle_gardens.util.InitialData;
 
 /**
  * The OrderRepositoryOffline class 
@@ -17,11 +17,11 @@ public class OrderRepositoryOffline
 	implements OrderRepository
 {
 	@Inject
-	private OrderInitialData initialData;
+	private InitialData initialData;
 
 	public OrderRepositoryOffline() 
 	{
-		initialData = new OrderInitialData();
+		initialData = new InitialData();
 	}
 	
 	public void persistOrder(Order o) 

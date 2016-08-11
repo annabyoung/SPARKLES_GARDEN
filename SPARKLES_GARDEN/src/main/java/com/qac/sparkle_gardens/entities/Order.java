@@ -11,6 +11,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+import com.qac.sparkle_gardens.util.OrderStatus;
+import com.qac.sparkle_gardens.util.PaymentStatus;
+
 /**
  * The Order class contains all the order lines along with 
  * the orderID and the customerID. This class does not hold 
@@ -20,7 +23,7 @@ import javax.validation.constraints.Null;
  * @author Damien Lloyd
  */
 @Entity
-@Table (name = "order")
+@Table (name = "Order")
 public class Order 
 {
 	@Id
@@ -38,6 +41,18 @@ public class Order
 	@Null
 	private boolean payLater;
 	
+	@Column (name = "Order Status", nullable = false)
+	@Null
+	private OrderStatus orderStatus;
+	
+	@Column (name = "Payment Status", nullable = false)
+	@NotNull
+	private PaymentStatus paymentStatus;
+	
+	@Column (name = "cardID", nullable = true)
+	@Null
+	private Card card;
+	
 	// List of orderlines in the order
 	private ArrayList<OrderLine> lines;
 	
@@ -46,7 +61,7 @@ public class Order
 	 */
 	public Order()
 	{
-		
+		this(0, new Customer());
 	}
 	
 	/**
@@ -54,8 +69,22 @@ public class Order
 	 */
 	public Order(long orderID, Customer customer)
 	{
+		this.orderStatus = OrderStatus.EMPTY;
+		this.paymentStatus = PaymentStatus.UNPAID;
 		this.orderID = orderID;
 		this.customer = customer;
+	}
+	
+	/**
+	 * Construct Order with orderID, Customer and Card
+	 * @param orderID
+	 * @param customer
+	 * @param card
+	 */
+	public Order(long orderID, Customer customer, Card card)
+	{
+		this(orderID, customer);
+		this.card = card;
 	}
 	
 	/**
@@ -97,7 +126,7 @@ public class Order
 	
 	/**
 	 * Get all the OrderLines in the Order
-	 * @return
+	 * @return lines
 	 */
 	public ArrayList<OrderLine> getOrderLines()
 	{
@@ -113,9 +142,51 @@ public class Order
 	{
 		this.payLater = payLater;
 	}
-
+	
+	/**
+	 * Retrieves whether the order is payLater
+	 * If isPayLater is true, then it is buy now pay later, otherwise it's buy now pay now
+	 * 
+	 * @return
+	 */
 	public boolean isPayLater() {
 		return payLater;
 	}
 	
+	/**
+	 * Set the state of an order. See OrderStatus
+	 * for all available states.
+	 * @param status
+	 */
+	public void setOrderStatus(OrderStatus orderStatus)
+	{
+		this.orderStatus = orderStatus;
+	}
+	
+	/**
+	 * Get the state of an order it's in.
+	 * @return status
+	 */
+	public OrderStatus getOrderStatus()
+	{
+		return orderStatus;
+	}
+	
+	/**
+	 * Retrieve the payment status of an order.
+	 * 
+	 */
+	public PaymentStatus getPaymentStatus() {
+		return paymentStatus;
+	}
+	
+	/**
+	 * Set the payment status of an order
+	 * See PaymentStatus for all status types
+	 * @param paymentStatus
+	 */
+	public void setPaymentStatus(PaymentStatus paymentStatus) 
+	{
+		this.paymentStatus = paymentStatus;
+	}
 }

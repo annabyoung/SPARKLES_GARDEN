@@ -1,6 +1,12 @@
 package com.qac.sparkle_gardens.util;
 
-public enum PaymentStatus {
+public enum PaymentStatus 
+{
+
+	/**
+	 * Payment default status. Not paid.
+	 */
+	UNPAID,
 	/**
 	 * Payment is yet to be paid
 	 */
