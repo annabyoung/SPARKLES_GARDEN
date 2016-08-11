@@ -24,7 +24,6 @@ label{
 /*Formats the form where all the user input fields will be found*/
 #formdiv{
 	margin: 0 auto;
-	background-color: #FEF1D6;
 	border-style: solid;
 	border-width: 1px;
 	padding-bottom: 10px;
@@ -32,6 +31,8 @@ label{
 	font-size:20px;
 	font-style: bold;
 	width: 100%;
+	border: 1px solid #000000;
+	background-color: #FEF1D6;
 }
 /*centres the logo within the header*/
 #logo{
@@ -62,8 +63,7 @@ input[type="radio"]{
 }
 
 .col-xs-12{
-	border: 1px solid #000000;
-	background-color: #FEF1D6;
+	
 }
 /*Pads the input fields so they're aligned */
 #holdingdiv{
@@ -71,15 +71,8 @@ input[type="radio"]{
 	float:left;
 	text-align: center;
 }
-#inputfields{
-
-}
 #formholder{
 	width:50%
-}
-#login{
-	text-align: left;
-	transform:translate(-110%,0);
 }
 .form-control{
 	
