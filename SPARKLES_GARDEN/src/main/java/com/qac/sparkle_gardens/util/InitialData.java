@@ -85,8 +85,8 @@ public class InitialData
 		orders.get(3).addOrderLine(new OrderLine(new Product("Great socks!", 10, 40), 2));
 		orders.get(3).addOrderLine(new OrderLine(new Product("Allen's Mac", 1, 231), 12));
 		
-		orders.get(4).addOrderLine(new OrderLine(new Product("Impressive glasses", 2, 200), 1));
-		orders.get(5).addOrderLine(new OrderLine(new Product("Gandhi's Nukes", 9001, 100000), 1));
+		orders.get(4).addOrderLine(new OrderLine(new Product("Impressive glasses", 2, 200), 1)); 
+		orders.get(5).addOrderLine(new OrderLine(new Product("Gandhi's Nukes", -1, 9001), 1));
 		
 		/*
 		// Add payments
@@ -208,22 +208,7 @@ public class InitialData
 	{
 		this.orders = orders;
 	}
-	
-//	public void addPayment(Payment p)
-//	{
-//		this.Payments.add(p);
-//	}
-//	
-//	public ArrayList<Payment> getPayments()
-//	{
-//		return Payments;
-//	}
-//	
-//	public void setPayments(ArrayList<Payment> Payments)
-//	{
-//		this.Payments = Payments;
-//	}
-	
+
 	@MethodAuthor(author="Annabelle Young")
 	public List<Product> getProducts(){
 		return products;
