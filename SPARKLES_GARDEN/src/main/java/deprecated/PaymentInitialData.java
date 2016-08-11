@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Payment;
 
+@Deprecated
 @Singleton
 public class PaymentInitialData 
 {

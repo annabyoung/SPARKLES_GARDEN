@@ -121,7 +121,7 @@ public class Address {
 	}
 	
 	// Gets the account ID using the CustomerHasAddress object
-	public long getCustomerId() {
+	public long getAccountId() {
 		return custAddress.getCustomer().getAccountID();
 	}
 	

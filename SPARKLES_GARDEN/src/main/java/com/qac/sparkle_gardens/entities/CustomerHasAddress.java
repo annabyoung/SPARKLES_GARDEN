@@ -39,7 +39,7 @@ public class CustomerHasAddress {
 		this.customer = customer;
 	}
 	
-	public long getCustomerId() {
+	public long getAccountId() {
 		return this.customer.getAccountID();
 	}
 	

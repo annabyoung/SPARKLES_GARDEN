@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.qac.sparkle_gardens.entities.Payment;
 
+@Deprecated
 public interface PaymentRepository {
 	public void persistPayment(Payment p);
 

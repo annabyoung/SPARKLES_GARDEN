@@ -12,7 +12,7 @@ import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
-import com.qac.sparkle_gardens.entities.Payment;
+//import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 
@@ -30,7 +30,7 @@ public class InitialData
 	private ArrayList<Card> Cards = new ArrayList<Card>();
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	private ArrayList<Order> orders;
-	private ArrayList<Payment> Payments = new ArrayList<Payment>();
+	//private ArrayList<Payment> Payments = new ArrayList<Payment>();
 	private ArrayList<Product> products = new ArrayList<Product>();
 
 	private ArrayList<CustomerHasCard> cusHasCards = new ArrayList<CustomerHasCard>();
@@ -88,10 +88,12 @@ public class InitialData
 		orders.get(4).addOrderLine(new OrderLine(new Product("Impressive glasses", 2, 200), 1));
 		orders.get(5).addOrderLine(new OrderLine(new Product("Gandhi's Nukes", 9001, 100000), 1));
 		
+		/*
 		// Add payments
 		Payments.add(new Payment(1, 1, 1, PaymentStatus.PENDING));
 		Payments.add(new Payment(2, 2, 2, PaymentStatus.PENDING));
 		Payments.add(new Payment(3, 3, 3, PaymentStatus.PENDING));
+		*/
 		
 		Product p = new Product("The Great American Challenge", 50, 79.99);
 		p.addProductTags("Dildo");
@@ -207,20 +209,20 @@ public class InitialData
 		this.orders = orders;
 	}
 	
-	public void addPayment(Payment p)
-	{
-		this.Payments.add(p);
-	}
-	
-	public ArrayList<Payment> getPayments()
-	{
-		return Payments;
-	}
-	
-	public void setPayments(ArrayList<Payment> Payments)
-	{
-		this.Payments = Payments;
-	}
+//	public void addPayment(Payment p)
+//	{
+//		this.Payments.add(p);
+//	}
+//	
+//	public ArrayList<Payment> getPayments()
+//	{
+//		return Payments;
+//	}
+//	
+//	public void setPayments(ArrayList<Payment> Payments)
+//	{
+//		this.Payments = Payments;
+//	}
 	
 	@MethodAuthor(author="Annabelle Young")
 	public List<Product> getProducts(){
