@@ -30,4 +30,7 @@ public interface AddressRepository {
 	
 	// Adds a CustomerHasAddress object
 	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId);
+	
+	// Removes a CustomerHasAddress object 
+	public void removeCustomerHasAddress(CustomerHasAddress cust, long accountId);
 }

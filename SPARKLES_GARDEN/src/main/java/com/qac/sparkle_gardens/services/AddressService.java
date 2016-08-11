@@ -30,7 +30,7 @@ public class AddressService {
 		address = addressRepository.findByCustomerId(custId);
 		addressRepository.removeAddress(address);
 		custAddressRepository.removeCustomerHasAddress(address.getCustAddress());
-		addressRepository.removeCustomerHasAddress(address.getCustAddress(), address.getCustomerId());
+		addressRepository.removeCustomerHasAddress(address.getCustAddress(), address.getAccountId());
 	}
 	
 	/**

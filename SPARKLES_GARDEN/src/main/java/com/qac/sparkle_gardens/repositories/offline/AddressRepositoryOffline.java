@@ -44,7 +44,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 		ArrayList<Address> list = initialData.getAddresses();
 		Address place = new Address();
 		for (int index = 0; index < list.size(); index++) {
-			if (list.get(index).getCustomerId() == accountId) {
+			if (list.get(index).getAccountId() == accountId) {
 				place = list.get(index);
 			}
 		}
@@ -88,7 +88,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
 		ArrayList<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
-			if (addresses.get(index).getCustAddress().getCustomerId() == accountId) {
+			if (addresses.get(index).getCustAddress().getAccountId() == accountId) {
 				custAddressRepository.addCustomerHasAddress(cust);
 			}
 		}
@@ -97,7 +97,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 	public void removeCustomerHasAddress(CustomerHasAddress cust, long accountId) {
 		ArrayList<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
-			if (addresses.get(index).getCustAddress().getCustomerId() == accountId) {
+			if (addresses.get(index).getCustAddress().getAccountId() == accountId) {
 				custAddressRepository.removeCustomerHasAddress(cust);
 			}
 		}
