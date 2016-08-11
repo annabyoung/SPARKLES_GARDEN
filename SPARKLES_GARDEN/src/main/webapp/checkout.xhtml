@@ -1,85 +1,88 @@
 <!DOCTYPE html>
 <html xmlns="https://www.w3.org/1999/xhtml"
-xmlns:f= “http://java.sun.com/jsf/core”
-xmlns:h= “http://java.sun.com/jsf/html”
-xmlns:ui= “http://java.sun.com/jsf/facelets
-lang="en">
-	<h:head>
-		<link rel="stylesheet" type="text/css" href="..\js\bootstrap.min.js">
-		<link rel="stylesheet" type="text/css" href="..\css\bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="..\css\Wireframe_Login.css">
-		<title>Checkout</title>
-	</h:head>
-	<f:view><body>
-	<h1>
-		<div id="homelink" class="center-block">
-			<h:outputLink value="Homepage.html">
-				<h:graphicImage class="img-responsive center-block" id ="logo" value="..\img\Logo.png"
-				width= 200px height= 150px>
-			</h:outputLink>
-		</div>
-	</h1>
-	<div class="container-fluid">
-		<h:form class="form-horizontal center_div" role="form" id="formdiv">
-			<h2 class="center-block">Checkout</h2>
-			<div class="form-group">
-				<label class="control-label col-sm-4">Order Type: </label>
-				<div class="col-sm-4">
-					<h:selectOneListBox class="form-control ">
-						<f:selectItem itemValue="1" itemLabel="Buy Now, Pay Later" />
-						<f:selectItem itemValue="2" itemLabel="Buy Now, Pay Now" />
-					</h:selectOneListBox>
-				</div>	
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" lang="en">
+<h:head>
+	<link rel="stylesheet" type="text/css" href="..\js\bootstrap.min.js">
+	<link rel="stylesheet" type="text/css" href="..\css\bootstrap.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="..\css\Wireframe_Login.css">
+	<title>Checkout</title>
+</h:head>
+<f:view>
+	<body>
+			<div id="homelink" class="center-block">
+				<h:outputLink value="Homepage.html">
+					<h:graphicImage class="img-responsive center-block" id="logo"
+						value="..\img\Logo.png" width=200 height=150>
+				</h:outputLink>
 			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-4">Payment Method: </label>
-				<div class="col-sm-4">
-					<h:selectOneListBox class="form-control">
-						<f:selectItem itemValue="1" itemLabel="***Card1***" />
-						<f:selectItem itemValue="2" itemLabel="***Card2***" />
-					</h:selectOneListBox>
+		<div class="container-fluid">
+			<h:form class="form-horizontal center_div" role="form" id="formdiv">
+				<h2 class="center-block">Checkout</h2>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Order Type: </label>
+					<div class="col-sm-4">
+						<h:selectOneListBox class="form-control ">
+							<f:selectItem itemValue="1" itemLabel="Buy Now, Pay Later" />
+							<f:selectItem itemValue="2" itemLabel="Buy Now, Pay Now" />
+						</h:selectOneListBox>
+					</div>
 				</div>
-				<span>
-					<h:outputLink value="registerPayment.html" class="btn btn-secondary" role="button">Add New Payment Method</h:outputLink>
-				</span>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-4"> CVV: </label> 
-				<div class="col-xs-2">
-					<h:inputSecret value="password" name="cvv" required />
+				<div class="form-group">
+					<label class="control-label col-sm-4">Payment Method: </label>
+					<div class="col-sm-4">
+						<h:selectOneListBox class="form-control">
+							<f:selectItem itemValue="1" itemLabel="***Card1***" />
+							<f:selectItem itemValue="2" itemLabel="***Card2***" />
+						</h:selectOneListBox>
+					</div>
+					<span> <h:outputLink value="registerPayment.html"
+							class="btn btn-secondary" role="button">Add New Payment Method</h:outputLink>
+					</span>
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-4">Billing Address: </label>
-				<div class="col-sm-4">
-					<h:selectOneListBox class="form-control">
-						<f:selectItem itemValue="1" itemLabel="***Billing Address 1***" />
-						<f:selectItem itemValue="2" itemLabel="***Billing Address 1***" />
-					</h:selectOneListBox>
+				<div class="form-group">
+					<label class="control-label col-sm-4"> CVV: </label>
+					<div class="col-xs-2">
+						<h:inputSecret value="password" name="cvv" required />
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-4">Shipping Address: </label>
-				<div class="col-sm-4">
-					<h:selectOneListBox class="form-control">
-						<f:selectItem itemValue="1" itemLabel="***Shipping Address 1***" />
-						<f:selectItem itemValue="2" itemLabel="***Shipping Address 1***" />
-					</h:selectOneListBox>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Billing Address: </label>
+					<div class="col-sm-4">
+						<h:selectOneListBox class="form-control">
+							<f:selectItem itemValue="1" itemLabel="***Billing Address 1***" />
+							<f:selectItem itemValue="2" itemLabel="***Billing Address 1***" />
+						</h:selectOneListBox>
+					</div>
 				</div>
-				<span>
-					<h:outputLink value="registerAddress.html" class="btn btn-secondary" role="button">Add New Address</h:outputLink>
-				</span>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3">Total Cost: </label>
-			</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Shipping Address: </label>
+					<div class="col-sm-4">
+						<h:selectOneListBox class="form-control">
+							<f:selectItem itemValue="1" itemLabel="***Shipping Address 1***" />
+							<f:selectItem itemValue="2" itemLabel="***Shipping Address 1***" />
+						</h:selectOneListBox>
+					</div>
+					<span> <h:outputLink value="registerAddress.html"
+							class="btn btn-secondary" role="button">Add New Address</h:outputLink>
+					</span>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3">Total Cost: </label>
+				</div>
+				<div>
+					<h:outputLink value="Homepage.html" class="btn btn-warning"
+						role="button">Complete Order!</h:outputLink>
+				</div>
+			</h:form>
 			<div>
-				<h:outputLink value="Homepage.html" class="btn btn-warning" role="button">Complete Order!</h:outputLink>
+				<p id="contact">
+					<h:outputLink value="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</h:outputLink>
+				</p>
 			</div>
-		</h:form>
-		<div>
-				<p id= "contact"><h:outputLink value="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</h:outputLink></p>
 		</div>
-	</div>
-	</body> </f:view>
+	</body>
+</f:view>
 </html>

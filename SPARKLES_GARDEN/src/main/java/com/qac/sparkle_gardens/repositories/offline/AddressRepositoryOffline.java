@@ -1,6 +1,5 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -45,7 +44,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 	 * @return
 	 */
 	public Address findByCustomerId(long accountId) {
-		ArrayList<Address> list = initialData.getAddresses();
+		List<Address> list = initialData.getAddresses();
 		Address place = new Address();
 		for (int index = 0; index < list.size(); index++) {
 			if (list.get(index).getCustomerId() == accountId) {
@@ -66,7 +65,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 	 * @param address
 	 */
 	public void updateAddress(Address address) {
-		ArrayList<Address> addresses = initialData.getAddresses();
+		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
 			if (addresses.get(index).getAddressId() == address.getAddressId()) {
 				addresses.set(index, address);
@@ -80,7 +79,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 	 * @param address
 	 */
 	public void removeAddress(Address address) {
-		ArrayList<Address> addresses = initialData.getAddresses();
+		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
 			if (addresses.get(index).getAddressId() == address.getAddressId()) {
 				addresses.remove(index);
@@ -90,7 +89,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 	}
 	
 	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
-		ArrayList<Address> addresses = initialData.getAddresses();
+		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
 			if (addresses.get(index).getCustAddress().getCustomerId() == accountId) {
 				custAddressRepository.addCustomerHasAddress(cust);
@@ -99,7 +98,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 	}
 	
 	public void removeCustomerHasAddress(CustomerHasAddress cust, long accountId) {
-		ArrayList<Address> addresses = initialData.getAddresses();
+		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
 			if (addresses.get(index).getCustAddress().getCustomerId() == accountId) {
 				custAddressRepository.removeCustomerHasAddress(cust);

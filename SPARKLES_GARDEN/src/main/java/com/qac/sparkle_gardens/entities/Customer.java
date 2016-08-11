@@ -4,18 +4,14 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.qac.sparkle_gardens.util.CreditStatus;
-import com.qac.sparkle_gardens.entities.Address;
 
 /**
  * 
  * @author Sean Connelly 
  * 
  */
-
-
  @Entity
  @Table (name = "customers")
-
  @NamedQueries ({
 	 @NamedQuery (name = Customer.FIND_BY_ID, 
 		      query="SELECT a FROM Customer a WHERE a.accountID = :accountID"),
@@ -31,9 +27,7 @@ import com.qac.sparkle_gardens.entities.Address;
 		      query="SELECT a FROM Customer a WHERE a.address = :Address"),
 	 @NamedQuery (name = Customer.FIND_BY_PHONE, 
 	          query="SELECT a FROM Customer a WHERE a.phone = :phone"),
-	 
  })
- 
  // may need to make new address query?
 public class Customer {
 	 

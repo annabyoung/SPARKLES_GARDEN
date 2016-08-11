@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.controllers;
 
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Order;
@@ -12,6 +13,7 @@ import com.qac.sparkle_gardens.util.OrderStatus;
  * @author Damien Lloyd
  *
  */
+@RequestScoped
 public class ReturnOrder 
 {
 	@Inject

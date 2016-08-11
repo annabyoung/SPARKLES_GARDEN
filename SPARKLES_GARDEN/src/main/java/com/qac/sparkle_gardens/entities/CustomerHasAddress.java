@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -10,6 +11,7 @@ import javax.persistence.ManyToOne;
  * This composite entity was created to resolve the issue
  * of the many to many relationship between customer and address. 
  */
+@Entity
 public class CustomerHasAddress {
 	// Composite key
 	@Id

@@ -9,7 +9,6 @@ import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 import com.qac.sparkle_gardens.test_data.InitialData;
-import com.qac.sparkle_gardens.test_data.ProductInitalData;
 import com.qac.sparkle_gardens.entities.Product;
 
 @Stateless
@@ -46,8 +45,8 @@ public class ProductRepositoryOffline implements ProductRepository
 		return null;
 	}
 	//Search for products by price
-	public ArrayList<Product> findByProductPrice(double price){
-		ArrayList<Product> productsByPrice = new ArrayList<Product>();
+	public List<Product> findByProductPrice(double price){
+		List<Product> productsByPrice = new ArrayList<Product>();
 		for (Product p : initialData.getProducts()){ //search through all products in product list
 			if (price == p.getPrice()){ //check if the product in list matches the price requested
 				productsByPrice.add(p); //add all products that are the same price as the price requested
@@ -60,8 +59,8 @@ public class ProductRepositoryOffline implements ProductRepository
 	 * Find all products that have a tag that is the same as the tag requested
 	 * return an arraylist of products with that same tag
 	 */ 
-	 public ArrayList<Product> findByProductTag(String tag){
-		ArrayList<Product> productsByPrice = new ArrayList<Product>();
+	 public List<Product> findByProductTag(String tag){
+		List<Product> productsByPrice = new ArrayList<Product>();
 		for (Product p : initialData.getProducts()){ //search through all products in product list
 			if (p.findProductTags(tag)){ //check if the product in list matches the tag requested
 				productsByPrice.add(p); //add all products that are the same tag as the tag requested
@@ -71,8 +70,8 @@ public class ProductRepositoryOffline implements ProductRepository
 	}
 	
 	//retrieve all products
-	public ArrayList<Product> getProducts() {
-		return (ArrayList<Product>) initialData.getProducts();
+	public List<Product> getProducts() {
+		return initialData.getProducts();
 	}
 		
 	public void createProduct(Product p) {
@@ -80,8 +79,7 @@ public class ProductRepositoryOffline implements ProductRepository
 	}
 	//update the product
 	public void updateProduct(Product p) {
-		ArrayList<Product> ps =
-			(ArrayList<Product>) initialData.getProducts();
+		List<Product> ps = initialData.getProducts();
 		for(int i=0; i<ps.size(); i++) {
 			if(ps.get(i).equals(p))
 			ps.set(i, p);
@@ -90,8 +88,7 @@ public class ProductRepositoryOffline implements ProductRepository
 	}
 
 	public void deleteProduct(Product p) {
-		ArrayList<Product> ps =
-			(ArrayList<Product>) initialData.getProducts();
+		List<Product> ps = initialData.getProducts();
 		for(int i=0; i<ps.size(); i++) {
 			if(ps.get(i).equals(p))
 				ps.remove(i);

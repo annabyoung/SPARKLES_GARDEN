@@ -1,6 +1,7 @@
 package com.qac.sparkle_gardens.test_data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Singleton;
 
@@ -22,7 +23,7 @@ import com.qac.sparkle_gardens.entities.Product;
 @Deprecated
 public class OrderInitialData 
 {
-	private ArrayList<Order> orders;
+	private List<Order> orders = new ArrayList<Order>();
 	
 	/**
 	 * Default constructor for OrderInitialData; constructs
@@ -65,7 +66,7 @@ public class OrderInitialData
 	 * Get list of orders
 	 * @return orders
 	 */
-	public ArrayList<Order> getOrders()
+	public List<Order> getOrders()
 	{
 		return orders;
 	}
@@ -74,7 +75,7 @@ public class OrderInitialData
 	 * Concurrently set all orders in a list by another
 	 * @param orders
 	 */
-	public void setOrders(ArrayList<Order> orders)
+	public void setOrders(List<Order> orders)
 	{
 		this.orders = orders;
 	}

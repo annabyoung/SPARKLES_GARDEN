@@ -1,10 +1,8 @@
 package com.qac.sparkle_gardens.services;
 
-import java.util.ArrayList;
-
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
@@ -14,6 +12,7 @@ import com.qac.sparkle_gardens.util.CreditStatus;
  * @author James Thompson
  *
  */
+@Stateless
 public class CustomerService {
 	@Inject CustomerRepository customerRepository;
 	

@@ -1,6 +1,6 @@
 package com.qac.sparkle_gardens.controllers;
 
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,7 +15,7 @@ import com.qac.sparkle_gardens.services.CardService;
  *
  */
 @Named(value = "PayByCard")
-@SessionScoped
+@RequestScoped
 public class PayByCard {
 	//@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;

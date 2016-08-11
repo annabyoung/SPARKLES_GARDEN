@@ -10,7 +10,6 @@ import java.util.Collections;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 
 /**

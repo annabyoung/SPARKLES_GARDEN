@@ -1,6 +1,5 @@
 package com.qac.sparkle_gardens.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.qac.sparkle_gardens.entities.Card;
@@ -22,7 +21,7 @@ public interface CardRepository
 	 * Keeps ArrayList of cards.
 	 * @param ArrayList<Card> c
 	 */
-	public void persistCards(ArrayList<Card> c);
+	public void persistCards(List<Card> c);
 
 	/**
 	 * Finds a card using unique identifier
@@ -35,7 +34,7 @@ public interface CardRepository
 	 * Gets all of the cards in the repository
 	 * @return
 	 */
-	public ArrayList<Card> getCards();
+	public List<Card> getCards();
 
 	/**
 	 * Removes a card.

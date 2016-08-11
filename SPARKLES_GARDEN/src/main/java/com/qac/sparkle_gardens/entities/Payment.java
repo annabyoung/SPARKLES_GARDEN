@@ -10,7 +10,6 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
  */
 @Entity
 @Table(name = "Payments")
-
 @Deprecated
 public class Payment {
 

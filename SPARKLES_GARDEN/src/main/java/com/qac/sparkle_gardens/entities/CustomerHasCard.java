@@ -1,6 +1,7 @@
 package com.qac.sparkle_gardens.entities;
 
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne; 
@@ -13,7 +14,7 @@ import javax.persistence.ManyToOne;
  * which has a many to many relationship 
  *
  */
-
+@Entity
 public class CustomerHasCard {
 	
 	@Id 

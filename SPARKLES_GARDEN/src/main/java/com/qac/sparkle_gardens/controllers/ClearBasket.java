@@ -1,6 +1,6 @@
 package com.qac.sparkle_gardens.controllers;
 
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +13,7 @@ import com.qac.sparkle_gardens.services.OrderService;
  */
 
 @Named (value = "clearBasket")
-@SessionScoped
+@RequestScoped
 public class ClearBasket 
 {
 	@Inject

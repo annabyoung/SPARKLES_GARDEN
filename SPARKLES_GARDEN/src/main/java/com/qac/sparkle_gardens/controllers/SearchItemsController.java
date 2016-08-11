@@ -2,7 +2,7 @@ package com.qac.sparkle_gardens.controllers;
 
 import java.util.ArrayList;
 
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.Product;
@@ -20,7 +20,7 @@ import javax.inject.Inject;
  *
  */
 @Named(value="search")
-@SessionScoped
+@RequestScoped
 public class SearchItemsController {
 	@Inject
 	ProductService productService;
