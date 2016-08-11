@@ -106,6 +106,15 @@ public class CardService {
 		return cardsOwnedByCustomer;
 	}
 	
+	public boolean checkIfCustomerOwnsCard(Card card, Customer customer){
+		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
+			if (co.getCustomer().equals(customer) && co.getCard().equals(card)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean refundCard(String cardNumber, String expirationDate){
 		return true;
 	}
