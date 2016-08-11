@@ -4,6 +4,19 @@ import java.util.ArrayList;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jms.JMSException;
+import javax.jms.MapMessage;
+import javax.jms.Queue;
+import javax.jms.QueueConnection;
+import javax.jms.QueueConnectionFactory;
+import javax.jms.QueueReceiver;
+import javax.jms.QueueSender;
+import javax.jms.QueueSession;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
@@ -30,6 +43,37 @@ public class OrderService
 	
 	@Inject
 	ArrayList<OrderLine> basket;
+	
+	private QueueConnection connect = null;
+	private QueueSession session = null;
+	private Queue response = null;
+	private Queue request = null;
+	
+	public OrderService(String queuecf, String requestQ,
+			String responseQ)
+	{
+		try
+		{
+			Context context = new InitialContext();
+			QueueConnectionFactory factory = 
+					(QueueConnectionFactory) 
+						context.lookup(queuecf);
+			connect = factory.createQueueConnection();
+			
+			session = 
+					connect.createQueueSession(false, 
+							Session.AUTO_ACKNOWLEDGE);
+			
+			response = (Queue)context.lookup(responseQ);
+			request = (Queue)context.lookup(requestQ);
+			
+			connect.start();
+		} catch (JMSException jmse) {
+			jmse.printStackTrace();
+		} catch (NamingException jne) {
+			jne.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Checks if the orderID is empty. If all the OrderLines have a
@@ -105,24 +149,29 @@ public class OrderService
 	 */
 	public String generateInvoice(long orderID)
 	{
-		String invoice = "";
-		ArrayList<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
-		
-		invoice += "\n\n\n----------------------------------------------";
-		
-		invoice += "Thank you for shopping at NBGardens!\n";
-		invoice += "You have purchased the following items: \n";
-		
-		for (OrderLine i : lines)
+		String result = "";
+		try
 		{
-			invoice += "\n\nProduct = " + i.getProduct().getProductName() + "\n" + 
-						"   Quantity = " + i.getQuantity() + "\n" + 
-						    "Price = " + (i.getProduct().getPrice() * i.getQuantity()) + "\n\n";
+			MapMessage msg = session.createMapMessage();
+			msg.setString("Invoice", "Invoice");
+			
+			QueueSender sender = session.createSender(request);
+			sender.send(msg);
+			
+			String inv = "JMSCorrelationID = " + msg.getJMSMessageID();
+			QueueReceiver receiver = 
+					session.createReceiver(response, inv);
+			
+			TextMessage tm = (TextMessage) receiver.receive(30_000);
+			
+			if (tm == null)
+			{
+				result = "No invoice!";
+			} else result = tm.getText();
+		} catch (JMSException jmse) {
+			jmse.printStackTrace();
 		}
-				
-		invoice += "\n\n\n----------------------------------------------";
-		
-		return invoice;
+		return result;
 	}
 	
 	/**
