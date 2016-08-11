@@ -19,7 +19,7 @@ import javax.inject.Inject;
  * This controller handles the search queries of customers and returns list of products based on search parameters
  *
  */
-@Named(value="search")
+@Named(value="searchItems")
 @SessionScoped
 public class SearchItemsController {
 	@Inject
