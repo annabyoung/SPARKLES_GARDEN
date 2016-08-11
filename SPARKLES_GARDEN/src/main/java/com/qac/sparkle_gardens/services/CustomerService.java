@@ -56,7 +56,6 @@ public class CustomerService {
 	 *  need to look up how to properly parse a string in java
 	 *   
 	 *   
-	 * 
 	 * @param email
 	 * @return
 	 */
@@ -146,31 +145,19 @@ public class CustomerService {
 	 * @return
 	 */
 	
-	public boolean updateAccountDetails(long userID, String updatedField, String newInformation){
-		
-		
-		switch(updatedField){
-		case "firstName":
-			customerRepository.findByID(userID).setFirstName(newInformation);
-			return true;
-		case "lastName":
-			customerRepository.findByID(userID).setLastName(newInformation);
-			return true;
-		case "email":
-			customerRepository.findByID(userID).setEmail(newInformation);
-			return true;
-		case "password":
-			customerRepository.findByID(userID).setPassword(newInformation);
-			return true;
-		case "phone":
-			customerRepository.findByID(userID).setPhone(newInformation);
-			
-			default: 
-				return false;
+	public boolean updateAccountDetails(Customer customer){
+		// validate 
+		customerRepository.updateCustomer(customer);
+		return true;
 		
 		}
-	}
 	
+	
+	
+	public Customer getCustomerByID(long userID){
+		return customerRepository.findByID(userID);
+		
+ 	}
 	
 	
 }
