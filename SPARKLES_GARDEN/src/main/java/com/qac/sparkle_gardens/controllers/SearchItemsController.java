@@ -26,7 +26,6 @@ public class SearchItemsController {
 	ProductService productService;
 	
 	private ArrayList<Product> searchQueryResults = new ArrayList<Product>();
-	//private ArrayList<String> searchQuery = new ArrayList<>();
 	private String error = "";
 	
 	/**
