@@ -1,6 +1,6 @@
 package com.qac.sparkle_gardens.repositories;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.qac.sparkle_gardens.entities.Order;
 
@@ -25,7 +25,7 @@ public interface OrderRepository
 	 * an entire list of orders.
 	 * @param o
 	 */
-	public void persistOrders(ArrayList<Order> o);
+	public void persistOrders(List<Order> o);
 	
 	/**
 	 * Get the Order stored by its orderID
@@ -38,7 +38,7 @@ public interface OrderRepository
 	 * Get all the Orders stored.
 	 * @return
 	 */
-	public ArrayList<Order> getOrders();
+	public List<Order> getOrders();
 	
 	/**
 	 * Remove the Order by its ID

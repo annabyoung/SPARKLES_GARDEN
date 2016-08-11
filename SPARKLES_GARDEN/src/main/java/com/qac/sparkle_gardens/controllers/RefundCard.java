@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.controllers;
 
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -14,6 +15,7 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
  *
  */
 @Named(value = "RefundCard")
+@RequestScoped
 public class RefundCard {
 	//@Inject PaymentRepository paymentRepository;
 	@Inject CardRepository cardRepository;

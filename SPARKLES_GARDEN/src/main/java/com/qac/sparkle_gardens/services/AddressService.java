@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.services;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Address;
@@ -8,6 +9,7 @@ import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.AddressRepository;
 import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
 
+@Stateless
 public class AddressService {
 	@Inject AddressRepository addressRepository;
 	@Inject CustomerHasAddressRepository custAddressRepository;

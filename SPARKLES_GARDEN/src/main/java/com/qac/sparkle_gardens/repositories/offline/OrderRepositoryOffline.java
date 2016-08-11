@@ -1,6 +1,6 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -33,14 +33,14 @@ public class OrderRepositoryOffline
 		initialData.addOrder(o);
 	}
 	
-	public void persistOrders(ArrayList<Order> o) 
+	public void persistOrders(List<Order> o) 
 	{
 		initialData.setOrders(o);
 	}
 	
 	public Order getOrder(long orderID) 
 	{
-		ArrayList<Order> ol = initialData.getOrders();
+		List<Order> ol = initialData.getOrders();
 		
 		for (int i = 0; i < ol.size(); i++)
 		{
@@ -50,14 +50,14 @@ public class OrderRepositoryOffline
 		return null;
 	}
 	
-	public ArrayList<Order> getOrders() 
+	public List<Order> getOrders() 
 	{
 		return initialData.getOrders();
 	}
 	
 	public void removeOrder(long orderID) 
 	{
-		ArrayList<Order> ol = initialData.getOrders();
+		List<Order> ol = initialData.getOrders();
 		
 		for (int i = 0; i < ol.size(); i++)
 		{

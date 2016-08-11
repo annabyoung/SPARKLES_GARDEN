@@ -1,6 +1,6 @@
 package com.qac.sparkle_gardens.controllers;
 
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,7 +18,7 @@ import com.qac.sparkle_gardens.controllers.RefundCard;
  *
  */
 @Named (value = "cancelOrder")
-@SessionScoped
+@RequestScoped
 public class CancelOrder 
 {
 	@Inject

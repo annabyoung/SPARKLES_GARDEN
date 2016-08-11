@@ -1,6 +1,7 @@
 package com.qac.sparkle_gardens.test_data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Singleton;
 
@@ -17,18 +18,18 @@ import com.qac.sparkle_gardens.entities.Customer;
 @Deprecated 
 public class CustomerInitialData {
 	
-		private ArrayList<Customer> customers = new ArrayList<Customer>();
+		private List<Customer> customers = new ArrayList<Customer>();
 			
 
 		public CustomerInitialData(){
 
 		}
 		
-		public ArrayList<Customer> getCustomers(){
+		public List<Customer> getCustomers(){
 			return customers;
 		}
 		
-		public void setCustomer(ArrayList<Customer> customers){
+		public void setCustomer(List<Customer> customers){
 			this.customers= customers;
 		}
 		

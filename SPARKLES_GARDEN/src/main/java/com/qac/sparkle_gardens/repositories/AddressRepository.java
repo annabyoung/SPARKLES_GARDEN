@@ -30,4 +30,7 @@ public interface AddressRepository {
 	
 	// Adds a CustomerHasAddress object
 	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId);
+
+	@Deprecated
+	public void removeCustomerHasAddress(CustomerHasAddress custAddress, long customerId);
 }

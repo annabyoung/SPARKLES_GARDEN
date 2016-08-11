@@ -12,6 +12,15 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- plugin versions -->
+		<ejb-plugin-version>2.3</ejb-plugin-version>
+		<war-plugin-version>2.4</war-plugin-version>
+		<ear-plugin-version>2.9</ear-plugin-version>
+		<compiler-plugin-version>3.1</compiler-plugin-version>
+		<!-- dependency versions -->
+		<javaee-api-version>7.0</javaee-api-version>
+		<!-- EJB spec version -->
+		<ejb-spec-version>3.2</ejb-spec-version>
 	</properties>
 
 	<dependencies>
@@ -56,12 +65,6 @@
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
 		</dependency>
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>

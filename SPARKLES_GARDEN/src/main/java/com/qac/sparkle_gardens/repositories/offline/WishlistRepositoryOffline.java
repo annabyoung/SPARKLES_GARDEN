@@ -1,6 +1,5 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -40,7 +39,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	 * @return
 	 */
 	public Wishlist findById(long id) {
-		ArrayList<Wishlist> list = initialData.getWishlists();
+		List<Wishlist> list = initialData.getWishlists();
 		Wishlist wish = new Wishlist();
 		for (int index = 0; index < list.size(); index++) {
 			if (list.get(index).getWishlistId() == id) {
@@ -56,7 +55,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	 * @return
 	 */
 	public Wishlist findByAccountId(long id) {
-		ArrayList<Wishlist> list = initialData.getWishlists();
+		List<Wishlist> list = initialData.getWishlists();
 		Wishlist wish = new Wishlist();
 		for (int index = 0; index < list.size(); index++) {
 			if (list.get(index).getAccountId() == id) {
@@ -72,7 +71,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	 * @return
 	 */
 	public Wishlist findByName(String name) {
-		ArrayList<Wishlist> list = initialData.getWishlists();
+		List<Wishlist> list = initialData.getWishlists();
 		Wishlist wish = new Wishlist();
 		for (int index = 0; index < list.size(); index++) {
 			if (list.get(index).getWishlistName().equals(name)) {
@@ -148,7 +147,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	
 	// Update wishlist
 	public void updateWishlist(Wishlist wish) {
-		ArrayList<Wishlist> list = initialData.getWishlists();
+		List<Wishlist> list = initialData.getWishlists();
 		for (int index = 0; index < list.size(); index++) {
 			if (list.get(index).equals(wish)) {
 				list.set(index, wish);
@@ -158,7 +157,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	}
 	//Remove wishlist
 	public void removeWishlist(Wishlist wish) {
-		ArrayList<Wishlist> list = initialData.getWishlists();
+		List<Wishlist> list = initialData.getWishlists();
 	
 		for (int index = 0; index < list.size(); index++) {
 			if (list.get(index).equals(wish)) {

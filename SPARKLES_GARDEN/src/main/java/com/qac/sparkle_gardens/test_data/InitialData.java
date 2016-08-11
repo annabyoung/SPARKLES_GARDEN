@@ -27,16 +27,16 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
 @Singleton
 public class InitialData 
 {
-	private ArrayList<Address> addresses = new ArrayList<Address>();
-	private ArrayList<Wishlist> wishlists = new ArrayList<Wishlist>();
-	private ArrayList<Card> Cards = new ArrayList<Card>();
-	private ArrayList<Customer> customers = new ArrayList<Customer>();
-	private ArrayList<Order> orders;
+	private List<Address> addresses = new ArrayList<Address>();
+	private List<Wishlist> wishlists = new ArrayList<Wishlist>();
+	private List<Card> Cards = new ArrayList<Card>();
+	private List<Customer> customers = new ArrayList<Customer>();
+	private List<Order> orders;
 	//private ArrayList<Payment> Payments = new ArrayList<Payment>();
-	private ArrayList<Product> products = new ArrayList<Product>();
+	private List<Product> products = new ArrayList<Product>();
 
-	private ArrayList<CustomerHasCard> cusHasCards = new ArrayList<CustomerHasCard>();
-	private ArrayList<CustomerHasAddress> cusHasAddress = new ArrayList<CustomerHasAddress>();
+	private List<CustomerHasCard> cusHasCards = new ArrayList<CustomerHasCard>();
+	private List<CustomerHasAddress> cusHasAddress = new ArrayList<CustomerHasAddress>();
 	
 	public InitialData() 
 	{
@@ -110,8 +110,8 @@ public class InitialData
 	}
 
 	@MethodAuthor(author = "Tyler Deans")
-	public ArrayList<Address> getAddresses() {
-		return (ArrayList<Address>) addresses;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
 	@MethodAuthor(author = "Tyler Deans")
@@ -121,11 +121,11 @@ public class InitialData
 
 	@MethodAuthor(author = "Tyler Deans")
 	public void setAddresses(List<Address> addresses) {
-		this.addresses = (ArrayList<Address>) addresses;
+		this.addresses = addresses;
 	}
 	
 	@MethodAuthor(author = "Tyler Deans")
-	public ArrayList<Wishlist> getWishlists() {
+	public List<Wishlist> getWishlists() {
 		return wishlists;
 	}
 	
@@ -136,11 +136,11 @@ public class InitialData
 	
 	@MethodAuthor(author = "Tyler Deans")
 	public void setWishlists(List<Wishlist> wishlists) {
-		this.wishlists = (ArrayList<Wishlist>) wishlists;
+		this.wishlists = wishlists;
 	}
 	
 	@MethodAuthor(author = "Tyler Deans")
-	public ArrayList<CustomerHasAddress> getCustomerHasAddresses() {
+	public List<CustomerHasAddress> getCustomerHasAddresses() {
 		return cusHasAddress;
 	}
 
@@ -151,28 +151,28 @@ public class InitialData
 	
 	@MethodAuthor(author = "Tyler Deans")
 	public void setCustomerHasAddresses(List<CustomerHasAddress> cust) {
-		this.cusHasAddress = (ArrayList<CustomerHasAddress>) cust;
+		this.cusHasAddress = cust;
 	}
 	 
 	public void addCard(Card p) {
 		this.Cards.add(p);
 	}
 
-	public ArrayList<Card> getCards() {
+	public List<Card> getCards() {
 		return Cards;
 	}
 
-	public void setCards(ArrayList<Card> Cards) {
+	public void setCards(List<Card> Cards) {
 		this.Cards = Cards;
 	}
 
 	@MethodAuthor(author = "Sean Connelly")
-	public ArrayList<Customer> getCustomers() {
+	public List<Customer> getCustomers() {
 		return customers;
 	}
 
 	@MethodAuthor(author = "Sean Connelly")
-	public void setCustomer(ArrayList<Customer> customers) {
+	public void setCustomer(List<Customer> customers) {
 		this.customers = customers;
 	}
 
@@ -196,7 +196,7 @@ public class InitialData
 	 * @return orders
 	 */
 	@MethodAuthor(author="Damien Lloyd")
-	public ArrayList<Order> getOrders()
+	public List<Order> getOrders()
 	{
 		return orders;
 	}
@@ -206,7 +206,7 @@ public class InitialData
 	 * @param orders
 	 */
 	@MethodAuthor(author="Damien Lloyd")
-	public void setOrders(ArrayList<Order> orders)
+	public void setOrders(List<Order> orders)
 	{
 		this.orders = orders;
 	}
@@ -216,12 +216,12 @@ public class InitialData
 //		this.Payments.add(p);
 //	}
 //	
-//	public ArrayList<Payment> getPayments()
+//	public List<Payment> getPayments()
 //	{
 //		return Payments;
 //	}
 //	
-//	public void setPayments(ArrayList<Payment> Payments)
+//	public void setPayments(List<Payment> Payments)
 //	{
 //		this.Payments = Payments;
 //	}
@@ -237,7 +237,7 @@ public class InitialData
 	}
 
 	@MethodAuthor(author="Annabelle Young")
-	public void setProducts(ArrayList<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 }
