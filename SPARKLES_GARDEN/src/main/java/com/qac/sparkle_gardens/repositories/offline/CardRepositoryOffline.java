@@ -3,11 +3,13 @@ package com.qac.sparkle_gardens.repositories.offline;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.repositories.CardRepository;
-import com.qac.sparkle_gardens.util.InitialData;
+import com.qac.sparkle_gardens.test_data.InitialData;
 import com.qac.sparkle_gardens.util.MethodAuthor;
 
 
@@ -16,6 +18,8 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
  * @author Allen Su
  *
  */
+@Stateless
+@Default
 public class CardRepositoryOffline implements CardRepository
 {
 	@Inject
