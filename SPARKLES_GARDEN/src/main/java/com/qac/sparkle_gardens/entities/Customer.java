@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.io.
 
 import com.qac.sparkle_gardens.util.CreditStatus;
 import com.qac.sparkle_gardens.entities.Address;
