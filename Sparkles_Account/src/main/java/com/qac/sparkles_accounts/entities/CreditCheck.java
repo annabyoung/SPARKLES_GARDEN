@@ -1,7 +1,5 @@
 package com.qac.sparkles_accounts.entities;
 
-import java.io.Serializable;
-
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -14,13 +12,8 @@ import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.util.CreditStatus;
 import com.qac.sparkle_gardens.util.MessageReceiver;
 
-public class CreditCheck implements MessageListener, Serializable
+public class CreditCheck implements MessageListener
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2742785142714169093L;
-	
 	private Card card;
 	private Customer customer;
 	
@@ -31,7 +24,7 @@ public class CreditCheck implements MessageListener, Serializable
 		this.card = card;
 		this.customer = customer;
 		
-		receiver = new MessageReceiver(this);
+		receiver = new MessageReceiver(queuecf, requestQueue, this);
 	}
 
 	public void onMessage(Message msg) 
