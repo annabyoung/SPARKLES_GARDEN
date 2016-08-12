@@ -57,4 +57,13 @@ h1{
 	background-color: #FEF1D6;
 	transform: translateY(5%);
 	resize: both;
-}	 
+}	
+#search{
+    width: 180px;
+    background: #FFFFFF;
+    background-image: "../img/search.png";
+   /* background-position: -48px 0;*/
+    padding-left: 30px;
+    border: 0;
+    float: right;
+}
