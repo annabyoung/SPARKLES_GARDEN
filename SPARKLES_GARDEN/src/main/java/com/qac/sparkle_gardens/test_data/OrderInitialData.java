@@ -1,4 +1,4 @@
-package deprecated;
+package com.qac.sparkle_gardens.test_data;
 
 import java.util.ArrayList;
 
@@ -19,6 +19,7 @@ import com.qac.sparkle_gardens.entities.Product;
  *
  */
 @Singleton
+@Deprecated
 public class OrderInitialData 
 {
 	private ArrayList<Order> orders;

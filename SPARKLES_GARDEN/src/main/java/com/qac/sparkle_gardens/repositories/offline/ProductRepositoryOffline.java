@@ -3,15 +3,17 @@ package com.qac.sparkle_gardens.repositories.offline;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.repositories.ProductRepository;
-import com.qac.sparkle_gardens.util.InitialData;
-
-import deprecated.ProductInitalData;
-
+import com.qac.sparkle_gardens.test_data.InitialData;
+import com.qac.sparkle_gardens.test_data.ProductInitalData;
 import com.qac.sparkle_gardens.entities.Product;
 
+@Stateless
+@Default
 public class ProductRepositoryOffline implements ProductRepository
 {
 	@Inject

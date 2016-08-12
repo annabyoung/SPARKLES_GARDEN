@@ -1,17 +1,21 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
+
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.*;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
-import com.qac.sparkle_gardens.util.InitialData;
+import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * 
  * @author Sean Connelly 
  *
  */
-
+@Stateless
+@Default
 public class CustomerRepositoryOffline implements CustomerRepository
 {	
 	@Inject 

@@ -1,7 +1,11 @@
-package deprecated;
+package com.qac.sparkle_gardens.test_data;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.ejb.Singleton;
+import javax.ejb.Stateless;
+
 import com.qac.sparkle_gardens.entities.Address;
 
 /**
@@ -12,6 +16,7 @@ import com.qac.sparkle_gardens.entities.Address;
  * deprecated in favour of InitialData (9/8/16)
  */
 @Deprecated
+@Singleton
 public class AddressInitialData {
 	private List<Address> addresses = new ArrayList<Address>();
 	

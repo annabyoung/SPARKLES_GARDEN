@@ -47,10 +47,27 @@ public class Wishlist {
 	@JoinColumn(name="product_fk", nullable = false)
 	// the list of products in wishlist
 	private ArrayList<Product> products;
-	
+
 	@Column
 	@NotNull
 	private String wishlistName;
+
+	/*
+	 * I am not sure if I need to use these properties
+	 * because the products are in a list.
+	 * 
+	 * 
+	 * @Column (name = "productName", nullable = false, length = 225)
+	 * @NotNull
+	 * @Size (min = 2, max = 225)
+	 * private String productName;
+	
+	 * @Column (name = "price", nullable = false, length = 100000)
+	 * @NotNull
+	 * @Size (min = 0, max = 100000)
+	*  private double price;
+	 */
+	
 	
 	// default constructor
 	public Wishlist () {
@@ -124,6 +141,19 @@ public class Wishlist {
 	public ArrayList<Product> getProducts() {
 		return products;
 	}
+	/*
+	 * If product name and price are separate columns in the database table then 
+	 * these methods are necessary. I am not sure if they necessary.
+	 * 
+	 * public String getProductName() {
+		return productName;
+	 }
+	
+	 * public double getPrice() {
+		return price;
+	 }
+	 */
+	
 	
 	/**
 	 * adds a product to the product list 
@@ -152,7 +182,7 @@ public class Wishlist {
 	public void setWishlistId(long wishlistId) {
 		this.wishlistId = wishlistId;
 	}
-   /** I don't know if I need this 
+   /* I don't know if I need this 
     * It depends on how the products are in a list or 
     * each product ID matches to a customer ID
     * 
@@ -175,10 +205,4 @@ public class Wishlist {
 	* }
     * 
     */
-	
-	
-	
-
 }
-
-

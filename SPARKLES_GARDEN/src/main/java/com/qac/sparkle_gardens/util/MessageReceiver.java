@@ -15,38 +15,43 @@ import javax.naming.NamingException;
 public class MessageReceiver 
 {
 	private QueueConnection connect = null;
+	private QueueConnectionFactory factory = null;
 	private QueueSession session = null;
-	private Queue request = null;
+	private Queue queue = null;
+	private Context context = null;
+	private QueueReceiver receiver = null;
 	
-	public MessageReceiver(String queuecf, String requestQueue, MessageListener ml)
+	public MessageReceiver(MessageListener ml)
 	{
-		setup(queuecf, requestQueue, ml);
+		setup(ml);
 	}
 	
-	void setup(String queuecf, String requestQueue, MessageListener ml)
+	void setup(MessageListener ml)
 	{
 		try
 		{
-			Context context = new InitialContext();
+			context = new InitialContext();
 			
 			QueueConnectionFactory factory =
-					(QueueConnectionFactory) context.lookup(queuecf);
+					(QueueConnectionFactory) 
+						context.lookup("ConnectionFactory");
 			
 			connect = factory.createQueueConnection();
 			
 			session = connect.createQueueSession(false,  
 					Session.AUTO_ACKNOWLEDGE);
 			
-			request = (Queue) context.lookup(requestQueue);
+			queue = (Queue) context.lookup("queue1");
 			
 			connect.start();
 			
-			QueueReceiver receiver = session.createReceiver(request);
+			receiver = session.createReceiver(queue);
 			receiver.setMessageListener(ml);
-			
-		} catch (JMSException jmse) {
+		} 
+		catch (JMSException jmse) {
 			jmse.printStackTrace();
-		} catch (NamingException jne) {
+		} 
+		catch (NamingException jne) {
 			jne.printStackTrace();
 		}
 	}
@@ -56,7 +61,8 @@ public class MessageReceiver
 		try
 		{
 			connect.close();
-		} catch (JMSException jmse) {
+		} 
+		catch (JMSException jmse) {
 			jmse.printStackTrace();
 		}
 	}
@@ -71,8 +77,8 @@ public class MessageReceiver
 		return session;
 	}
 
-	public Queue getRequest() 
+	public Queue getQueue() 
 	{
-		return request;
+		return queue;
 	}
 }
