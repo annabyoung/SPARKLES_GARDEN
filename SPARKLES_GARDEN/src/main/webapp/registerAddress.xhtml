@@ -25,13 +25,13 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 					<div class="form-group">
 						<label class="control-label col-sm-4">House number/ name:</label>
 						<div class="col-sm-4">
-							<h:inputtext name="houseName" required=true />
+							<h:inputText name="houseName" required="true" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-4">Address Line 1:</label>
 						<div class="col-sm-4">
-							 <h:inputText name="ad1" required=true />
+							 <h:inputText name="ad1" required="true" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -43,33 +43,33 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 					<div class="form-group">
 						<label class="control-label col-sm-4">City:</label>
 						<div class="col-sm-4">
-							<h:inputText name="city" required=true />
+							<h:inputText name="city" required="true" />
 						</div>
 					</div>
 					<div class="form-group">	
 						<label class="control-label col-sm-4">County:</label>
 						<div class="col-sm-4">
-						 	<h:inputText name="county" required=true />
+						 	<h:inputText name="county" required="true" />
 						 </div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-4">Country:</label>
 						<div class="col-sm-4">
-							<h:inputText name="country" required=true />
+							<h:inputText name="country" required="true" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-4">Postcode:</label>
 						<div class="col-sm-4">
-							<h:inputText name="postcode" required=true /> 
+							<h:inputText name="postcode" required="true" /> 
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-4">Address Type:</label> 
-						<div>
+						<div class="col-sm-4">
 							<h:selectOneMenu class="form-control" name="addressType" >
-								<f:selectItem itemValue="1" itemlabel="Billing" />
-								<f:selectItem itemValue="2" itemlabel="Shipping" />
+								<f:selectItem itemValue="Billing" itemlabel="Billing" />
+								<f:selectItem itemValue="Shipping" itemlabel="Shipping" />
 							</h:selectOneMenu>
 						</div>
 					</div>
@@ -78,11 +78,11 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 							<h:commandButton value="Add Another Address" class="btn btn-primary" role="button" />
 						</span>
 						<span>
-							<h:outputLink value="registerPayment.html" class="btn btn-secondary" role="button">Continue To Payment Method</h:outputLink>
+							<h:outputLink value="registerPayment.html" class="btn btn-primary" role="button">Continue To Payment Method</h:outputLink>
 						</span>
 					</div>
-				</div>
 			</h:form>
+			</div>
 			<div>
 				<p id="contact">
 					<a href="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</a>
