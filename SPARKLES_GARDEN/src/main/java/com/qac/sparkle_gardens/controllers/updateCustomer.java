@@ -25,7 +25,7 @@ import com.qac.sparkle_gardens.services.AddressService;
 @RequestScoped 
 
 
-public class updateCustomer 
+public class updateCustomer implements Controller<Customer> 
 {
 	@Inject
 	CustomerService service;
@@ -50,6 +50,11 @@ public class updateCustomer
 		else
 			return errors;
 	
+	}
+	@Override
+	public void handleMessage(Customer messagedCustomer){
+		//TODO set logged in customer to be the received customer
+		//TODO display a confirmation message to the customer 
 	}
 }
 
