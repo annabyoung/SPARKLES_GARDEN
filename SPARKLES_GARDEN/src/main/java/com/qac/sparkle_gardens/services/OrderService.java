@@ -4,12 +4,20 @@ import java.util.ArrayList;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jms.JMSException;
+import javax.jms.MapMessage;
+import javax.jms.Queue;
+import javax.jms.QueueReceiver;
+import javax.jms.QueueSender;
+import javax.jms.QueueSession;
+import javax.jms.TextMessage;
 
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
+import com.qac.sparkle_gardens.util.MessageSender;
 import com.qac.sparkle_gardens.util.OrderStatus;
 
 /**
@@ -30,6 +38,14 @@ public class OrderService
 	
 	@Inject
 	ArrayList<OrderLine> basket;
+	
+	@Inject
+	MessageSender sender;
+	
+	public OrderService()
+	{
+		sender = new MessageSender("", "", "");
+	}
 	
 	/**
 	 * Checks if the orderID is empty. If all the OrderLines have a
@@ -105,24 +121,33 @@ public class OrderService
 	 */
 	public String generateInvoice(long orderID)
 	{
-		String invoice = "";
-		ArrayList<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
+		QueueSession session = sender.getSession();
+		Queue response = sender.getResponse();
+		Queue request = sender.getRequest();
 		
-		invoice += "\n\n\n----------------------------------------------";
-		
-		invoice += "Thank you for shopping at NBGardens!\n";
-		invoice += "You have purchased the following items: \n";
-		
-		for (OrderLine i : lines)
+		String result = "";
+		try
 		{
-			invoice += "\n\nProduct = " + i.getProduct().getProductName() + "\n" + 
-						"   Quantity = " + i.getQuantity() + "\n" + 
-						    "Price = " + (i.getProduct().getPrice() * i.getQuantity()) + "\n\n";
+			MapMessage msg = session.createMapMessage();
+			msg.setString("Invoice", "Invoice");
+			
+			QueueSender sender = session.createSender(request);
+			sender.send(msg);
+			
+			String inv = "JMSCorrelationID = " + msg.getJMSMessageID();
+			QueueReceiver receiver = 
+					session.createReceiver(response, inv);
+			
+			TextMessage tm = (TextMessage) receiver.receive(30_000);
+			
+			if (tm == null)
+			{
+				result = "No invoice!";
+			} else result = tm.getText();
+		} catch (JMSException jmse) {
+			jmse.printStackTrace();
 		}
-				
-		invoice += "\n\n\n----------------------------------------------";
-		
-		return invoice;
+		return result;
 	}
 	
 	/**

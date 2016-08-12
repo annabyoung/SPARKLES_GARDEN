@@ -1,5 +1,7 @@
 package com.qac.sparkle_gardens.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -35,8 +37,13 @@ import com.qac.sparkle_gardens.entities.Address;
  })
  
  // may need to make new address query?
-public class Customer {
+public class Customer implements Serializable  {
 	 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6237268271859215384L;
+
 	@Id
 	@Column (name ="accountID")
 	@OneToMany 
