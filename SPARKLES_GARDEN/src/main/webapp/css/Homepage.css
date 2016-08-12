@@ -7,7 +7,7 @@ h1{
 	position:fixed;
 }
 
-#login{
+#login a{
 	background-color: #097F10	;
 	border: 0px;
 	border-radius: 0px 0px 5px 5px;
@@ -15,6 +15,7 @@ h1{
 	position: fixed;
 	top: 0;
 	right: 0;
+	color: #FFFFFF;
 }
 #navbarTitle{
 	color: #FEF1D6;

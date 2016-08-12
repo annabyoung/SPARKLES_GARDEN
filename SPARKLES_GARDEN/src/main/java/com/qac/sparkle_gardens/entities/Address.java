@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,11 +27,6 @@ public class Address {
 	@Column (name = "addressID")
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long addressId;
-	
-	@ManyToOne
-	@JoinColumn(name="cust_address", nullable = false)
-	private CustomerHasAddress custAddress;
-
 	
 	//The number of the building
 	@Column
@@ -92,39 +85,6 @@ public class Address {
 		this.postCode = postCode;
 	}
 	
-	/**
-	 * 
-	 * @param custAddress
-	 * @param buildingNum
-	 * @param streetName
-	 * @param city
-	 * @param county
-	 * @param country
-	 * @param postCode
-	 */
-	public Address(CustomerHasAddress custAddress, int buildingNum, String streetName, String city, String county, String country, String postCode) {
-		this.custAddress = custAddress;
-		this.buildingNum = buildingNum;
-		this.streetName = streetName;
-		this.city = city;
-		this.county = county;
-		this.country = country;
-		this.postCode = postCode;
-	}
-	// Getters and setters for all the attributes
-	
-	public CustomerHasAddress getCustAddress() {
-		return custAddress;
-	}
-	public void setCustAddress(CustomerHasAddress custAddress) {
-		this.custAddress = custAddress;
-	}
-	
-	// Gets the account ID using the CustomerHasAddress object
-	public long getAccountId() {
-		return custAddress.getCustomer().getAccountID();
-	}
-	
 	public long getAddressId() {
 		return addressId;
 	}
@@ -181,5 +141,7 @@ public class Address {
 		this.postCode = postCode;
 	}
 	
-	
+	public boolean equals(Address anotherAddress){
+		return (this.addressId == anotherAddress.addressId);
+	}
 }

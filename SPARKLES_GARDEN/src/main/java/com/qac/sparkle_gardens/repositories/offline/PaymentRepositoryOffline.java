@@ -1,14 +1,20 @@
-package deprecated;
+package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.repositories.PaymentRepository;
+import com.qac.sparkle_gardens.test_data.CardInitialData;
+import com.qac.sparkle_gardens.test_data.PaymentInitialData;
 
 @Deprecated
+@Stateless
+@Default
 public class PaymentRepositoryOffline implements PaymentRepository
 {
 	@Inject
