@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.util;
+package com.qac.sparkle_gardens.test_data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,8 @@ import com.qac.sparkle_gardens.entities.OrderLine;
 //import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
+import com.qac.sparkle_gardens.util.CreditStatus;
+import com.qac.sparkle_gardens.util.MethodAuthor;
 
 /**
  * A single initial data object. For simplicity.
@@ -24,7 +26,7 @@ import com.qac.sparkle_gardens.entities.Wishlist;
  */
 @Singleton
 public class InitialData 
-{
+{ 
 	private ArrayList<Address> addresses = new ArrayList<Address>();
 	private ArrayList<Wishlist> wishlists = new ArrayList<Wishlist>();
 	private ArrayList<Card> Cards = new ArrayList<Card>();
@@ -39,7 +41,8 @@ public class InitialData
 	public InitialData() 
 	{
 		//Object Creation.
-		Address dummyAddress = new Address(1, "Anchorage 1", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ");
+		//long addressId, int buildingNum, String streetName, String city, String county, String country, String postCode
+		Address dummyAddress = new Address(1, "Anchorage", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ");
 		Customer johnSmith = new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890");
 		Customer janeDoe = new Customer("Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, "password01", "0987654321");
 		Customer joeSchmoe = new Customer("Joe", "Schmoe", "email999@email.com", CreditStatus.VALID, "password01", "1357908642");
