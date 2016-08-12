@@ -44,7 +44,7 @@ public class OrderService
 	
 	public OrderService()
 	{
-		sender = new MessageSender("", "", "");
+		sender = new MessageSender();
 	}
 	
 	/**
@@ -122,21 +122,20 @@ public class OrderService
 	public String generateInvoice(long orderID)
 	{
 		QueueSession session = sender.getSession();
-		Queue response = sender.getResponse();
-		Queue request = sender.getRequest();
-		
+		Queue queue = sender.getQueue();
 		String result = "";
+		
 		try
 		{
 			MapMessage msg = session.createMapMessage();
 			msg.setString("Invoice", "Invoice");
 			
-			QueueSender sender = session.createSender(request);
+			QueueSender sender = session.createSender(queue);
 			sender.send(msg);
 			
 			String inv = "JMSCorrelationID = " + msg.getJMSMessageID();
 			QueueReceiver receiver = 
-					session.createReceiver(response, inv);
+					session.createReceiver(queue, inv);
 			
 			TextMessage tm = (TextMessage) receiver.receive(30_000);
 			

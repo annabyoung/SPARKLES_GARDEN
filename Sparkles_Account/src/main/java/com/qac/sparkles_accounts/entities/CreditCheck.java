@@ -1,8 +1,9 @@
 package com.qac.sparkles_accounts.entities;
 
+import java.io.Serializable;
+
 import javax.jms.JMSException;
 import javax.jms.Message;
-import javax.jms.MessageListener;
 import javax.jms.Queue;
 import javax.jms.QueueSender;
 import javax.jms.TextMessage;
@@ -12,38 +13,24 @@ import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.util.CreditStatus;
 import com.qac.sparkle_gardens.util.MessageReceiver;
 
-public class CreditCheck implements MessageListener
+public class CreditCheck implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2035175086074314039L;
+	
 	private Card card;
 	private Customer customer;
 	
 	private MessageReceiver receiver;
 	
-	public CreditCheck(Card card, Customer customer, String queuecf, String requestQueue)
+	public CreditCheck(Card card, Customer customer)
 	{
 		this.card = card;
 		this.customer = customer;
 		
-		receiver = new MessageReceiver(queuecf, requestQueue, this);
-	}
-
-	public void onMessage(Message msg) 
-	{
-		try
-		{
-			TextMessage tm = 
-					receiver.getSession().createTextMessage(this.calculate());
-			tm.setJMSCorrelationID(msg.getJMSMessageID());
-			
-			QueueSender sender = 
-					receiver.getSession()
-							.createSender((Queue) msg.getJMSReplyTo());
-			sender.send(tm);
-		} catch (JMSException jmse) {
-			jmse.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		receiver = new MessageReceiver(this);
 	}
 	
 	public void close()
@@ -51,15 +38,16 @@ public class CreditCheck implements MessageListener
 		receiver.close();
 	}
 	
-	private String calculate()
+	public Boolean calculate()
 	{
-		String result = "Credit check: UNKNOWN";
+		Boolean result = false;
 		
 		if (customer.getCreditStatus() == CreditStatus.BLACKLISTED)
 		{
-			result = "Credit check: FAIL";
+			result = false;
 		}
-		else result = "Credit check: PASS";
+		else result = true;
+		
 		return result;
 	}
 }
