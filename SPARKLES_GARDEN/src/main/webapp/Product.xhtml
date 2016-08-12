@@ -1,0 +1,47 @@
+<ui:composition xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="templates/navbar_Template.xhtml">
+	<ui:define name="mainContent">
+		<div class="container-fluid" id="formdiv">
+			<!--Everything goes in here-->
+			<div class="col-sm-3 col-lg-3 col-md-3">
+				<div class="thumbnail">
+					<img id="prodimg" src="/img/gnome1.jpg" alt="" width="640 px"
+						height="360 px" />
+				</div>
+			</div>
+			<div id="productname">
+				<a href="#">Red Gnome</a>
+			</div>
+			<div id="stocklevel">
+				<p align="left">17 in stock</p>
+			</div>
+			<div id="buttonArea" class="pull-right">
+				<span><h:commandButton id="addToBasket" value="Add To Basket" role="button" /></span>
+				<div class="col-sm-4">
+							<h:selectOneMenu id="wishlistDropdown" class="form-control" name="wishlist" >
+								<f:selectItem itemValue="wishlist1" itemlabel="Wish List 1" />
+								<f:selectItem itemValue="wishlist2" itemlabel="Wish list 2" />
+							</h:selectOneMenu>
+				</div>
+			</div>
+			<div id="productdesc">
+				<p>This is a longer description. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit.</p>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

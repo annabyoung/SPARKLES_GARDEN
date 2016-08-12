@@ -1,14 +1,15 @@
-h1{
+h1 {
 	background-color: #097F10;
-	height:130px;
+	height: 130px;
 	margin: 0px;
 }
+
 #navbar-right {
-	position:fixed;
+	position: fixed;
 }
 
-#login a{
-	background-color: #097F10	;
+#login a {
+	background-color: #097F10;
 	border: 0px;
 	border-radius: 0px 0px 5px 5px;
 	font-size: 10pt;
@@ -17,61 +18,132 @@ h1{
 	right: 0;
 	color: #FFFFFF;
 }
-#navbarTitle{
+
+#navbarTitle {
 	color: #FEF1D6;
 }
-#myNewNavbar{
+
+#myNewNavbar {
 	background-color: #097F10;
 	border: 0px;
 	border-radius: 0px 0px 5px 5px
 }
-#myDropdown{
-	background-color:#097F10; 
+
+#myDropdown {
+	background-color: #097F10;
 }
-#dropdown{
+
+#dropdown {
 	background-color: #097F10;
 	color: #FEF1D6;
 }
-#MyNavButton{
+
+#MyNavButton {
 	background-color: #097F10;
 	border: 1px solid #FEF1D6;
 }
-#myNavbar ul li a{ 
-	color: #FEF1D6; 
+
+#myNavbar ul li a {
+	color: #FEF1D6;
 }
-#myNavbar ul li a:hover { 
-	color: #FEF1D6; 
-	background-color: #FFDF52; 
+
+#myNavbar ul li a:hover {
+	color: #FEF1D6;
+	background-color: #FFDF52;
 }
-#contact{
+
+#contact {
 	text-decoration: underline;
 	position: fixed;
 	bottom: 0;
 	right: 0;
 	padding-right: 15px;
 }
-#mainbody{
-	width:1600px;
-	height:700px;
-	border:1px solid #000;
+
+#mainbody {
+	width: 1600px;
+	height: 700px;
+	border: 1px solid #000;
 	background-color: #FEF1D6;
 	transform: translateY(5%);
 	resize: both;
-}	 
-#formdiv{
+}
+
+#formdiv {
 	margin: 0 auto;
 	border-style: solid;
 	border-width: 1px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	text-align: center;
-	font-size:20px;
+	font-size: 20px;
 	font-style: bold;
-	width: 100%;
-	border: 1px solid #000000;
+	width: 100%; border : 1px solid #000000;
 	background-color: #FEF1D6;
+	border: 1px solid #000000;
 }
-#productname a{
+
+#productname a {
 	font-size: 24;
 	color: #000000;
+}
+
+#formdiv inputbox {
+	background-color: #000000;
+}
+
+#stocklevel p {
+	color: #51CE4D;
+}
+
+#price p {
+	color: #000000;
+}
+
+#prodname {
+	font-weight: bold;
+}
+
+#buttonArea {
+	width: 20%;
+	height: 20%;
+	transform: translateY(-10%);
+	border: 1px solid;
+	background-color: #FFFFFF;
+}
+
+#prodimg img {
+	border: 0 auto;
+	background-color: #FEF1D6;
+}
+
+.button{
+	background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#addToBasket{
+	transition-duration: 0.4s;
+	transform:translateY(150%);	
+	background-color: #F29D05;
+	color: #FFFFFF;
+	border-radius: 12px;
+	padding: 14px 75px;
+}
+#addToBasket:hover{
+	background-color: #51CE4D;
+	color: #000000;
+}
+#wishlistDropdown{
+	transform:translate(10%,400%);
+	width:280px;
+	height: 50px;
 }
