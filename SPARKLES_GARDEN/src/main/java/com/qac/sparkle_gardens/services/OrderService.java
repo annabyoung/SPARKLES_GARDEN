@@ -7,22 +7,17 @@ import javax.inject.Inject;
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.Queue;
-import javax.jms.QueueConnection;
-import javax.jms.QueueConnectionFactory;
 import javax.jms.QueueReceiver;
 import javax.jms.QueueSender;
 import javax.jms.QueueSession;
-import javax.jms.Session;
 import javax.jms.TextMessage;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
+import com.qac.sparkle_gardens.util.MessageSender;
 import com.qac.sparkle_gardens.util.OrderStatus;
 
 /**
@@ -44,35 +39,12 @@ public class OrderService
 	@Inject
 	ArrayList<OrderLine> basket;
 	
-	private QueueConnection connect = null;
-	private QueueSession session = null;
-	private Queue response = null;
-	private Queue request = null;
+	@Inject
+	MessageSender sender;
 	
-	public OrderService(String queuecf, String requestQ,
-			String responseQ)
+	public OrderService()
 	{
-		try
-		{
-			Context context = new InitialContext();
-			QueueConnectionFactory factory = 
-					(QueueConnectionFactory) 
-						context.lookup(queuecf);
-			connect = factory.createQueueConnection();
-			
-			session = 
-					connect.createQueueSession(false, 
-							Session.AUTO_ACKNOWLEDGE);
-			
-			response = (Queue)context.lookup(responseQ);
-			request = (Queue)context.lookup(requestQ);
-			
-			connect.start();
-		} catch (JMSException jmse) {
-			jmse.printStackTrace();
-		} catch (NamingException jne) {
-			jne.printStackTrace();
-		}
+		sender = new MessageSender("", "", "");
 	}
 	
 	/**
@@ -149,6 +121,10 @@ public class OrderService
 	 */
 	public String generateInvoice(long orderID)
 	{
+		QueueSession session = sender.getSession();
+		Queue response = sender.getResponse();
+		Queue request = sender.getRequest();
+		
 		String result = "";
 		try
 		{

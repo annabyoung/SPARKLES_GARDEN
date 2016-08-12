@@ -1,10 +1,8 @@
 package com.qac.sparkles_accounts.entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.jms.JMSException;
-import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.Queue;
@@ -22,6 +20,7 @@ import javax.naming.NamingException;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
+import com.qac.sparkle_gardens.util.MessageReceiver;
 
 /**
  * The Invoice entity generates an invoice based on the 
@@ -34,44 +33,38 @@ public class Invoice implements MessageListener
 	Customer customer;
 	Order order;
 	
-	private QueueConnection connect = null;
-	private QueueSession session = null;
-	private Queue request = null;
-	
-	public Invoice()
-	{
-		this(null,null,"","");
-	}
+	private MessageReceiver receiver;
 	
 	public Invoice(Customer customer, Order order, String queuecf, String requestQueue)
 	{
 		this.customer = customer;
 		this.order = order;
 		
+		receiver = new MessageReceiver(queuecf, requestQueue, this);
+	}
+
+	public void onMessage(Message msg) 
+	{
 		try
 		{
-			Context context = new InitialContext();
+			TextMessage tm = 
+					receiver.getSession().createTextMessage(this.generate());
+			tm.setJMSCorrelationID(msg.getJMSMessageID());
 			
-			QueueConnectionFactory factory =
-					(QueueConnectionFactory)context.lookup(queuecf);
-			
-			connect = factory.createQueueConnection();
-			
-			session = connect.createQueueSession(false,  
-					Session.AUTO_ACKNOWLEDGE);
-			
-			request = (Queue)context.lookup(requestQueue);
-			
-			connect.start();
-			
-			QueueReceiver receiver = session.createReceiver(request);
-			receiver.setMessageListener(this);
-			
+			QueueSender sender = 
+					receiver.getSession()
+							.createSender((Queue) msg.getJMSReplyTo());
+			sender.send(tm);
 		} catch (JMSException jmse) {
 			jmse.printStackTrace();
-		} catch (NamingException jne) {
-			jne.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+	}
+	
+	public void close()
+	{
+		receiver.close();
 	}
 	
 	private String generate()
@@ -94,33 +87,5 @@ public class Invoice implements MessageListener
 		invoice += "\n\n\n----------------------------------------------";
 		
 		return invoice;
-	}
-
-	public void onMessage(Message message) 
-	{
-		try
-		{	
-			TextMessage tm = session.createTextMessage(generate());
-			tm.setJMSCorrelationID(message.getJMSMessageID());
-			
-			QueueSender sender = 
-					session.createSender((Queue) 
-							message.getJMSReplyTo());
-			sender.send(tm);
-		} catch (JMSException jmse) {
-			jmse.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void close()
-	{
-		try
-		{
-			connect.close();
-		} catch (JMSException jmse) {
-			jmse.printStackTrace();
-		}
 	}
 }

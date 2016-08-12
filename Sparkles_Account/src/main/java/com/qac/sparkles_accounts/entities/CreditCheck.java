@@ -1,49 +1,65 @@
 package com.qac.sparkles_accounts.entities;
 
-import static javax.jms.Session.AUTO_ACKNOWLEDGE;
-
 import javax.jms.JMSException;
-import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.Queue;
-import javax.jms.QueueConnection;
-import javax.jms.QueueConnectionFactory;
-import javax.jms.QueueReceiver;
-import javax.jms.QueueSession;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import javax.jms.QueueSender;
+import javax.jms.TextMessage;
 
-public class CreditCheck implements MessageListener {
-	private Context context= null;
-	private QueueConnectionFactory conFact= null;
-	private QueueConnection connect = null;
-	private QueueSession session = null;
-	private QueueReceiver receiver = null;
-	private Queue requests = null;
+import com.qac.sparkle_gardens.entities.Card;
+import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.util.CreditStatus;
+import com.qac.sparkle_gardens.util.MessageReceiver;
+
+public class CreditCheck implements MessageListener
+{
+	private Card card;
+	private Customer customer;
 	
-	public void receiveCustomerMessage() {
-		try {
-			context = new InitialContext();
-			conFact = (QueueConnectionFactory) context.lookup("ConnectionFactory");
-			requests = (Queue) context.lookup("queue1");
-			connect = conFact.createQueueConnection();
-			session = connect.createQueueSession(false, AUTO_ACKNOWLEDGE);
-		} catch (NamingException e){
+	private MessageReceiver receiver;
+	
+	public CreditCheck(Card card, Customer customer, String queuecf, String requestQueue)
+	{
+		this.card = card;
+		this.customer = customer;
+		
+		receiver = new MessageReceiver(queuecf, requestQueue, this);
+	}
+
+	public void onMessage(Message msg) 
+	{
+		try
+		{
+			TextMessage tm = 
+					receiver.getSession().createTextMessage(this.calculate());
+			tm.setJMSCorrelationID(msg.getJMSMessageID());
 			
-		} catch (JMSException e) {
-			
-		} finally {
-			
+			QueueSender sender = 
+					receiver.getSession()
+							.createSender((Queue) msg.getJMSReplyTo());
+			sender.send(tm);
+		} catch (JMSException jmse) {
+			jmse.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
-	public void onMessage(Message messsage) {
-		try {
-			// Gets the customer data
-			MapMessage msg = (MapMessage) message;
-			
+	public void close()
+	{
+		receiver.close();
+	}
+	
+	private String calculate()
+	{
+		String result = "Credit check: UNKNOWN";
+		
+		if (customer.getCreditStatus() == CreditStatus.BLACKLISTED)
+		{
+			result = "Credit check: FAIL";
 		}
+		else result = "Credit check: PASS";
+		return result;
 	}
 }
