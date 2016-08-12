@@ -1,5 +1,6 @@
 package com.qac.sparkles_accounts.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.jms.JMSException;
@@ -28,8 +29,13 @@ import com.qac.sparkle_gardens.util.MessageReceiver;
  * @author Administrator
  *
  */
-public class Invoice implements MessageListener
+public class Invoice implements MessageListener, Serializable
 {	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7791470121898410338L;
+	
 	Customer customer;
 	Order order;
 	
@@ -40,7 +46,7 @@ public class Invoice implements MessageListener
 		this.customer = customer;
 		this.order = order;
 		
-		receiver = new MessageReceiver(queuecf, requestQueue, this);
+		receiver = new MessageReceiver(this);
 	}
 
 	public void onMessage(Message msg) 
