@@ -112,7 +112,7 @@ public class Card {
 	 */
 	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
-	}
+	} 
 
 	/**
 	 * 
