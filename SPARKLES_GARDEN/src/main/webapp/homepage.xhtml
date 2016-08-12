@@ -4,11 +4,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="templates/navbar_Template.xhtml">
 	<ui:define name="mainContent">
-		<div id="mainbody">
-			Main Body
-			<p id="contact">
-				<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Contact</a>
-			</p>
+		<div class="container-fluid">
+			<h:form class="form-horizontal center_div" role="form" id="formdiv">
+				<label>Test</label>
+			</h:form>
+			<div>
+				<p id="contact">
+					<h:outputLink value="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</h:outputLink>
+				</p>
+			</div>
 		</div>
 	</ui:define>
 </ui:composition>
