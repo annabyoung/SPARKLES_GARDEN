@@ -1,16 +1,15 @@
 /**
  * 
  */
-package com.qac.sparkle_gardens.controllers;
+package com.qac.sparkles_accounts.controllers;
 
 /**
  * @author Annabelle Young
  * 
- * Controller interface: 
- * see updateCustomer for details on handleMessage
+ * Controller interface:
  *
  */
 public interface Controller<T> {
-
+	
 	public void handleMessage(T messageObject);
 }
