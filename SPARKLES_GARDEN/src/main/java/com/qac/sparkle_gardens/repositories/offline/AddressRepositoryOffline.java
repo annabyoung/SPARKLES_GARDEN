@@ -40,19 +40,19 @@ public class AddressRepositoryOffline implements AddressRepository {
 	}
 	
 	/**
-	 * Locate an address by the customer ID
+	 * Locate the address(s) by the customer ID
 	 * @param id
 	 * @return
 	 */
-	public Address findByAccountId(long accountId) {
-		ArrayList<Address> list = initialData.getAddresses();
-		Address place = new Address();
-		for (int index = 0; index < list.size(); index++) {
-			if (list.get(index).getAccountId() == accountId) {
-				place = list.get(index);
-			}
+	public List<Address> findByAccountId(long accountId) {
+		ArrayList <Address> places = new ArrayList <Address>();
+		// retrieves all the addresses a customer has 
+	    ArrayList<CustomerHasAddress> custAddress = (ArrayList<CustomerHasAddress>) custAddressRepository.findByCustomerID(accountId);
+		
+		for (CustomerHasAddress cust : custAddress) {
+			places.add(cust.getAddress());
 		}
-		return place;
+		return places;
 	}
 	
 	// Returns all the addresses
@@ -87,6 +87,20 @@ public class AddressRepositoryOffline implements AddressRepository {
 			}
 		}
 		initialData.setAddresses(addresses);
+	}
+	
+	/**
+	 * @param address
+	 */
+	public boolean isDuplicate(Address address) {
+		ArrayList<Address> addresses = initialData.getAddresses();
+		
+		for (int index = 0; index < addresses.size(); index++) {
+			if (address.equals(addresses.get(index))) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

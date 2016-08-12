@@ -1,5 +1,8 @@
 package com.qac.sparkle_gardens.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Address;
@@ -17,7 +20,7 @@ public class AddressService {
 	 * @param id
 	 * @return
 	 */
-	public Address getAddress(long custId) {
+	public List<Address> getAddress(long custId) {
 		return addressRepository.findByAccountId(custId);
 	}
 	
@@ -26,10 +29,21 @@ public class AddressService {
 	 * @param id
 	 */
 	public void deleteAddress(long acctId, long addressId) {
-		Address address;
-		address = addressRepository.findByAccountId(acctId);
-		CustomerHasAddress cust = custAddressRepository.findByAddressID(addressId);
-		custAddressRepository.removeCustomerHasAddress(address.getCustAddress());
+		
+		// Retrieve all the addresses under a given address ID
+		ArrayList<CustomerHasAddress> custAdd = (ArrayList<CustomerHasAddress>) custAddressRepository.findByAddressID(addressId);
+		
+		CustomerHasAddress custAddress = new CustomerHasAddress();
+		// Finds the given account ID with that address ID
+		for (CustomerHasAddress cust : custAdd) {
+			if (cust.getAccountId() == acctId && cust.getAddressId() == addressId) {
+				custAddress = cust;
+			}
+		}
+		
+		Address address = custAddress.getAddress();
+		
+		custAddressRepository.removeCustomerHasAddress(custAddress);
 		/** if there are no other customers who have this associated address
 		 * then the address is removed
 		 */
@@ -44,9 +58,9 @@ public class AddressService {
 	 * @param customer
 	 * @param otherAddress
 	 */
-	public void deleteAddress(Customer customer, Address otherAddress) {
-		Address address = addressRepository.findByAccountId(customer.getAccountID());
-		custAddressRepository.removeCustomerHasAddress(address.getCustAddress());
+	public void deleteAddress(Customer customer, Address address) {
+		CustomerHasAddress custAdd = new CustomerHasAddress(customer, address);
+		custAddressRepository.removeCustomerHasAddress(custAdd);
 		
 		/** if there are no other customers who have this associated address
 		 * then the address is removed
@@ -54,11 +68,11 @@ public class AddressService {
 		if (!custAddressRepository.isCustomerId(address)) {
 			addressRepository.removeAddress(address);
 		}
-		addressRepository.removeCustomerHasAddress(address.getCustAddress(), address.getAccountId());
+		
 	}
 	
 	/**
-	 *  Creates a new address
+	 *  Creates a new address (DEPRECATED)
 	 * @param address
 	 */
 	@Deprecated
@@ -67,7 +81,7 @@ public class AddressService {
 	}
 	
 	/**
-	 * Overloaded create address method
+	 * A more complex but necessary create address method
 	 * @param customer
 	 * @param buildingNum
 	 * @param streetName
@@ -80,8 +94,15 @@ public class AddressService {
 		Address address = new Address(buildingNum, streetName, city, county, country, postCode);
 		CustomerHasAddress custAdd = new CustomerHasAddress(customer, address); 
 		custAddressRepository.persistCustomerHasAddress(custAdd);
-		addressRepository.persistAddress(address);
-		addressRepository.addCustomerHasAddress(custAdd, customer.getAccountID());
+		
+		/** This code prevents duplicate address objects from being created.
+		 * If the address has not already been created then add a new address 
+		 * to the repository.
+		 */
+		if (!addressRepository.isDuplicate(address)) {
+			addressRepository.persistAddress(address);
+		}
+		
 	}
 	
 	

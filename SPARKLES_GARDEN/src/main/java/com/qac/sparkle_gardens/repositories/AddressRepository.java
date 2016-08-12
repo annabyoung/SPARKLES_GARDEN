@@ -28,10 +28,7 @@ public interface AddressRepository {
 	public void updateAddress(Address address);
 	//Remove address
 	public void removeAddress(Address address);
-	
-	// Adds a CustomerHasAddress object
-	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId);
-	
-	// Removes a CustomerHasAddress object 
-	public void removeCustomerHasAddress(CustomerHasAddress cust, long accountId);
+
+	// checks for duplicate objects
+	public boolean isDuplicate(Address address);
 }
