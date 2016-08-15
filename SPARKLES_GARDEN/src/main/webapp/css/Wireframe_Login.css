@@ -43,7 +43,6 @@ label{
 /*Underlines and fixes the contact link  to the bottom right of the page*/
 #contact{
 	text-decoration: underline;
-	position: fixed;
 	bottom: 0;
 	right: 0;
 	padding-right: 15px;

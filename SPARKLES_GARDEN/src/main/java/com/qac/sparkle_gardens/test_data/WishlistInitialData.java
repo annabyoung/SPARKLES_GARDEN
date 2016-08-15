@@ -1,4 +1,4 @@
-package com.qac.sparkle_gardens.util;
+package com.qac.sparkle_gardens.test_data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ import com.qac.sparkle_gardens.entities.Wishlist;
  *
  */
 @Singleton
+@Deprecated
 public class WishlistInitialData {
 	private ArrayList<Wishlist> wishlists = new ArrayList<Wishlist>();
 	private ArrayList<Product> products = new ArrayList<Product>();

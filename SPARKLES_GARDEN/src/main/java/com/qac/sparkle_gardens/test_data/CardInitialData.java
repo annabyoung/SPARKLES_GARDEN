@@ -1,5 +1,7 @@
 package com.qac.sparkle_gardens.test_data;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Singleton;
 
@@ -12,7 +14,7 @@ import com.qac.sparkle_gardens.entities.Card;
 @Deprecated
 public class CardInitialData 
 {
-	private ArrayList<Card> Cards = new ArrayList<Card>();
+	private List<Card> Cards = new ArrayList<Card>();
 	
 	public CardInitialData()
 	{
@@ -26,12 +28,12 @@ public class CardInitialData
 		this.Cards.add(p);
 	}
 	
-	public ArrayList<Card> getCards()
+	public List<Card> getCards()
 	{
 		return Cards;
 	}
 	
-	public void setCards(ArrayList<Card> Cards)
+	public void setCards(List<Card> Cards)
 	{
 		this.Cards = Cards;
 	}

@@ -30,12 +30,12 @@ public class CardRepositoryOffline implements CardRepository
 		initialData.addCard(c);
 	}
 	
-	public ArrayList<Card> listCards() 
+	public List<Card> listCards() 
 	{
 		return initialData.getCards(); 
 	}
 	
-	public void persistCards(ArrayList<Card> c) 
+	public void persistCards(List<Card> c) 
 	{
 		initialData.setCards(c);
 	}
@@ -52,7 +52,7 @@ public class CardRepositoryOffline implements CardRepository
 		return null;
 	}
 	
-	public ArrayList<Card> getCards() 
+	public List<Card> getCards() 
 	{
 		return initialData.getCards();
 	}
@@ -60,7 +60,7 @@ public class CardRepositoryOffline implements CardRepository
 	@MethodAuthor (author = "Damien Lloyd")
 	public void removeCard(long cardID) 
 	{
-		ArrayList<Card> cl = initialData.getCards();
+		List<Card> cl = initialData.getCards();
 		
 		for (int i = 0; i < cl.size(); i++)
 		{
@@ -71,7 +71,7 @@ public class CardRepositoryOffline implements CardRepository
 	
 	public List<Card> findByCardNumber(String cardNumber) 
 	{
-		ArrayList<Card> cards = new ArrayList<Card>();
+		List<Card> cards = new ArrayList<Card>();
 		for (Card c : initialData.getCards()){
 			if(cardNumber == c.getCardNumber()){
 				cards.add(c);

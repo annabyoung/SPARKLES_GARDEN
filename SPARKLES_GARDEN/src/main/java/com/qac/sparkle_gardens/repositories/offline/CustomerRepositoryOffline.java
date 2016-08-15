@@ -1,6 +1,6 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -31,12 +31,12 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			
 		}
 		
-		public void persistCustomer(ArrayList<Customer> customers){
+		public void persistCustomer(List<Customer> customers){
 			initialData.setCustomer(customers);
 		}
 		
 		public Customer findByID(long accountID) {
-			ArrayList<Customer> theCustomers = initialData.getCustomers();
+			List<Customer> theCustomers = initialData.getCustomers();
 			for (int i=0; i<theCustomers.size(); i++)
 			{
 				if(theCustomers.get(i).getAccountID() == accountID){
@@ -49,14 +49,14 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		}
 		
 		//get customer
-		public ArrayList<Customer> getCustomers(Customer c){
+		public List<Customer> getCustomers(Customer c){
 			
 			return initialData.getCustomers();
 			
 		} 
 		
 		public Customer getCustomer(Customer c){
-			ArrayList<Customer> theCustomers = initialData.getCustomers();
+			List<Customer> theCustomers = initialData.getCustomers();
 			
 			for (int i=0; i<theCustomers.size(); i++)
 			{
@@ -70,7 +70,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		
 		//update customer 
 		public void updateCustomer(Customer c){
-			ArrayList<Customer> theCustomers = initialData.getCustomers();
+			List<Customer> theCustomers = initialData.getCustomers();
 			
 			for (int i=0; i<theCustomers.size(); i++)
 			{
@@ -83,7 +83,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		
 		//remove customer
 		public void removeCustomer(Customer c){
-			ArrayList<Customer> theCustomers = initialData.getCustomers();
+			List<Customer> theCustomers = initialData.getCustomers();
 			
 			for (int i=0; i<theCustomers.size(); i++)
 			{
