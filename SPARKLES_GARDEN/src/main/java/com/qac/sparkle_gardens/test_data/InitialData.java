@@ -26,21 +26,13 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
  */
 @Singleton
 public class InitialData 
-<<<<<<< HEAD
 {
 	private List<Address> addresses = new ArrayList<Address>();
 	private List<Wishlist> wishlists = new ArrayList<Wishlist>();
 	private List<Card> Cards = new ArrayList<Card>();
 	private List<Customer> customers = new ArrayList<Customer>();
 	private List<Order> orders;
-=======
-{ 
-	private ArrayList<Address> addresses = new ArrayList<Address>();
-	private ArrayList<Wishlist> wishlists = new ArrayList<Wishlist>();
-	private ArrayList<Card> Cards = new ArrayList<Card>();
-	private ArrayList<Customer> customers = new ArrayList<Customer>();
-	private ArrayList<Order> orders;
->>>>>>> 2caba8f9bcaccf1df93b3bb549ba8e67c68fc975
+
 	//private ArrayList<Payment> Payments = new ArrayList<Payment>();
 	private List<Product> products = new ArrayList<Product>();
 
@@ -220,7 +212,7 @@ public class InitialData
 	{
 		this.orders = orders;
 	}
-<<<<<<< HEAD
+
 	
 //	public void addPayment(Payment p)
 //	{
@@ -237,9 +229,7 @@ public class InitialData
 //		this.Payments = Payments;
 //	}
 	
-=======
 
->>>>>>> 2caba8f9bcaccf1df93b3bb549ba8e67c68fc975
 	@MethodAuthor(author="Annabelle Young")
 	public List<Product> getProducts(){
 		return products;

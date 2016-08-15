@@ -120,7 +120,6 @@ public class OrderService
 	 */
 	public String generateInvoice(long orderID)
 	{
-<<<<<<< HEAD
 		String invoice = "";
 		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
 		
@@ -128,11 +127,9 @@ public class OrderService
 		
 		invoice += "Thank you for shopping at NBGardens!\n";
 		invoice += "You have purchased the following items: \n";
-=======
 		QueueSession session = sender.getSession();
 		Queue queue = sender.getQueue();
 		String result = "";
->>>>>>> 2caba8f9bcaccf1df93b3bb549ba8e67c68fc975
 		
 		try
 		{

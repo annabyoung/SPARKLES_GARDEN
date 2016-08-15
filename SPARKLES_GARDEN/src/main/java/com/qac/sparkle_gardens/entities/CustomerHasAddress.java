@@ -56,6 +56,11 @@ public class CustomerHasAddress {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+	public long getCustomerId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 }

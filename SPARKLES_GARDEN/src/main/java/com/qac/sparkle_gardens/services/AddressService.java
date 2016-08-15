@@ -1,11 +1,9 @@
 package com.qac.sparkle_gardens.services;
 
-<<<<<<< HEAD
-=======
+
 import java.util.ArrayList;
 import java.util.List;
 
->>>>>>> 2caba8f9bcaccf1df93b3bb549ba8e67c68fc975
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 

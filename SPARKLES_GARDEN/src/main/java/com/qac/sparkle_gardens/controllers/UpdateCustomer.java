@@ -4,6 +4,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.services.CustomerService;
 
 
@@ -18,13 +19,7 @@ import com.qac.sparkle_gardens.services.CustomerService;
 
 @Named(value= "updateCustomer")
 @RequestScoped 
-<<<<<<< HEAD:SPARKLES_GARDEN/src/main/java/com/qac/sparkle_gardens/controllers/UpdateCustomer.java
-public class UpdateCustomer 
-=======
-
-
-public class updateCustomer implements Controller<Customer> 
->>>>>>> 2caba8f9bcaccf1df93b3bb549ba8e67c68fc975:SPARKLES_GARDEN/src/main/java/com/qac/sparkle_gardens/controllers/updateCustomer.java
+public class UpdateCustomer implements Controller<Customer> 
 {
 	@Inject
 	CustomerService service;
