@@ -18,7 +18,7 @@ label{
     float: center;
     clear: left;
     width: 250px;
-    text-align: right;
+    text-align:left;
 	padding-bottom:15px;
 }
 /*Formats the form where all the user input fields will be found*/
@@ -83,4 +83,9 @@ select{
 }
 option{
 	text-align: center;
+}
+
+#labels{
+	
+	text-align:left;
 }

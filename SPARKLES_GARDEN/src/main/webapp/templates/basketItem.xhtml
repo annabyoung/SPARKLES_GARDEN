@@ -1,0 +1,32 @@
+<!DOCTYPE xhtml>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>NBGardens Navigation Bar</title>
+	<link rel="stylesheet" type="text/css" href="..\js\bootstrap.min.js"></link>
+	<link rel="stylesheet" type="text/css" href="..\css\bootstrap.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="..\css\basketItem.css"></link>
+</h:head>
+<h:body>
+	<div id="imageBody">
+		<div>
+			<div class="thumbnail">
+				<a href="#"> <img src="/img/gnome1.jpg" alt="" width="160 px"
+					height="90 px" />
+				</a>
+				<div class="caption">
+					<h4 class="pull-right">$24.99</h4>
+					<h4 class="pull-center" id="productname">
+						<a href="#">Red Gnome</a>
+					</h4>
+					<p>This is a short description. Lorem ipsum dolor sit amet,
+						consectetur adipiscing elit.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ui:insert name="itemInBasket"></ui:insert>
+</h:body>
+</html>
