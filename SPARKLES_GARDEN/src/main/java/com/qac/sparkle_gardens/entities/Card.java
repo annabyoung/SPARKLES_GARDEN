@@ -112,7 +112,7 @@ public class Card {
 	 */
 	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
-	}
+	} 
 
 	/**
 	 * 
@@ -128,6 +128,15 @@ public class Card {
 	 */
 	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
+	}
+	
+	/**
+	 * 
+	 * @param anotherCard
+	 * @return boolean
+	 */
+	public boolean equals(Card anotherCard){
+		return anotherCard.getCardId() == cardId;
 	}
 
 

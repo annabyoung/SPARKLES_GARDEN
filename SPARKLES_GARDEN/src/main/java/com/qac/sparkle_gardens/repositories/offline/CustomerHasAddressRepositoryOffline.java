@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
+import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
 import com.qac.sparkle_gardens.test_data.InitialData;
@@ -61,7 +62,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 		List<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
 		for (int index = 0; index < custAddress.size(); index++) {
 			
-			if(custAddress.get(index).getCustomerId() == C.getCustomerId() && custAddress.get(index).getAddressId() == C.getAddressId() ) {
+			if(custAddress.get(index).getAccountId() == C.getAccountId() && custAddress.get(index).getAddressId() == C.getAddressId() ) {
 				custAddress.set(index, C);
 			}
 		}
@@ -76,7 +77,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 		List<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
 		for (int index = 0; index < custAddress.size(); index++) {
 			
-			if(custAddress.get(index).getCustomerId() == c.getCustomerId() && custAddress.get(index).getAddressId() == c.getAddressId() ) {
+			if(custAddress.get(index).getAccountId() == c.getAccountId() && custAddress.get(index).getAddressId() == c.getAddressId() ) {
 				custAddress.remove(index);
 			}
 		}
@@ -86,15 +87,21 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 
 	/**
 	 * Finds instances of Customer Owning Addresses by Customers.
-	 * @param customerID
+	 * @param accountID
 	 * @return
 	 */
+<<<<<<< HEAD
 	public List<CustomerHasAddress> findByCustomerID(long customerID) {
 		List<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
 		List<CustomerHasAddress> customerOwned = new ArrayList<CustomerHasAddress>();
+=======
+	public List<CustomerHasAddress> findByCustomerID(long accountID) {
+		ArrayList<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
+		ArrayList<CustomerHasAddress> customerOwned = new ArrayList<CustomerHasAddress>();
+>>>>>>> 2caba8f9bcaccf1df93b3bb549ba8e67c68fc975
 		for (int index = 0; index < custAddress.size(); index++) {
 			
-			if(custAddress.get(index).getCustomerId() == customerID) {
+			if(custAddress.get(index).getAccountId() == accountID) {
 				customerOwned.add(custAddress.get(index));
 			}
 		}
@@ -116,5 +123,20 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 			}
 		}
 		return customerOwned;
+	}
+	
+	/**
+	 * Checks if there are any customer addresses associated with an given address
+	 * @return
+	 */
+	public boolean isCustomerId(Address address) {
+		ArrayList<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
+		
+		for (int index = 0; index < custAddress.size(); index++) {
+			if (custAddress.get(index).getAddressId() == address.getAddressId()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

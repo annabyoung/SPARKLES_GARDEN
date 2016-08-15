@@ -50,4 +50,8 @@ public class CancelOrder
 		error = "Order is not valid for cancellation.";
 		return "home";
 	}
+	
+	public String getError(){
+		return error;
+	}
 }

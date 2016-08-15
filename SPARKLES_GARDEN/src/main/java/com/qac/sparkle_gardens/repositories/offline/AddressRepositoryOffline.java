@@ -39,10 +39,11 @@ public class AddressRepositoryOffline implements AddressRepository {
 	}
 	
 	/**
-	 * Locate an address by the customer ID
+	 * Locate the address(s) by the customer ID
 	 * @param id
 	 * @return
 	 */
+<<<<<<< HEAD
 	public Address findByCustomerId(long accountId) {
 		List<Address> list = initialData.getAddresses();
 		Address place = new Address();
@@ -50,8 +51,17 @@ public class AddressRepositoryOffline implements AddressRepository {
 			if (list.get(index).getCustomerId() == accountId) {
 				place = list.get(index);
 			}
+=======
+	public List<Address> findByAccountId(long accountId) {
+		ArrayList <Address> places = new ArrayList <Address>();
+		// retrieves all the addresses a customer has 
+	    ArrayList<CustomerHasAddress> custAddress = (ArrayList<CustomerHasAddress>) custAddressRepository.findByCustomerID(accountId);
+		
+		for (CustomerHasAddress cust : custAddress) {
+			places.add(cust.getAddress());
+>>>>>>> 2caba8f9bcaccf1df93b3bb549ba8e67c68fc975
 		}
-		return place;
+		return places;
 	}
 	
 	// Returns all the addresses
@@ -88,15 +98,26 @@ public class AddressRepositoryOffline implements AddressRepository {
 		initialData.setAddresses(addresses);
 	}
 	
+<<<<<<< HEAD
 	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
 		List<Address> addresses = initialData.getAddresses();
+=======
+	/**
+	 * @param address
+	 */
+	public boolean isDuplicate(Address address) {
+		ArrayList<Address> addresses = initialData.getAddresses();
+		
+>>>>>>> 2caba8f9bcaccf1df93b3bb549ba8e67c68fc975
 		for (int index = 0; index < addresses.size(); index++) {
-			if (addresses.get(index).getCustAddress().getCustomerId() == accountId) {
-				custAddressRepository.addCustomerHasAddress(cust);
+			if (address.equals(addresses.get(index))) {
+				return true;
 			}
 		}
+		return false;
 	}
 	
+<<<<<<< HEAD
 	public void removeCustomerHasAddress(CustomerHasAddress cust, long accountId) {
 		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
@@ -105,4 +126,6 @@ public class AddressRepositoryOffline implements AddressRepository {
 			}
 		}
 	}
+=======
+>>>>>>> 2caba8f9bcaccf1df93b3bb549ba8e67c68fc975
 }
