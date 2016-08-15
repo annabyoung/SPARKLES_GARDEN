@@ -1,6 +1,5 @@
 package com.qac.sparkle_gardens.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.qac.sparkle_gardens.entities.Product;
 /**
@@ -21,9 +20,9 @@ public interface ProductRepository {
 	public Product findByProductName(String productName);
 	public Product findByProductID(long productID);
 	//public Product findByProductTag(String tag);
-	public ArrayList<Product> findByProductPrice(double price);
+	public List<Product> findByProductPrice(double price);
 	//retrieve all products in product list
-	public ArrayList<Product> getProducts();
+	public List<Product> getProducts();
 	
 	//Create, remove, update and delete products
 	public void createProduct (Product p);	

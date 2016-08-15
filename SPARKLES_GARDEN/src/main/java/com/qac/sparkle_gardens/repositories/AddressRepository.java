@@ -28,6 +28,12 @@ public interface AddressRepository {
 	public void updateAddress(Address address);
 	//Remove address
 	public void removeAddress(Address address);
+	
+	// Adds a CustomerHasAddress object
+	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId);
+
+	@Deprecated
+	public void removeCustomerHasAddress(CustomerHasAddress custAddress, long customerId);
 
 	// checks for duplicate objects
 	public boolean isDuplicate(Address address);

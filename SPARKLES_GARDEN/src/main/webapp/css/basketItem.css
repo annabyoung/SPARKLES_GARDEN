@@ -1,0 +1,44 @@
+#basketItemDesc {
+	text-align: left;
+}
+#borderedP{
+	
+	border: none;
+}
+.thumbnail{
+	border: none;
+	background: none;
+}
+#basketItems{
+	border: 1px solid;
+}
+#Quantity{
+	display: inline-block;
+	vertical-align:top;
+	transform:translateY(-250%);
+}
+.button{
+	background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#checkoutButton{
+	transition-duration: 0.4s;
+	transform:translateY(150%);	
+	background-color: #F29D05;
+	color: #FFFFFF;
+	border-radius: 12px;
+	padding: 14px 75px;
+}
+#checkoutButton:hover{
+	background-color: #51CE4D;
+	color: #000000;
+}

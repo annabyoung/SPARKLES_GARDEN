@@ -19,7 +19,7 @@ import com.qac.sparkle_gardens.entities.Product;
 @Singleton
 @Deprecated
 public class ProductInitalData {
-	private ArrayList<Product> products = new ArrayList<Product>();
+	private List<Product> products = new ArrayList<Product>();
 	
 	public ProductInitalData(){
 		Product p = new Product("The Great American Challenge", 50, 79.99);
@@ -29,6 +29,9 @@ public class ProductInitalData {
 		p.addProductTags("Masturbator");
 		products.add(p);
 		p = new Product("The Screaming O", 500, 19.99);
+		p.addProductTags("Vibrating");
+		products.add(p);
+		p = new Product("Vag Gape", 500, 19.99);
 		p.addProductTags("Vibrating");
 		products.add(p);
 	}
@@ -41,7 +44,7 @@ public class ProductInitalData {
 		products.add(product);
 	}
 
-	public void setProducts(ArrayList<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 	

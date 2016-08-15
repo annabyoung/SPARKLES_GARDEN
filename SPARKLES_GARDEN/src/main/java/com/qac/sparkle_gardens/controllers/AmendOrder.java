@@ -1,5 +1,7 @@
 package com.qac.sparkle_gardens.controllers;
 
+import javax.faces.bean.RequestScoped;
+
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.util.OrderStatus;
@@ -9,6 +11,7 @@ import com.qac.sparkle_gardens.util.OrderStatus;
  * @author Damien Lloyd
  *
  */
+@RequestScoped
 public class AmendOrder 
 {
 	OrderService service;

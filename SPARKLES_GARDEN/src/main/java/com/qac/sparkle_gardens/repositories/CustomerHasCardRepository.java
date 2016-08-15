@@ -1,6 +1,5 @@
 package com.qac.sparkle_gardens.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.qac.sparkle_gardens.entities.CustomerHasCard;
@@ -21,14 +20,14 @@ public interface CustomerHasCardRepository {
 	 * Keeps ArrayList of CustomerHasCards.
 	 * @param ArrayList<CustomerHasCard> c
 	 */
-	public void persistCustomerHasCards(ArrayList<CustomerHasCard> c);
+	public void persistCustomerHasCards(List<CustomerHasCard> c);
 
 
 	/**
 	 * Gets all of the CustomerHasCards in the repository
 	 * @return
 	 */
-	public ArrayList<CustomerHasCard> getCustomerHasCards();
+	public List<CustomerHasCard> getCustomerHasCards();
 	
 	/**
 	 * Adds a new CustomerHasCard into repository. Might be useless because persist CustomerHasCard.

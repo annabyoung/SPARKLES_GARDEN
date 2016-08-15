@@ -4,53 +4,47 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<link rel="stylesheet" type="text/css" href="bootstrap.min.js">
-	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="Wireframe_Login.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="javascript" type="text/javascript"
+		href="\js\bootstrap.min.js" />
+	<link rel="stylesheet" type="text/css" href="\css\bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="\css\Wireframe_Login.css" />
 	<title>Login</title>
 </h:head>
 <f:view>
-<body>
-	<div>
+	<h:body>
 		<h1>
 			<div id="homelink" class="center-block">
-					<a href="Homepage.html">
-						<img class="img-responsive center-block" id ="logo" src = "Logo.png" width= 200px height= 150px>
-					</a>
+				<h:outputLink value="homepage.xhtml">
+					<h:graphicImage class="img-responsive center-block" id="logo"
+						value="\img\Logo.png" width="200px" height="150px" />
+				</h:outputLink>
 			</div>
 		</h1>
-	</div>
-	<div id="formdiv">
-	<form action="javascript:submitForm()" class="center-block">
-		<h2> Sign In </h2>
-		<div class="form-group">
-			<label class="control-label col-sm-2" style="text-align: left"> Username: </label> 
-			<div class="col-xs-4">
-				<h:inputText class="form-control" type="text" name="Username" required>
+		<div class="container-fluid">
+			<h:form class="form-horizontal center_div" role="form" id="formdiv">
+				<div class="form-group">
+					<label id="loginlabel" class="control-label col-sm-4"> Username</label>
+					<div class="col-sm-4">
+						<h:inputText name="Username" required="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label id="loginlabel" class="control-label col-sm-4"> Password</label>
+					<div class="col-sm-4">
+						<h:inputSecret name="Password" required="true" />
+					</div>
+				</div>
+				<div>
+					<h:outputLink value="homepage.xhtml" class="btn btn-warning"
+						role="button">Login</h:outputLink>
+				</div>
+			</h:form>
+			<div>
+				<p id="contact">
+					<h:outputLink value="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</h:outputLink>
+				</p>
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2 " style="text-align: left"> Password: </label> 
-			<div class="col-xs-4">
-				<h:inputText class="form-control" type="password" name="Password" required>
-			</div>
-		</div>
-		<div style="center-block">							
-			<input type="Submit" value="Log me in!">
-		</div>
-	</form>
-	<div id = "registration_prompt">
-		<p> New to our online catalogue? </p>
-		<p> Click <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">here</a> to register for an online account</p>
-	</div>		
-	</div>				
-	<div>
-		<p id= "contact"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Contact</a></p>
-	</div>
-</body>
+	</h:body>
 </f:view>
 </html>
