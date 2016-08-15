@@ -29,7 +29,7 @@ import com.qac.sparkle_gardens.util.MessageReceiver;
  * @author Administrator
  *
  */
-public class Invoice implements MessageListener, Serializable
+public class Invoice implements Serializable
 {	
 	/**
 	 * 
@@ -46,7 +46,7 @@ public class Invoice implements MessageListener, Serializable
 		this.customer = customer;
 		this.order = order;
 		
-		receiver = new MessageReceiver(this);
+		receiver = new MessageReceiver();
 	}
 
 	public void onMessage(Message msg) 

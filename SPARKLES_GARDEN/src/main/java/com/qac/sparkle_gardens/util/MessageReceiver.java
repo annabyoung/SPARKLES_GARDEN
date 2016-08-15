@@ -1,18 +1,29 @@
 package com.qac.sparkle_gardens.util;
 
+import java.io.Serializable;
+
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.jms.QueueConnection;
 import javax.jms.QueueConnectionFactory;
 import javax.jms.QueueReceiver;
+import javax.jms.QueueSender;
 import javax.jms.QueueSession;
 import javax.jms.Session;
+import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class MessageReceiver 
+/**
+ * 
+ * @author Damien Lloyd
+ *
+ */
+public class MessageReceiver implements MessageListener
 {
 	private QueueConnection connect = null;
 	private QueueConnectionFactory factory = null;
@@ -21,12 +32,16 @@ public class MessageReceiver
 	private Context context = null;
 	private QueueReceiver receiver = null;
 	
-	public MessageReceiver(MessageListener ml)
+	private Object object = null;
+	
+	private Serializable serial = null;
+	
+	public MessageReceiver(Serializable serial)
 	{
-		setup(ml);
+		this.serial = serial;
 	}
 	
-	void setup(MessageListener ml)
+	void setup()
 	{
 		try
 		{
@@ -46,7 +61,7 @@ public class MessageReceiver
 			connect.start();
 			
 			receiver = session.createReceiver(queue);
-			receiver.setMessageListener(ml);
+			receiver.setMessageListener(this);
 		} 
 		catch (JMSException jmse) {
 			jmse.printStackTrace();
@@ -64,6 +79,36 @@ public class MessageReceiver
 		} 
 		catch (JMSException jmse) {
 			jmse.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void onMessage(Message msg) 
+	{
+		ObjectMessage om = (ObjectMessage) msg;
+		try {
+			object = om.getObject();
+			this.respond(serial);
+		} 
+		catch (JMSException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void respond(Serializable s)
+	{
+		try
+		{
+			ObjectMessage om = session.createObjectMessage(s);
+			om.setJMSCorrelationID(om.getJMSMessageID());
+			
+			QueueSender sender = 
+					session.createSender((Queue) om.getJMSReplyTo());
+			sender.send(om);
+		} catch (JMSException jmse) {
+			jmse.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

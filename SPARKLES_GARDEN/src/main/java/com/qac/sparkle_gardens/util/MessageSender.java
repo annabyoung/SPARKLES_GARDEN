@@ -82,7 +82,7 @@ public class MessageSender
 		return session;
 	}
 
-	public Queue getRequest() 
+	public Queue getQueue() 
 	{
 		return queue;
 	}	
