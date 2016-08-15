@@ -18,15 +18,30 @@
 			<div id="stocklevel">
 				<p align="left">17 in stock</p>
 			</div>
-			<div id="buttonArea" class="pull-right">
-				<span><h:commandButton id="addToBasket" value="Add To Basket" role="button" /></span>
-				<div class="col-sm-4">
-							<h:selectOneMenu id="wishlistDropdown" class="form-control" name="wishlist" >
-								<f:selectItem itemValue="wishlist1" itemlabel="Wish List 1" />
-								<f:selectItem itemValue="wishlist2" itemlabel="Wish list 2" />
-							</h:selectOneMenu>
-				</div>
+			<div id="buttonArea" class="pull-right" style="padding:1%">
+				<table style="width: 100%">
+					<tr>
+						<th></th>
+					</tr>
+					<tr>
+						<td><h:commandButton class="center-block" id="addToBasket"
+									value="Add To Basket" role="button" /></td>
+					</tr>
+					<tr><td><p> </p></td></tr>
+					<tr>
+						<td>
+							<div class="col-sm-4">
+								<h:selectOneMenu id="wishlistDropdown" class="form-control"
+									name="wishlist">
+									<f:selectItem itemValue="wishlist1" itemlabel="Wish List 1" />
+									<f:selectItem itemValue="wishlist2" itemlabel="Wish list 2" />
+								</h:selectOneMenu>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</div>
+
 			<div id="productdesc">
 				<p>This is a longer description. Lorem ipsum dolor sit amet,
 					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
