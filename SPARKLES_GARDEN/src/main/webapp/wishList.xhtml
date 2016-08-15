@@ -1,0 +1,118 @@
+<ui:composition xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="templates/navbar_Template.xhtml">
+	<meta charset="utf-8"/>
+	<ui:define name="mainContent">
+		<h:form>
+			<div class="row container-fluid" id="formdiv">
+				<h2>Your Wishlist</h2>
+				<table style="width: 100%">
+					<tr>
+						<th>Item #1</th>
+						<th>Info</th>
+						<th>Availability</th>
+						<th>Price</th>
+						<td><h:button value="Add To Basket" class="btn btn-warning"
+								role="button" /></td>
+					</tr>
+					<tr>
+						<td style="width: 25%"><div>
+								<div class="thumbnail">
+									<h:outputLink value="Product.xhtml">
+										<h:graphicImage class="img-rounded" value="/img/gnome1.jpg"
+											alt="" width="240 px" height="160 px" />
+									</h:outputLink>
+								</div>
+							</div></td>
+						<td>
+							<div id="basketItemDesc">
+								<p id="borderedP">
+									Red Gnome<br> </br> It's a Red Gnome, dipshit <br> </br> 17 in
+									stock
+								</p>
+							</div>
+						</td>
+						<td><div class="col-sm-5">
+								<label>In Stock</label>
+							</div></td>
+						<td>£69.69</td>
+						<td><h:button value="Remove From Wishlist"
+								class="btn btn-default" role="button" /></td>
+					</tr>
+				</table>
+				<table style="width: 100%">
+					<tr>
+						<th>Item #2</th>
+						<th>Info</th>
+						<th>Availability</th>
+						<th>Price</th>
+						<td><h:button value="Add To Basket" class="btn btn-warning"
+								role="button" /></td>
+					</tr>
+					<tr>
+						<td style="width: 25%"><div>
+								<div class="thumbnail">
+									<h:outputLink value="Product.xhtml">
+										<h:graphicImage class="img-rounded" value="/img/gnome1.jpg"
+											alt="" width="240 px" height="160 px" />
+									</h:outputLink>
+								</div>
+							</div></td>
+						<td>
+							<div id="basketItemDesc">
+								<p id="borderedP">
+									Red Gnome<br> </br> It's a Red Gnome, dipshit <br> </br> 17 in
+									stock
+								</p>
+
+							</div>
+						</td>
+						<td><div class="col-sm-5">
+								<label>In Stock</label>
+							</div></td>
+						<td>£69.69</td>
+						<td><h:button value="Remove From Wishlist"
+								class="btn btn-default" role="button" /></td>
+					</tr>
+				</table>
+				<table style="width: 100%">
+					<tr>
+						<th>Item #3</th>
+						<th>Info</th>
+						<th>Availability</th>
+						<th>Price</th>
+						<td><h:button value="Add To Basket" class="btn btn-warning"
+								role="button" /></td>
+					</tr>
+					<tr>
+						<td style="width: 25%"><div>
+								<div class="thumbnail">
+									<h:outputLink value="Product.xhtml">
+										<h:graphicImage class="img-rounded" value="/img/gnome1.jpg"
+											alt="" width="240 px" height="160 px" />
+									</h:outputLink>
+								</div>
+							</div></td>
+						<td>
+							<div id="basketItemDesc">
+								<p id="borderedP">
+									Red Gnome<br> </br> It's a Red Gnome, dipshit <br> </br> 17 in
+									stock
+								</p>
+
+							</div>
+						</td>
+						<td><div class="col-sm-5">
+								<label>In Stock</label>
+							</div></td>
+						<td>£69.69</td>
+						<td><h:button value="Remove From Wishlist"
+								class="btn btn-default" role="button" /></td>
+					</tr>
+				</table>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
