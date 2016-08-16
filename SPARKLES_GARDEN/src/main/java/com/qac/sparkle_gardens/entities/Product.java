@@ -49,9 +49,7 @@ import javax.validation.constraints.Size;
 		query = "SELECT a FROM Product a WHERE a.price = :price"),
 	@NamedQuery(name = "FindProductsByCustomer",
 		query = "SELECT b FROM Customer b JOIN b.customer a WHERE a.product = :product")
-	
 })
-
 @Table (name = "products")
 public class Product {
 	/*

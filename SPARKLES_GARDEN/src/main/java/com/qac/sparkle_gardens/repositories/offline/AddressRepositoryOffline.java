@@ -44,10 +44,11 @@ public class AddressRepositoryOffline implements AddressRepository {
 	 * @param id
 	 * @return
 	 */
+
 	public List<Address> findByAccountId(long accountId) {
-		ArrayList <Address> places = new ArrayList <Address>();
+		List <Address> places = new ArrayList <Address>();
 		// retrieves all the addresses a customer has 
-	    ArrayList<CustomerHasAddress> custAddress = (ArrayList<CustomerHasAddress>) custAddressRepository.findByCustomerID(accountId);
+	    List<CustomerHasAddress> custAddress = (ArrayList<CustomerHasAddress>) custAddressRepository.findByCustomerID(accountId);
 		
 		for (CustomerHasAddress cust : custAddress) {
 			places.add(cust.getAddress());
@@ -66,7 +67,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 	 * @param address
 	 */
 	public void updateAddress(Address address) {
-		ArrayList<Address> addresses = initialData.getAddresses();
+		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
 			if (addresses.get(index).getAddressId() == address.getAddressId()) {
 				addresses.set(index, address);
@@ -80,7 +81,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 	 * @param address
 	 */
 	public void removeAddress(Address address) {
-		ArrayList<Address> addresses = initialData.getAddresses();
+		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
 			if (addresses.get(index).getAddressId() == address.getAddressId()) {
 				addresses.remove(index);
@@ -88,13 +89,18 @@ public class AddressRepositoryOffline implements AddressRepository {
 		}
 		initialData.setAddresses(addresses);
 	}
-	
+
+	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
+		List<Address> addresses = initialData.getAddresses();
+	}
+
 	/**
 	 * @param address
 	 */
 	public boolean isDuplicate(Address address) {
-		ArrayList<Address> addresses = initialData.getAddresses();
+		List<Address> addresses = initialData.getAddresses();
 		
+
 		for (int index = 0; index < addresses.size(); index++) {
 			if (address.equals(addresses.get(index))) {
 				return true;
@@ -103,4 +109,13 @@ public class AddressRepositoryOffline implements AddressRepository {
 		return false;
 	}
 	
+	public void removeCustomerHasAddress(CustomerHasAddress cust, long accountId) {
+		List<Address> addresses = initialData.getAddresses();
+		for (int index = 0; index < addresses.size(); index++) {
+			if (addresses.get(index).getCustAddress().getCustomerId() == accountId) {
+				custAddressRepository.removeCustomerHasAddress(cust);
+			}
+		}
+	}
+
 }

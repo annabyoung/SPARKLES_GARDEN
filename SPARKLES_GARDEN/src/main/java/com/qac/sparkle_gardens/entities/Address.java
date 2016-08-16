@@ -84,7 +84,15 @@ public class Address {
 		this.country = country;
 		this.postCode = postCode;
 	}
-	
+	// Getters and setters for all the attributes
+
+
+	//@Deprecated
+	/*public Address(int buildingNum2, String streetName2, String city2, String county2, String country2,
+			String postCode2) {
+		// TODO Auto-generated constructor stub
+	}*/
+
 	public long getAddressId() {
 		return addressId;
 	}
@@ -141,6 +149,18 @@ public class Address {
 		this.postCode = postCode;
 	}
 	
+	@Deprecated
+	public CustomerHasAddress getCustAddress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Deprecated
+	public long getCustomerId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	public boolean equals(Address anotherAddress){
 		return (this.addressId == anotherAddress.addressId);
 	}

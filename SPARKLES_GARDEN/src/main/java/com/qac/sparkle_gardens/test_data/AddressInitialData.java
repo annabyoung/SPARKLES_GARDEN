@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Singleton;
-import javax.ejb.Stateless;
-
 import com.qac.sparkle_gardens.entities.Address;
 
 /**
@@ -24,8 +22,8 @@ public class AddressInitialData {
 	public AddressInitialData() {
 	}
 	
-	public ArrayList<Address> getAddresses() {
-		return (ArrayList<Address>) addresses;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 	
 	public void addAddress(Address address) {
@@ -33,7 +31,7 @@ public class AddressInitialData {
 	}
 	
 	public void setAddresses(List<Address> addresses) {
-		this.addresses = (ArrayList<Address>) addresses;
+		this.addresses = addresses;
 	}
 	
 }

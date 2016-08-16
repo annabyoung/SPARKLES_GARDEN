@@ -5,16 +5,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.mail.internet.AddressException;
 
-import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Address;
-import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.services.CustomerService;
 import com.qac.sparkle_gardens.util.CreditStatus;
 import com.qac.sparkle_gardens.services.AddressService;
-
-
-@Named(value= "Register")
-@RequestScoped
 
 // or maybe conversation scoped ?
 
@@ -25,7 +19,8 @@ import com.qac.sparkle_gardens.services.AddressService;
  * creates a new customer 
  *
  */
-
+@Named(value= "Register")
+@RequestScoped
 public class Registration { 
 	
 	@Inject 

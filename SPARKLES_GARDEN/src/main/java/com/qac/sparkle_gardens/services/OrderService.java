@@ -1,6 +1,6 @@
 package com.qac.sparkle_gardens.services;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -36,8 +36,7 @@ public class OrderService
 	@Inject
 	WishlistRepository w_repository;
 	
-	@Inject
-	ArrayList<OrderLine> basket;
+	List<OrderLine> basket;
 	
 	@Inject
 	MessageSender sender;
@@ -55,7 +54,7 @@ public class OrderService
 	 */
 	public boolean isOrderEmpty(long orderID)
 	{
-		ArrayList<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
+		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
 		int totalQuantity = 0;
 		
 		for (OrderLine i : lines)
@@ -96,7 +95,7 @@ public class OrderService
 	 */
 	public double getTotalPrice(long orderID)
 	{
-		ArrayList<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
+		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
 		double totalPrice = 0;
 		
 		for (OrderLine i : lines)
@@ -121,6 +120,13 @@ public class OrderService
 	 */
 	public String generateInvoice(long orderID)
 	{
+		String invoice = "";
+		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
+		
+		invoice += "\n\n\n----------------------------------------------";
+		
+		invoice += "Thank you for shopping at NBGardens!\n";
+		invoice += "You have purchased the following items: \n";
 		QueueSession session = sender.getSession();
 		Queue queue = sender.getQueue();
 		String result = "";

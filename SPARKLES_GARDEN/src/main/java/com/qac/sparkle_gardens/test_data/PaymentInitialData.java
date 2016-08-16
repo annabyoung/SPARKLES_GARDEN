@@ -1,22 +1,20 @@
 package com.qac.sparkle_gardens.test_data;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Singleton;
 
-import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Payment;
 
 @Deprecated
 @Singleton
 public class PaymentInitialData 
 {
-	private ArrayList<Payment> Payments = new ArrayList<Payment>();
+	private List<Payment> Payments = new ArrayList<Payment>();
 	
 	public PaymentInitialData()
 	{
-		Payments.add(new Payment());
-		Payments.add(new Payment());
-		Payments.add(new Payment());
 	}
 	
 	public void addPayment(Payment p)
@@ -24,12 +22,12 @@ public class PaymentInitialData
 		this.Payments.add(p);
 	}
 	
-	public ArrayList<Payment> getPayments()
+	public List<Payment> getPayments()
 	{
 		return Payments;
 	}
 	
-	public void setPayments(ArrayList<Payment> Payments)
+	public void setPayments(List<Payment> Payments)
 	{
 		this.Payments = Payments;
 	}
