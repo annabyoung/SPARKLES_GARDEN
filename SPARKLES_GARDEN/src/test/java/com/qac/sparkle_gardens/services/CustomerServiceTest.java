@@ -7,11 +7,18 @@ import javax.inject.Inject;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
-import com.qac.sparkle_gardens.controllers.CustomerInterface;
+//import com.qac.sparkle_gardens.controllers.CustomerInterface;
+
+
+
+import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.repositories.CustomerRepository;
+//import com.qac.sparkle_gardens.controllers.CustomerInterface;
 
 
 import junit.framework.TestCase;
@@ -26,7 +33,12 @@ public class CustomerServiceTest extends TestCase {
 	
 	@Inject 
 	CustomerRepository customerRepository; 
+
 	Customer dummyCustomer =  new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890"); 
+
+	//Customer dummyCustomer; 
+	
+
 	
 	public void persistCustomerTest(Customer customer){
 	
@@ -48,7 +60,9 @@ public class CustomerServiceTest extends TestCase {
 		
 		Customer customer = customerRepository.getCustomer(c); 
 		assertNotNull(customer);
+
 		assertEquals(customer, dummyCustomer);
+
 	}
 		
 	public void updateCustomerTest(Customer c){
@@ -62,15 +76,19 @@ public class CustomerServiceTest extends TestCase {
 		customerRepository.removeCustomer(c); //remove customer
 	}
 	
+
 	public void findCustomerAddressesTest(Customer c){
 	
 		customerRepository.findCustomerAddresses(c);
-	}
+
+}
 		
 		
 	public void findCustomerCardsTest(Customer c){
 		
+
 		Card cards = customerRepository.findCustomerCards(c);
+
 		assertNotNull(cards);
 		
 	}

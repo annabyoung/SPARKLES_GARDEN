@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.*;
+
+import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.test_data.InitialData;
@@ -102,15 +104,17 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			return null;
 		}
 		
-		public void findCustomerAdresses(Customer customer){
-			
-			initialData.getAddresses();
-			
-			//TODO: do this return type is wrong 
+		public Address findCustomerAddresses(Customer customer){
+			Address address; 
+			address= initialData.getAddresses();
+			return address;
+			//TODO: get compost class return addresses
 		}
 		
-		public void findCustomerCards(Customer customer){
-			initialData.getCards(); 
+		public Card findCustomerCards(Customer customer){
+			Card card;
+			card = initialData.getCards(); 
+			return card;
 			//TODO: and do this return type is wrong;  
 		}
 		

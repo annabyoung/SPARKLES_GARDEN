@@ -40,8 +40,8 @@ public class Customer implements Serializable  {
 
 	@Id
 	@Column (name ="accountID")
-	@OneToMany 
-	// not sure what the foreign key looks like or if this is correct 
+	//@OneToMany 
+	//fix this comeback  later
 	@JoinColumn(name = "accountID_fk ", nullable = false)
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long accountID;
