@@ -24,6 +24,7 @@ label{
 /*Formats the form where all the user input fields will be found*/
 #formdiv{
 	margin: 0 auto;
+	padding-top: 25px;
 	border-style: solid;
 	border-width: 1px;
 	padding-bottom: 10px;
@@ -82,4 +83,7 @@ select{
 }
 option{
 	text-align: center;
+}
+#loginContainer{
+	margin-top: 3px;
 }
