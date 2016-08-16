@@ -1,0 +1,98 @@
+h1 {
+	background-color: #097F10;
+	height: 130px;
+	margin: 0px;
+}
+
+#navbar-right {
+	position: fixed;
+}
+
+#login {
+	background-color: #097F10;
+	border: 0px;
+	border-radius: 0px 0px 5px 5px;
+	font-size: 10pt;
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: #FFFFFF;
+}
+
+#navbarTitle {
+	color: #FEF1D6;
+}
+
+#myNewNavbar {
+	background-color: #097F10;
+	border: 0px;
+	border-radius: 0px 0px 5px 5px
+}
+
+#myDropdown {
+	background-color: #097F10;
+}
+
+#dropdown {
+	background-color: #097F10;
+	color: #FEF1D6;
+}
+
+#MyNavButton {
+	background-color: #097F10;
+	border: 1px solid #FEF1D6;
+}
+
+#myNavbar ul li a {
+	color: #FEF1D6;
+}
+
+#myNavbar ul li a:hover {
+	color: #FEF1D6;
+	background-color: #FFDF52;
+}
+
+#contact {
+	text-decoration: underline;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	padding-right: 15px;
+}
+
+#mainbody {
+	width: 1600px;
+	height: 700px;
+	border: 1px solid #000;
+	background-color: #FEF1D6;
+	transform: translateY(5%);
+	resize: both;
+}
+
+#search {
+	width: 180px;
+	background: #FFFFFF;
+	background-image: "/img/search.png";
+	/* background-position: -48px 0;*/
+	padding-left: 30px;
+	border: 0;
+	float: right;
+}
+
+#search {
+	width: 600px;
+	background-position: -48px 0;
+	border: 0;
+	float: right;
+	transform: translateY(-100%);
+}
+
+#searchbutton {
+	transform: translateY(-100%);
+	height: 47px;
+}
+
+#registerLink {
+	transform: translate=(-100px, 0);
+	text-align: left;
+}

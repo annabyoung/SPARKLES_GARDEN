@@ -134,7 +134,6 @@ public class Customer implements Serializable  {
 		this.email = email;
 	}
 
-
 	public CreditStatus getCreditStatus() {
 		return creditStatus;
 	}

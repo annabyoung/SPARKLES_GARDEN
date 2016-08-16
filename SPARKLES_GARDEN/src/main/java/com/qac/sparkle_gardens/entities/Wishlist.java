@@ -46,7 +46,7 @@ public class Wishlist {
 	@OneToMany
 	@JoinColumn(name="product_fk", nullable = false)
 	// the list of products in wishlist
-	private ArrayList<Product> products;
+	private List<Product> products;
 
 	@Column
 	@NotNull
@@ -108,6 +108,12 @@ public class Wishlist {
 		this.wishlistName = wishlistName;
 	}
 	
+	public Wishlist (long accountId, Product product) {
+		this.acccountId = accountId;
+		products = new ArrayList<Product>();
+		addProduct(product);
+	}
+	
 	/**
 	 * Checks if the product is in a wishlist
 	 * @param productId
@@ -138,7 +144,7 @@ public class Wishlist {
 		return acccountId;
 	}
 	
-	public ArrayList<Product> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 	/*
@@ -160,7 +166,7 @@ public class Wishlist {
 	 * @param product
 	 */
 	public void addProduct(Product product) {
-		products.add(product);
+		this.products.add(product);
 	}
 	
 	/**

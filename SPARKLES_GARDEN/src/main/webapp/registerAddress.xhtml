@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<link rel="stylesheet" type="text/css" href="\js\bootstrap.min.js" />
+	<link rel="stylesheet" type="text/css" href="\css\bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="\css\register.css" />
+	<title>Add Address</title>
+</h:head>
+<f:view>
+	<h:body>
+		<h1>
+			<div id="homelink" class="center-block">
+				<h:outputLink value="homepage.xhtml">
+					<h:graphicImage class="img-responsive center-block" id="logo"
+						value="\img\Logo.png" width="200px" height="150px" />
+				</h:outputLink>
+			</div>
+		</h1>
+		<div class="container-fluid">
+			<h:form class="form-horizontal center_div" role="form" id="formdiv">
+				<h2>Add Address</h2>
+				<div class="form-group">
+					<label class="control-label col-sm-4">House number/ name:</label>
+					<div class="col-sm-4">
+						<h:inputText name="houseName" required="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Address Line 1:</label>
+					<div class="col-sm-4">
+						<h:inputText name="ad1" required="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Address Line 2:</label>
+					<div class="col-sm-4">
+						<h:inputText name="ad2" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">City:</label>
+					<div class="col-sm-4">
+						<h:inputText name="city" required="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">County:</label>
+					<div class="col-sm-4">
+						<h:inputText name="county" required="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Country:</label>
+					<div class="col-sm-4">
+						<h:inputText name="country" required="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Postcode:</label>
+					<div class="col-sm-4">
+						<h:inputText name="postcode" required="true" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Address Type:</label>
+					<div class="col-sm-4">
+						<h:selectOneMenu class="form-control" name="addressType">
+							<f:selectItem itemValue="Billing" itemlabel="Billing" />
+							<f:selectItem itemValue="Shipping" itemlabel="Shipping" />
+						</h:selectOneMenu>
+					</div>
+				</div>
+				<div>
+					<span> <h:commandButton value="Add Another Address"
+							class="btn btn-primary" role="button" />
+					</span> <span> <h:outputLink value="registerPayment.xhtml"
+							class="btn btn-primary" role="button">Continue To Payment Method</h:outputLink>
+					</span>
+				</div>
+			</h:form>
+		</div>
+		<div>
+			<p id="contact">
+				<a href="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</a>
+			</p>
+		</div>
+		<script src="C:\Users\Administrator\Documents\HTML\formReplication.js"></script>
+	</h:body>
+</f:view>
+</html>
