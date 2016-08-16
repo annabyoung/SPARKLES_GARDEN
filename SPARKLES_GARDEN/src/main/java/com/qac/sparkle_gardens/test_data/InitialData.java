@@ -232,6 +232,7 @@ public class InitialData
 
 	@MethodAuthor(author="Annabelle Young")
 	public List<Product> getProducts(){
+		
 		return products;
 	}
 	
