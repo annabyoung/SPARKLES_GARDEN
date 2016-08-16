@@ -4,15 +4,16 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="templates/noSearchTemplate.xhtml">
 	<ui:define name="mainContent">
+	<!-- 
+	<h:outputScript library="javascript" name="helloWorld.js" target="head" /> -->
 		<meta charset="utf-8" />
-		
-<f:view>
-	<h:body>
-		<div class="container-fluid">
-		<h:outputLink class="btn btn-warning"
-						role="button"><h:outputScript library="javascript" name="js/helloWorld.js" onclick="Hello()" target="head" />Login</h:outputLink>
-		</div>
-	</h:body>
-</f:view>
-</ui:define>
+
+		<f:view>
+			<h:body>
+				<div class="container-fluid">
+					<h:outputLink class="btn btn-warning" role="button" onclick="console.log('wrk')">Login</h:outputLink>
+				</div>
+			</h:body>
+		</f:view>
+	</ui:define>
 </ui:composition>
