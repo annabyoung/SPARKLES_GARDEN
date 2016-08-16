@@ -1,8 +1,8 @@
 package com.qac.sparkle_gardens.controllers;
 
 import java.util.List;
-import javax.faces.bean.SessionScoped;
 
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,7 +19,7 @@ import com.qac.sparkle_gardens.services.WishlistService;
  */
 @Named (value = "wishlist")
 
-@SessionScoped
+@RequestScoped
 public class WishlistController {
 	
 	@Inject 
