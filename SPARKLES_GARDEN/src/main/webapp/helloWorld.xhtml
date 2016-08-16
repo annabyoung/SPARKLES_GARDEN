@@ -5,9 +5,12 @@
 	template="templates/noSearchTemplate.xhtml">
 	<ui:define name="mainContent">
 		<meta charset="utf-8" />
+		
 <f:view>
 	<h:body>
 		<div class="container-fluid">
+		<h:outputLink class="btn btn-warning"
+						role="button"><h:outputScript library="javascript" name="js/helloWorld.js" onclick="Hello()" target="head" />Login</h:outputLink>
 			
 		</div>
 	</h:body>
