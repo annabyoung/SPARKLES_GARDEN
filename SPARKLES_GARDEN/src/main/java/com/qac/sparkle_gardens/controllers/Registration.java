@@ -3,6 +3,7 @@ package com.qac.sparkle_gardens.controllers;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.mail.internet.AddressException;
 
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Address;
@@ -52,9 +53,13 @@ public class Registration {
 	  private String firstName=""; 
 	  private String lastName="";
 	  private String email="";
+	  public String  confirmEmail="";
 	  private CreditStatus creditStatus= CreditStatus.VALIDATING; // shouldn't be inputted here but will need external thingamjob to check it
 	  private String password="";
+	  public String confirmPassword="";
 	  private String phone=""; 
+	  
+	  
 	  private String error="";
 	  
 	   private Address address; 
@@ -62,18 +67,30 @@ public class Registration {
 	  
 	  
 	
-	public String makeNewCustomer(){
+	public String makeNewCustomer(){ 
 		
 		//address = addressService.createAddress();
 		//don't know what i'm doing here yet. this is probably its own controller 
 		
-		
-		if (customerService.validateRegistrationDetails(firstName, lastName, password, email, phone)){
+		 try {
+			if(customerService.validateEmailInputs(email))
+			 {
+				 if (customerService.validateRegistrationDetails(firstName, lastName, password, email, phone)){
 			customerService.makeNewCustomer(firstName, lastName, email, creditStatus, password, phone);
 			 
-		}
-		else
-			error= "Invalid Registration details. Try again.";
+				 }//if
+				 else
+					 error= "Invalid Registration details. Try again.";
+		
+			 	}//else
+		} catch (AddressException e) {
+			
+			error="not a valid email address"; 
+			e.printStackTrace();
+		}//try and catch 
+	
+		
+		
 		
 		
 		return "home";

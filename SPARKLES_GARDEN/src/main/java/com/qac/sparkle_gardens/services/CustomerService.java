@@ -3,6 +3,9 @@ package com.qac.sparkle_gardens.services;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+//import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
 
 import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Customer;
@@ -19,7 +22,8 @@ public class CustomerService {
 	
 	/**
 	 * Takes in customer registration details. 
-	 * Returns false if a customer with that e-mail already exists or if other data isn't in valid format. 
+	 * Returns false if a customer with that e-mail already exists
+	 *  or if other data isn't in valid format. 
 	 * 
 	 * 
 	 * @param firstName
@@ -58,13 +62,24 @@ public class CustomerService {
 	 *   
 	 * @param email
 	 * @return
+	 * @throws AddressException 
 	 */
 	
-	public boolean validateEmailInputs(String email)
+	public boolean validateEmailInputs(String email) throws AddressException
 	{
-		//TODO: write code 
-		return true;
-		
+		//make work 
+		boolean ans=true;
+				InternetAddress validator = new InternetAddress(email);
+		try{
+
+		validator.validate();
+		}
+		finally {
+			ans=false;
+		}
+		return ans;
+		//TODO: write code learn how to parse strings in java  
+		// need to test 
 	}
 	
 	
