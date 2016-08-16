@@ -26,5 +26,15 @@
           <artifactId>SPARKLES_GARDEN</artifactId>
           <version>0.0.1</version>
     </dependency>
+    <dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
   </dependencies>
 </project>

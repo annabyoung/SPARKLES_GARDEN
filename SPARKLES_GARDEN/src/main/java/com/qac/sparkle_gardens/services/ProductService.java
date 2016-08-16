@@ -10,6 +10,7 @@ import java.util.Collections;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
+import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 
 /**
@@ -21,7 +22,7 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
  */
 
 @Stateless
-public class ProductService {
+public class ProductService implements ProductInterface{
 	@Inject ProductRepository productRepository;
 	
 	private ArrayList<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags

@@ -15,7 +15,7 @@ import javax.jms.QueueSession;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import com.qac.sparkle_gardens.jms.AccountsMessageListener;
+import com.qac.sparkles_accounts.jms.CommonMessageListener;
 
 /**
  * @author Annabelle Young
@@ -43,7 +43,7 @@ public class CommonMessageReceiver {
 			queueSession = queueConnection.createQueueSession(false, AUTO_ACKNOWLEDGE);
 			queueReceiver = queueSession.createReceiver(responseQueue);
 			queueConnection.start();
-			queueReceiver.setMessageListener(new AccountsMessageListener());
+			queueReceiver.setMessageListener(new CommonMessageListener());
 		} catch(NamingException e){
 			e.printStackTrace();
 		}catch (JMSException e){
