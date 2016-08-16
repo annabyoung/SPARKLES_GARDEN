@@ -1,0 +1,19 @@
+<ui:composition xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="templates/noSearchTemplate.xhtml">
+	<ui:define name="mainContent">
+	<!-- 
+	<h:outputScript library="javascript" name="helloWorld.js" target="head" /> -->
+		<meta charset="utf-8" />
+
+		<f:view>
+			<h:body>
+				<div class="container-fluid">
+					<h:outputLink class="btn btn-warning" role="button" onclick="console.log('wrk')">Login</h:outputLink>
+				</div>
+			</h:body>
+		</f:view>
+	</ui:define>
+</ui:composition>
