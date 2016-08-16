@@ -109,6 +109,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 		return false;
 	}
 	
+	@Deprecated
 	public void removeCustomerHasAddress(CustomerHasAddress cust, long accountId) {
 		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
