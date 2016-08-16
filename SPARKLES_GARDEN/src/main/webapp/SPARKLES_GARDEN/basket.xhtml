@@ -3,9 +3,11 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="templates/navbar_Template.xhtml">
+	<meta charset="utf-8" />
 	<ui:define name="mainContent">
 		<h:form>
 			<div class="row container-fluid" id="formdiv">
+			<h2>Order Number: 6969696969</h2><br></br>
 				<table style="width: 100%">
 					<tr>
 						<th>Item</th>
@@ -14,13 +16,15 @@
 						<th>Price</th>
 					</tr>
 					<tr>
-						<td style="width: 25%"><div>
+						<td style="width: 25%">
+							<div>
 								<div class="thumbnail">
 									<a href="#"> <img src="/img/gnome1.jpg" alt=""
 										width="240 px" height="160 px" />
 									</a>
 								</div>
-							</div></td>
+							</div>
+						</td>
 						<td>
 							<div id="basketItemDesc">
 								<p id="borderedP">
@@ -31,8 +35,7 @@
 							</div>
 						</td>
 						<td><div class="col-sm-4">
-								<h:selectOneMenu class="form-control"
-									name="wishlist">
+								<h:selectOneMenu class="form-control" name="wishlist">
 									<f:selectItem itemValue="1" itemlabel="1" />
 									<f:selectItem itemValue="2" itemlabel="2" />
 									<f:selectItem itemValue="3" itemlabel="3" />
@@ -40,7 +43,10 @@
 									<f:selectItem itemValue="5" itemlabel="5" />
 								</h:selectOneMenu>
 							</div></td>
-						<td>89.97</td>
+						<td>£89.97</td>
+						<td><h:outputLink value="basket.xhtml">
+								<span style="color: red" class="glyphicon glyphicon-remove"></span>
+							</h:outputLink></td>
 					</tr>
 				</table>
 				<table style="width: 100%">
@@ -68,8 +74,7 @@
 							</div>
 						</td>
 						<td><div class="col-sm-4">
-								<h:selectOneMenu class="form-control"
-									name="wishlist">
+								<h:selectOneMenu class="form-control" name="wishlist">
 									<f:selectItem itemValue="1" itemlabel="1" />
 									<f:selectItem itemValue="2" itemlabel="2" />
 									<f:selectItem itemValue="3" itemlabel="3" />
@@ -77,7 +82,10 @@
 									<f:selectItem itemValue="5" itemlabel="5" />
 								</h:selectOneMenu>
 							</div></td>
-						<td>89.97</td>
+						<td>£89.97</td>
+						<td><h:outputLink value="basket.xhtml">
+								<span style="color: red" class="glyphicon glyphicon-remove"></span>
+							</h:outputLink></td>
 					</tr>
 				</table>
 				<table style="width: 100%">
@@ -105,8 +113,7 @@
 							</div>
 						</td>
 						<td><div class="col-sm-4">
-								<h:selectOneMenu class="form-control"
-									name="wishlist">
+								<h:selectOneMenu class="form-control" name="wishlist">
 									<f:selectItem itemValue="1" itemlabel="1" />
 									<f:selectItem itemValue="2" itemlabel="2" />
 									<f:selectItem itemValue="3" itemlabel="3" />
@@ -114,7 +121,10 @@
 									<f:selectItem itemValue="5" itemlabel="5" />
 								</h:selectOneMenu>
 							</div></td>
-						<td>89.97</td>
+						<td>£89.97</td>
+						<td><h:outputLink value="basket.xhtml">
+								<span style="color: red" class="glyphicon glyphicon-remove"></span>
+							</h:outputLink></td>
 					</tr>
 				</table>
 				<table style="width: 100%">
@@ -143,8 +153,7 @@
 						</td>
 						<td>
 							<div class="col-sm-4">
-								<h:selectOneMenu class="form-control"
-									name="wishlist">
+								<h:selectOneMenu class="form-control" name="wishlist">
 									<f:selectItem itemValue="1" itemlabel="1" />
 									<f:selectItem itemValue="2" itemlabel="2" />
 									<f:selectItem itemValue="3" itemlabel="3" />
@@ -153,7 +162,10 @@
 								</h:selectOneMenu>
 							</div>
 						</td>
-						<td>89.97</td>
+						<td>£89.97</td>
+						<td><h:outputLink value="basket.xhtml">
+								<span style="color: red" class="glyphicon glyphicon-remove"></span>
+							</h:outputLink></td>
 					</tr>
 				</table>
 				<table style="width: 100%">
@@ -181,8 +193,7 @@
 							</div>
 						</td>
 						<td><div class="col-sm-4">
-								<h:selectOneMenu class="form-control"
-									name="wishlist">
+								<h:selectOneMenu class="form-control" name="wishlist">
 									<f:selectItem itemValue="1" itemlabel="1" />
 									<f:selectItem itemValue="2" itemlabel="2" />
 									<f:selectItem itemValue="3" itemlabel="3" />
@@ -190,15 +201,17 @@
 									<f:selectItem itemValue="5" itemlabel="5" />
 								</h:selectOneMenu>
 							</div></td>
-						<td>89.97</td>
+						<td>£89.97</td>
+						<td><h:outputLink value="basket.xhtml">
+								<span style="color: red" class="glyphicon glyphicon-remove"></span>
+							</h:outputLink></td>
 					</tr>
 				</table>
-
+				<h:outputLink value="basket.xhtml" class="btn btn-warning"
+					role="button">Update Basket</h:outputLink>
 				<h:outputLink value="checkout.xhtml" class="btn btn-warning"
 					role="button">Proceed To Checkout</h:outputLink>
-
 			</div>
-
 		</h:form>
 	</ui:define>
 </ui:composition>

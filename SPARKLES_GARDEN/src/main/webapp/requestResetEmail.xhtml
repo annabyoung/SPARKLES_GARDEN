@@ -1,0 +1,38 @@
+<ui:composition xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="templates/noSearchTemplate.xhtml">
+	<ui:define name="mainContent">
+		<meta charset="utf-8" />
+		<f:view>
+			<h:body>
+				<div class="container-fluid">
+					<h:form class="form-horizontal center_div" role="form" id="formdiv">
+						<h2>Request Password Reset</h2>
+						<div>
+							<label class="col-md-9" style="text-align: center">Please enter
+								your email address.<br></br> You will be sent a link where you can reset your password.<br></br>If you have any problems, please feel free to <a href="contact.xhtml">Contact us</a></label>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">Email Address: </label><br></br>
+							<div class="col-sm-4">
+								<h:inputText size="35" name="email" required="true"
+									placeholder="Enter Email Address" />
+							</div>
+						</div>
+						<div>
+							<h:outputLink value="emailSentConfirmation.xhtml"
+								class="btn btn-warning" role="button">Send me a link!</h:outputLink>
+						</div>
+					</h:form>
+				</div>
+				<div>
+					<p id="contact">
+						<a href="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</a>
+					</p>
+				</div>
+			</h:body>
+		</f:view>
+	</ui:define>
+</ui:composition>

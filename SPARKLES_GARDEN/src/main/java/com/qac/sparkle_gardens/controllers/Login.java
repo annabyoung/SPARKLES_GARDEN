@@ -1,6 +1,7 @@
 package com.qac.sparkle_gardens.controllers;
 
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.*;
@@ -15,7 +16,7 @@ import com.qac.sparkle_gardens.services.*;
  *
  */
 
-@ConversationScoped 
+@RequestScoped
 
 @Named (value ="Login")
 public class Login {
