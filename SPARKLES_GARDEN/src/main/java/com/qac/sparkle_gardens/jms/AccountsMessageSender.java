@@ -5,6 +5,9 @@ package com.qac.sparkle_gardens.jms;
 
 import static javax.jms.Session.AUTO_ACKNOWLEDGE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.jms.JMSException;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
@@ -16,6 +19,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * @author Annabelle Young
@@ -32,19 +36,24 @@ public class AccountsMessageSender {
 	private QueueConnectionFactory queueConnectionFactory = null;
 	private QueueSession queueSession = null;
 	private QueueSender queueSender = null;
+	private List<Customer> customer;
+	private InitialData customerData = new InitialData();
 	
 	public void sendObjectMessage(){
 		try{
+			customer = customerData.getCustomers();
+			Customer messageCustomer = customer.get(0);
 			context = new InitialContext();
 			queueConnectionFactory = (QueueConnectionFactory) context.lookup("ConnectionFactory");
 			requestQueue = (Queue) context.lookup("queue1");
 			queueConnection = queueConnectionFactory.createQueueConnection();
 			queueSession = queueConnection.createQueueSession(false, AUTO_ACKNOWLEDGE);
 			queueSender = queueSession.createSender(requestQueue);
-			Customer customer = new Customer();
+			
 			ObjectMessage objectMessage = queueSession.createObjectMessage();
-			objectMessage.setObject(customer);
+			objectMessage.setObject(messageCustomer);
 			queueConnection.start();
+			System.out.println(" Sending message containing Customer: " + messageCustomer.getFirstName() );
 			queueSender.send(objectMessage);			
 		} catch (NamingException e){
 			e.printStackTrace();

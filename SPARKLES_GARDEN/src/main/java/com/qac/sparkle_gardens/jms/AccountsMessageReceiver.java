@@ -5,7 +5,6 @@ package com.qac.sparkle_gardens.jms;
 
 import static javax.jms.Session.AUTO_ACKNOWLEDGE;
 
-import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.Queue;
 import javax.jms.QueueConnection;
