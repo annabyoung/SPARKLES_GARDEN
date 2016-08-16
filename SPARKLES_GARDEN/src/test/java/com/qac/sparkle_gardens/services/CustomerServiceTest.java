@@ -24,26 +24,26 @@ import junit.framework.TestCase;
 
 public class CustomerServiceTest extends TestCase {
 	
-	@Inject 
-	CustomerRepository customerRepository; 
+	
+	
 	Customer dummyCustomer =  new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890"); 
+	CustomerRepository customerRepository; 
+	CustomerInterface customerInterface = new CustomerService();
 	
-	public void persistCustomerTest(Customer customer){
-	
-		  customerRepository.persistCustomer(customer);	
-	}
-	
-	public void persistCustomerTest(List<Customer> customers){
-	
-		customerRepository.persistCustomer(customers);
-	}
-	
+
+	 /**
+	  * returns an ID 
+	  * @param accountID
+	  */
+	@Test
 	public void  findByIDTest(long accountID){
 		
 		Customer result = customerRepository.findByID(accountID);
 		assertNotNull(result);
 	}
 	
+	
+	@Test	
 	public void getCustomerTest(Customer c){
 		
 		Customer customer = customerRepository.getCustomer(c); 
@@ -51,23 +51,25 @@ public class CustomerServiceTest extends TestCase {
 		assertEquals(customer, dummyCustomer);
 	}
 		
+	@Test
 	public void updateCustomerTest(Customer c){
 
 		customerRepository.updateCustomer(c); //update customer what am i updating tho? I may need more of these 
 	
 	}
 		
-	
+	@Test
 	public void removeCustomerTest(Customer c){
 		customerRepository.removeCustomer(c); //remove customer
 	}
 	
+	@Test
 	public void findCustomerAddressesTest(Customer c){
 	
 		customerRepository.findCustomerAddresses(c);
 	}
 		
-		
+	@Test
 	public void findCustomerCardsTest(Customer c){
 		
 		Card cards = customerRepository.findCustomerCards(c);
@@ -75,6 +77,7 @@ public class CustomerServiceTest extends TestCase {
 		
 	}
 	
+	@Test
 	public Customer findByEmail(String email){
 
 		

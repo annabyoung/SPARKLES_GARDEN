@@ -5,6 +5,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.*;
+
+import com.qac.sparkle_gardens.entities.Address;
+import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.test_data.InitialData;
@@ -102,16 +105,19 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			return null;
 		}
 		
-		public void findCustomerAdresses(Customer customer){
-			
+		public Address findCustomerAddresses(Customer customer){
+			Address address= new Address();
 			initialData.getAddresses();
 			
-			//TODO: do this return type is wrong 
+			//TODO: initialize objects, may need to reference composite objects  
+		return address; 
 		}
 		
-		public void findCustomerCards(Customer customer){
-			initialData.getCards(); 
-			//TODO: and do this return type is wrong;  
+		public Card findCustomerCards(Customer customer){
+			Card card= new Card();
+			initialData.getCards(); // i probably need to come back and get composite types 
+			//TODO: currently doesn't work and just returns a null card. make it work later   
+			return card;
 		}
 		
 }
