@@ -41,7 +41,7 @@ public class CustomerHasAddress {
 		this.customer = customer;
 	}
 	
-	public long getCustomerId() {
+	public long getAccountId() {
 		return this.customer.getAccountID();
 	}
 	
@@ -55,6 +55,11 @@ public class CustomerHasAddress {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public long getCustomerId() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

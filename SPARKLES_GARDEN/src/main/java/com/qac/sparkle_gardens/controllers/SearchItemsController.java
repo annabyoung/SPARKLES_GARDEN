@@ -2,7 +2,7 @@ package com.qac.sparkle_gardens.controllers;
 
 import java.util.ArrayList;
 
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.Product;
@@ -19,14 +19,14 @@ import javax.inject.Inject;
  * This controller handles the search queries of customers and returns list of products based on search parameters
  *
  */
-@Named(value="search")
-@RequestScoped
+
+@Named(value="searchItems")
+@SessionScoped
 public class SearchItemsController {
 	@Inject
 	ProductService productService;
 	
 	private ArrayList<Product> searchQueryResults = new ArrayList<Product>();
-	//private ArrayList<String> searchQuery = new ArrayList<>();
 	private String error = "";
 	
 	/**

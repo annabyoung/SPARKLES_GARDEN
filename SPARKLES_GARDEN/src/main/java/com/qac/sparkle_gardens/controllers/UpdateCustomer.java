@@ -4,6 +4,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.services.CustomerService;
 
 
@@ -18,22 +19,37 @@ import com.qac.sparkle_gardens.services.CustomerService;
 
 @Named(value= "updateCustomer")
 @RequestScoped 
-public class UpdateCustomer 
+public class UpdateCustomer implements Controller<Customer> 
 {
 	@Inject
 	CustomerService service;
 
-	private String userID="";
-	private String updatedInformation=""; // should this maybe be an enum?
-	private String newInformation="";
-
+	private long userID;
+	private String errors="unable to update information";
+	
+	// update cards and address need to be thier own controllers 
+	
 	public String updateCustomer(long customerID)
 	{
-		/*if(customerService.updateAccountDetails(username, updatedField, newInformation))
-		{
-			String output= "successful updated information";
-		}*/
-		//service.updateAccountDetails(userID, updatedField, newInformation);
+		
+		Customer customer = service.getCustomerByID(userID);
+		
+		//change value here with science 
+		//do thing
+		//validate stuff
+		
+	
+		if (service.updateAccountDetails(customer))		
 		return "home";
+		else
+			return errors;
+	
+	}
+	@Override
+	public void handleMessage(Customer messagedCustomer){
+		//TODO set logged in customer to be the received customer
+		//TODO display a confirmation message to the customer 
 	}
 }
+
+

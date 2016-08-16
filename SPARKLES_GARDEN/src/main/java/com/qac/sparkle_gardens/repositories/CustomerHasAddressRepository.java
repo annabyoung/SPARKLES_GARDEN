@@ -2,6 +2,7 @@ package com.qac.sparkle_gardens.repositories;
 
 import java.util.List;
 
+import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 
 /**
@@ -61,4 +62,11 @@ public interface CustomerHasAddressRepository {
 	 * @return
 	 */
 	public List<CustomerHasAddress> findByAddressID(long AddressID);
+	
+	/**
+	 * @MethodAuthor Tyler Deans
+	 * Checks if there are any customer addresses associated with an given address
+	 * @return
+	 */
+	public boolean isCustomerId(Address address);
 }

@@ -52,7 +52,7 @@ public interface CustomerHasCardRepository {
 	 * @param customerID
 	 * @return
 	 */
-	public List<CustomerHasCard> findByCustomerID(long customerID);
+	public List<CustomerHasCard> findByAccountID(long customerID);
 	
 	/**
 	 * Finds instances of Customer Owning Cards by Card.

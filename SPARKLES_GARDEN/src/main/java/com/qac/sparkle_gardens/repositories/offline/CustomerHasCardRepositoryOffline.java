@@ -48,7 +48,7 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 
 	}
 
-	@Override
+
 	public List<CustomerHasCard> findByCustomerID(long customerID) {
 		// TODO Auto-generated method stub
 		return null;
@@ -56,6 +56,12 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 
 	@Override
 	public List<CustomerHasCard> findByCardID(long cardID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CustomerHasCard> findByAccountID(long customerID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

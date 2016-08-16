@@ -18,7 +18,8 @@ public interface AddressRepository {
 	public void persistAddresses(List<Address> addresss);
 	
 	// Locate an address by ID
-	public Address findByCustomerId(long id); 
+
+	public List<Address> findByAccountId(long id); 
 	
 	// Returns all the addresses
 	public List<Address> getAddresses();
@@ -33,4 +34,7 @@ public interface AddressRepository {
 
 	@Deprecated
 	public void removeCustomerHasAddress(CustomerHasAddress custAddress, long customerId);
+
+	// checks for duplicate objects
+	public boolean isDuplicate(Address address);
 }

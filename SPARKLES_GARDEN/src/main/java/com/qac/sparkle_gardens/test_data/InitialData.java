@@ -32,6 +32,7 @@ public class InitialData
 	private List<Card> Cards = new ArrayList<Card>();
 	private List<Customer> customers = new ArrayList<Customer>();
 	private List<Order> orders;
+
 	//private ArrayList<Payment> Payments = new ArrayList<Payment>();
 	private List<Product> products = new ArrayList<Product>();
 
@@ -41,7 +42,8 @@ public class InitialData
 	public InitialData() 
 	{
 		//Object Creation.
-		Address dummyAddress = new Address(1, "Anchorage 1", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ");
+		//long addressId, int buildingNum, String streetName, String city, String county, String country, String postCode
+		Address dummyAddress = new Address(1, "Anchorage", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ");
 		Customer johnSmith = new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890");
 		Customer janeDoe = new Customer("Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, "password01", "0987654321");
 		Customer joeSchmoe = new Customer("Joe", "Schmoe", "email999@email.com", CreditStatus.VALID, "password01", "1357908642");
@@ -87,8 +89,8 @@ public class InitialData
 		orders.get(3).addOrderLine(new OrderLine(new Product("Great socks!", 10, 40), 2));
 		orders.get(3).addOrderLine(new OrderLine(new Product("Allen's Mac", 1, 231), 12));
 		
-		orders.get(4).addOrderLine(new OrderLine(new Product("Impressive glasses", 2, 200), 1));
-		orders.get(5).addOrderLine(new OrderLine(new Product("Gandhi's Nukes", 9001, 100000), 1));
+		orders.get(4).addOrderLine(new OrderLine(new Product("Impressive glasses", 2, 200), 1)); 
+		orders.get(5).addOrderLine(new OrderLine(new Product("Gandhi's Nukes", -1, 9001), 1));
 		
 		/*
 		// Add payments
@@ -210,6 +212,7 @@ public class InitialData
 	{
 		this.orders = orders;
 	}
+
 	
 //	public void addPayment(Payment p)
 //	{
@@ -226,6 +229,7 @@ public class InitialData
 //		this.Payments = Payments;
 //	}
 	
+
 	@MethodAuthor(author="Annabelle Young")
 	public List<Product> getProducts(){
 		return products;

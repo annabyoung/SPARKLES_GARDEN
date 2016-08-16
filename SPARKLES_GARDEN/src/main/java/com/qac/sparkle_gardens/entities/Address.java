@@ -1,15 +1,10 @@
 package com.qac.sparkle_gardens.entities;
 
-
-import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,17 +27,6 @@ public class Address {
 	@Column (name = "addressID")
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long addressId;
-
-	@OneToMany
-	@JoinColumn(name="customer_fk", nullable = false)
-	private ArrayList<Customer> customers;
-	
-	public ArrayList<Customer> getCustomers() {
-		return customers;
-	}
-	public void setCustomers(ArrayList<Customer> customers) {
-		this.customers = customers;
-	}
 	
 	//The number of the building
 	@Column
@@ -74,9 +58,25 @@ public class Address {
 	@Size (min = 1, max = 20)
 	private String postCode;
 	
-	public Address(long addressId, int buildingNum, String streetName, String city, String county, 
-			String country, String postCode) {
-		this.addressId = addressId;
+	public Address() {
+		this.buildingNum = 0;
+		this.streetName = "";
+		this.city = "";
+		this.county = "";
+		this.country = "";
+		this.postCode = "";
+	}
+	
+	/**
+	 * 
+	 * @param buildingNum
+	 * @param streetName
+	 * @param city
+	 * @param county
+	 * @param country
+	 * @param postCode
+	 */
+	public Address(int buildingNum, String streetName, String city, String county, String country, String postCode) {
 		this.buildingNum = buildingNum;
 		this.streetName = streetName;
 		this.city = city;
@@ -86,15 +86,13 @@ public class Address {
 	}
 	// Getters and setters for all the attributes
 
-	public Address() {
-		// TODO Auto-generated constructor stub
-	}
 
-	@Deprecated
-	public Address(int buildingNum2, String streetName2, String city2, String county2, String country2,
+	//@Deprecated
+	/*public Address(int buildingNum2, String streetName2, String city2, String county2, String country2,
 			String postCode2) {
 		// TODO Auto-generated constructor stub
-	}
+	}*/
+
 	public long getAddressId() {
 		return addressId;
 	}
@@ -161,5 +159,9 @@ public class Address {
 	public long getCustomerId() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public boolean equals(Address anotherAddress){
+		return (this.addressId == anotherAddress.addressId);
 	}
 }

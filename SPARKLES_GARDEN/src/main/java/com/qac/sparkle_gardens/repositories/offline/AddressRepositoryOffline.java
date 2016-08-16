@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -39,19 +40,20 @@ public class AddressRepositoryOffline implements AddressRepository {
 	}
 	
 	/**
-	 * Locate an address by the customer ID
+	 * Locate the address(s) by the customer ID
 	 * @param id
 	 * @return
 	 */
-	public Address findByCustomerId(long accountId) {
-		List<Address> list = initialData.getAddresses();
-		Address place = new Address();
-		for (int index = 0; index < list.size(); index++) {
-			if (list.get(index).getCustomerId() == accountId) {
-				place = list.get(index);
-			}
+
+	public List<Address> findByAccountId(long accountId) {
+		List <Address> places = new ArrayList <Address>();
+		// retrieves all the addresses a customer has 
+	    List<CustomerHasAddress> custAddress = (ArrayList<CustomerHasAddress>) custAddressRepository.findByCustomerID(accountId);
+		
+		for (CustomerHasAddress cust : custAddress) {
+			places.add(cust.getAddress());
 		}
-		return place;
+		return places;
 	}
 	
 	// Returns all the addresses
@@ -87,14 +89,24 @@ public class AddressRepositoryOffline implements AddressRepository {
 		}
 		initialData.setAddresses(addresses);
 	}
-	
+
 	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
 		List<Address> addresses = initialData.getAddresses();
+	}
+
+	/**
+	 * @param address
+	 */
+	public boolean isDuplicate(Address address) {
+		List<Address> addresses = initialData.getAddresses();
+		
+
 		for (int index = 0; index < addresses.size(); index++) {
-			if (addresses.get(index).getCustAddress().getCustomerId() == accountId) {
-				custAddressRepository.addCustomerHasAddress(cust);
+			if (address.equals(addresses.get(index))) {
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	public void removeCustomerHasAddress(CustomerHasAddress cust, long accountId) {
@@ -105,4 +117,5 @@ public class AddressRepositoryOffline implements AddressRepository {
 			}
 		}
 	}
+
 }
