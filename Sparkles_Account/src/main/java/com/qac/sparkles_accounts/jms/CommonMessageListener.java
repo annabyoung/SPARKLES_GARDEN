@@ -27,7 +27,6 @@ public class CommonMessageListener<T> implements MessageListener {
 	/* (non-Javadoc)
 	 * @see javax.jms.MessageListener#onMessage(javax.jms.Message)
 	 */
-	@Override
 	public void onMessage(Message message) {
 		ObjectMessage objectMessage = (ObjectMessage) message;
 		try {
