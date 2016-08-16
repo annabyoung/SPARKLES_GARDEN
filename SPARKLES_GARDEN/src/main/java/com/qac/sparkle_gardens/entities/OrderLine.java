@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * @author Damien Lloyd
  *
  */
-@Entity
+
 public class OrderLine 
 {
 	@Id

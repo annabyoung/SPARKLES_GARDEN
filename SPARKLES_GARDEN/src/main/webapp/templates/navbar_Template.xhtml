@@ -1,0 +1,121 @@
+<!DOCTYPE xhtml>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<meta charset="utf-8" />
+<h:head>
+	<title>NBGardens Navigation Bar</title>
+	<link rel="stylesheet" type="text/css" href="..\js\bootstrap.min.js"></link>
+	<link rel="stylesheet" type="text/css" href="..\css\bootstrap.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="..\css\Navbar.css"></link>
+	<link rel="stylesheet" type="text/css" href="..\css\Homepage.css"></link>
+	<link rel="stylesheet" type="text/css" href="..\css\basketItem.css"></link>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" />
+	<meta charset="utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+</h:head>
+<h:body>
+	<f:view>
+		<div>
+			<nav class="navbar navbar-inverse" id="myNewNavbar">
+				<div id="login">
+					<p id="login">
+						<h:link rendered="#{!credentials.loggedIn}">
+							<div>
+								<a data-toggle="model" href="registerUser.xhtml">Register
+									Login</a>
+							</div>
+							<div>
+								<a data-toggle="model" href="login.xhtml">Login</a>
+							</div>
+						</h:link>
+					</p>
+				</div>
+				<table class="container-fluid col-xs-8" style="width: 100%">
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+					<tr>
+						<td>
+							<div id="logo">
+								<h1>
+									<h:outputLink value="homepage.xhtml">
+										<h:graphicImage class="img-responsive left-block" id="logo"
+											value="\img\Logo.png" width="200px" height="150px" />
+									</h:outputLink>
+								</h1>
+							</div>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<div>
+								<div class="row">
+									<div class="col-md-6">
+										<div id="custom-search-input">
+											<div class="input-group col-md-12">
+												<h:inputText id="search" type="text"
+													class="form-control input-lg" placeholder="Search"></h:inputText>
+												<span class="input-group-btn">
+													<button id="searchbutton" type="button"
+														class="btn btn-default" aria-label="Search Button">
+														<span class="glyphicon glyphicon-search"
+															aria-hidden="true"></span>
+													</button>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<div>
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target="#myNavbar">
+								<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a id="navbarTitle" class="navbar-brand" href="/">Home</a>
+						</div>
+						<div class="navbar-collapse collapse" id="myNavbar">
+							<ul class="nav navbar-nav">
+								<li class="dropdown"><a id="myDropdown"
+									class="dropdown-toggle" data-toggle="dropdown" href="/">Gnomes<span
+										class="caret"></span>
+								</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">Action</a></li>
+										<li><a href="#">Another action</a></li>
+										<li><a href="#">Something else here</a></li>
+										<li class="divider"></li>
+										<li><a href="#">Separated link</a></li>
+										<li class="divider"></li>
+										<li><a href="#">One more separated link</a></li>
+									</ul></li>
+								<li><a href="#">Accessories</a></li>
+								<li><a href="#">Limited Edition</a></li>
+								<li><a href="#">Seasonal Items</a></li>
+								<li><a href="#">Sale Items</a></li>
+								<li><a href="#">Clearance</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</nav>
+
+			<ui:insert name="mainContent"></ui:insert>
+		</div>
+	</f:view>
+</h:body>
+</html>
+
+

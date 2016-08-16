@@ -43,7 +43,7 @@ public class OrderService
 	
 	public OrderService()
 	{
-		sender = new MessageSender();
+
 	}
 	
 	/**
