@@ -11,10 +11,11 @@ public interface WishlistServiceInterface {
 	public List<Wishlist> getWishlists();
 	public void deleteWishlist(long id);
 	public void createWishlist(long accountId, String name);
+	public void createWishlist(long accountId, Product product);
 	public void addProduct(Product product, long wishlistId);
 	public void addProduct(Product product, String wishlistName);
 	public void removeProduct(Product product, String wishlistName);
 	public void removeProduct(Product product, long accountId);
 	public List<Product> getProducts(String wishlistName);
-	
+	public List<Product> getProducts(long accountId);
 }

@@ -44,4 +44,7 @@ public interface WishlistRepository {
 	
 	//Returns all the products in a wishlist
 	public List<Product> getProducts(String wishlistName);
+	
+	//Returns all the products in a wishlist (with accountId parameter
+	public List<Product> getProducts(long accountId);
 }
