@@ -57,6 +57,9 @@ public class ProductService implements ProductInterface{
 	 * 
 	 */
 	public boolean checkInStock(Product p){
+		if(p == null){
+			throw new IllegalArgumentException();
+		}
 		if (p.getStockLevel() == 0)
 		/**
 		 * Need to consult with Chris and Luke about further details for what exactly they want to happen
@@ -69,7 +72,11 @@ public class ProductService implements ProductInterface{
 	 * Retrieve product's info from productID
 	 * Find the product from its ID and return its description
 	 */
+	@Deprecated
 	public String getProductDescriptionFromID(long productID){
+		if(productID == 0){
+			throw new IllegalArgumentException();
+		}
 		Product p = getProductByID(productID);
 		return p.getProductDescription();
 	}
@@ -80,7 +87,13 @@ public class ProductService implements ProductInterface{
 	 * if there is not enough stock to meet the quantity requested, false will be returned
 	 */
 	public boolean checkIfEnoughQuantity(Product p, int quantityRequested){
-		return (p.getStockLevel() <= quantityRequested);
+		if(p == null){
+			throw new IllegalArgumentException();
+		}
+		if(quantityRequested == 0){
+			throw new IllegalArgumentException();
+		}
+		return (p.getStockLevel() >= quantityRequested);
 	}
 	
 	/**
@@ -88,6 +101,9 @@ public class ProductService implements ProductInterface{
 	 * Use a product's ID to find the whole product, including its other attributes
 	 */
 	public Product getProductByID(long productID){
+		if(productID == 0){
+			throw new IllegalArgumentException();
+		}
 		return productRepository.findByProductID(productID);
 	}
 	
@@ -98,6 +114,9 @@ public class ProductService implements ProductInterface{
 	 * @return prodcutsInRange which is all the products within the price range the customer is searching for
 	 */
 	public ArrayList<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
+		if(maximumPrice < minimumPrice ){
+			throw new IllegalArgumentException();
+		}
 		ArrayList<Product> productsInRange = new ArrayList<Product>();
 		for(Product p : productRepository.getProducts()){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
