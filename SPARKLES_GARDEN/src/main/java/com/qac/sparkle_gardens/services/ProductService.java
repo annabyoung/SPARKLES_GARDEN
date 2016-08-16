@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
+import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * @author Annabelle Young
@@ -23,9 +24,13 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
 
 @Stateless
 public class ProductService implements ProductInterface{
+	//@Inject InitialData initialData;
 	@Inject ProductRepository productRepository;
 	
+	
+	
 	private ArrayList<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
+	//private ArrayList<Product> products = (ArrayList<Product>) initialData.getProducts();
 	private ArrayList<String> tags = new ArrayList<String>();
 		
 	
@@ -107,6 +112,12 @@ public class ProductService implements ProductInterface{
 		return productRepository.findByProductID(productID);
 	}
 	
+	public boolean checkIfMinIsLessThanMax(double minimumPrice, double maximumPrice){
+		if (minimumPrice > maximumPrice){
+			return false;
+		}
+		return true;
+	}
 	/**
 	 * Search items within a price range
 	 * @param minimumPrice
@@ -114,9 +125,6 @@ public class ProductService implements ProductInterface{
 	 * @return prodcutsInRange which is all the products within the price range the customer is searching for
 	 */
 	public ArrayList<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
-		if(maximumPrice < minimumPrice ){
-			throw new IllegalArgumentException();
-		}
 		ArrayList<Product> productsInRange = new ArrayList<Product>();
 		for(Product p : productRepository.getProducts()){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){

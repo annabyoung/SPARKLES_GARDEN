@@ -62,6 +62,16 @@ public class WishlistService implements WishlistServiceInterface {
 	}
 	
 	/**
+	 * Overloaded create wishlist method
+	 * @param accountId
+	 * @param product
+	 */
+	public void createWishlist(long accountId, Product product) {
+		Wishlist wish = new Wishlist(accountId, product);
+		wishlistRepository.persistWishlist(wish);
+	}
+	
+	/**
 	 * Adds a product to a wishlist
 	 * @param product
 	 * @param wishlistId
@@ -105,5 +115,9 @@ public class WishlistService implements WishlistServiceInterface {
 	 */
 	public List<Product> getProducts(String wishlistName) {
 		return wishlistRepository.getProducts(wishlistName);
+	}
+	
+	public List<Product> getProducts(long accountId) {
+		return wishlistRepository.getProducts(accountId);
 	}
 }

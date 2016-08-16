@@ -5,6 +5,9 @@ package com.qac.sparkle_gardens.services;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -12,6 +15,7 @@ import org.junit.Test;
 import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
+import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * @author Annabelle Young
@@ -21,6 +25,7 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
  *
  */
 public class ProductServiceTest {
+	//@Inject InitialData initialData;
 	//@Inject ProductRepository productRepository;
 	
 	private Product product = new Product("The Great American Challenge", 10, 79.99);
@@ -127,11 +132,34 @@ public class ProductServiceTest {
 	}
 	
 	/**
-	 * Verifies that minimumPrice value entered is not greater than maximumPrice value entered
+	 * Verifies that true is returned if minimumPrice value entered
+	 * is not greater than maximumPrice value entered
+	 */	
+	@Test
+	public void checkIfMinIsLessThanMaxShouldReturnValidOutputForValidInput(){
+		boolean result = pi.checkIfMinIsLessThanMax(10.00, 20.00);
+		assertTrue(result);
+	}
+	
+	/**
+	 * Verifies that false is returned if minimumPrice value entered
+	 * is greater than maximumPrice value entered
+	 */	
+	@Test
+	public void checkIfMinIsLessThanMaxShouldReturnValidOutputForInvalidInput(){
+		boolean result = pi.checkIfMinIsLessThanMax(20.00, 10.00);
+		assertFalse(result);
+	}
+	
+	/**
+	 * Verifies that false is returned if products are added to list
+	 * result will be false if the resultList is empty
 	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void createProductListByPriceRangeShouldThrowIllegalArgumentExceptionForMinGreaterThanMax(){
-		pi.createProductListByPriceRange(20.00, 10.00);
+	@Test
+	public void createProductListByPriceRangeShouldAddProductInPriceRange(){
+		List<Product> resultList = pi.createProductListByPriceRange(10.00, 80.00);
+		boolean result = resultList.isEmpty();
+		assertFalse(result);
 	}
 	
 }

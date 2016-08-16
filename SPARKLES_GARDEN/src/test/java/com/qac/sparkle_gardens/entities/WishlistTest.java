@@ -1,10 +1,7 @@
-package com.qac.sparkle_gardens.services;
+package com.qac.sparkle_gardens.entities;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
@@ -34,6 +31,6 @@ public class WishlistTest {
 	
 	@Test 
 	public void checkInWishlist() {
-		assertEquals(true, list.inWishlist(p1.getProductID()));
+		assertTrue(list.inWishlist(p1.getProductID()));
 	}
 }

@@ -36,6 +36,10 @@ public class WishlistController {
 		wishlistService.createWishlist(accountId, wishlistName);
 	}
 	
+	public void createWishlist(long accountId, Product product) {
+		wishlistService.createWishlist(accountId, product);
+	}
+	
 	/**
 	 * Adds a product to the wishlist
 	 * @param product

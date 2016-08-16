@@ -41,7 +41,13 @@ public class Customer implements Serializable  {
 	@Id
 	@Column (name ="accountID")
 	//@OneToMany 
+<<<<<<< HEAD
 	//fix this comeback  later
+=======
+	//TODO: FIX THIS STOPS SERVER FROM RUNNING
+	
+	// not sure what the foreign key looks like or if this is correct 
+>>>>>>> e129f58b156b7e1e704826c0597df8fecf76aff2
 	@JoinColumn(name = "accountID_fk ", nullable = false)
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long accountID;
