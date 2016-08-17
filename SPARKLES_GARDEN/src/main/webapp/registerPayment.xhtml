@@ -1,87 +1,82 @@
-<!DOCTYPE xhtml>
-<html xmlns="https://www.w3.org/1999/xhtml"
+<ui:composition xmlns="https://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<link rel="stylesheet" type="text/css" href="\js\bootstrap.min.js" />
-	<link rel="stylesheet" type="text/css" href="\css\bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="\css\register.css" />
-	<title>Add Payment</title>
-</h:head>
-<f:view>
-	<h:body>
-		<h1>
-			<div id="homelink" class="center-block">
-				<h:outputLink value="homepage.xhtml">
-					<h:graphicImage class="img-responsive center-block" id="logo"
-						value="\img\Logo.png" width="200px" height="150px" />
-				</h:outputLink>
-			</div>
-		</h1>
-		<div class="container-fluid">
-			<h:form name="paymentForm" class="form-horizontal center_div"
-				role="form" id="formdiv">
-				<h2>Add a Payment Method</h2>
-				<div class="form-group">
-					<label class="control-label col-sm-4">Card Type: </label>
-					<div class="col-sm-4">
-						<h:selectOneListbox>
-							<f:selectItem itemValue="visa" itemLabel="Visa" />
-							<f:selectItem itemValue="maestro" itemLabel="Maestro" />
-							<f:selectItem itemValue="mastercard" itemLabel="Mastercard" />
-							<f:selectItem itemValue="americanExpress"
-								itemLabel="American Express" />
-						</h:selectOneListbox>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-4"> *Card Holder Name: </label>
-					<div class="col-sm-4">
-						<h:inputText id="cardName" tpe="text" name="cardName" required="true" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-4"> *Card Number: </label>
-					<div class="col-sm-4">
-						<h:inputText id="cardNumber" type="number" name="cardNumber" required="true" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-4">Start Date: </label>
-					<div class="col-sm-4">
-						<h:inputText id="startDate" name="startDate" type="month" required="true" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-4"> *Expiration Date: </label>
-					<div class="col-sm-4">
-						<h:inputText id="expDate" type="month" name="expDate" required="true" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-4">Issue Number: </label>
-					<div class="col-sm-4">
-						<h:inputText type="number" id="issNum" name="issueNum" />
-					</div>
-				</div>
-				<div>
-					<h:commandButton type="button" class="btn btn-warning"
-						value="Complete Registration!" onclick="Validation()"/>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="templates/noSearchTemplate.xhtml">
+	<ui:define name="mainContent">
+		<meta charset="utf-8" />
+		<f:view>
+			<h:body>
+				<div class="container-fluid">
+					<h:form name="paymentForm" class="form-horizontal center_div"
+						role="form" id="formdiv">
+						<h2>Add a Payment Method</h2>
+						<div class="form-group">
+							<label class="control-label col-sm-4">Card Type: </label>
+							<div class="col-sm-4">
+								<h:selectOneListbox>
+									<f:selectItem itemValue="visa" itemLabel="Visa" />
+									<f:selectItem itemValue="maestro" itemLabel="Maestro" />
+									<f:selectItem itemValue="mastercard" itemLabel="Mastercard" />
+									<f:selectItem itemValue="americanExpress"
+										itemLabel="American Express" />
+								</h:selectOneListbox>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4"> *Card Holder Name:
+							</label>
+							<div class="col-sm-4">
+								<h:inputText id="cardName" tpe="text" name="cardName"
+									required="true" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4"> *Card Number: </label>
+							<div class="col-sm-4">
+								<h:inputText id="cardNumber" type="number" name="cardNumber"
+									required="true" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">Start Date: </label>
+							<div class="col-sm-4">
+								<h:inputText id="startDate" name="startDate" type="month"
+									required="true" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4"> *Expiration Date:
+							</label>
+							<div class="col-sm-4">
+								<h:inputText id="expDate" type="month" name="expDate"
+									required="true" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">Issue Number: </label>
+							<div class="col-sm-4">
+								<h:inputText type="number" id="issNum" name="issueNum" />
+							</div>
+						</div>
+						<div>
+							<h:commandButton type="button" class="btn btn-warning"
+								value="Complete Registration!" onclick="Validation()" />
 
+						</div>
+						<div>
+							<p id="errorMessage"></p>
+						</div>
+					</h:form>
 				</div>
 				<div>
-					<p id="errorMessage"> </p>
+					<p id="contact">
+						<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Contact</a>
+					</p>
 				</div>
-			</h:form>
-		</div>
-		<div>
-			<p id="contact">
-				<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Contact</a>
-			</p>
-		</div>
-		<script src="..\js\cardRegistrationFormValidation.js" />
-		<script src="..\js\inputValidationPayment.js" />
-	</h:body>
-</f:view>
-</html>
+				<script src="..\js\cardRegistrationFormValidation.js" />
+				<script src="..\js\inputValidationPayment.js" />
+			</h:body>
+		</f:view>
+	</ui:define>
+</ui:composition>
