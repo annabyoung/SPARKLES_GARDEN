@@ -10,47 +10,53 @@
 				<div class="container-fluid">
 					<h:form class="form-horizontal center_div" role="form" id="formdiv">
 						<h2 class="center-block">Register</h2>
+						<div>
+							<p id="errorMessage"></p>
+						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">First Name:</label>
 							<div class="col-sm-4">
-								<h:inputText name="firstName" require="true" />
+								<h:inputText name="firstName" id="firstName" require="true" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">Surname:</label>
 							<div class="col-sm-4">
-								<h:inputText name="surname" required="true" />
+								<h:inputText name="surname" required="true" id="surname" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">EmailAddress:</label>
 							<div class="col-sm-4">
-								<h:inputText name="email" renderedType="Email" required="true" />
+								<h:inputText name="email" type="Email" id="email"
+									required="true" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">Confirm Email
 								Address:</label>
 							<div class="col-sm-4">
-								<h:inputText name="confirmEmail" renderedType="Email"
+								<h:inputText name="confirmEmail" type="Email" id="emailCon"
 									required="true" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">Password:</label>
 							<div class="col-sm-4">
-								<h:inputSecret name="password" required="true" />
+								<h:inputSecret name="password" id="password" required="true" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">Confirm Password:</label>
 							<div class="col-sm-4">
-								<h:inputSecret name="confrimPassword" required="true" />
+								<h:inputSecret name="confrimPassword" id="passCon"
+									required="true" />
 							</div>
 						</div>
 						<div>
-							<h:outputLink value="registerAddress.xhtml"
-								class="btn btn-warning" role="button">Continue to Add Address</h:outputLink>
+							<h:commandButton class="btn btn-warning" type="button"
+								role="button" value="Continue to add address"
+								onclick="Validation()" />
 						</div>
 					</h:form>
 					<div>
@@ -59,6 +65,7 @@
 						</p>
 					</div>
 				</div>
+				<script src="..\js\userValidation.js"></script>
 			</h:body>
 		</f:view>
 	</ui:define>

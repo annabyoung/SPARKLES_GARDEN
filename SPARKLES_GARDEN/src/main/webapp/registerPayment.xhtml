@@ -11,6 +11,9 @@
 					<h:form name="paymentForm" class="form-horizontal center_div"
 						role="form" id="formdiv">
 						<h2>Add a Payment Method</h2>
+						<div>
+							<p id="errorMessage"></p>
+						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">Card Type: </label>
 							<div class="col-sm-4">
@@ -61,11 +64,8 @@
 						</div>
 						<div>
 							<h:commandButton type="button" class="btn btn-warning"
-								value="Complete Registration!" onclick="Validation()" />
+								value="Complete Registration!" onclick="Valdation()" />
 
-						</div>
-						<div>
-							<p id="errorMessage"></p>
 						</div>
 					</h:form>
 				</div>
@@ -74,8 +74,7 @@
 						<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Contact</a>
 					</p>
 				</div>
-				<script src="..\js\cardRegistrationFormValidation.js" />
-				<script src="..\js\inputValidationPayment.js" />
+				<script src="..\js\paymentValidation.js" />
 			</h:body>
 		</f:view>
 	</ui:define>

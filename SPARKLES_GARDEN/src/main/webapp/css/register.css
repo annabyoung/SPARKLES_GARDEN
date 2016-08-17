@@ -90,3 +90,8 @@ option{
 	
 	text-align:left;
 }
+
+#errorMessage{
+	
+	color: red;
+}
