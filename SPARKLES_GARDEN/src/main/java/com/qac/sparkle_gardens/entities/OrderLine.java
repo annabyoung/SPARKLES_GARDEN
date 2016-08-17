@@ -31,7 +31,7 @@ public class OrderLine
 	private Order order;
 	
 	@Column
-	@Null
+	@NotNull
 	private int quantity; // Quantity of Product ordered
 	
 	/**

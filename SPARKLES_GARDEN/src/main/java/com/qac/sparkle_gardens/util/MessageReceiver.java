@@ -31,7 +31,7 @@ public class MessageReceiver implements MessageListener
 	private Queue queue = null;
 	private Context context = null;
 	private QueueReceiver receiver = null;
-	 
+	
 	private Object object = null;
 	
 	private Serializable serial = null;
