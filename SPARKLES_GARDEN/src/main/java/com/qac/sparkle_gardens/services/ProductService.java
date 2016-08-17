@@ -126,16 +126,11 @@ public class ProductService implements ProductInterface{
 	 * Search items within a price range
 	 * @param minimumPrice
 	 * @param maximumPrice
-	 * @return prodcutsInRange which is all the products within the price range the customer is searching for
+	 * @return productsInRange which is all the products within the price range the customer is searching for
 	 */
 	public List<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
 		List<Product> productsInRange = new ArrayList<Product>();
 		List<Product> pl = productRepository.getProducts();
-		//List<Product> pl = initial.getAllProducts();
-	/*	pl.add(new Product("The Great American Challenge", 50, 79.99));
-		pl.add(new Product("Fleshlight Original", 100, 99.99));
-		pl.add(new Product("The Screaming O", 500, 19.99));
-		*/
 		for(Product p : pl){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
 				productsInRange.add(p);
@@ -210,19 +205,17 @@ public class ProductService implements ProductInterface{
 		return true;
 	}
 	
-	public List<Product> getProductList(){
-		//There should be a query here, but we're not at that point yet
-		return initial.getAllProducts();
-	}
-	
 	/**
 	 * Return the list of all products that meet the search parameters
 	 */
-/*	public ArrayList<Product> getProductList(){
+	public List<Product> getProductList(){
 		//There should be a query here, but we're not at that point yet
 		return productList;
 	}
-	*/
+	
+	/**
+	 * Clears the search query
+	 */
 	public void clearSearchQuery(){
 		productList.clear();
 	}

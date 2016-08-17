@@ -209,24 +209,18 @@ public class ProductServiceTest {
 	}
 	
 	/**
-	 * Verifies that false is returned if products are added to list
-	 * result will be false if the resultList is empty
+	 * Verifies that true is returned if products are added to list
+	 * result will be true if list is not empty
 	 */
 	@Test
 	public void createProductListByPriceRangeShouldAddProductInPriceRange(){
 		System.out.println("createProductListByPriceRangeShouldAddProductInPriceRange");
 		List<Product> resultList = pi.createProductListByPriceRange(10.00, 80.00);
-		boolean result = resultList.isEmpty();
+		boolean result = !(resultList.isEmpty());
 		//boolean result = (pi.createProductListByPriceRange(10.00, 80.00)).isEmpty();
-		assertFalse(result);
+		assertTrue(result);
 	}
 	
-	@Test
-	public void getProductListShouldReturnSomething(){
-		pi.getProductList();
-		//boolean result = (pi.getProductList()).isEmpty();
-		//assertFalse(result);
-	}
 	
 	/**
 	 * Verifies that false is returned if products are added to list
