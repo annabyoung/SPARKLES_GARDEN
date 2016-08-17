@@ -24,7 +24,7 @@ public interface CustomerRepository {
 	public void updateCustomer(Customer c); //update customer what am i updating tho? I may need more of these 
 	public void removeCustomer(Customer c); //remove customer
 	public Address findCustomerAddresses(Customer c);
-	public Card findCustomerCards(Customer c); //maybe get composite class? 
+	public List<Card> findCustomerCards(Customer c); //maybe get composite class? 
 	
 	/**
 	 * Finds a customer by their email address and returns null is no customer is found

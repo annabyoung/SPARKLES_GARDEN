@@ -247,4 +247,8 @@ public class InitialData
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+	
+	public List<CustomerHasCard> getCusHasCards(){
+		return this.cusHasCards;
+	}
 }

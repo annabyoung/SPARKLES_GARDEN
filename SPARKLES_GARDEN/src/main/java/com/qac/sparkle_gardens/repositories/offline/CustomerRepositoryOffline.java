@@ -23,27 +23,30 @@ public class CustomerRepositoryOffline implements CustomerRepository
 {	
 	@Inject 
 	private InitialData initialData;
-	
+	private List<Customer> customers;
 		public CustomerRepositoryOffline()
 		{
 			initialData = new InitialData();
+			
+			List<Customer> customers = initialData.getCustomers();
+			
 		}
 		
 		public void persistCustomer(Customer customer){
-			initialData.addCustomer(customer);
+			customers.addCustomer(customer);
 			
 		}
 		
 		public void persistCustomer(List<Customer> customers){
-			initialData.setCustomer(customers);
+			customers.setCustomer(customers);
 		}
 		
 		public Customer findByID(long accountID) {
-			List<Customer> theCustomers = initialData.getCustomers();
-			for (int i=0; i<theCustomers.size(); i++)
+			customers;
+			for (int i=0; i<customers.size(); i++)
 			{
-				if(theCustomers.get(i).getAccountID() == accountID){
-					return theCustomers.get(i); 
+				if(customers.get(i).getAccountID() == accountID){
+					return customers.get(i); 
 				}
 				
 			}
@@ -52,19 +55,18 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		}
 		
 		//get customer
-		public List<Customer> getCustomers(Customer c){
+		public List<Customer> customers(Customer c){
 			
-			return initialData.getCustomers();
+			return initialData.customers();
 			
 		} 
 		
-		public Customer getCustomer(Customer c){
-			List<Customer> theCustomers = initialData.getCustomers();
+		public Customer customer(Customer c){
 			
-			for (int i=0; i<theCustomers.size(); i++)
+			for (int i=0; i<customers.size(); i++)
 			{
-				if(theCustomers.get(i).equals(c)){
-				 return theCustomers.get(i);
+				if(customers.get(i).equals(c)){
+				 return customers.get(i);
 				}
 			}
 			 Customer nothing = new Customer();
@@ -73,12 +75,11 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		
 		//update customer 
 		public void updateCustomer(Customer c){
-			List<Customer> theCustomers = initialData.getCustomers();
 			
-			for (int i=0; i<theCustomers.size(); i++)
+			for (int i=0; i<customers.size(); i++)
 			{
-				if(theCustomers.get(i).equals(c)){
-				 theCustomers.set(i, c);
+				if(customers.get(i).equals(c)){
+				customers.set(i, c);
 				}
 			}
 		} 
@@ -86,17 +87,18 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		
 		//remove customer
 		public void removeCustomer(Customer c){
-			List<Customer> theCustomers = initialData.getCustomers();
 			
-			for (int i=0; i<theCustomers.size(); i++)
+			
+			for (int i=0; i<customers.size(); i++)
 			{
-				if(theCustomers.get(i).equals(c)){
-					theCustomers.remove(i);
+				if(customers.get(i).equals(c)){
+					customers.remove(i);
 				}
 			}
 			
 		}
 
+		
 		public Customer findByEmail(String email) 
 		{
 			for (Customer customer : initialData.getCustomers())
@@ -104,6 +106,8 @@ public class CustomerRepositoryOffline implements CustomerRepository
 					return customer;
 			return null;
 		}
+		
+		
 		
 		public Address findCustomerAddresses(Customer customer){
 
@@ -114,10 +118,11 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		return address; 
 		}
 		
-		public Card findCustomerCards(Customer customer){
-			Card card= new Card();
-			initialData.getCards(); // i probably need to come back and get composite types 
+		public List<Card> findCustomerCards(Customer customer){
+		
+			initialData.get; // i probably need to come back and get composite types 
 			//TODO: currently doesn't work and just returns a null card. make it work later   
+			
 			return card;
 		}
 		
