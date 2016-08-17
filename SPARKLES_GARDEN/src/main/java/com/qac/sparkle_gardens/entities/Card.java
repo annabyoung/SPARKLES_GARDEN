@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 /*
  * @author Allen Su
  */
+
 @Entity
 @Table(name = "Cards")
 
@@ -63,6 +64,7 @@ public class Card {
 	 * @param expirationDate
 	 * @param customer
 	 */
+	
 	public Card(long cardID, String customerName, String cardNumber, String expirationDate) {
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;

@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
+//import javax.inject.Inject;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,7 +18,7 @@ import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.entities.Product;
 //import com.qac.sparkle_gardens.repositories.ProductRepository;
 //import com.qac.sparkle_gardens.test_data.InitialData;
-import com.qac.sparkle_gardens.test_data.InitialData;
+//import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * @author Annabelle Young
@@ -34,8 +34,8 @@ public class ProductServiceTest {
 	//Product product;
 	Product p;
 	ProductInterface pi;
-	List<Product> products;
-	InitialData initData;
+	//List<Product> products;
+	//InitialData initData;
 	
 	
 	@Before
@@ -113,7 +113,7 @@ public class ProductServiceTest {
 	@Test
 	public void checkIfEnoughQuantityShouldReturnValidOutputForNotEnoughStock(){
 		System.out.println("checkIfEnoughQuantityShouldReturnValidOutputForNotEnoughStock");
-		Boolean result = pi.checkIfEnoughQuantity(p, 15);
+		Boolean result = pi.checkIfEnoughQuantity(p, 55);
 		assertFalse(result);
 	}
 	
@@ -209,16 +209,18 @@ public class ProductServiceTest {
 	}
 	
 	/**
-	 * Verifies that false is returned if products are added to list
-	 * result will be false if the resultList is empty
+	 * Verifies that true is returned if products are added to list
+	 * result will be true if list is not empty
 	 */
 	@Test
 	public void createProductListByPriceRangeShouldAddProductInPriceRange(){
 		System.out.println("createProductListByPriceRangeShouldAddProductInPriceRange");
 		List<Product> resultList = pi.createProductListByPriceRange(10.00, 80.00);
-		boolean result = resultList.isEmpty();
-		assertFalse(result);
+		boolean result = !(resultList.isEmpty());
+		//boolean result = (pi.createProductListByPriceRange(10.00, 80.00)).isEmpty();
+		assertTrue(result);
 	}
+	
 	
 	/**
 	 * Verifies that false is returned if products are added to list

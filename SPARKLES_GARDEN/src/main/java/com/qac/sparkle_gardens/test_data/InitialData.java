@@ -72,6 +72,7 @@ public class InitialData
 		cusHasAddress.add(new CustomerHasAddress(johnSmith,dummyAddress));
 		
 		// Create order with orderID & customer
+		
 		orders.add(new Order(1, customers.get(0)));
 		orders.add(new Order(2, customers.get(1)));
 		orders.add(new Order(3, customers.get(2)));
@@ -245,5 +246,9 @@ public class InitialData
 	@MethodAuthor(author="Annabelle Young")
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+	
+	public List<CustomerHasCard> getCusHasCards(){
+		return this.cusHasCards;
 	}
 }

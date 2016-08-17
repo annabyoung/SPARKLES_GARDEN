@@ -17,31 +17,23 @@ import com.qac.sparkle_gardens.entities.Product;
  *deprecated in favour of InitialData (9/8/16)
  */
 @Singleton
-@Deprecated
+
 public class ProductInitalData {
 	private List<Product> products = new ArrayList<Product>();
 	
 	public ProductInitalData(){
-		Product p = new Product("The Great American Challenge", 50, 79.99);
-		p.addProductTags("Dildo");
-		products.add(p);
-		p = new Product("Fleshlight Original", 100, 99.99);
-		p.addProductTags("Masturbator");
-		products.add(p);
-		p = new Product("The Screaming O", 500, 19.99);
-		p.addProductTags("Vibrating");
-		products.add(p);
-		p = new Product("Vag Gape", 500, 19.99);
-		p.addProductTags("Vibrating");
-		products.add(p);
+		addProduct(new Product("The Great American Challenge", 50, 79.99));
+		addProduct(new Product("Fleshlight Original", 100, 99.99));
+		addProduct(new Product("The Screaming O", 500, 19.99));
+		
 	}
 	
-	public List<Product> getProducts(){
+	public List<Product> getAllProducts(){
 		return products;
 	}
 	
 	public void addProduct(Product product){
-		products.add(product);
+		this.products.add(product);
 	}
 
 	public void setProducts(List<Product> products) {
