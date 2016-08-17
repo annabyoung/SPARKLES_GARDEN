@@ -38,7 +38,7 @@ public class PayByCard {
 		Card card = cardRepository.findByCardNumberAndExpiration(cardNumber, expirationDate);
 		if (card == null){
 			card = new Card(cardOwnerName, cardNumber, expirationDate);
-			cardRepository.addCard(card);
+			cardRepository.persistCard(card);
 		}
 		//STUFF TO BE DONE BECAUSE NO PAYMENT CLASS.
 		error = "";
