@@ -41,24 +41,9 @@ public class ProductServiceTest {
 	@Before
 	public void setup(){
 		System.out.println("Setup");
-		//product = new Product("The Great American Challenge", 10, 79.99);
 		pi = new ProductService();
 		p = new Product("The Great American Challenge", 50, 79.99);
-		initData.addProduct(p);
-		//products = initData.getProducts();
-		/*products = new ArrayList<>();
-		product = new Product("The Great American Challenge", 50, 79.99);
-		product.addProductTags("Dildo");
-		p = product;
-		products.add(product);
-		product = new Product("Fleshlight Original", 100, 99.99);
-		product.addProductTags("Masturbator");
-		products.add(product);
-		product = new Product("The Screaming O", 500, 19.99);
-		product.addProductTags("Vibrating");
-		products.add(product);
-		product = products.get(0);
-		*/
+		
 	}
 	
 	/**
