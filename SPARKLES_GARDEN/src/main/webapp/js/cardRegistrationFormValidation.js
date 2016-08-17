@@ -16,13 +16,12 @@ function Validation() {
 			alert("Fields marked with a * must be completed");
 			return false;
 			
-		} else if(variablesToCheck[i].value != null || variablesToCheck[i].value != ""){
-			
-			window.url='..\homepage.xhtml';
 		}
 	}
+	console.log('Past Loop - Attempting to Redirect...')
+	window.location=('../homepage.xhtml');
+	return true;
 }
-
 function Error() {
 	
 	alert("Error");
