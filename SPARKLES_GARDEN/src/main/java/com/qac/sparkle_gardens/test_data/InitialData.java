@@ -238,7 +238,7 @@ public class InitialData
 	
 	@MethodAuthor(author="Annabelle Young")
 	public void addProduct(Product product){
-		products.add(product);
+		this.products.add(product);
 	}
 
 	@MethodAuthor(author="Annabelle Young")

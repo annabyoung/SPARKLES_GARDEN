@@ -16,7 +16,8 @@ import org.junit.Test;
 
 import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.repositories.ProductRepository;
+//import com.qac.sparkle_gardens.repositories.ProductRepository;
+//import com.qac.sparkle_gardens.test_data.InitialData;
 import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
@@ -30,14 +31,34 @@ public class ProductServiceTest {
 	//@Inject InitialData initialData;
 	//@Inject ProductRepository productRepository;
 	
-	Product product;
+	//Product product;
+	Product p;
 	ProductInterface pi;
+	List<Product> products;
+	InitialData initData;
+	
 	
 	@Before
 	public void setup(){
 		System.out.println("Setup");
-		product = new Product("The Great American Challenge", 10, 79.99);
+		//product = new Product("The Great American Challenge", 10, 79.99);
 		pi = new ProductService();
+		p = new Product("The Great American Challenge", 50, 79.99);
+		initData.addProduct(p);
+		//products = initData.getProducts();
+		/*products = new ArrayList<>();
+		product = new Product("The Great American Challenge", 50, 79.99);
+		product.addProductTags("Dildo");
+		p = product;
+		products.add(product);
+		product = new Product("Fleshlight Original", 100, 99.99);
+		product.addProductTags("Masturbator");
+		products.add(product);
+		product = new Product("The Screaming O", 500, 19.99);
+		product.addProductTags("Vibrating");
+		products.add(product);
+		product = products.get(0);
+		*/
 	}
 	
 	/**
@@ -46,18 +67,20 @@ public class ProductServiceTest {
 	@Test
 	public void checkInStockShouldReturnValidOutputForInStock() {	
 		System.out.println("checkInStockShouldReturnValidOutputForInStock");
-		Boolean result = pi.checkInStock(product);
+		Boolean result = pi.checkInStock(p);
 		assertTrue(result);
 	}
 	
 	/**
 	 * This test is checking checkInStock(Product p) to make sure that 'false' is returned if the stock level is 0
+	 * Retrieve the first product in products list and set its stock level to 0
 	 */
 	@Test
 	public void checkInStockShouldReturnValidOutputForNoStock() {
 		System.out.println("checkInStockShouldReturnValidOutputForNoStock");
-		product.setStockLevel(0);
-		Boolean result = pi.checkInStock(product);
+		//product = products.get(0);
+		p.setStockLevel(0);
+		Boolean result = pi.checkInStock(p);
 		assertFalse(result);
 	}
 	
@@ -94,7 +117,7 @@ public class ProductServiceTest {
 	@Test
 	public void checkIfEnoughQuantityShouldReturnValidOutputForEnoughStock(){
 		System.out.println("checkIfEnoughQuantityShouldReturnValidOutputForEnoughStock");
-		Boolean result = pi.checkIfEnoughQuantity(product, 5);
+		Boolean result = pi.checkIfEnoughQuantity(p, 5);
 		assertTrue(result);
 	}
 	
@@ -105,7 +128,7 @@ public class ProductServiceTest {
 	@Test
 	public void checkIfEnoughQuantityShouldReturnValidOutputForNotEnoughStock(){
 		System.out.println("checkIfEnoughQuantityShouldReturnValidOutputForNotEnoughStock");
-		Boolean result = pi.checkIfEnoughQuantity(product, 15);
+		Boolean result = pi.checkIfEnoughQuantity(p, 15);
 		assertFalse(result);
 	}
 	
@@ -124,7 +147,7 @@ public class ProductServiceTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void checkIfEnoughQuantityShouldThrowIllegalExceptionForNullRequest(){
 		System.out.println("checkIfEnoughQuantityShouldThrowIllegalExceptionForNullRequest");
-		pi.checkIfEnoughQuantity(product, 0);
+		pi.checkIfEnoughQuantity(p, 0);
 	}
 	
 	/**
@@ -133,7 +156,7 @@ public class ProductServiceTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void checkIfEnoughQuantityShouldThrowIllegalExceptionForNegativeRequest(){
 		System.out.println("checkIfEnoughQuantityShouldThrowIllegalExceptionForNullRequest");
-		pi.checkIfEnoughQuantity(product, -1);
+		pi.checkIfEnoughQuantity(p, -1);
 	}
 	
 	/**
@@ -226,8 +249,10 @@ public class ProductServiceTest {
 	@After
 	public void teardown(){
 		System.out.println("Teardown");
-		product = null;
+		//product = null;
 		pi = null;
+		//products.clear();
+		p = null;
 	}
 	
 	
