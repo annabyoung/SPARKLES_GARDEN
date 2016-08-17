@@ -1,15 +1,12 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.*;
 
-<<<<<<< HEAD
-=======
+
 import com.qac.sparkle_gardens.entities.Address;
->>>>>>> e129f58b156b7e1e704826c0597df8fecf76aff2
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
@@ -109,19 +106,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		}
 		
 		public Address findCustomerAddresses(Customer customer){
-<<<<<<< HEAD
-			Address address; 
-			address= initialData.getAddresses();
-			return address;
-			//TODO: get compost class return addresses
-		}
-		
-		public Card findCustomerCards(Customer customer){
-			Card card;
-			card = initialData.getCards(); 
-			return card;
-			//TODO: and do this return type is wrong;  
-=======
+
 			Address address= new Address();
 			initialData.getAddresses();
 			
@@ -134,7 +119,6 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			initialData.getCards(); // i probably need to come back and get composite types 
 			//TODO: currently doesn't work and just returns a null card. make it work later   
 			return card;
->>>>>>> e129f58b156b7e1e704826c0597df8fecf76aff2
 		}
 		
 }
