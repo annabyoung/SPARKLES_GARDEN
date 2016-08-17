@@ -89,7 +89,8 @@ public class AddressRepositoryOffline implements AddressRepository {
 		}
 		initialData.setAddresses(addresses);
 	}
-
+	
+	@Deprecated
 	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
 		List<Address> addresses = initialData.getAddresses();
 	}
