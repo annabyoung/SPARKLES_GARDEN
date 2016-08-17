@@ -211,6 +211,14 @@ public class OrderService
 	}
 	
 	/**
+	 * Returns the basket
+	 */
+	public List<OrderLine> getBasket()
+	{
+		return basket;
+	}
+	
+	/**
 	 * Create Order with the orderlines of the basket transferred.
 	 * The ID of the order is automatically generated.
 	 * @param customerID

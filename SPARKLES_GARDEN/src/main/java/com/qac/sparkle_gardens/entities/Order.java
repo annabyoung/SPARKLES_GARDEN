@@ -31,7 +31,7 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
 				query = "SELECT o FROM Order o WHERE o.orderID = :orderID"),
 			@NamedQuery (name = Order.GET_PRODUCTS,
 				query = "SELECT o FROM OrderLine o, Product p "
-						+ "WHERE o.productID = :p.productID)
+						+ "WHERE o.productID = :p.productID")
 		}
 )
 @Entity

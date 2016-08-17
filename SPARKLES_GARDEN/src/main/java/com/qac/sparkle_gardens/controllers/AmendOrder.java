@@ -16,21 +16,44 @@ public class AmendOrder
 {
 	OrderService service;
 	
+	long orderID, productID;
+	int quantity;
+	
 	@SuppressWarnings("unused")
 	public String amendOrder(long orderID, long productID, int quantity)
 	{
+		this.orderID = orderID;
+		this.productID = productID;
+		this.quantity = quantity;
+		
 		Order o = service.getOrder(orderID);
 		
 		if (o.getOrderStatus() == OrderStatus.DISPATCHED)
-			return "orders";
+			return "order_not_amended";
 		
 		for (int i = 0; i < o.getOrderLines().size(); i++)
 		{
 			if (o.getOrderLines().get(i).getProduct().getProductID() == productID)
 				o.getOrderLines().get(i).setQuantity(quantity);
 			
-			return "orders";
+			return "order_amended";
 		}
-		return "orders";
+		return "order_not_amended";
+	}
+
+	public long getOrderID() {
+		return orderID;
+	}
+
+	public long getProductID() {
+		return productID;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+	
+	public OrderService getService() {
+		return service;
 	}
 }

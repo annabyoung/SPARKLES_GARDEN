@@ -14,14 +14,12 @@ import com.sparkle_gardens.sample_data.OrderSamples;
 
 public class OrderRepositoryOfflineTest 
 {
-	//OrderRepositoryOffline repository;
-	OrderRepository or;
+	OrderRepository repo;
 	
 	@Before
 	public void initialise()
 	{
-		//repository = new OrderRepositoryOffline();
-		or = new OrderRepositoryOffline();
+		repo = new OrderRepositoryOffline();
 	}
 	
 	@Test
@@ -30,16 +28,16 @@ public class OrderRepositoryOfflineTest
 		Order o = OrderSamples.kinky();
 
 		
-		or.persistOrder(o);
+		repo.persistOrder(o);
 		
-		assertEquals(or.getOrder(o.getOrderID()), o);
+		assertEquals(repo.getOrder(o.getOrderID()), o);
 	}
 	
 	@Test
-	public void orderEmpty()
+	public void orderEmpty(Order o)
 	{
-		Order o = OrderSamples.food();
-		
+		Order kink = OrderSamples.kinky();
+		assertNull(kink);
 		assertThat(o, is(notNullValue()));
 	}
 	
@@ -48,17 +46,19 @@ public class OrderRepositoryOfflineTest
 	{
 		for (Order o : OrderSamples.orders())
 		{
+			repo.persistOrder(o);
 			for (OrderLine ol : o.getOrderLines())
 			{
 				assertFalse(ol.getQuantity() == 0);
+				repo.getOrders().forEach(ord -> orderEmpty(ord));
 			}
 		}
 	}
 	
 	@After
-	public void teardown(){
-	//	repository = null;
-		or = null;
+	public void teardown()
+	{
+		repo = null;
 	}
 	
 }
