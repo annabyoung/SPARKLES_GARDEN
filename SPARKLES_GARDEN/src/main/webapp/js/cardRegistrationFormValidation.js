@@ -1,4 +1,4 @@
-function Validation(a,b,c) {
+function Validation() {
 	
 	var nameCheck = document.getElementById('formdiv:cardName');
 	var numCheck = document.getElementById('formdiv:cardNumber');
