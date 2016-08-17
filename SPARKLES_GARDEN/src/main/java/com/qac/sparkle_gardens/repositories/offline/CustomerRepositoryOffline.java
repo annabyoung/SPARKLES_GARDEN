@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -9,6 +10,8 @@ import javax.inject.*;
 import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.CustomerHasAddress;
+import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.test_data.InitialData;
 
@@ -32,17 +35,20 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			
 		}
 		
+		@Override 
 		public void persistCustomer(Customer customer){
-			customers.addCustomer(customer);
+			customers.add(customer);
 			
 		}
 		
-		public void persistCustomer(List<Customer> customers){
-			customers.setCustomer(customers);
+		@Override 
+		public void persistCustomer(List<Customer> customer){
+			customers.addAll(customer);
 		}
 		
+		@Override 
 		public Customer findByID(long accountID) {
-			customers;
+		
 			for (int i=0; i<customers.size(); i++)
 			{
 				if(customers.get(i).getAccountID() == accountID){
@@ -57,11 +63,11 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		//get customer
 		public List<Customer> customers(Customer c){
 			
-			return initialData.customers();
+			return customers;
 			
 		} 
-		
-		public Customer customer(Customer c){
+		@Override 
+		public Customer getCustomer(Customer c){
 			
 			for (int i=0; i<customers.size(); i++)
 			{
@@ -74,6 +80,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		}
 		
 		//update customer 
+		@Override 
 		public void updateCustomer(Customer c){
 			
 			for (int i=0; i<customers.size(); i++)
@@ -86,6 +93,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		
 		
 		//remove customer
+		@Override 
 		public void removeCustomer(Customer c){
 			
 			
@@ -98,7 +106,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			
 		}
 
-		
+		@Override 
 		public Customer findByEmail(String email) 
 		{
 			for (Customer customer : initialData.getCustomers())
@@ -108,22 +116,34 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		}
 		
 		
-		
-		public Address findCustomerAddresses(Customer customer){
+		@Override 
+		public List<CustomerHasAddress> findCustomerAddresses(Customer customer){
 
-			Address address= new Address();
-			initialData.getAddresses();
+			List<CustomerHasAddress> composites = initialData.getCustomerHasAddresses(); // i probably need to come back and get composite types 
+			List<CustomerHasAddress> addys=  new ArrayList<CustomerHasAddress>();
+						for (CustomerHasAddress addyz : composites)
+						{
+							if(addyz.getCustomerId() == customer.getAccountID())
+							addys.add(addyz);
+						}
 			
-			//TODO: initialize objects, may need to reference composite objects  
-		return address; 
+						return addys;
 		}
 		
-		public List<Card> findCustomerCards(Customer customer){
+		@Override 
+		public List<CustomerHasCard> findCustomerCards(Customer customer){
 		
-			initialData.get; // i probably need to come back and get composite types 
-			//TODO: currently doesn't work and just returns a null card. make it work later   
-			
-			return card;
+		List<CustomerHasCard> composites = initialData.getCusHasCards(); // i probably need to come back and get composite types 
+		List<CustomerHasCard> cards=  new ArrayList<CustomerHasCard>();
+					for (CustomerHasCard cardz : composites)
+					{
+						if(cardz.getCustomerId() == customer.getAccountID())
+						cards.add(cardz);
+					}
+		
+					return cards;
 		}
+
+		
 		
 }
