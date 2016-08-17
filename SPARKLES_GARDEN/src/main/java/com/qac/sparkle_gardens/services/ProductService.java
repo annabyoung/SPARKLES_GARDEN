@@ -6,13 +6,15 @@ package com.qac.sparkle_gardens.services;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
-import com.qac.sparkle_gardens.test_data.InitialData;
+import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
+import com.qac.sparkle_gardens.test_data.ProductInitalData;
 
 /**
  * @author Annabelle Young
@@ -25,14 +27,18 @@ import com.qac.sparkle_gardens.test_data.InitialData;
 @Stateless
 public class ProductService implements ProductInterface{
 	//@Inject InitialData initialData;
-	@Inject ProductRepository productRepository;
+	@Inject ProductRepository productRepository= new ProductRepositoryOffline();
+	//@Inject ProductInitalData initial;
 	
 	
+	//ProductRepository productRepository = new ProductRepositoryOffline();
+	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
+	//private ArrayList<Product> products = (ArrayList<Product>) productRepository.getProducts();
+	private List<Product> productL = new ArrayList<Product>(); 
+	private List<String> tags = new ArrayList<String>();
+//	ProductRepository productRepository = new ProductRepositoryOffline();
+	ProductInitalData initial = new ProductInitalData();
 	
-	private ArrayList<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
-	//private ArrayList<Product> products = (ArrayList<Product>) initialData.getProducts();
-	private ArrayList<String> tags = new ArrayList<String>();
-		
 	
 	/**
 	 * If the product has enough stock to meet the request, return true and decrement stock
@@ -122,9 +128,15 @@ public class ProductService implements ProductInterface{
 	 * @param maximumPrice
 	 * @return prodcutsInRange which is all the products within the price range the customer is searching for
 	 */
-	public ArrayList<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
-		ArrayList<Product> productsInRange = new ArrayList<Product>();
-		for(Product p : productRepository.getProducts()){
+	public List<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
+		List<Product> productsInRange = new ArrayList<Product>();
+		List<Product> pl = productRepository.getProducts();
+		//List<Product> pl = initial.getAllProducts();
+	/*	pl.add(new Product("The Great American Challenge", 50, 79.99));
+		pl.add(new Product("Fleshlight Original", 100, 99.99));
+		pl.add(new Product("The Screaming O", 500, 19.99));
+		*/
+		for(Product p : pl){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
 				productsInRange.add(p);
 			}
@@ -198,14 +210,19 @@ public class ProductService implements ProductInterface{
 		return true;
 	}
 	
+	public List<Product> getProductList(){
+		//There should be a query here, but we're not at that point yet
+		return initial.getAllProducts();
+	}
+	
 	/**
 	 * Return the list of all products that meet the search parameters
 	 */
-	public ArrayList<Product> getProductList(){
+/*	public ArrayList<Product> getProductList(){
 		//There should be a query here, but we're not at that point yet
 		return productList;
 	}
-	
+	*/
 	public void clearSearchQuery(){
 		productList.clear();
 	}
