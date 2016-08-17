@@ -7,7 +7,7 @@
 	<ui:define name="mainContent">
 		<h:form>
 			<div class="row container-fluid" id="formdiv">
-				<table style="width: 100%">
+				<table id="basketTable" style="width: 100%">
 					<tr>
 						<th>Item</th>
 						<th>Info</th>
@@ -42,14 +42,12 @@
 									<f:selectItem itemValue="5" itemlabel="5" />
 								</h:selectOneMenu>
 							</div></td>
-						<td>£89.97</td>
-					<td><h:commandButton onclick="deleteItem(basketTable.rowIndex)" type="button">
+						<td>£69.69</td>
+					<td><h:commandButton onclick="deleteItem()" type="button">
 								<span style="color: red" class="glyphicon glyphicon-remove"
 									id="5"></span>
 							</h:commandButton></td>
 					</tr>
-				</table>
-				<table style="width: 100%">
 					<tr>
 						<th>Item</th>
 						<th>Info</th>
@@ -88,8 +86,6 @@
 									id="2"></span>
 							</h:outputLink></td>
 					</tr>
-				</table>
-				<table style="width: 100%">
 					<tr>
 						<th>Item</th>
 						<th>Info</th>
@@ -128,8 +124,6 @@
 									id="3"></span>
 							</h:outputLink></td>
 					</tr>
-				</table>
-				<table style="width: 100%">
 					<tr>
 						<th>Item</th>
 						<th>Info</th>
@@ -170,8 +164,6 @@
 									id="4"></span>
 							</h:outputLink></td>
 					</tr>
-				</table>
-				<table id="basketTable" style="width: 100%">
 					<tr>
 						<th>Item</th>
 						<th>Info</th>
@@ -205,7 +197,7 @@
 								</h:selectOneMenu>
 							</div></td>
 						<td>£22</td>
-						<td><h:commandButton onclick="deleteItem(basketTable.rowIndex)" type="button">
+						<td><h:commandButton onclick="deleteItem()" type="button">
 								<span style="color: red" class="glyphicon glyphicon-remove"
 									id="5"></span>
 							</h:commandButton></td>
