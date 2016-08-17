@@ -32,7 +32,7 @@ function Validation() {
 	return true;
 }
 
-/*function Validity() {
+function Validity() {
 	
 	var checkName=document.getElementById("formdiv:cardName");
 	var checkCard=document.getElementById("formdiv:cardnumber");
@@ -46,9 +46,10 @@ function Validation() {
 		
 		if(inputChecks[i].value.validity.typeMismatch){
 			
+			console.log(i); 
 			error= "Your fields dont match the required input type. E.g Card Number must be a number"
 		}
 	}
 	
 	document.getElementById("errorMessage").innerHTML=error; 
-} */
+} 
