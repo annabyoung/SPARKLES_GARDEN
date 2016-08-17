@@ -1,7 +1,6 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.*;
@@ -111,18 +110,11 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			return address;
 			//TODO: get compost class return addresses
 		}
-		
-		public Card findCustomerCards(Customer customer){
-			Card card;
-			card = initialData.getCards().get(0); 
-			return card;
-			//TODO: and do this return type is wrong;  
-		}
 
-		@Override
-		public void findCustomerAdresses(Customer c) {
-			// TODO Auto-generated method stub
-			
-		}
-		
+		public Card findCustomerCards(Customer customer){
+			Card card= new Card();
+			initialData.getCards(); // i probably need to come back and get composite types 
+			//TODO: currently doesn't work and just returns a null card. make it work later
+			return card;
+		}		
 }

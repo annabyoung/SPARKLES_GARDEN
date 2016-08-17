@@ -7,9 +7,19 @@ import javax.inject.Inject;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+
+import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
-import com.qac.sparkle_gardens.controllers.CustomerInterface;
+import com.qac.sparkle_gardens.util.CreditStatus;
+//import com.qac.sparkle_gardens.controllers.CustomerInterface;
+
+
+
+import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.repositories.CustomerRepository;
+//import com.qac.sparkle_gardens.controllers.CustomerInterface;
+
 
 import junit.framework.TestCase;
 
@@ -21,58 +31,82 @@ import junit.framework.TestCase;
 
 public class CustomerServiceTest extends TestCase {
 	
+<<<<<<< HEAD
 	@Inject 
 	CustomerRepository customerRepository; 
-	Customer dummyCustomer; 
+
+	Customer dummyCustomer =  new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890"); 
+
+	//Customer dummyCustomer; 
 	
+
 	
 	public void persistCustomerTest(Customer customer){
+=======
+>>>>>>> e129f58b156b7e1e704826c0597df8fecf76aff2
 	
-		  customerRepository.persistCustomer(customer);	
-	}
 	
-	public void persistCustomerTest(List<Customer> customers){
+	Customer dummyCustomer =  new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890"); 
+	CustomerRepository customerRepository; 
+	CustomerInterface customerInterface = new CustomerService();
 	
-		customerRepository.persistCustomer(customers);
-	}
-	
+
+	 /**
+	  * returns an ID 
+	  * @param accountID
+	  */
+	@Test
 	public void  findByIDTest(long accountID){
 		
 		Customer result = customerRepository.findByID(accountID);
 		assertNotNull(result);
 	}
 	
+	
+	@Test	
 	public void getCustomerTest(Customer c){
 		
 		Customer customer = customerRepository.getCustomer(c); 
 		assertNotNull(customer);
-		assertsEquals(customer, dummyCustomer)
+
+		assertEquals(customer, dummyCustomer);
+
 	}
 		
+	@Test
 	public void updateCustomerTest(Customer c){
 
 		customerRepository.updateCustomer(c); //update customer what am i updating tho? I may need more of these 
 	
 	}
 		
-	
+	@Test
 	public void removeCustomerTest(Customer c){
 		customerRepository.removeCustomer(c); //remove customer
 	}
 	
-	public void findCustomerAdressesTest(Customer c){
+<<<<<<< HEAD
+
+=======
+	@Test
+>>>>>>> e129f58b156b7e1e704826c0597df8fecf76aff2
+	public void findCustomerAddressesTest(Customer c){
 	
-		customerRepository.findCustomerAdresses(c);
-	}
+		customerRepository.findCustomerAddresses(c);
+
+}
 		
-		
+	@Test
 	public void findCustomerCardsTest(Customer c){
 		
-		Cards cards customerRepository.findCustomerCards(c);
+
+		Card cards = customerRepository.findCustomerCards(c);
+
 		assertNotNull(cards);
 		
 	}
 	
+	@Test
 	public Customer findByEmail(String email){
 
 		

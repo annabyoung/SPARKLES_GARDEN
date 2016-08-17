@@ -176,4 +176,9 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		return list.getProducts();
 	}
 	
+	public List<Product> getProducts(long accountId) {
+		Wishlist list = findByAccountId(accountId);
+		return list.getProducts();
+	}
+	
 }

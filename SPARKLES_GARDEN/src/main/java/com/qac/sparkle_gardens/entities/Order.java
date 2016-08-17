@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
@@ -22,17 +25,30 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
  * 
  * @author Damien Lloyd
  */
+@NamedQueries (
+		{
+			@NamedQuery (name = Order.FIND_BY_ID,
+				query = "SELECT o FROM Order o WHERE o.orderID = :orderID"),
+			@NamedQuery (name = Order.GET_PRODUCTS,
+				query = "SELECT o FROM OrderLine o, Product p "
+						+ "WHERE o.productID = :p.productID)
+		}
+)
 @Entity
 @Table (name = "Order")
-public class Order 
+public class Order implements Serializable
 {
+	/**
+	 * Serial ID of Order
+	 */
+	private static final long serialVersionUID = -8868918125632312195L;
+
 	@Id
 	@NotNull
 	@Column (name = "orderID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long orderID;
 	
-	@Id
 	@Column (name = "customerID", nullable = false)
 	@NotNull
 	private Customer customer;
@@ -189,4 +205,7 @@ public class Order
 	{
 		this.paymentStatus = paymentStatus;
 	}
+	
+	public static final String FIND_BY_ID = "Order.getOrderID()";
+	public static final String GET_PRODUCTS = "Order.getOrderLines().getProduct()";
 }

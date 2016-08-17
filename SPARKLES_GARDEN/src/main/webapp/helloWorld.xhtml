@@ -4,11 +4,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="templates/noSearchTemplate.xhtml">
 	<ui:define name="mainContent">
-
 		<meta charset="utf-8"/>
 		<f:view>
 			<h:body>
 				<div class="container-fluid">
+					<h:outputLink class="btn btn-warning" role="button"
+						onclick="console.log('wrk')">Login</h:outputLink>
 					<h:commandButton class="btn btn-warning" role="button" onclick="Hello()" value="Login"/>
 				</div>
 			</h:body>

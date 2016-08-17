@@ -13,6 +13,11 @@ import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.AddressRepository;
 import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
 
+/**
+ * 
+ * @author Tyler Deans
+ *
+ */
 @Stateless
 public class AddressService {
 	@Inject AddressRepository addressRepository;

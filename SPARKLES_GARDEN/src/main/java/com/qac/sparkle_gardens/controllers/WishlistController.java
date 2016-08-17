@@ -3,8 +3,6 @@ package com.qac.sparkle_gardens.controllers;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -36,6 +34,10 @@ public class WishlistController {
 	 */
 	public void createWishlist(long accountId, String wishlistName) {
 		wishlistService.createWishlist(accountId, wishlistName);
+	}
+	
+	public void createWishlist(long accountId, Product product) {
+		wishlistService.createWishlist(accountId, product);
 	}
 	
 	/**
