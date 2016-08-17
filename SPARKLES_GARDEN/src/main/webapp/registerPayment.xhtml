@@ -38,31 +38,31 @@
 				<div class="form-group">
 					<label class="control-label col-sm-4"> *Card Holder Name: </label>
 					<div class="col-sm-4">
-						<h:inputText id="cardName" name="cardName" required="true" />
+						<h:inputText id="cardName" tpe="text" name="cardName" required="true" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-4"> *Card Number: </label>
 					<div class="col-sm-4">
-						<h:inputText id="cardNumber" name="cardNumber" required="true" />
+						<h:inputText id="cardNumber" type="number" name="cardNumber" required="true" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-4">Start Date: </label>
 					<div class="col-sm-4">
-						<h:inputText name="startDate" type="month" required="true" />
+						<h:inputText id="startDate" name="startDate" type="month" required="true" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-4"> *Expiration Date: </label>
 					<div class="col-sm-4">
-						<h:inputText id="expDate" name="expDate" required="true" />
+						<h:inputText id="expDate" type="month" name="expDate" required="true" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-4">Issue Number: </label>
 					<div class="col-sm-4">
-						<h:inputText name="issueNum" />
+						<h:inputText type="number" id="issNum" name="issueNum" />
 					</div>
 				</div>
 				<div>
@@ -78,6 +78,7 @@
 			</p>
 		</div>
 		<script src="..\js\cardRegistrationFormValidation.js" />
+		<script src="..\js\inputValidationPayment.js" />
 	</h:body>
 </f:view>
 </html>
