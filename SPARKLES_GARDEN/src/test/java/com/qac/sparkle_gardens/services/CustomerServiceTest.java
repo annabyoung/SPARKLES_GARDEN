@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
 //import com.qac.sparkle_gardens.controllers.CustomerInterface;
@@ -86,14 +87,12 @@ public class CustomerServiceTest extends TestCase {
 	public void findCustomerAddressesTest(Customer c){
 	
 		customerRepository.findCustomerAddresses(c);
-
-}
+		}
 		
 	@Test
 	public void findCustomerCardsTest(Customer c){
-		
 
-		Card cards = customerRepository.findCustomerCards(c);
+		List<CustomerHasCard> cards = customerRepository.findCustomerCards(c);
 
 		assertNotNull(cards);
 		
