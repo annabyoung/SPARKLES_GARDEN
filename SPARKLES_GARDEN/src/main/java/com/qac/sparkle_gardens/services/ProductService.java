@@ -92,12 +92,10 @@ public class ProductService implements ProductInterface{
 	 * if there is not enough stock to meet the quantity requested, false will be returned
 	 */
 	public boolean checkIfEnoughQuantity(Product p, int quantityRequested){
-		if(p == null){
+		if(p == null || quantityRequested <= 0){
 			throw new IllegalArgumentException();
 		}
-		if(quantityRequested == 0){
-			throw new IllegalArgumentException();
-		}
+		
 		return (p.getStockLevel() >= quantityRequested);
 	}
 	
@@ -112,8 +110,8 @@ public class ProductService implements ProductInterface{
 		return productRepository.findByProductID(productID);
 	}
 	
-	public boolean checkIfMinIsLessThanMax(double minimumPrice, double maximumPrice){
-		if (minimumPrice > maximumPrice){
+	public boolean checkIfMinAndMaxAreValid(double minimumPrice, double maximumPrice){
+		if (minimumPrice > maximumPrice || Double.compare(minimumPrice, 0.0) < 0 || Double.compare(maximumPrice, 0.0) < 0){
 			return false;
 		}
 		return true;

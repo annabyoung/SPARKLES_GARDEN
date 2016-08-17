@@ -17,7 +17,7 @@ public interface ProductInterface {
 	public String getProductDescriptionFromID(long productID);
 	public boolean checkIfEnoughQuantity(Product p, int quantityRequested);
 	public Product getProductByID(long productID);
-	public boolean checkIfMinIsLessThanMax(double minimumPrice, double maximumPrice);
+	public boolean checkIfMinAndMaxAreValid(double minimumPrice, double maximumPrice);
 	public List<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice);
 	public List<Product> createProductListByTags(String input);
 	public List<String> convertStringToArrayList(String tags);
