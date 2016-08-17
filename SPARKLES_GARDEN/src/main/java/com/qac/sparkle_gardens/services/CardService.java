@@ -123,34 +123,34 @@ public class CardService {
 			if (co.getCustomer().equals(customer) && co.getCard().equals(card)){
 				cardOwnershipRepository.removeCustomerHasCard(co);
 				if (!checkIfAnyoneOwnsCard(card)){
-					cardRepository.removeCard(card.getCardId());
+					cardRepository.removeCard(card);
 				}
 			}
 		}
 		return false;
 	}
 	
-	/**
-	 * Deletes the card of a customer. Requires both a card and a customer.
-	 * Checks if there are any other people who own this card. If not, then the card
-	 * is deleted.
-	 * 
-	 * Method returns false if there was no card owned by such customer in the first place.
-	 * @param card
-	 * @param customer
-	 * @return
-	 */
-	public boolean deleteCardOfCustomer(long cardId, long accountId){
-		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
-			if (co.getCustomerId() == accountId && co.getCardId() == cardId){
-				cardOwnershipRepository.removeCustomerHasCard(co);
-				if (!checkIfAnyoneOwnsCard(cardId)){
-					cardRepository.removeCard(cardId);
-				}
-			}
-		}
-		return false;
-	}
+//	/**
+//	 * Deletes the card of a customer. Requires both a card and a customer.
+//	 * Checks if there are any other people who own this card. If not, then the card
+//	 * is deleted.
+//	 * 
+//	 * Method returns false if there was no card owned by such customer in the first place.
+//	 * @param card
+//	 * @param customer
+//	 * @return
+//	 */
+//	public boolean deleteCardOfCustomer(long cardId, long accountId){
+//		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
+//			if (co.getCustomerId() == accountId && co.getCardId() == cardId){
+//				cardOwnershipRepository.removeCustomerHasCard(co);
+//				if (!checkIfAnyoneOwnsCard(cardId)){
+//					cardRepository.removeCard(cardId);
+//				}
+//			}
+//		}
+//		return false;
+//	}
 	
 	/**
 	 * Returns true if anyone owns the card. Mostly used after deleteCardOfCustomer

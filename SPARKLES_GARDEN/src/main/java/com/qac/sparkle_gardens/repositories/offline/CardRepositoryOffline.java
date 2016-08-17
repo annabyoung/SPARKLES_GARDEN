@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
@@ -25,7 +26,7 @@ public class CardRepositoryOffline implements CardRepository
 	@Inject
 	InitialData initialData;
 
-	public void persistCard(Card c) 
+	public void addCard(Card c) 
 	{
 		initialData.addCard(c);
 	}
@@ -52,21 +53,14 @@ public class CardRepositoryOffline implements CardRepository
 		return null;
 	}
 	
-	public List<Card> getCards() 
+	public List<Card> getCardsByField(String orderField) 
 	{
 		return initialData.getCards();
 	}
 	
-	@MethodAuthor (author = "Damien Lloyd")
-	public void removeCard(long cardID) 
-	{
-		List<Card> cl = initialData.getCards();
-		
-		for (int i = 0; i < cl.size(); i++)
-		{
-			if (cl.get(i).getCardId() == cardID)
-				cl.remove(i);
-		}
+	@Override
+	public void removeCard(Card c){
+		initialData.getCards().remove(c);
 	}
 	
 	public List<Card> findByCardNumber(String cardNumber) 
