@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * @author Damien Lloyd
  *
  */
-
+@Entity
 public class OrderLine 
 {
 	@Id
@@ -31,7 +31,7 @@ public class OrderLine
 	private Order order;
 	
 	@Column
-	@NotNull
+	@Null
 	private int quantity; // Quantity of Product ordered
 	
 	/**
