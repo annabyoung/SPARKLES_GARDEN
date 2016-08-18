@@ -1,6 +1,7 @@
 package com.qac.sparkle_gardens.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.RequestScoped;
@@ -27,7 +28,7 @@ public class SearchItemsController {
 	@Inject
 	ProductService productService;
 	
-	private ArrayList<Product> searchQueryResults = new ArrayList<Product>();
+	private List<Product> searchQueryResults = new ArrayList<Product>();
 	private String error = "";
 	
 	/**

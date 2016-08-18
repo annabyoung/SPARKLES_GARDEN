@@ -14,7 +14,7 @@ import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
-import com.qac.sparkle_gardens.test_data.ProductInitalData;
+import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 /**
  * @author Annabelle Young
@@ -37,7 +37,7 @@ public class ProductService implements ProductInterface{
 	private List<Product> productL = new ArrayList<Product>(); 
 	private List<String> tags = new ArrayList<String>();
 //	ProductRepository productRepository = new ProductRepositoryOffline();
-	ProductInitalData initial = new ProductInitalData();
+	ProductInitialData initial = new ProductInitialData();
 	
 	
 	/**
@@ -183,8 +183,8 @@ public class ProductService implements ProductInterface{
 	 * @param tags
 	 * @return tagsToSearch
 	 */
-	public ArrayList<String> convertStringToArrayList(String tags){
-		ArrayList<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tags.split(" ")));
+	public List<String> convertStringToArrayList(String tags){
+		List<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tags.split(" ")));
 		
 		return tagsToSearch;
 	}
@@ -198,7 +198,7 @@ public class ProductService implements ProductInterface{
 	 * @return false, true
 	 */
 	
-	public boolean validateResultsOfSearch(ArrayList<Product> productList){
+	public boolean validateResultsOfSearch(List<Product> productList){
 		if (productList.isEmpty()){
 			return false;
 		}
@@ -219,4 +219,6 @@ public class ProductService implements ProductInterface{
 	public void clearSearchQuery(){
 		productList.clear();
 	}
+
+
 }
