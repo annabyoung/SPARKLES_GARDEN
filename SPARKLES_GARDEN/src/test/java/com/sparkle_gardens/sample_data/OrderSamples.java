@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.Ignore;
 
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.sparkle_gardens.sample_data.ProductSamples;
@@ -19,7 +20,7 @@ public class OrderSamples
 	
 	public static Order shoes()
 	{
-		Order o = new Order();
+		Order o = new Order(1, new Customer());
 		
 		o.addOrderLine(new OrderLine(ProductSamples.greatShoes(), 1));
 		o.addOrderLine(new OrderLine(ProductSamples.nikeTrainers(), 2));
@@ -31,7 +32,7 @@ public class OrderSamples
 	
 	public static Order kinky()
 	{
-		Order o = new Order();
+		Order o = new Order(2, new Customer());
 		
 		o.addOrderLine(new OrderLine(ProductSamples.maximusLube(), 1));
 		o.addOrderLine(new OrderLine(ProductSamples.dildoInch8(), 2));
@@ -44,7 +45,7 @@ public class OrderSamples
 	
 	public static Order food()
 	{
-		Order o = new Order();
+		Order o = new Order(3, new Customer());
 		
 		o.addOrderLine(new OrderLine(ProductSamples.mango(), 3)); // We'll talk about the third one, later
 		o.addOrderLine(new OrderLine(ProductSamples.watermelon(), 1));

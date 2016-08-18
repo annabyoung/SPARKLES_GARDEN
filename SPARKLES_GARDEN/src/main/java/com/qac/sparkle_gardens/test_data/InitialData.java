@@ -24,7 +24,7 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
  * @author James Thompson
  *
  */
-@Singleton
+@Deprecated
 public class InitialData 
 {
 	private List<Address> addresses = new ArrayList<Address>();

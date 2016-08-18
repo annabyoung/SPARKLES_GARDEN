@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -36,11 +37,13 @@ public class OrderService
 	@Inject
 	WishlistRepository w_repository;
 	
-	List<OrderLine> basket;
+	List<OrderLine> basket = new ArrayList<OrderLine>();
 	
-	@Inject
-	MessageSender sender;
+	MessageSender sender = new MessageSender();
 	
+	/**
+	 * Default constructor
+	 */
 	public OrderService()
 	{
 
@@ -54,7 +57,8 @@ public class OrderService
 	 */
 	public boolean isOrderEmpty(long orderID)
 	{
-		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
+		List<OrderLine> lines = 
+			repository.getOrder(orderID).getOrderLines();
 		int totalQuantity = 0;
 		
 		for (OrderLine i : lines)
@@ -78,12 +82,9 @@ public class OrderService
 	 */
 	public boolean isValid(int quantity, double price, int stocklevel)
 	{
-		if (quantity < 0 || price < 0)
+		if (quantity <= 0 || price <= 0.0 || 
+		  stocklevel <= 0 || quantity > stocklevel)
 			return false;
-		
-		if (quantity < stocklevel)
-			return false;
-		
 		return true;
 	}
 	
@@ -262,6 +263,14 @@ public class OrderService
 	public Order getOrder(long orderID)
 	{
 		return repository.getOrder(orderID);
+	}
+	
+	/**
+	 * Get repository
+	 */
+	public final OrderRepository getRepository()
+	{
+		return repository;
 	}
 	
 	/**

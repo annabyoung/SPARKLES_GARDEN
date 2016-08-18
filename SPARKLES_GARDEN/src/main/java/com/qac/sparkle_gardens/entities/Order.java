@@ -74,7 +74,7 @@ public class Order implements Serializable
 	private Card card;
 	
 	// List of orderlines in the order
-	private List<OrderLine> lines;
+	private List<OrderLine> lines = new ArrayList<OrderLine>();
 	
 	/**
 	 * Default constructor
