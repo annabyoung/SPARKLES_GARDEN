@@ -11,7 +11,7 @@ import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.AddressRepository;
 import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
-import com.qac.sparkle_gardens.test_data.InitialData;
+import com.qac.sparkle_gardens.test_data.AddressInitialData;
 
 /**
  * 
@@ -21,9 +21,8 @@ import com.qac.sparkle_gardens.test_data.InitialData;
 @Stateless
 @Default
 public class AddressRepositoryOffline implements AddressRepository {
-	@Inject private InitialData initialData;
+	@Inject private AddressInitialData  initialData = new AddressInitialData();
 	@Inject private CustomerHasAddressRepository custAddressRepository;
-	
 	/**
 	 * Creates an address
 	 * @param address
@@ -91,11 +90,6 @@ public class AddressRepositoryOffline implements AddressRepository {
 		initialData.setAddresses(addresses);
 	}
 	
-	@Deprecated
-	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
-		List<Address> addresses = initialData.getAddresses();
-	}
-
 	/**
 	 * @param address
 	 */
@@ -109,6 +103,11 @@ public class AddressRepositoryOffline implements AddressRepository {
 			}
 		}
 		return false;
+	}
+	
+	@Deprecated
+	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
+		List<Address> addresses = initialData.getAddresses();
 	}
 	
 	@Deprecated

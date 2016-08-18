@@ -64,6 +64,51 @@ public class AddressService {
 	/**
 	 * 
 	 * @param customer
+	 * @param newAddress
+	 */
+	public void createAddress(Customer customer, Address newAddress) {
+		Address address = newAddress;
+		CustomerHasAddress custAdd = new CustomerHasAddress(customer, address); 
+		custAddressRepository.persistCustomerHasAddress(custAdd);
+		
+		/** This code prevents duplicate address objects from being created.
+		 * If the address has not already been created then add a new address 
+		 * to the repository.
+		 */
+		if (!addressRepository.isDuplicate(address)) {
+			addressRepository.persistAddress(address);
+		}
+	}
+	
+	/**
+	 * A more complex but necessary create address method
+	 * @param customer
+	 * @param buildingNum
+	 * @param streetName
+	 * @param city
+	 * @param county
+	 * @param country
+	 * @param postCode
+	 */
+	public void createAddress(Customer customer, String buildingNum, String addressLine1, String addressLine2, String city, String county, String country, String postCode, String addressType) {
+		Address address = new Address(buildingNum, addressLine1, addressLine2, city, county, country, postCode, addressType);
+		CustomerHasAddress custAdd = new CustomerHasAddress(customer, address); 
+		custAddressRepository.persistCustomerHasAddress(custAdd);
+		
+		/** This code prevents duplicate address objects from being created.
+		 * If the address has not already been created then add a new address 
+		 * to the repository.
+		 */
+		if (!addressRepository.isDuplicate(address)) {
+			addressRepository.persistAddress(address);
+		}
+		
+	}
+	
+	
+	/**
+	 * 
+	 * @param customer
 	 * @param otherAddress
 	 */
 	public void deleteAddress(Customer customer, Address address) {
@@ -86,31 +131,6 @@ public class AddressService {
 	@Deprecated
 	public void createAddress(Address address) {
 		addressRepository.persistAddress(address);
-	}
-	
-	/**
-	 * A more complex but necessary create address method
-	 * @param customer
-	 * @param buildingNum
-	 * @param streetName
-	 * @param city
-	 * @param county
-	 * @param country
-	 * @param postCode
-	 */
-	public void createAddress(Customer customer, int buildingNum, String streetName, String city, String county, String country, String postCode) {
-		Address address = new Address(buildingNum, streetName, city, county, country, postCode);
-		CustomerHasAddress custAdd = new CustomerHasAddress(customer, address); 
-		custAddressRepository.persistCustomerHasAddress(custAdd);
-		
-		/** This code prevents duplicate address objects from being created.
-		 * If the address has not already been created then add a new address 
-		 * to the repository.
-		 */
-		if (!addressRepository.isDuplicate(address)) {
-			addressRepository.persistAddress(address);
-		}
-		
 	}
 	
 	
