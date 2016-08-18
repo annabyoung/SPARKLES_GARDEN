@@ -19,7 +19,9 @@ public interface ProductInterface {
 	public Product getProductByID(long productID);
 	public boolean checkIfMinAndMaxAreValid(double minimumPrice, double maximumPrice);
 	public List<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice);
-	public List<Product> createProductListByTags(String input);
+	//public List<Product> createProductListByTags(String input);
+	public List<Product> createProductListWithAllTags(String input);
+	public List<Product> createProductListWithSomeTags(String input);
 	public List<String> convertStringToArrayList(String tags);
 	public boolean validateResultsOfSearch(List<Product> productList);
 	public List<Product> getProductList();

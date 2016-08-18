@@ -26,18 +26,12 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 @Stateless
 public class ProductService implements ProductInterface{
-	//@Inject InitialData initialData;
 	@Inject ProductRepository productRepository= new ProductRepositoryOffline();
-	//@Inject ProductInitalData initial;
 	
 	
-	//ProductRepository productRepository = new ProductRepositoryOffline();
 	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
-	//private ArrayList<Product> products = (ArrayList<Product>) productRepository.getProducts();
-	private List<Product> productL = new ArrayList<Product>(); 
+	private List<Product> productL = productRepository.getProducts(); 
 	private List<String> tags = new ArrayList<String>();
-//	ProductRepository productRepository = new ProductRepositoryOffline();
-	ProductInitialData initial = new ProductInitialData();
 	
 	
 	/**
@@ -134,8 +128,8 @@ public class ProductService implements ProductInterface{
 	 */
 	public List<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
 		List<Product> productsInRange = new ArrayList<Product>();
-		List<Product> pl = productRepository.getProducts();
-		for(Product p : pl){
+		//List<Product> pl = productRepository.getProducts();
+		for(Product p : productL){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
 				productsInRange.add(p);
 			}
@@ -160,11 +154,15 @@ public class ProductService implements ProductInterface{
 	 */
 
 	
-	public ArrayList<Product> createProductListByTags(String input){
-		tags = convertStringToArrayList(input);
-		ArrayList<Product> productsWithTags = new ArrayList<Product>();
-		ArrayList<Product> productsWithAllTags = new ArrayList<Product>();
-		ArrayList<Product> productsWithSubsetOfTags = new ArrayList<Product>();
+	/*public List<Product> createProductListWithAllTags(String input){
+		if(input.isEmpty() || input == null){
+			throw new IllegalArgumentException();
+		}
+		List<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tag.split(" ")));
+		//tags = convertStringToArrayList(input);
+		List<Product> productsWithTags = new ArrayList<Product>();
+		List<Product> productsWithAllTags = new ArrayList<Product>();
+		List<Product> productsWithSubsetOfTags = new ArrayList<Product>();
 		for(Product p : productRepository.getProducts()){
 			if (p.getProductTags().containsAll(tags)){
 				productsWithAllTags.add(p);
@@ -177,6 +175,47 @@ public class ProductService implements ProductInterface{
 		productsWithTags.addAll(productsWithSubsetOfTags);
 		return productsWithTags;
 	}
+	*/
+	
+	/**
+	 * Search for items with all of the requested tags 
+	 * This checks for products that contain all of the tags a customer is searching for
+	 * Returns a list of all products that contain all of the tags searched for
+	 */
+	public List<Product> createProductListWithAllTags(String input){
+		if(input.isEmpty()){
+			throw new IllegalArgumentException();
+		}
+		tags = convertStringToArrayList(input);
+		List<Product> productsWithAllTags = new ArrayList<Product>();
+		for(Product p : productL){
+			if (p.getProductTags().containsAll(tags)){
+				productsWithAllTags.add(p);
+			} 
+		}
+		return productsWithAllTags;
+		
+	}
+	
+	/**
+	 * Search for items with one or more of the requested tags
+	 * This checks for products that contain some of the tags a customer is searching for
+	 * Returns a list of all products that contain one or more of the tags searched for
+	 */
+	public List<Product> createProductListWithSomeTags(String input){
+		if(input.isEmpty() || input == null){
+			throw new IllegalArgumentException();
+		}
+		tags = convertStringToArrayList(input);
+		List<Product> productsWithSubsetOfTags = new ArrayList<Product>();
+		for(Product p : productL){
+			if (!Collections.disjoint(p.getProductTags(), tags)){
+				productsWithSubsetOfTags.add(p);
+			}
+		}
+		return productsWithSubsetOfTags;
+	}
+	
 	
 	/**
 	 * 
@@ -187,8 +226,9 @@ public class ProductService implements ProductInterface{
 	 * @param tags
 	 * @return tagsToSearch
 	 */
-	public List<String> convertStringToArrayList(String tags){
-		List<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tags.split(" ")));
+	
+	public List<String> convertStringToArrayList(String tag){
+		List<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tag.split(" ")));
 		
 		return tagsToSearch;
 	}
