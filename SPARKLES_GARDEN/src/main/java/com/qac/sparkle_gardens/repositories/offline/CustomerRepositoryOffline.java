@@ -81,14 +81,16 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		
 		//update customer 
 		@Override 
-		public void updateCustomer(Customer c){
+		public boolean updateCustomer(Customer c){
 			
 			for (int i=0; i<customers.size(); i++)
 			{
 				if(customers.get(i).equals(c)){
 				customers.set(i, c);
+				return true;
 				}
 			}
+			return false; 
 		} 
 		
 		

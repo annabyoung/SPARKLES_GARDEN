@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
@@ -26,7 +27,7 @@ import junit.framework.TestCase;
 
 /**
  * 
- * @author sean connelly 
+ * @author Sean Connelly 
  *
  */
 
@@ -62,9 +63,9 @@ public class CustomerServiceTest extends TestCase {
 	
 	
 	@Test	
-	public void getCustomerTest(Customer c){
+	public void getCustomerTest(){
 		
-		Customer customer = customerRepository.getCustomer(c); 
+		Customer customer = customerRepository.getCustomer(dummyCustomer); 
 		assertNotNull(customer);
 
 		assertEquals(customer, dummyCustomer);
@@ -72,21 +73,24 @@ public class CustomerServiceTest extends TestCase {
 	}
 		
 	@Test
-	public void updateCustomerTest(Customer c){
+	public void updateCustomerTest(){
 
-		customerRepository.updateCustomer(c); //update customer what am i updating tho? I may need more of these 
-	
+		boolean result = customerRepository.updateCustomer(dummyCustomer); //update customer what am i updating tho? I may need more of these 
+	 assertTrue(result);
 	}
 		
 	@Test
 	public void removeCustomerTest(Customer c){
-		customerRepository.removeCustomer(c); //remove customer
+	customerRepository.removeCustomer(c); //remove customer
+	
 	}
 	
 	@Test
 	public void findCustomerAddressesTest(Customer c){
 	
-		customerRepository.findCustomerAddresses(c);
+		List<CustomerHasAddress> result = customerRepository.findCustomerAddresses(c);
+		
+		assertNotNull(result);
 		}
 		
 	@Test
@@ -99,10 +103,10 @@ public class CustomerServiceTest extends TestCase {
 	}
 	
 	@Test
-	public Customer findByEmail(String email){
+	public void findByEmailTest(String email){
 
-		
-	   return customerRepository.findByEmail(email);
+	  // return customerRepository.findByEmail(email);
+	    assertNotNull(customerRepository.findByEmail(email));
 	
 	}
 }
