@@ -1,5 +1,7 @@
 package com.qac.sparkle_gardens.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -16,21 +18,26 @@ import javax.validation.constraints.Size;
 		@NamedQuery(name = Card.FIND_BY_CARDID, query = "SELECT a FROM Cards a WHERE a.cardId = :cardId"),
 		})
 
-public class Card {
+public class Card implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3699822989065958978L;
+
 	@Id
-	@Column(name = "cardId", nullable = false, unique = true)
 	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long cardId;
-	@Column(name = "nameOnCard", nullable = false, length = 225)
+	private long cardID;
+	
 	@NotNull
-	@Size(min = 2, max = 225)
+	@Size(min = 2, max = 25)
 	private String cardOwnerName;
 	@Pattern(regexp = "[0-9]{16}", message = "{invalid.cardNumber}")
-	@Column(name = "cardNumber", nullable = false, length = 16)
+
 	@NotNull
 	private String cardNumber;
-	@Column(name = "expirationDate", nullable = false, length = 5)
+
 	@NotNull
 	@Pattern(regexp = "[0-1][0-9]/[0-9]{2}", message = "{invalid.expirationDate}")
 	private String expirationDate;
@@ -64,6 +71,7 @@ public class Card {
 	 * @param customer
 	 */
 	public Card(long cardID, String customerName, String cardNumber, String expirationDate) {
+		this.cardID = cardID;
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
@@ -75,7 +83,7 @@ public class Card {
 	 * @return
 	 */
 	public long getCardId() {
-		return cardId;
+		return cardID;
 	}
 
 	/**
@@ -136,7 +144,7 @@ public class Card {
 	 * @return boolean
 	 */
 	public boolean equals(Card anotherCard){
-		return anotherCard.getCardId() == cardId;
+		return anotherCard.getCardId() == cardID;
 	}
 
 
