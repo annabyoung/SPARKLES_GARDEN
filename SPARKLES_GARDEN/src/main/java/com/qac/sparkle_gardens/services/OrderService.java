@@ -277,7 +277,7 @@ public class OrderService
 	 * @param order
 	 * @return true; false
 	 */
-	public boolean validateOrderStatus (Order order)
+	public boolean validateOrderStatus(Order order)
 	{
 		OrderStatus orderStatus = order.getOrderStatus();
 		if (orderStatus == OrderStatus.PLACED || orderStatus == OrderStatus.PACKING)

@@ -2,11 +2,13 @@ package com.qac.sparkle_gardens.services;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
+import com.sparkle_gardens.sample_data.OrderSamples;
 
 import junit.framework.TestCase;
 
@@ -15,9 +17,15 @@ import junit.framework.TestCase;
  * @author Damien Lloyd
  *
  */
-public class OrderServiceTest extends TestCase 
+public class OrderServiceTest
 {
-	OrderService service = new OrderService();
+	OrderService service;
+	
+	@Before
+	public void initialise()
+	{
+		service = new OrderService();
+	}
 	
 	@Test
 	public void checkOrderValid()
@@ -43,13 +51,57 @@ public class OrderServiceTest extends TestCase
 	}
 	
 	@Test
-	public void canProductBeAdded()
+	public void isInvoiceNull()
 	{
-		Product p = new Product("Chris.. lol", 1, 0.01);
+		Order o = OrderSamples.techies();
 		
-		assertFalse(service.addProductToBasket(p, 1));
+		String invoice = service.generateInvoice(o.getOrderID());
+		
+		assertNotNull(invoice);
 	}
 	
 	@Test
-	public void 
+	public void productBasketOps()
+	{
+		Product p = new Product("Apple", 10, 0.30);
+		Product q = new Product("Laptop", 15, 499.00);
+		
+		boolean added = service.addProductToBasket(p, 2);
+		assertFalse(added);
+		
+		boolean removed = service.removeItemFromBasket(p);
+		assertTrue(removed);
+		
+		service.addProductToBasket(q, 1);
+		
+		boolean empty = service.isBasketEmpty();
+		assertFalse(empty);
+		
+		boolean clear = service.clearBasket();
+		assertTrue(clear);
+	}
+	
+	@Test
+	public void orderCreated()
+	{
+		Product a = new Product("Toothbrush", 20, 2.99);
+		Product b = new Product("Cup", 30, 1.00);
+		
+		service.addProductToBasket(a, 2);
+		service.addProductToBasket(b, 3);
+		
+		boolean result = service.createOrder(true);
+		
+		assertTrue(result);
+	}
+	
+	@Test
+	public void validatedOrderStatus()
+	{
+		Order o = OrderSamples.shoes();
+		
+		boolean result = service.validateOrderStatus(o);
+		
+		assertTrue(result);
+	}
 }
