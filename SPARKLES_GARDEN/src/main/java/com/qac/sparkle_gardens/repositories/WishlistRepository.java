@@ -21,9 +21,13 @@ public interface WishlistRepository {
 	// Returns all the wishlists
 	public List<Wishlist> getWishlists();
 	
+	public Wishlist findByAccountId(long id);
+	
 	// Adds a product to a wishlist
 	public void addProductToList(Product product, long wishId);
 	
+	public void addProductToListWithAcctId(Product product, long acctId);
+	@Deprecated
 	// Adds a product to a wishlist based on the name of the wishlist
 	public void addProductToList(Product product, String name);
 	
@@ -42,6 +46,7 @@ public interface WishlistRepository {
 	// checks if a product is in a wishlist
 	public boolean inWishlist(Product product, long accountId);
 	
+	@Deprecated
 	//Returns all the products in a wishlist
 	public List<Product> getProducts(String wishlistName);
 	
