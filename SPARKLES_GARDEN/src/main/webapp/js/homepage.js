@@ -8,7 +8,6 @@ function addProductToHomepage(imageNumber){
 	var x = document.getElementById(elemId);
 	x.appendChild(elem);
 }
-
 function addAllProducts(){
 	var i=0;
 	for (i=0;i<5;i++){
