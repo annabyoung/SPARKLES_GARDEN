@@ -13,7 +13,6 @@ import com.qac.sparkle_gardens.entities.Wishlist;
  *
  */
 @Singleton
-@Deprecated
 public class WishlistInitialData {
 	private ArrayList<Wishlist> wishlists = new ArrayList<Wishlist>();
 	private ArrayList<Product> products = new ArrayList<Product>();
