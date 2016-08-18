@@ -96,15 +96,17 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		
 		//remove customer
 		@Override 
-		public void removeCustomer(Customer c){
+		public boolean removeCustomer(Customer c){
 			
 			
 			for (int i=0; i<customers.size(); i++)
 			{
 				if(customers.get(i).equals(c)){
 					customers.remove(i);
+					return true;
 				}
 			}
+			return false;
 			
 		}
 

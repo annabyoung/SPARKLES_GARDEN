@@ -24,7 +24,7 @@ public interface CustomerRepository {
 	
 	public Customer getCustomer(Customer c); //get customer
 	public boolean updateCustomer(Customer c); //update customer what am i updating tho? I may need more of these 
-	public void removeCustomer(Customer c); //remove customer
+	public boolean removeCustomer(Customer c); //remove customer
 	public List<CustomerHasAddress> findCustomerAddresses(Customer c);
 	public List<CustomerHasCard> findCustomerCards(Customer c); //maybe get composite class? 
 	
