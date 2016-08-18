@@ -116,6 +116,10 @@ public class ProductService implements ProductInterface{
 		return productRepository.findByProductID(productID);
 	}
 	
+	/**
+	 * Verify that minimum price entered is not larger than maximum price
+	 * Verify that minimum price and maximum price entered are not negative
+	 */
 	public boolean checkIfMinAndMaxAreValid(double minimumPrice, double maximumPrice){
 		if (minimumPrice > maximumPrice || Double.compare(minimumPrice, 0.0) < 0 || Double.compare(maximumPrice, 0.0) < 0){
 			return false;
@@ -123,7 +127,7 @@ public class ProductService implements ProductInterface{
 		return true;
 	}
 	/**
-	 * Search items within a price range
+	 * Search for items within a price range entered
 	 * @param minimumPrice
 	 * @param maximumPrice
 	 * @return productsInRange which is all the products within the price range the customer is searching for

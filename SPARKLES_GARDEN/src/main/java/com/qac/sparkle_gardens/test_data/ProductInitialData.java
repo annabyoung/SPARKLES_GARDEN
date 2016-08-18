@@ -25,6 +25,8 @@ public class ProductInitialData {
 		addProduct(new Product("The Great American Challenge", 50, 79.99));
 		addProduct(new Product("Fleshlight Original", 100, 99.99));
 		addProduct(new Product("The Screaming O", 500, 19.99));
+		addProduct(new Product("Hatachi Wand", 25, 89.99));
+		addProduct(new Product("", 500, 19.99));
 		
 	}
 	
