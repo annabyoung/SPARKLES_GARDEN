@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.repositories.CardRepository;
@@ -23,7 +24,7 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
 public class CardRepositoryOffline implements CardRepository
 {
 	@Inject
-	InitialData initialData;
+	InitialData initialData = new InitialData();
 
 	public void addCard(Card c) 
 	{
@@ -51,7 +52,7 @@ public class CardRepositoryOffline implements CardRepository
 		}
 		return null;
 	}
-	
+	@Named("cards")
 	public List<Card> getCards() 
 	{
 		return initialData.getCards();
