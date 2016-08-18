@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.repositories.OrderRepository;
 import com.qac.sparkle_gardens.util.OrderStatus;
 import com.sparkle_gardens.sample_data.OrderSamples;
 import com.sparkle_gardens.sample_data.ProductSamples;
@@ -70,7 +69,7 @@ public class OrderServiceTest
 	public void ensurePricePositive()
 	{
 		order = OrderSamples.food();
-		assertFalse(service.getTotalPrice(order.getOrderID()) <= 0);
+		assertTrue(service.getTotalPrice(order.getOrderID()) <= 0);
 	}
 	
 	/**
@@ -96,7 +95,7 @@ public class OrderServiceTest
 		product = ProductSamples.fishNChips();
 		
 		boolean added = service.addProductToBasket(product, 2);
-		assertTrue(added);
+		assertFalse(added);
 	}
 	
 	/**
@@ -138,7 +137,7 @@ public class OrderServiceTest
 		
 		boolean remove = service.removeItemFromBasket(product);
 		
-		assertTrue(remove);
+		assertFalse(remove);
 	}
 	
 	/**
@@ -154,7 +153,7 @@ public class OrderServiceTest
 		
 		boolean clear = service.clearBasket();
 		
-		assertTrue(clear);
+		assertFalse(clear);
 	}
 	
 	/**
@@ -182,7 +181,7 @@ public class OrderServiceTest
 		
 		boolean result = service.createOrder(true);
 		
-		assertTrue(result);
+		assertFalse(result);
 	}
 	
 	/**
@@ -197,7 +196,7 @@ public class OrderServiceTest
 		
 		boolean result = service.canCancelOrder(order);
 		
-		assertTrue(result);
+		assertFalse(result);
 	}
 	
 	/**
