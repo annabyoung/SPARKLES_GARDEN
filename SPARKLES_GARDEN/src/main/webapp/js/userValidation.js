@@ -1,4 +1,4 @@
-function Validation() {
+function regValidation() {
 	
 	var firstNCheck = document.getElementById('formdiv:firstName');
 	var surnameCheck = document.getElementById('formdiv:surname');

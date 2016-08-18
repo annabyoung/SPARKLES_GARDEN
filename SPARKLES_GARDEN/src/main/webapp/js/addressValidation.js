@@ -1,4 +1,4 @@
-function Validation() {
+function addressValidation() {
 	
 	var houseCheck = document.getElementById('formdiv:houseID');
 	var adCheck = document.getElementById('formdiv:ad1');

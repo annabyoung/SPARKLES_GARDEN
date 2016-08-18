@@ -1,14 +1,14 @@
-function CheckAll(){
+function CheckCard(){
 
 	
-	if(Validation()==true){
+	if(cardValidation()==true){
 		
 		Validity();
 	}
 }
 
 
-function Validation() {
+function cardValidation() {
 	
 	var nameCheck = document.getElementById('formdiv:cardName');
 	var numCheck = document.getElementById('formdiv:cardNumber');
