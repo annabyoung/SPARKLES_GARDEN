@@ -76,7 +76,7 @@ public class OrderService
 	 * @param price
 	 * @return true if the order passes, false if otherwise
 	 */
-	public boolean checkOrderLine(int quantity, double price, int stocklevel)
+	public boolean isValid(int quantity, double price, int stocklevel)
 	{
 		if (quantity < 0 || price < 0)
 			return false;
@@ -163,7 +163,10 @@ public class OrderService
 	 */
 	public boolean addProductToBasket(Product p, int quantity)
 	{
-		if (!checkOrderLine(quantity, p.getPrice(), p.getStockLevel()))
+		if (p == null)
+			return false;
+		
+		if (!isValid(quantity, p.getPrice(), p.getStockLevel()))
 			return false;
 		
 		basket.add(new OrderLine(p, quantity));
@@ -178,6 +181,9 @@ public class OrderService
 	 */
 	public boolean removeItemFromBasket(Product p)
 	{
+		if (isBasketEmpty())
+			return false;
+		
 		for (int i = 0; i < basket.size(); i++)
 		{
 			if (basket.get(i).getProduct().equals(p))
@@ -277,17 +283,14 @@ public class OrderService
 	 * @param order
 	 * @return true; false
 	 */
-	public boolean validateOrderStatus(Order order)
+	public boolean canCancelOrder(Order order)
 	{
 		OrderStatus orderStatus = order.getOrderStatus();
-		if (orderStatus == OrderStatus.PLACED || orderStatus == OrderStatus.PACKING)
+		
+		if (orderStatus == OrderStatus.PLACED || 
+			orderStatus == OrderStatus.PACKING)
 		{
-			orderStatus = order.getOrderStatus();
-			
-			if (orderStatus != OrderStatus.DISPATCHED && orderStatus != OrderStatus.DELIVERED)
-			{
-				return true;
-			}
+			return true;
 		}
 		return false;
 	}

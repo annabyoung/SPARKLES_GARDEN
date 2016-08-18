@@ -2,6 +2,7 @@ package com.qac.sparkle_gardens.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -73,7 +74,7 @@ public class Order implements Serializable
 	private Card card;
 	
 	// List of orderlines in the order
-	private ArrayList<OrderLine> lines;
+	private List<OrderLine> lines;
 	
 	/**
 	 * Default constructor
@@ -147,7 +148,7 @@ public class Order implements Serializable
 	 * Get all the OrderLines in the Order
 	 * @return lines
 	 */
-	public ArrayList<OrderLine> getOrderLines()
+	public List<OrderLine> getOrderLines()
 	{
 		return lines;
 	}
@@ -168,7 +169,8 @@ public class Order implements Serializable
 	 * 
 	 * @return
 	 */
-	public boolean isPayLater() {
+	public boolean isPayLater() 
+	{
 		return payLater;
 	}
 	
