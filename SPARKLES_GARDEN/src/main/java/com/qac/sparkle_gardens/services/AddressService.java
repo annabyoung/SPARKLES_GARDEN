@@ -29,6 +29,9 @@ public class AddressService {
 	 * @return
 	 */
 	public List<Address> getAddress(long custId) {
+		if (custId <= 0) {
+			throw new IllegalArgumentException();
+		}
 		return addressRepository.findByAccountId(custId);
 	}
 	
