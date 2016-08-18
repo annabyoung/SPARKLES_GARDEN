@@ -63,8 +63,8 @@
 							</div>
 						</div>
 						<div>
-							<h:commandButton type="button" class="btn btn-warning"
-								value="Complete Registration!" onclick="CheckCard()" />
+							<h:commandButton id="submit" type="button" class="btn btn-warning"
+								value="Complete Registration!" onclick="cardValidation()" />
 
 						</div>
 					</h:form>
@@ -75,6 +75,7 @@
 					</p>
 				</div>
 				<script src="..\js\paymentValidation.js" />
+				<script src="..\js\typeValidationCard.js" />
 			</h:body>
 		</f:view>
 	</ui:define>

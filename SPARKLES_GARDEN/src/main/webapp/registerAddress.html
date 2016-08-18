@@ -22,6 +22,7 @@
 		<div class="container-fluid">
 			<h:form class="form-horizontal center_div" role="form" id="formdiv">
 				<h2>Add Address</h2>
+				<p id="addressCount" class="col-sm-4"></p>
 				<div class="form-group">
 					<label class="control-label col-sm-4">House number/ name:</label>
 					<div class="col-sm-4">
@@ -73,15 +74,16 @@
 						</h:selectOneMenu>
 					</div>
 				</div>
-				<div>
-					<span> <h:commandButton value="Add Another Address"
-							class="btn btn-primary" role="button" />
-					</span> <span> <h:outputLink value="registerPayment.html"
-							class="btn btn-secondary" role="button">Continue To Payment Method</h:outputLink>
-					</span>
-				</div>
+			</h:form>
 		</div>
-		</h:form>
+		<div id="clonePoint"></div>
+		<div>
+			<span> <h:commandButton value="Add Another Address"
+					class="btn btn-warning" role="button" id="extraForm" />
+			</span> <span> <h:commandButton value="Continue To Payment Method"
+					class="btn btn-warning" role="button" />
+			</span>
+		</div>
 		<div>
 			<p id="contact">
 				<a href="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</a>
