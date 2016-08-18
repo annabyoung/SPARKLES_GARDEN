@@ -18,10 +18,10 @@ import com.qac.sparkle_gardens.entities.Product;
  */
 @Singleton
 
-public class ProductInitalData {
+public class ProductInitialData {
 	private List<Product> products = new ArrayList<Product>();
 	
-	public ProductInitalData(){
+	public ProductInitialData(){
 		addProduct(new Product("The Great American Challenge", 50, 79.99));
 		addProduct(new Product("Fleshlight Original", 100, 99.99));
 		addProduct(new Product("The Screaming O", 500, 19.99));

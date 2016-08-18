@@ -8,7 +8,7 @@ import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.repositories.ProductRepository;
-import com.qac.sparkle_gardens.test_data.ProductInitalData;
+import com.qac.sparkle_gardens.test_data.ProductInitialData;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.util.MethodAuthor;
 
@@ -17,7 +17,7 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
 public class ProductRepositoryOffline implements ProductRepository
 {
 	@Inject 
-	ProductInitalData initialData = new ProductInitalData();
+	ProductInitialData initialData = new ProductInitialData();
 	
 
 	

@@ -21,7 +21,7 @@ public interface ProductInterface {
 	public List<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice);
 	public List<Product> createProductListByTags(String input);
 	public List<String> convertStringToArrayList(String tags);
-	public boolean validateResultsOfSearch(ArrayList<Product> productList);
+	public boolean validateResultsOfSearch(List<Product> productList);
 	public List<Product> getProductList();
 	public void clearSearchQuery();
 	
