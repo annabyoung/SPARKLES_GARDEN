@@ -2,7 +2,7 @@ function addProductToHomepage(imageNumber){
 	var elem = document.createElement("img");
 	var srcLink = ("img/gnome"+imageNumber+".jpg");
 	elem.setAttribute("src", srcLink);
-	elem.setAttribute("height", "160");
+	elem.setAttribute("style", "height:160");
 	elem.setAttribute("alt", "");
 	var elemId = ("imageInsertLocation" + imageNumber);
 	var x = document.getElementById(elemId);
