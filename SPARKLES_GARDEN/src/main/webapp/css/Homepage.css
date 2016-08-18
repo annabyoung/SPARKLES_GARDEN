@@ -106,7 +106,6 @@ h1 {
 #buttonArea {
 	width: 20%;
 	height: 20%;
-	transform: translateY(-10%);
 	border: 1px solid;
 	background-color: #FFFFFF;
 }
