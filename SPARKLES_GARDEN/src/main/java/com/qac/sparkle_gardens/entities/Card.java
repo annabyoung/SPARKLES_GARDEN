@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 /*
  * @author Allen Su
  */
+
 @Entity
 @Table(name = "Cards")
 
@@ -70,6 +71,7 @@ public class Card implements Serializable{
 	 * @param expirationDate
 	 * @param customer
 	 */
+	
 	public Card(long cardID, String customerName, String cardNumber, String expirationDate) {
 		this.cardID = cardID;
 		this.cardOwnerName = customerName;

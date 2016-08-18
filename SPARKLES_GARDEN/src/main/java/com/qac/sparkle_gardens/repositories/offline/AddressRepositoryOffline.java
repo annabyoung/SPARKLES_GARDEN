@@ -23,6 +23,7 @@ import com.qac.sparkle_gardens.test_data.InitialData;
 public class AddressRepositoryOffline implements AddressRepository {
 	@Inject private InitialData initialData;
 	@Inject private CustomerHasAddressRepository custAddressRepository;
+	
 	/**
 	 * Creates an address
 	 * @param address
@@ -89,7 +90,8 @@ public class AddressRepositoryOffline implements AddressRepository {
 		}
 		initialData.setAddresses(addresses);
 	}
-
+	
+	@Deprecated
 	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
 		List<Address> addresses = initialData.getAddresses();
 	}

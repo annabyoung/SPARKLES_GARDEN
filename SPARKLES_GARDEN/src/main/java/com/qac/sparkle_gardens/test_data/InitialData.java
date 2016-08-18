@@ -41,6 +41,7 @@ public class InitialData
 	
 	public InitialData() 
 	{
+		System.out.println("BLAH");
 		//Object Creation.
 		//long addressId, int buildingNum, String streetName, String city, String county, String country, String postCode
 		Address dummyAddress = new Address(1, "Anchorage", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ");
@@ -71,6 +72,7 @@ public class InitialData
 		cusHasAddress.add(new CustomerHasAddress(johnSmith,dummyAddress));
 		
 		// Create order with orderID & customer
+		
 		orders.add(new Order(1, customers.get(0)));
 		orders.add(new Order(2, customers.get(1)));
 		orders.add(new Order(3, customers.get(2)));
@@ -238,11 +240,15 @@ public class InitialData
 	
 	@MethodAuthor(author="Annabelle Young")
 	public void addProduct(Product product){
-		products.add(product);
+		this.products.add(product);
 	}
 
 	@MethodAuthor(author="Annabelle Young")
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+	
+	public List<CustomerHasCard> getCusHasCards(){
+		return this.cusHasCards;
 	}
 }

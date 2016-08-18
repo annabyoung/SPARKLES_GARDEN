@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
 //import com.qac.sparkle_gardens.controllers.CustomerInterface;
@@ -31,7 +32,6 @@ import junit.framework.TestCase;
 
 public class CustomerServiceTest extends TestCase {
 	
-<<<<<<< HEAD
 	@Inject 
 	CustomerRepository customerRepository; 
 
@@ -42,14 +42,12 @@ public class CustomerServiceTest extends TestCase {
 
 	
 	public void persistCustomerTest(Customer customer){
-=======
->>>>>>> e129f58b156b7e1e704826c0597df8fecf76aff2
-	
 	
 	Customer dummyCustomer =  new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890"); 
-	CustomerRepository customerRepository; 
-	CustomerInterface customerInterface = new CustomerService();
+	}
 	
+	//CustomerInterface customerInterface = new CustomerService();
+	// saw this in demo unsure why its needed. 
 
 	 /**
 	  * returns an ID 
@@ -85,22 +83,16 @@ public class CustomerServiceTest extends TestCase {
 		customerRepository.removeCustomer(c); //remove customer
 	}
 	
-<<<<<<< HEAD
-
-=======
 	@Test
->>>>>>> e129f58b156b7e1e704826c0597df8fecf76aff2
 	public void findCustomerAddressesTest(Customer c){
 	
 		customerRepository.findCustomerAddresses(c);
-
-}
+		}
 		
 	@Test
 	public void findCustomerCardsTest(Customer c){
-		
 
-		Card cards = customerRepository.findCustomerCards(c);
+		List<CustomerHasCard> cards = customerRepository.findCustomerCards(c);
 
 		assertNotNull(cards);
 		

@@ -22,11 +22,11 @@ import com.qac.sparkle_gardens.util.CreditStatus;
 	 @NamedQuery (name = Customer.FIND_BY_LAST_NAME, 
 		      query="SELECT a FROM Customer a WHERE a.lastName = :lastName"),
 	 @NamedQuery (name = Customer.FIND_BY_EMAIL, 
-		      query="SELECT a FROM Customer a WHERE a.EMAIL = :email"),
+		      query="SELECT a FROM Customer a WHERE a.email = :email"),
 	 @NamedQuery (name = Customer.FIND_BY_CREDIT_STATUS, 
 		      query="SELECT a FROM Customer a WHERE a.creditStatus = :creditStatus"),
-	 @NamedQuery (name = Customer.FIND_BY_ADDRESS, 
-		      query="SELECT a FROM Customer a WHERE a.address = :Address"),
+///	 @NamedQuery (name = Customer.FIND_BY_ADDRESS, 
+///		      query="SELECT a FROM Customer a WHERE a.address = :Address"),// address is now refercned by a composite entity needs to redo this 
 	 @NamedQuery (name = Customer.FIND_BY_PHONE, 
 	          query="SELECT a FROM Customer a WHERE a.phone = :phone"),
  })
@@ -41,13 +41,8 @@ public class Customer implements Serializable  {
 	@Id
 	@Column (name ="accountID")
 	//@OneToMany 
-<<<<<<< HEAD
 	//fix this comeback  later
-=======
 	//TODO: FIX THIS STOPS SERVER FROM RUNNING
-	
-	// not sure what the foreign key looks like or if this is correct 
->>>>>>> e129f58b156b7e1e704826c0597df8fecf76aff2
 	@JoinColumn(name = "accountID_fk ", nullable = false)
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long accountID;

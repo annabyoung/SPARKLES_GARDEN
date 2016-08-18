@@ -6,13 +6,15 @@ package com.qac.sparkle_gardens.services;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
-import com.qac.sparkle_gardens.test_data.InitialData;
+import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
+import com.qac.sparkle_gardens.test_data.ProductInitalData;
 
 /**
  * @author Annabelle Young
@@ -25,14 +27,18 @@ import com.qac.sparkle_gardens.test_data.InitialData;
 @Stateless
 public class ProductService implements ProductInterface{
 	//@Inject InitialData initialData;
-	@Inject ProductRepository productRepository;
+	@Inject ProductRepository productRepository= new ProductRepositoryOffline();
+	//@Inject ProductInitalData initial;
 	
 	
+	//ProductRepository productRepository = new ProductRepositoryOffline();
+	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
+	//private ArrayList<Product> products = (ArrayList<Product>) productRepository.getProducts();
+	private List<Product> productL = new ArrayList<Product>(); 
+	private List<String> tags = new ArrayList<String>();
+//	ProductRepository productRepository = new ProductRepositoryOffline();
+	ProductInitalData initial = new ProductInitalData();
 	
-	private ArrayList<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
-	//private ArrayList<Product> products = (ArrayList<Product>) initialData.getProducts();
-	private ArrayList<String> tags = new ArrayList<String>();
-		
 	
 	/**
 	 * If the product has enough stock to meet the request, return true and decrement stock
@@ -92,12 +98,10 @@ public class ProductService implements ProductInterface{
 	 * if there is not enough stock to meet the quantity requested, false will be returned
 	 */
 	public boolean checkIfEnoughQuantity(Product p, int quantityRequested){
-		if(p == null){
+		if(p == null || quantityRequested <= 0){
 			throw new IllegalArgumentException();
 		}
-		if(quantityRequested == 0){
-			throw new IllegalArgumentException();
-		}
+		
 		return (p.getStockLevel() >= quantityRequested);
 	}
 	
@@ -112,8 +116,8 @@ public class ProductService implements ProductInterface{
 		return productRepository.findByProductID(productID);
 	}
 	
-	public boolean checkIfMinIsLessThanMax(double minimumPrice, double maximumPrice){
-		if (minimumPrice > maximumPrice){
+	public boolean checkIfMinAndMaxAreValid(double minimumPrice, double maximumPrice){
+		if (minimumPrice > maximumPrice || Double.compare(minimumPrice, 0.0) < 0 || Double.compare(maximumPrice, 0.0) < 0){
 			return false;
 		}
 		return true;
@@ -122,11 +126,12 @@ public class ProductService implements ProductInterface{
 	 * Search items within a price range
 	 * @param minimumPrice
 	 * @param maximumPrice
-	 * @return prodcutsInRange which is all the products within the price range the customer is searching for
+	 * @return productsInRange which is all the products within the price range the customer is searching for
 	 */
-	public ArrayList<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
-		ArrayList<Product> productsInRange = new ArrayList<Product>();
-		for(Product p : productRepository.getProducts()){
+	public List<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
+		List<Product> productsInRange = new ArrayList<Product>();
+		List<Product> pl = productRepository.getProducts();
+		for(Product p : pl){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
 				productsInRange.add(p);
 			}
@@ -203,11 +208,14 @@ public class ProductService implements ProductInterface{
 	/**
 	 * Return the list of all products that meet the search parameters
 	 */
-	public ArrayList<Product> getProductList(){
+	public List<Product> getProductList(){
 		//There should be a query here, but we're not at that point yet
 		return productList;
 	}
 	
+	/**
+	 * Clears the search query
+	 */
 	public void clearSearchQuery(){
 		productList.clear();
 	}

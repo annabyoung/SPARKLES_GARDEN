@@ -5,6 +5,8 @@ import java.util.List;
 import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.CustomerHasAddress;
+import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.util.MethodAuthor;
 
 /**
@@ -23,8 +25,8 @@ public interface CustomerRepository {
 	public Customer getCustomer(Customer c); //get customer
 	public void updateCustomer(Customer c); //update customer what am i updating tho? I may need more of these 
 	public void removeCustomer(Customer c); //remove customer
-	public Address findCustomerAddresses(Customer c);
-	public Card findCustomerCards(Customer c); //maybe get composite class? 
+	public List<CustomerHasAddress> findCustomerAddresses(Customer c);
+	public List<CustomerHasCard> findCustomerCards(Customer c); //maybe get composite class? 
 	
 	/**
 	 * Finds a customer by their email address and returns null is no customer is found

@@ -8,14 +8,17 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
+//import javax.inject.Inject;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.repositories.ProductRepository;
-import com.qac.sparkle_gardens.test_data.InitialData;
+//import com.qac.sparkle_gardens.repositories.ProductRepository;
+//import com.qac.sparkle_gardens.test_data.InitialData;
+//import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * @author Annabelle Young
@@ -28,25 +31,41 @@ public class ProductServiceTest {
 	//@Inject InitialData initialData;
 	//@Inject ProductRepository productRepository;
 	
-	private Product product = new Product("The Great American Challenge", 10, 79.99);
-	ProductInterface pi = new ProductService();
+	//Product product;
+	Product p;
+	ProductInterface pi;
+	//List<Product> products;
+	//InitialData initData;
+	
+	
+	@Before
+	public void setup(){
+		System.out.println("Setup");
+		pi = new ProductService();
+		p = new Product("The Great American Challenge", 50, 79.99);
+		
+	}
 	
 	/**
 	 * This test is checking checkInStock(Product p) to make sure that 'true' is returned if the stock level is greater than 0
 	 */	
 	@Test
-	public void checkInStockShouldReturnValidOutputForInStock() {		
-		Boolean result = pi.checkInStock(product);
+	public void checkInStockShouldReturnValidOutputForInStock() {	
+		System.out.println("checkInStockShouldReturnValidOutputForInStock");
+		Boolean result = pi.checkInStock(p);
 		assertTrue(result);
 	}
 	
 	/**
 	 * This test is checking checkInStock(Product p) to make sure that 'false' is returned if the stock level is 0
+	 * Retrieve the first product in products list and set its stock level to 0
 	 */
 	@Test
 	public void checkInStockShouldReturnValidOutputForNoStock() {
-		product.setStockLevel(0);
-		Boolean result = pi.checkInStock(product);
+		System.out.println("checkInStockShouldReturnValidOutputForNoStock");
+		//product = products.get(0);
+		p.setStockLevel(0);
+		Boolean result = pi.checkInStock(p);
 		assertFalse(result);
 	}
 	
@@ -55,6 +74,7 @@ public class ProductServiceTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void checkInStockShouldThrowIllegalExceptionForNullProduct(){
+		System.out.println("checkInStockShouldThrowIllegalExceptionForNullProduct");
 		pi.checkInStock(null);		
 	}
 	/*
@@ -81,7 +101,8 @@ public class ProductServiceTest {
 	 */
 	@Test
 	public void checkIfEnoughQuantityShouldReturnValidOutputForEnoughStock(){
-		Boolean result = pi.checkIfEnoughQuantity(product, 5);
+		System.out.println("checkIfEnoughQuantityShouldReturnValidOutputForEnoughStock");
+		Boolean result = pi.checkIfEnoughQuantity(p, 5);
 		assertTrue(result);
 	}
 	
@@ -91,7 +112,8 @@ public class ProductServiceTest {
 	 */
 	@Test
 	public void checkIfEnoughQuantityShouldReturnValidOutputForNotEnoughStock(){
-		Boolean result = pi.checkIfEnoughQuantity(product, 15);
+		System.out.println("checkIfEnoughQuantityShouldReturnValidOutputForNotEnoughStock");
+		Boolean result = pi.checkIfEnoughQuantity(p, 55);
 		assertFalse(result);
 	}
 	
@@ -100,6 +122,7 @@ public class ProductServiceTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void checkIfEnoughQuantityShouldThrowIllegalExceptionForNullProduct(){
+		System.out.println("checkIfEnoughQuantityShouldThrowIllegalExceptionForNullProduct");
 		pi.checkIfEnoughQuantity(null, 5);
 	}
 	
@@ -108,9 +131,18 @@ public class ProductServiceTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void checkIfEnoughQuantityShouldThrowIllegalExceptionForNullRequest(){
-		pi.checkIfEnoughQuantity(product, 0);
+		System.out.println("checkIfEnoughQuantityShouldThrowIllegalExceptionForNullRequest");
+		pi.checkIfEnoughQuantity(p, 0);
 	}
 	
+	/**
+	 * Verifies that Illegal Argument Exception is thrown if negative value is passed in for request
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void checkIfEnoughQuantityShouldThrowIllegalExceptionForNegativeRequest(){
+		System.out.println("checkIfEnoughQuantityShouldThrowIllegalExceptionForNullRequest");
+		pi.checkIfEnoughQuantity(p, -1);
+	}
 	
 	/**
 	 * Verifies that long productID value passed into getProductById is not 0
@@ -128,16 +160,20 @@ public class ProductServiceTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void getProductByIDShouldThrowIllegalExceptionForNullID(){
+		System.out.println("getProductByIDShouldThrowIllegalExceptionForNullID");
 		pi.getProductByID(0);
 	}
+	
+	
 	
 	/**
 	 * Verifies that true is returned if minimumPrice value entered
 	 * is not greater than maximumPrice value entered
 	 */	
 	@Test
-	public void checkIfMinIsLessThanMaxShouldReturnValidOutputForValidInput(){
-		boolean result = pi.checkIfMinIsLessThanMax(10.00, 20.00);
+	public void checkIfMinAndMaxAreValidShouldReturnValidOutputForValidInput(){
+		System.out.println("checkIfMinAndMaxAreValidShouldReturnValidOutputForValidInput");
+		boolean result = pi.checkIfMinAndMaxAreValid(10.00, 20.00);
 		assertTrue(result);
 	}
 	
@@ -146,21 +182,66 @@ public class ProductServiceTest {
 	 * is greater than maximumPrice value entered
 	 */	
 	@Test
-	public void checkIfMinIsLessThanMaxShouldReturnValidOutputForInvalidInput(){
-		boolean result = pi.checkIfMinIsLessThanMax(20.00, 10.00);
+	public void checkIfMinAndMaxAreValidShouldReturnValidOutputForMaxLessThanMin(){
+		System.out.println("checkIfMinAndMaxAreValidShouldReturnValidOutputForMaxLessThanMin");
+		boolean result = pi.checkIfMinAndMaxAreValid(20.00, 10.00);
 		assertFalse(result);
 	}
+	
+	/**
+	 * Verifies that false is returned if minimumPrice value entered is negative
+	 */	
+	@Test
+	public void checkIfMinAndMaxAreValidShouldReturnValidOutputForNegativeMinimum(){
+		System.out.println("checkIfMinAndMaxAreValidShouldReturnValidOutputForNegativeMinimum");
+		boolean result = pi.checkIfMinAndMaxAreValid(-10.00, 20.00);
+		assertFalse(result);
+	}
+	
+	/**
+	 * Verifies that false is returned if maximumPrice value entered is negative
+	 */	
+	@Test
+	public void checkIfMinAndMaxAreValidShouldReturnValidOutputForNegativeMaximum(){
+		System.out.println("checkIfMinAndMaxAreValidShouldReturnValidOutputForNegativeMaximum");
+		boolean result = pi.checkIfMinAndMaxAreValid(10.00, -20.00);
+		assertFalse(result);
+	}
+	
+	/**
+	 * Verifies that true is returned if products are added to list
+	 * result will be true if list is not empty
+	 */
+	@Test
+	public void createProductListByPriceRangeShouldAddProductInPriceRange(){
+		System.out.println("createProductListByPriceRangeShouldAddProductInPriceRange");
+		List<Product> resultList = pi.createProductListByPriceRange(10.00, 80.00);
+		boolean result = !(resultList.isEmpty());
+		//boolean result = (pi.createProductListByPriceRange(10.00, 80.00)).isEmpty();
+		assertTrue(result);
+	}
+	
 	
 	/**
 	 * Verifies that false is returned if products are added to list
 	 * result will be false if the resultList is empty
 	 */
-	@Test
+	/*@Test
 	public void createProductListByPriceRangeShouldAddProductInPriceRange(){
+		System.out.println("createProductListByPriceRangeShouldAddProductInPriceRange");
 		List<Product> resultList = pi.createProductListByPriceRange(10.00, 80.00);
 		boolean result = resultList.isEmpty();
 		assertFalse(result);
+	*/
+	@After
+	public void teardown(){
+		System.out.println("Teardown");
+		//product = null;
+		pi = null;
+		//products.clear();
+		p = null;
 	}
+	
 	
 }
 
