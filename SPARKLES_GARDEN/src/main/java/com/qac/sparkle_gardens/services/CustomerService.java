@@ -6,7 +6,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 //import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
 
-import com.qac.sparkle_gardens.controllers.CustomerInterface;
+
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
@@ -17,7 +17,7 @@ import com.qac.sparkle_gardens.util.CreditStatus;
  *
  */
 @Stateless
-public class CustomerService implements CustomerInterface {
+public class CustomerService {
 	@Inject CustomerRepository customerRepository;
 	
 	
