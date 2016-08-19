@@ -4,22 +4,20 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-@Embeddable
 public class OrderLinePK implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1517213253333547928L;
-
-	@Column (name = "orderID", nullable = false)
+	
+	@ManyToOne
+	@JoinColumn (name = "orderID", nullable = false)
 	private Order order;
 	
-	@Column (name = "productID", nullable = false)
+	@ManyToOne
+	@JoinColumn (name = "productID", nullable = false)
 	private Product product;
-	
-	
 	
 	public void setOrder(Order order) {
 		this.order = order;
