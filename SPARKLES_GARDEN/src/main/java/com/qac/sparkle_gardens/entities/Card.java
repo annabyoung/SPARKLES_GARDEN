@@ -22,7 +22,7 @@ public class Card {
 	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long cardId;
-	@Column(name = "nameOnCard", nullable = false, length = 225)
+	@Column(name = "cardOwnerName", nullable = false, length = 225)
 	@NotNull
 	@Size(min = 2, max = 225)
 	private String cardOwnerName;
