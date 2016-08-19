@@ -23,13 +23,12 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
  * @author James Thompson
  *
  */
-@Deprecated
 @Stateless
 public class InitialData 
 {
 	private List<Address> addresses = new ArrayList<Address>();
 	private List<Wishlist> wishlists = new ArrayList<Wishlist>();
-	private List<Card> Cards = new ArrayList<Card>();
+	private List<Card> cards = new ArrayList<Card>();
 	private List<Customer> customers = new ArrayList<Customer>();
 	private List<Order> orders;
 
@@ -39,44 +38,44 @@ public class InitialData
 	private List<CustomerHasCard> cusHasCards = new ArrayList<CustomerHasCard>();
 	private List<CustomerHasAddress> cusHasAddress = new ArrayList<CustomerHasAddress>();
 	
-	public InitialData() 
-	{
-		//Object Creation.
+	public InitialData() { }
+	
+	private void setupInitialData() {
+	//Object Creation.
 		//long addressId, int buildingNum, String streetName, String city, String county, String country, String postCode
 		Address dummyAddress = new Address("Anchorage 1", "Floor 5", "Anchorage Quay", "Salford Quay", "Greater Manchester", "United Kingdom", "M50 3YJ", "Shipping");
-		Customer johnSmith = new Customer("John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890");
-		Customer janeDoe = new Customer("Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, "password01", "0987654321");
-		Customer joeSchmoe = new Customer("Joe", "Schmoe", "email999@email.com", CreditStatus.VALID, "password01", "1357908642");
-		Customer lukeSkyWalker = new Customer("Luke", "Skywalker", "theForce@deathstar.com", CreditStatus.VALID, "password01", "2468097531");
-		Card card1 = new Card(1, "Connect", "4412345647894531", "12/12");
+		Customer customer = new Customer(1, "John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890");
+		Customer customer2 = new Customer(2, "Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, "password01", "0987654321");
+		Customer customer3 = new Customer(3, "Joe", "Schmoe", "email999@email.com", CreditStatus.VALID, "password01", "1357908642");
+		Customer customer4 = new Customer(4, "Luke", "Skywalker", "theForce@deathstar.com", CreditStatus.VALID, "password01", "2468097531");
+		Card card = new Card(1, "Connect", "4412345647894531", "12/17");
 		Card card2 = new Card(2, "Head", "4212345647894531", "11/12");
 		Card card3 = new Card(3, "Hammer", "4552345647894531", "12/13");
 		
+		customers.add(0, customer);
+		customers.add(1, customer2);
+		customers.add(2, customer3);
+		customers.add(3, customer4);
+		cards.add(0, card);
+		cards.add(1, card2);
+		cards.add(2, card3);
+		cusHasCards.add(new CustomerHasCard(customers.get(2), cards.get(0)));
+		cusHasCards.add(new CustomerHasCard(customers.get(2), cards.get(1)));
+		cusHasCards.add(new CustomerHasCard(customers.get(2), cards.get(2)));
 		addresses.add(dummyAddress);
-		Cards.add(card1);
-		Cards.add(card2);
-		Cards.add(card3);
-		customers.add(johnSmith);
-		customers.add(janeDoe);
-		customers.add(lukeSkyWalker);
-		customers.add(joeSchmoe);
 		
-		cusHasCards.add(new CustomerHasCard(johnSmith, card1));
-		cusHasCards.add(new CustomerHasCard(joeSchmoe, card2));
-		cusHasCards.add(new CustomerHasCard(lukeSkyWalker, card3));
-		
-		cusHasAddress.add(new CustomerHasAddress(joeSchmoe,dummyAddress));
-		cusHasAddress.add(new CustomerHasAddress(lukeSkyWalker,dummyAddress));
-		cusHasAddress.add(new CustomerHasAddress(janeDoe,dummyAddress));
-		cusHasAddress.add(new CustomerHasAddress(johnSmith,dummyAddress));
+//		cusHasAddress.add(new CustomerHasAddress(joeSchmoe,dummyAddress));
+//		cusHasAddress.add(new CustomerHasAddress(lukeSkyWalker,dummyAddress));
+//		cusHasAddress.add(new CustomerHasAddress(janeDoe,dummyAddress));
+//		cusHasAddress.add(new CustomerHasAddress(johnSmith,dummyAddress));
 		
 		// Create order with orderID & customer
 		
-		orders.add(new Order(1, customers.get(0)));
-		orders.add(new Order(2, customers.get(1)));
-		orders.add(new Order(3, customers.get(2)));
-		orders.add(new Order(4, customers.get(3)));
-		orders.add(new Order(5, customers.get(4)));
+//		orders.add(new Order(1, customers.get(0)));
+//		orders.add(new Order(2, customers.get(1)));
+//		orders.add(new Order(3, customers.get(2)));
+//		orders.add(new Order(4, customers.get(3)));
+//		orders.add(new Order(5, customers.get(4)));
 		
 		// Add order line to order by product, quantity & price
 //		orders.get(0).addOrderLine(new OrderLine(new Product("Pretty trainers", 3, 30), 3));
@@ -112,141 +111,83 @@ public class InitialData
 //		wishlists.add(new Wishlist((long) 24, products));
 	}
 
-	@MethodAuthor(author = "Tyler Deans")
 	public List<Address> getAddresses() {
+		if (addresses.isEmpty())
+			setupInitialData();
 		return addresses;
 	}
 
-	@MethodAuthor(author = "Tyler Deans")
-	public void addAddress(Address address) {
-		addresses.add(address);
-	}
-
-	@MethodAuthor(author = "Tyler Deans")
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
-	
-	@MethodAuthor(author = "Tyler Deans")
 	public List<Wishlist> getWishlists() {
+		if (wishlists.isEmpty())
+			setupInitialData();
 		return wishlists;
-	}
-	
-	@MethodAuthor(author = "Tyler Deans")
-	public void addWishlist(Wishlist wishlist) {
-		wishlists.add(wishlist);
-	}
-	
-	@MethodAuthor(author = "Tyler Deans")
-	public void setWishlists(List<Wishlist> wishlists) {
-		this.wishlists = wishlists;
-	}
-	
-	@MethodAuthor(author = "Tyler Deans")
-	public List<CustomerHasAddress> getCustomerHasAddresses() {
-		return cusHasAddress;
-	}
-
-	@MethodAuthor(author = "Tyler Deans")
-	public void addCustomerHasAddress(CustomerHasAddress cust) {
-		cusHasAddress.add(cust);
-	}
-	
-	@MethodAuthor(author = "Tyler Deans")
-	public void setCustomerHasAddresses(List<CustomerHasAddress> cust) {
-		this.cusHasAddress = cust;
-	}
-	 
-	public void addCard(Card p) {
-		this.Cards.add(p);
 	}
 
 	public List<Card> getCards() {
-		return Cards;
+		if (cards.isEmpty())
+			setupInitialData();
+		return cards;
 	}
 
-	public void setCards(List<Card> Cards) {
-		this.Cards = Cards;
-	}
-
-	@MethodAuthor(author = "Sean Connelly")
 	public List<Customer> getCustomers() {
+		if (customers.isEmpty())
+			setupInitialData();
 		return customers;
 	}
 
-	@MethodAuthor(author = "Sean Connelly")
-	public void setCustomer(List<Customer> customers) {
+	public List<Order> getOrders() {
+		if (orders.isEmpty())
+			setupInitialData();
+		return orders;
+	}
+
+	public List<Product> getProducts() {
+		if (products.isEmpty())
+			setupInitialData();
+		return products;
+	}
+
+	public List<CustomerHasCard> getCusHasCards() {
+		if (cusHasCards.isEmpty())
+			setupInitialData();
+		return cusHasCards;
+	}
+
+	public List<CustomerHasAddress> getCusHasAddress() {
+		if (cusHasAddress.isEmpty())
+			setupInitialData();
+		return cusHasAddress;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
+
+	public void setWishlists(List<Wishlist> wishlists) {
+		this.wishlists = wishlists;
+	}
+
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
+	}
+
+	public void setCustomers(List<Customer> customers) {
 		this.customers = customers;
 	}
 
-	@MethodAuthor(author = "Sean Connelly")
-	public void addCustomer(Customer customer) {
-		customers.add(customer);
-	}
-	
-	/**
-	 * Add an order to list of orders
-	 * @param o
-	 */
-	@MethodAuthor(author="Damien Lloyd")
-	public void addOrder(Order o)
-	{
-		this.orders.add(o);
-	}
-	
-	/**
-	 * Get list of orders
-	 * @return orders
-	 */
-	@MethodAuthor(author="Damien Lloyd")
-	public List<Order> getOrders()
-	{
-		return orders;
-	}
-	
-	/**
-	 * Concurrently set all orders in a list by another
-	 * @param orders
-	 */
-	@MethodAuthor(author="Damien Lloyd")
-	public void setOrders(List<Order> orders)
-	{
+	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
 
-	
-//	public void addPayment(Payment p)
-//	{
-//		this.Payments.add(p);
-//	}
-//	
-//	public List<Payment> getPayments()
-//	{
-//		return Payments;
-//	}
-//	
-//	public void setPayments(List<Payment> Payments)
-//	{
-//		this.Payments = Payments;
-//	}
-	
-
-	@MethodAuthor(author="Annabelle Young")
-	public List<Product> getProducts(){
-		return products;
-	}
-	
-	@MethodAuthor(author="Annabelle Young")
-	public void addProduct(Product product){
-		products.add(product);
-	}
-
-	@MethodAuthor(author="Annabelle Young")
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-	
-	public List<CustomerHasCard> getCusHasCards(){
-		return this.cusHasCards;
+
+	public void setCusHasCards(List<CustomerHasCard> cusHasCards) {
+		this.cusHasCards = cusHasCards;
+	}
+
+	public void setCusHasAddress(List<CustomerHasAddress> cusHasAddress) {
+		this.cusHasAddress = cusHasAddress;
 	}
 }

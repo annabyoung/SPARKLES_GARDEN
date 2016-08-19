@@ -19,7 +19,7 @@ public class ProductRepositoryOffline implements ProductRepository
 	private InitialData initialData;
 	
 	public void persistProduct(Product p){
-		initialData.addProduct(p);
+//		initialData.addProduct(p);
 	}
 	
 	public void persistProducts(List<Product> p) {

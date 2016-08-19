@@ -24,9 +24,11 @@ public class CardRepositoryOffline implements CardRepository
 	@Inject
 	InitialData initialData;
 
-	public void persistCard(Card c) 
+	public void persistCard(Card card) 
 	{
-		initialData.addCard(c);
+		List<Card> cards = initialData.getCards();
+		cards.add(card);
+		initialData.setCards(cards);
 	}
 	
 	public List<Card> listCards() 

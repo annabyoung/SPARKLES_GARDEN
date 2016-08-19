@@ -18,28 +18,20 @@
         <h:panelGroup rendered="#{not empty cards.cards}">
             <em>Some registered cards.</em>
         </h:panelGroup>
-        <h:dataTable var="_card" value="#{cards.getCards}"
+        <h:dataTable var="_card" value="#{cards.cards}"
             rendered="#{not empty cards}"
             styleClass="simpletablestyle">
             <h:column>
                 <f:facet name="header">Id</f:facet>
-                #{_card.id}
+                #{_card.cardId}
             </h:column>
             <h:column>
                 <f:facet name="header">Name</f:facet>
-                #{_card.name}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Email</f:facet>
-                #{_card.email}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Phone #</f:facet>
-                #{_card.phoneNumber}
+                #{_card.cardOwnerName}
             </h:column>
             <h:column>
                 <f:facet name="header">REST URL</f:facet>
-                <a href="#{request.contextPath}/rest/cards/#{_card.id}">/rest/cards/#{_card.id}</a>
+                <a href="#{request.contextPath}/rest/cards/#{_card.cardId}">/rest/cards/#{_card.cardId}</a>
             </h:column>
             <f:facet name="footer">
             REST URL for all cards: <a

@@ -38,10 +38,6 @@ public class CustomerHasCard {
 		return customer;
 	}
 	
-	public long getCustomerId(){
-		return customer.getAccountID();
-	}
-	
 	public void setCustomer(Customer customer){
 		this.customer = customer;
 	}
@@ -50,14 +46,9 @@ public class CustomerHasCard {
 		return card;
 	}
 	
-	public long getCardId(){
-		return card.getCardId();
-	}
-	
 	public void setCard(Card card){
 		this.card = card;
 	}
-
 }
 
 class CustomerHasCardId implements Serializable {

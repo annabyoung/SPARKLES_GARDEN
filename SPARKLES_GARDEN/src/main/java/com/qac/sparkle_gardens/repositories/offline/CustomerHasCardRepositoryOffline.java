@@ -1,17 +1,21 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CustomerHasCardRepository;
+import com.qac.sparkle_gardens.test_data.InitialData;
 
 @Stateless
 @Default
 public class CustomerHasCardRepositoryOffline implements CustomerHasCardRepository {
-
+	@Inject private InitialData initialData;
+	
 	@Override
 	public void persistCustomerHasCard(CustomerHasCard c) {
 		// TODO Auto-generated method stub
@@ -48,12 +52,6 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 
 	}
 
-
-	public List<CustomerHasCard> findByCustomerID(long customerID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public List<CustomerHasCard> findByCardID(long cardID) {
 		// TODO Auto-generated method stub
@@ -61,9 +59,15 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 	}
 
 	@Override
-	public List<CustomerHasCard> findByAccountID(long customerID) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CustomerHasCard> findByAccountID(long accountID) {
+		List<CustomerHasCard> customerHasCards = new ArrayList<CustomerHasCard>();
+		System.out.println(">>> Customer Cards " + customerHasCards.isEmpty() + " <<< ");
+		for(CustomerHasCard hasCard : initialData.getCusHasCards()) {
+			System.out.println(">>> Card belongs to " + hasCard.getCustomer().getAccountID() + " <<< ");
+			if(hasCard.getCustomer().getAccountID() == accountID)
+				customerHasCards.add(hasCard);
+		}
+		System.out.println(">>> Customer Cards " + customerHasCards.size() + " <<< ");
+		return customerHasCards;
 	}
-
 }

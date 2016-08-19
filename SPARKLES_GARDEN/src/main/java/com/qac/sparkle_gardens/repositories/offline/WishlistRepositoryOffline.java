@@ -32,7 +32,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 			throw new IllegalArgumentException();
 		}
 		
-		initialData.addWishlist(wishlist);
+//		initialData.addWishlist(wishlist);
 	}
 	
 	public void persistWishlists(List<Wishlist> wishlists) {

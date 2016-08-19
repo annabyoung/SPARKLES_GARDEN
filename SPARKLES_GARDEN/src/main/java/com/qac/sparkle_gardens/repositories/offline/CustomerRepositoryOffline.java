@@ -120,12 +120,12 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		@Override 
 		public List<CustomerHasAddress> findCustomerAddresses(Customer customer){
 
-			List<CustomerHasAddress> composites = initialData.getCustomerHasAddresses(); // i probably need to come back and get composite types 
+//			List<CustomerHasAddress> composites = initialData.getCustomerHasAddresses(); // i probably need to come back and get composite types 
 			List<CustomerHasAddress> addys=  new ArrayList<CustomerHasAddress>();
-						for (CustomerHasAddress addyz : composites)
+//						for (CustomerHasAddress addyz : composites)
 						{
-							if(addyz.getCustomerId() == customer.getAccountID())
-							addys.add(addyz);
+	//						if(addyz.getCustomerId() == customer.getAccountID())
+	//						addys.add(addyz);
 						}
 			
 						return addys;
@@ -138,7 +138,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		List<CustomerHasCard> cards=  new ArrayList<CustomerHasCard>();
 					for (CustomerHasCard cardz : composites)
 					{
-						if(cardz.getCustomerId() == customer.getAccountID())
+						if(cardz.getCustomer().getAccountID() == customer.getAccountID())
 						cards.add(cardz);
 					}
 		
