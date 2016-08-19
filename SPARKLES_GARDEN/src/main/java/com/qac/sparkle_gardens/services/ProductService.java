@@ -25,7 +25,7 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 @Stateless
 public class ProductService {
-	@Inject ProductRepository productRepository= new ProductRepositoryOffline();
+	@Inject private ProductRepository productRepository= new ProductRepositoryOffline();
 	/*
 	 * Access Initial Data not repository
 	 * Inject Initial Data 
