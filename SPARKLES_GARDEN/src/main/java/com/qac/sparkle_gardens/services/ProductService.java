@@ -26,7 +26,10 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 @Stateless
 public class ProductService {
 	@Inject ProductRepository productRepository= new ProductRepositoryOffline();
-	
+	/*
+	 * Access Initial Data not repository
+	 * Inject Initial Data 
+	 */
 	
 	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
 	private List<Product> productL = productRepository.getProducts(); 

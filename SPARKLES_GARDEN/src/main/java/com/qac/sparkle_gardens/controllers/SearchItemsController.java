@@ -40,7 +40,8 @@ public class SearchItemsController {
 	 * @return search, blank_search
 	 */
 	public String createProductList(String customerInput){
-		searchQueryResults = productService.createProductListByTags(customerInput);
+		searchQueryResults.addAll(productService.createProductListWithAllTags(customerInput));
+		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
 			return "search";
 		}
