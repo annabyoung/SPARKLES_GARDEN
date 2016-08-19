@@ -46,17 +46,12 @@ import javax.validation.constraints.Size;
 	@NamedQuery(name = Product.FIND_BY_PRICE, 
 		query = "SELECT a FROM Product a WHERE a.price = :price"),
 	@NamedQuery(name = Product.FIND_BY_TAG, 
-		query = "SELECT a FROM Product a WHERE a.price = :price"),
-	@NamedQuery(name = "FindProductsByCustomer",
-		query = "SELECT b FROM Customer b JOIN b.customer a WHERE a.product = :product")
+		query = "SELECT a FROM Product a WHERE a.price = :price")
 })
+
 @Table (name = "products")
 public class Product {
-	/*
-	 * To do:
-	 * Product Image
-	 * Product Description
-	*/
+	
 	@Id
 	@Column (name = "productID")
 	@GeneratedValue  (strategy = GenerationType.IDENTITY)//
@@ -83,7 +78,8 @@ public class Product {
 	
 	@Column (name = "productTags", nullable = false)
 	@NotNull
-	private ArrayList<String> productTags;
+	private List<String> productTags = new ArrayList<>();
+	
 	
 	//Many products to one wish list
 	@ManyToOne
@@ -109,7 +105,8 @@ public class Product {
 	public Product(String productName, int stockLevel, double price){	
 		this.productName = productName;	
 		this.stockLevel = stockLevel;
-		this.price = price;}
+		this.price = price;
+	}
 		
 	/**
 	 * 
@@ -162,8 +159,8 @@ public class Product {
 	}
 	
 	//Get all product tags, returns arraylist<string> of a product's tags
-	public ArrayList<String> getProductTags(){
-		return new ArrayList<String>(productTags);
+	public List<String> getProductTags(){
+		return productTags;
 	}
 	
 	/**
@@ -191,8 +188,6 @@ public class Product {
 	public void addProductTags(String productTag) {
 		this.productTags.add(productTag);
 	}
-	
-	
 	
 	
 }

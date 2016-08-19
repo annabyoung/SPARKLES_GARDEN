@@ -31,10 +31,12 @@ public interface AddressRepository {
 	
 	// Adds a CustomerHasAddress object
 	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId);
-
+	
+	// checks for duplicate objects
+	public boolean isDuplicate(Address address);
+	
 	@Deprecated
 	public void removeCustomerHasAddress(CustomerHasAddress custAddress, long customerId);
 
-	// checks for duplicate objects
-	public boolean isDuplicate(Address address);
+	
 }

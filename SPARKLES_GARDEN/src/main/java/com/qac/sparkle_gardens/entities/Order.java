@@ -2,12 +2,17 @@ package com.qac.sparkle_gardens.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -25,15 +30,14 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
  * 
  * @author Damien Lloyd
  */
+
 @NamedQueries (
 		{
 			@NamedQuery (name = Order.FIND_BY_ID,
 				query = "SELECT o FROM Order o WHERE o.orderID = :orderID"),
-			@NamedQuery (name = Order.GET_PRODUCTS,
-				query = "SELECT o FROM OrderLine o, Product p "
-						+ "WHERE o.productID = :p.productID")
 		}
 )
+
 @Entity
 @Table (name = "Order")
 public class Order implements Serializable
@@ -49,8 +53,8 @@ public class Order implements Serializable
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long orderID;
 	
-	@Column (name = "customerID", nullable = false)
-	@NotNull
+	@ManyToOne
+	@JoinTable (name = "customers")
 	private Customer customer;
 	
 	@Column (name = "payLater", nullable = true)
@@ -70,7 +74,7 @@ public class Order implements Serializable
 	private Card card;
 	
 	// List of orderlines in the order
-	private ArrayList<OrderLine> lines;
+	private List<OrderLine> lines = new ArrayList<OrderLine>();
 	
 	/**
 	 * Default constructor
@@ -144,7 +148,7 @@ public class Order implements Serializable
 	 * Get all the OrderLines in the Order
 	 * @return lines
 	 */
-	public ArrayList<OrderLine> getOrderLines()
+	public List<OrderLine> getOrderLines()
 	{
 		return lines;
 	}
@@ -165,7 +169,8 @@ public class Order implements Serializable
 	 * 
 	 * @return
 	 */
-	public boolean isPayLater() {
+	public boolean isPayLater() 
+	{
 		return payLater;
 	}
 	

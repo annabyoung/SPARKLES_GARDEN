@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -19,6 +20,7 @@ import com.qac.sparkle_gardens.repositories.OrderRepository;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
 import com.qac.sparkle_gardens.util.MessageSender;
 import com.qac.sparkle_gardens.util.OrderStatus;
+import com.qac.sparkle_gardens.util.MethodAuthor;
 
 /**
  * The OrderService provides the functionality required for 
@@ -36,11 +38,13 @@ public class OrderService
 	@Inject
 	WishlistRepository w_repository;
 	
-	List<OrderLine> basket;
+	List<OrderLine> basket = new ArrayList<OrderLine>();
 	
-	@Inject
-	MessageSender sender;
+	MessageSender sender = new MessageSender();
 	
+	/**
+	 * Default constructor
+	 */
 	public OrderService()
 	{
 
@@ -54,7 +58,8 @@ public class OrderService
 	 */
 	public boolean isOrderEmpty(long orderID)
 	{
-		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
+		List<OrderLine> lines = 
+			repository.getOrder(orderID).getOrderLines();
 		int totalQuantity = 0;
 		
 		for (OrderLine i : lines)
@@ -76,14 +81,11 @@ public class OrderService
 	 * @param price
 	 * @return true if the order passes, false if otherwise
 	 */
-	public boolean checkOrderLine(int quantity, double price, int stocklevel)
+	public boolean isValid(int quantity, double price, int stocklevel)
 	{
-		if (quantity < 0 || price < 0)
+		if (quantity <= 0 || price <= 0.0 || 
+		  stocklevel <= 0 || quantity > stocklevel)
 			return false;
-		
-		if (quantity < stocklevel)
-			return false;
-		
 		return true;
 	}
 	
@@ -163,7 +165,10 @@ public class OrderService
 	 */
 	public boolean addProductToBasket(Product p, int quantity)
 	{
-		if (!checkOrderLine(quantity, p.getPrice(), p.getStockLevel()))
+		if (p == null)
+			return false;
+		
+		if (!isValid(quantity, p.getPrice(), p.getStockLevel()))
 			return false;
 		
 		basket.add(new OrderLine(p, quantity));
@@ -178,6 +183,9 @@ public class OrderService
 	 */
 	public boolean removeItemFromBasket(Product p)
 	{
+		if (isBasketEmpty())
+			return false;
+		
 		for (int i = 0; i < basket.size(); i++)
 		{
 			if (basket.get(i).getProduct().equals(p))
@@ -259,6 +267,14 @@ public class OrderService
 	}
 	
 	/**
+	 * Get repository
+	 */
+	public final OrderRepository getRepository()
+	{
+		return repository;
+	}
+	
+	/**
 	 * Gets the number of days since an order 
 	 * has been dispatched
 	 * @param orderID The id of the order enquired
@@ -277,17 +293,15 @@ public class OrderService
 	 * @param order
 	 * @return true; false
 	 */
-	public boolean validateOrderStatus (Order order)
+	@MethodAuthor(author="Annabelle Young")
+	public boolean canCancelOrder(Order order)
 	{
 		OrderStatus orderStatus = order.getOrderStatus();
-		if (orderStatus == OrderStatus.PLACED || orderStatus == OrderStatus.PACKING)
+		
+		if (orderStatus == OrderStatus.PLACED || 
+			orderStatus == OrderStatus.PACKING)
 		{
-			orderStatus = order.getOrderStatus();
-			
-			if (orderStatus != OrderStatus.DISPATCHED && orderStatus != OrderStatus.DELIVERED)
-			{
-				return true;
-			}
+			return true;
 		}
 		return false;
 	}

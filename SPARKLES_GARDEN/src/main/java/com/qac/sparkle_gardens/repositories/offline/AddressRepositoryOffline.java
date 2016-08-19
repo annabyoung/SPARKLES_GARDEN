@@ -11,7 +11,7 @@ import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.AddressRepository;
 import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
-import com.qac.sparkle_gardens.test_data.InitialData;
+import com.qac.sparkle_gardens.test_data.AddressInitialData;
 
 /**
  * 
@@ -21,14 +21,16 @@ import com.qac.sparkle_gardens.test_data.InitialData;
 @Stateless
 @Default
 public class AddressRepositoryOffline implements AddressRepository {
-	@Inject private InitialData initialData;
+	@Inject private AddressInitialData  initialData = new AddressInitialData();
 	@Inject private CustomerHasAddressRepository custAddressRepository;
-	
 	/**
 	 * Creates an address
 	 * @param address
 	 */
 	public void persistAddress(Address address) {
+		if (address == null) {
+			throw new IllegalArgumentException();
+		}
 		initialData.addAddress(address);
 	}
 	
@@ -37,6 +39,9 @@ public class AddressRepositoryOffline implements AddressRepository {
 	 * @param address
 	 */
 	public void persistAddresses(List<Address> addresses) {
+		if (addresses == null) {
+			throw new IllegalArgumentException();
+		}
 		initialData.setAddresses(addresses);
 	}
 	
@@ -47,6 +52,9 @@ public class AddressRepositoryOffline implements AddressRepository {
 	 */
 
 	public List<Address> findByAccountId(long accountId) {
+		if (accountId <= 0) {
+			throw new IllegalArgumentException();
+		}
 		List <Address> places = new ArrayList <Address>();
 		// retrieves all the addresses a customer has 
 	    List<CustomerHasAddress> custAddress = (ArrayList<CustomerHasAddress>) custAddressRepository.findByCustomerID(accountId);
@@ -68,6 +76,10 @@ public class AddressRepositoryOffline implements AddressRepository {
 	 * @param address
 	 */
 	public void updateAddress(Address address) {
+		if (address == null) {
+			throw new IllegalArgumentException();
+		}
+		
 		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
 			if (addresses.get(index).getAddressId() == address.getAddressId()) {
@@ -82,6 +94,10 @@ public class AddressRepositoryOffline implements AddressRepository {
 	 * @param address
 	 */
 	public void removeAddress(Address address) {
+		if (address == null) {
+			throw new IllegalArgumentException();
+		}
+		
 		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
 			if (addresses.get(index).getAddressId() == address.getAddressId()) {
@@ -91,17 +107,15 @@ public class AddressRepositoryOffline implements AddressRepository {
 		initialData.setAddresses(addresses);
 	}
 	
-	@Deprecated
-	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
-		List<Address> addresses = initialData.getAddresses();
-	}
-
 	/**
 	 * @param address
 	 */
 	public boolean isDuplicate(Address address) {
-		List<Address> addresses = initialData.getAddresses();
+		if (address == null) {
+			throw new IllegalArgumentException();
+		}
 		
+		List<Address> addresses = initialData.getAddresses();
 
 		for (int index = 0; index < addresses.size(); index++) {
 			if (address.equals(addresses.get(index))) {
@@ -109,6 +123,11 @@ public class AddressRepositoryOffline implements AddressRepository {
 			}
 		}
 		return false;
+	}
+	
+	@Deprecated
+	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
+		List<Address> addresses = initialData.getAddresses();
 	}
 	
 	@Deprecated

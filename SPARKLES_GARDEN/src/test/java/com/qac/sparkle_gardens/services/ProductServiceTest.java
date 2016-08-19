@@ -8,17 +8,11 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//import javax.inject.Inject;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.entities.Product;
-//import com.qac.sparkle_gardens.repositories.ProductRepository;
-//import com.qac.sparkle_gardens.test_data.InitialData;
-//import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * @author Annabelle Young
@@ -28,14 +22,10 @@ import com.qac.sparkle_gardens.entities.Product;
  *
  */
 public class ProductServiceTest {
-	//@Inject InitialData initialData;
-	//@Inject ProductRepository productRepository;
 	
-	//Product product;
-	Product p;
-	ProductInterface pi;
-	//List<Product> products;
-	//InitialData initData;
+	private Product p;
+	private ProductService pi;
+	private List<Product> resultList;
 	
 	
 	@Before
@@ -43,6 +33,7 @@ public class ProductServiceTest {
 		System.out.println("Setup");
 		pi = new ProductService();
 		p = new Product("The Great American Challenge", 50, 79.99);
+		resultList = new ArrayList<>();
 		
 	}
 	
@@ -145,7 +136,7 @@ public class ProductServiceTest {
 	}
 	
 	/**
-	 * Verifies that long productID value passed into getProductById is not 0
+	 * Verifies that long productID value passed in returns the product associated with ID
 	 */
 	/*
 	 * Currently there is no database, so ID's are unknown, thus can't verify that passing in an ID returns a product
@@ -213,8 +204,8 @@ public class ProductServiceTest {
 	 * result will be true if list is not empty
 	 */
 	@Test
-	public void createProductListByPriceRangeShouldAddProductInPriceRange(){
-		System.out.println("createProductListByPriceRangeShouldAddProductInPriceRange");
+	public void createProductListByPriceRangeShouldReturnNotEmptyListForProductsInRange(){
+		System.out.println("createProductListByPriceRangeShouldReturnNotEmptyListForProductsInRange");
 		List<Product> resultList = pi.createProductListByPriceRange(10.00, 80.00);
 		boolean result = !(resultList.isEmpty());
 		//boolean result = (pi.createProductListByPriceRange(10.00, 80.00)).isEmpty();
@@ -223,16 +214,91 @@ public class ProductServiceTest {
 	
 	
 	/**
-	 * Verifies that false is returned if products are added to list
+	 * Verifies that false is returned if no products are added to list
 	 * result will be false if the resultList is empty
 	 */
-	/*@Test
-	public void createProductListByPriceRangeShouldAddProductInPriceRange(){
-		System.out.println("createProductListByPriceRangeShouldAddProductInPriceRange");
-		List<Product> resultList = pi.createProductListByPriceRange(10.00, 80.00);
-		boolean result = resultList.isEmpty();
+	@Test
+	public void createProductListByPriceRangeShouldReturnEmptyListForNoProductsInRange(){
+		System.out.println("createProductListByPriceRangeShouldReturnEmptyListForNoProductsInRange");
+		resultList = pi.createProductListByPriceRange(300.00, 400.00);
+		boolean result = !(resultList.isEmpty());
 		assertFalse(result);
+	}
+	
+	/**
+	 * Product Initial Data only contains three items that are within the price range of 10.00 and 80.00
+	 * The Great American Challenge at 79.99, Power Bullet at 24.99 and The Screaming O at 19.99
+	 * The result list should then only contain 3 items, test will pass if the list's size is 3
+	 */
+	@Test
+	public void createProductListByPriceRangeShouldReturnListContainingOnlyProductsWithinRange(){
+		System.out.println("createProductListByPriceRangeShouldReturnListContainingOnlyProductsWithinRange");
+		resultList = pi.createProductListByPriceRange(10.00, 80.00);
+		assertEquals(resultList.size(), 3);
+	}
+	
+	
+	/**
+	 * createProductListWithAllTags should throw illegal argument exception for empty String
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void createProductListWithAllTagsShouldThrowIllegalExceptionForEmptyString(){
+		System.out.println("createProductListWithAllTagsShouldThrowIllegalExceptionForEmptyString");
+		pi.createProductListWithAllTags("");
+	}
+	
+	/**
+	 * Returned list should not be empty if there are products matching all tags searched for
+	 */
+	@Test
+	public void createProductListWithAllTagsShouldReturnNotEmptyListForValidInput(){
+		System.out.println("createProductListWithAllTagsShouldReturnNotEmptyListForValidInput");
+		resultList = pi.createProductListWithAllTags("dildo dong american challenge");
+		boolean result = !(resultList.isEmpty());
+		assertTrue(result);
+	}
+	
+	/**
+	 * Returned list should be empty if there are no products matching all tags searched for
+	 */
+	@Test
+	public void createProductListWithAllTagsShouldReturnEmptyListForNoProductsWithAllTags(){
+		System.out.println("createProductListWithAllTagsShouldReturnEmptyListForNoProductsWithAllTags");
+		resultList = pi.createProductListWithAllTags("dildo dong american challenge poop");
+		boolean result = !(resultList.isEmpty());
+		assertFalse(result);
+	}
+	
+	/**
+	 * Returned list should only contain products matching all tags searched for
+	 */
+	@Test
+	public void createProductListWithAllTagsShouldOnlyContainItemsWithAllTags(){
+		System.out.println("createProductListWithAllTagsShouldOnlyContainItemsWithAllTags");
+		resultList = pi.createProductListWithAllTags("vibrating multi_speed");
+		assertEquals(resultList.size(), 2);
+	}
+	
+	/**
+	 * createProductListWithSomeTags should throw illegal argument exception for empty String
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void createProductListWithSomeTagsShouldThrowIllegalExceptionForEmptyString(){
+		System.out.println("createProductListWithAllTagsShouldThrowIllegalExceptionForEmptyString");
+		pi.createProductListWithSomeTags("");
+	}
+	
+	
+	/*
+	@Test
+	public void convertStringToArrayListShouldReturnValidOutput(){
+		System.out.println("convertStringToArrayListShouldReturnValidOutput");
+		resultList
+		
+	}
+	
 	*/
+	
 	@After
 	public void teardown(){
 		System.out.println("Teardown");
@@ -240,6 +306,7 @@ public class ProductServiceTest {
 		pi = null;
 		//products.clear();
 		p = null;
+		resultList.clear();
 	}
 	
 	

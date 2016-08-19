@@ -1,6 +1,6 @@
 package com.qac.sparkle_gardens.repositories.offline;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,28 +15,45 @@ public class AddressRepositoryTest {
 	
 	Address address;
 	AddressRepository addressRepo;
-	//InitialData initData;
 	
 	@Before
 	public void setup() {
 		System.out.println("Setting up test...");
 		addressRepo = new AddressRepositoryOffline();
-		address = new Address(1, "Anchorage", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ");
-		//initData = new InitialData();
+		address = new Address("Anchorage 1", "Floor 5", "Anchorage Quay", "Salford Quay", "Greater Manchester", "United Kingdom", "M50 3YJ", "Shipping");
 	}
 	
+	
+	@Test(expected = IllegalArgumentException.class)
 	/**
-	@Test
-	public void findByAccountIdNotFound() {
-		
+	 * Test succeeds if findByAccountId is passed an invalid ID
+	 */
+	public void findByAccountIdShouldThrowIllegalExceptionForInvalidId() {
+		long id = -1;
+		addressRepo.findByAccountId(id);
 	}
-	**/
+	
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void persistAddressShouldThrowIllegalExceptionForNullAddress() {
+		addressRepo.persistAddress(null);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void updateAddressShouldThrowIllegalExceptionForNullAddress() {
+		addressRepo.updateAddress(null);
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void removeAddressShouldThrowIllegalExceptionForNullAddress() {
+		addressRepo.removeAddress(null);
+	}
 	
 	@Test
 	public void duplicateFound() {
 		
-		Address dummyAddress = new Address(1, "Anchorage", "Anchorage Quay", "Salford Quays", "England", "M50 3YJ");
-		assertEquals(addressRepo.isDuplicate(dummyAddress), true);
+		Address dummyAddress = new Address("Anchorage 1", "Floor 5", "Anchorage Quay", "Salford Quay", "Greater Manchester", "United Kingdom", "M50 3YJ", "Shipping");
+		assertTrue(addressRepo.isDuplicate(dummyAddress));
 	}
 	
 	@After

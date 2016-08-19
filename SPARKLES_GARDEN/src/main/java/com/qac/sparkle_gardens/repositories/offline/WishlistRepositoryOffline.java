@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
-import com.qac.sparkle_gardens.test_data.InitialData;
+import com.qac.sparkle_gardens.test_data.WishlistInitialData;
 
 /**
  * 
@@ -19,7 +19,7 @@ import com.qac.sparkle_gardens.test_data.InitialData;
 @Stateless
 @Default
 public class WishlistRepositoryOffline implements WishlistRepository{
-	@Inject private InitialData initialData;
+	@Inject private WishlistInitialData initialData;
 	
 	/**
 	 * @param Wishlist wishlist
@@ -27,18 +27,35 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	 * Add a wishlist
 	 */
 	public void persistWishlist(Wishlist wishlist) {
+		if (wishlist == null) {
+			throw new IllegalArgumentException();
+		}
+		
 		initialData.addWishlist(wishlist);
 	}
 	
 	public void persistWishlists(List<Wishlist> wishlists) {
+		if (wishlists == null) {
+			throw new IllegalArgumentException();
+		}
+		
 		initialData.setWishlists(wishlists);
 	}
+	
+	// Read all the wishlists
+		public List<Wishlist> getWishlists() {
+			return initialData.getWishlists();
+		}
+
 	/**
 	 * Finds a wishlist according to the wishlist ID
 	 * @param id
 	 * @return
 	 */
 	public Wishlist findById(long id) {
+		if (id <= 0) {
+			throw new IllegalArgumentException();
+		}
 		List<Wishlist> list = initialData.getWishlists();
 		Wishlist wish = new Wishlist();
 		for (int index = 0; index < list.size(); index++) {
@@ -55,6 +72,10 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	 * @return
 	 */
 	public Wishlist findByAccountId(long id) {
+		if (id <= 0) {
+			throw new IllegalArgumentException();
+		}
+		
 		List<Wishlist> list = initialData.getWishlists();
 		Wishlist wish = new Wishlist();
 		for (int index = 0; index < list.size(); index++) {
@@ -65,7 +86,9 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		return wish;
 	}
 	
+	@Deprecated
 	/**
+	 * No longer necessary
 	 * Finds a wishlist according to the name of the wishlist
 	 * @param name
 	 * @return
@@ -86,11 +109,26 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	 * @param wishId
 	 */
 	public void addProductToList(Product product, long wishId) {
+		if (wishId <= 0 || product == null) {
+			throw new IllegalArgumentException();
+		}
 		// Creates a wishlist object based on the given ID
 		Wishlist aList = findById(wishId); 
 		aList.addProduct(product); // adds the product to the list
 		updateWishlist(aList); // updates the original list with the updated lists
 	}
+	
+	public void addProductToListWithAcctId(Product product, long acctId) {
+		if (product == null || acctId <= 0) {
+			throw new IllegalArgumentException();
+		}
+		// Creates a wishlist object based on the given ID
+		Wishlist aList = findByAccountId(acctId); 
+		aList.addProduct(product); // adds the product to the list
+		updateWishlist(aList); // updates the original list with the updated lists
+	}
+	
+	@Deprecated
 	/**
 	 * This method adds a product to the wishlist according to the name 
 	 *  of the wishlist
@@ -104,6 +142,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		updateWishlist(aList); // updates the original list with the updated lists
 	}
 	
+	@Deprecated
 	/**
 	 * Removes a product from a wishlist
 	 * @param product
@@ -139,12 +178,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		
 		return false;
 	}
-	
-	// Read all the wishlists
-	public List<Wishlist> getWishlists() {
-		return initialData.getWishlists();
-	}
-	
+		
 	// Update wishlist
 	public void updateWishlist(Wishlist wish) {
 		List<Wishlist> list = initialData.getWishlists();

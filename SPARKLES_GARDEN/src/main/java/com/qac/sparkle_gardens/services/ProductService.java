@@ -11,10 +11,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
-import com.qac.sparkle_gardens.test_data.ProductInitalData;
+import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 /**
  * @author Annabelle Young
@@ -25,19 +24,16 @@ import com.qac.sparkle_gardens.test_data.ProductInitalData;
  */
 
 @Stateless
-public class ProductService implements ProductInterface{
-	//@Inject InitialData initialData;
+public class ProductService {
 	@Inject ProductRepository productRepository= new ProductRepositoryOffline();
-	//@Inject ProductInitalData initial;
+	/*
+	 * Access Initial Data not repository
+	 * Inject Initial Data 
+	 */
 	
-	
-	//ProductRepository productRepository = new ProductRepositoryOffline();
 	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
-	//private ArrayList<Product> products = (ArrayList<Product>) productRepository.getProducts();
-	private List<Product> productL = new ArrayList<Product>(); 
+	private List<Product> productL = productRepository.getProducts(); 
 	private List<String> tags = new ArrayList<String>();
-//	ProductRepository productRepository = new ProductRepositoryOffline();
-	ProductInitalData initial = new ProductInitalData();
 	
 	
 	/**
@@ -116,6 +112,10 @@ public class ProductService implements ProductInterface{
 		return productRepository.findByProductID(productID);
 	}
 	
+	/**
+	 * Verify that minimum price entered is not larger than maximum price
+	 * Verify that minimum price and maximum price entered are not negative
+	 */
 	public boolean checkIfMinAndMaxAreValid(double minimumPrice, double maximumPrice){
 		if (minimumPrice > maximumPrice || Double.compare(minimumPrice, 0.0) < 0 || Double.compare(maximumPrice, 0.0) < 0){
 			return false;
@@ -123,15 +123,15 @@ public class ProductService implements ProductInterface{
 		return true;
 	}
 	/**
-	 * Search items within a price range
+	 * Search for items within a price range entered
 	 * @param minimumPrice
 	 * @param maximumPrice
 	 * @return productsInRange which is all the products within the price range the customer is searching for
 	 */
 	public List<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
 		List<Product> productsInRange = new ArrayList<Product>();
-		List<Product> pl = productRepository.getProducts();
-		for(Product p : pl){
+		//List<Product> pl = productRepository.getProducts();
+		for(Product p : productL){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
 				productsInRange.add(p);
 			}
@@ -156,11 +156,15 @@ public class ProductService implements ProductInterface{
 	 */
 
 	
-	public ArrayList<Product> createProductListByTags(String input){
-		tags = convertStringToArrayList(input);
-		ArrayList<Product> productsWithTags = new ArrayList<Product>();
-		ArrayList<Product> productsWithAllTags = new ArrayList<Product>();
-		ArrayList<Product> productsWithSubsetOfTags = new ArrayList<Product>();
+	/*public List<Product> createProductListWithAllTags(String input){
+		if(input.isEmpty() || input == null){
+			throw new IllegalArgumentException();
+		}
+		List<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tag.split(" ")));
+		//tags = convertStringToArrayList(input);
+		List<Product> productsWithTags = new ArrayList<Product>();
+		List<Product> productsWithAllTags = new ArrayList<Product>();
+		List<Product> productsWithSubsetOfTags = new ArrayList<Product>();
 		for(Product p : productRepository.getProducts()){
 			if (p.getProductTags().containsAll(tags)){
 				productsWithAllTags.add(p);
@@ -173,6 +177,47 @@ public class ProductService implements ProductInterface{
 		productsWithTags.addAll(productsWithSubsetOfTags);
 		return productsWithTags;
 	}
+	*/
+	
+	/**
+	 * Search for items with all of the requested tags 
+	 * This checks for products that contain all of the tags a customer is searching for
+	 * Returns a list of all products that contain all of the tags searched for
+	 */
+	public List<Product> createProductListWithAllTags(String input){
+		if(input.isEmpty()){
+			throw new IllegalArgumentException();
+		}
+		tags = convertStringToArrayList(input);
+		List<Product> productsWithAllTags = new ArrayList<Product>();
+		for(Product p : productL){
+			if (p.getProductTags().containsAll(tags)){
+				productsWithAllTags.add(p);
+			} 
+		}
+		return productsWithAllTags;
+		
+	}
+	
+	/**
+	 * Search for items with one or more of the requested tags
+	 * This checks for products that contain some of the tags a customer is searching for
+	 * Returns a list of all products that contain one or more of the tags searched for
+	 */
+	public List<Product> createProductListWithSomeTags(String input){
+		if(input.isEmpty() || input == null){
+			throw new IllegalArgumentException();
+		}
+		tags = convertStringToArrayList(input);
+		List<Product> productsWithSubsetOfTags = new ArrayList<Product>();
+		for(Product p : productL){
+			if (!Collections.disjoint(p.getProductTags(), tags)){
+				productsWithSubsetOfTags.add(p);
+			}
+		}
+		return productsWithSubsetOfTags;
+	}
+	
 	
 	/**
 	 * 
@@ -183,8 +228,9 @@ public class ProductService implements ProductInterface{
 	 * @param tags
 	 * @return tagsToSearch
 	 */
-	public ArrayList<String> convertStringToArrayList(String tags){
-		ArrayList<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tags.split(" ")));
+	
+	public List<String> convertStringToArrayList(String tag){
+		List<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tag.split(" ")));
 		
 		return tagsToSearch;
 	}
@@ -198,7 +244,7 @@ public class ProductService implements ProductInterface{
 	 * @return false, true
 	 */
 	
-	public boolean validateResultsOfSearch(ArrayList<Product> productList){
+	public boolean validateResultsOfSearch(List<Product> productList){
 		if (productList.isEmpty()){
 			return false;
 		}
@@ -219,4 +265,6 @@ public class ProductService implements ProductInterface{
 	public void clearSearchQuery(){
 		productList.clear();
 	}
+
+
 }

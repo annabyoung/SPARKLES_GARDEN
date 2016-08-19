@@ -2,6 +2,7 @@ package com.qac.sparkle_gardens.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,7 +48,8 @@ public class Wishlist {
 	@JoinColumn(name="product_fk", nullable = false)
 	// the list of products in wishlist
 	private List<Product> products;
-
+	
+	@Deprecated
 	@Column
 	@NotNull
 	private String wishlistName;
@@ -74,6 +76,7 @@ public class Wishlist {
 		this.acccountId = 0;
 	}
 	
+	@Deprecated
 	/**
 	 * 
 	 * @param acccountId
@@ -95,6 +98,7 @@ public class Wishlist {
 		this.acccountId = acccountId;
 		this.products = (ArrayList<Product>) products;
 	}
+	@Deprecated
 	/**
 	 * This constructor was created since when a wishlist is created
 	 * products may be added to the wishlist once the wishlist is created.
@@ -132,10 +136,12 @@ public class Wishlist {
 	 * 
 	 * Getters and setters for wishlist attributes
 	 */
+	@Deprecated
 	public String getWishlistName() {
 		return wishlistName;
 	}
-
+	
+	@Deprecated
 	public void setWishlistName(String wishlistName) {
 		this.wishlistName = wishlistName;
 	}
