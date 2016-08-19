@@ -42,7 +42,7 @@ public class ProductServiceTest {
 	public void setup(){
 		System.out.println("Setup");
 		pi = new ProductService();
-		p = new Product("The Great American Challenge", 50, 79.99, "/images/gnome0.jpg");
+		p = new Product("The Great American Challenge", 50, 79.99);
 		resultList = new ArrayList<>();
 		
 	}
@@ -146,7 +146,7 @@ public class ProductServiceTest {
 	}
 	
 	/**
-	 * Verifies that long productID value passed into getProductById is not 0
+	 * Verifies that long productID value passed in returns the product associated with ID
 	 */
 	/*
 	 * Currently there is no database, so ID's are unknown, thus can't verify that passing in an ID returns a product

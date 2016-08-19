@@ -84,7 +84,6 @@ public class Product {
 	@NotNull
 	private List<String> productTags = new ArrayList<>();
 	
-	private String productImage = "";
 	
 	//Many products to one wish list
 	@ManyToOne
@@ -107,11 +106,10 @@ public class Product {
 	public Product() {	}
 	
 	//constructor for Product
-	public Product(String productName, int stockLevel, double price, String productImage){	
+	public Product(String productName, int stockLevel, double price){	
 		this.productName = productName;	
 		this.stockLevel = stockLevel;
 		this.price = price;
-		this.productImage = productImage;
 	}
 		
 	/**
@@ -194,24 +192,6 @@ public class Product {
 	public void addProductTags(String productTag) {
 		this.productTags.add(productTag);
 	}
-
-	/**
-	 * Retrieve the location of a product's image 
-	 * @return
-	 */
-	public String getProductImage() {
-		return productImage;
-	}
-
-	/**
-	 * Store the resource location of a product's image
-	 * @param productImage
-	 */
-	public void setProductImage(String productImage) {
-		this.productImage = productImage;
-	}
-	
-	
 	
 	
 }
