@@ -4,19 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-<<<<<<< HEAD
-import javax.persistence.IdClass;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-=======
->>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
@@ -32,17 +26,11 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
  * 
  * @author Damien Lloyd
  */
-<<<<<<< HEAD
-
 @NamedQueries (
 		{
-			@NamedQuery (name = Order.FIND_BY_ID,
-				query = "SELECT o FROM Order o WHERE o.orderID = :orderID"),
+//			@NamedQuery (name = Order.FIND_BY_ID, query = "SELECT o FROM Order o WHERE o.orderID = :orderID"),
 		}
 )
-
-=======
->>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 @Entity
 @Table (name = "Order")
 public class Order 
@@ -53,14 +41,8 @@ public class Order
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long orderID;
 	
-<<<<<<< HEAD
 	@ManyToOne
 	@JoinTable (name = "customers")
-=======
-	@Id
-	@Column (name = "customerID", nullable = false)
-	@NotNull
->>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 	private Customer customer;
 	
 	@Column (name = "payLater", nullable = true)

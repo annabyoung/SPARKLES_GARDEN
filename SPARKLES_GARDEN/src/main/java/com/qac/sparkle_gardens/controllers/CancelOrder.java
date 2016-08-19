@@ -41,12 +41,12 @@ public class CancelOrder
 	public String cancelOrder(long orderID)
 	{
 		Order order = service.getOrder(orderID);
-		if (service.validateOrderStatus(order)){
+//		if (service.validateOrderStatus(order)){
 			if(order.isPayLater()){
 				order.setPaymentStatus(PaymentStatus.VOID);
 			}
 			refund.refundCard(order);
-		}
+//		}
 		error = "Order is not valid for cancellation.";
 		return "home";
 	}

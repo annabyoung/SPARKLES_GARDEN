@@ -3,14 +3,13 @@ package com.qac.sparkle_gardens.entities;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+
+import com.qac.sparkle_gardens.entities.composite.OrderLineId;
 
 /**
  * The OrderLine class contains information regarding one product &
@@ -22,18 +21,21 @@ import javax.validation.constraints.Null;
  */
 
 @Entity
+@IdClass(OrderLineId.class)
+@Table(name="OrderLine")
 public class OrderLine implements Serializable
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2617329345043164043L;
-
-	@EmbeddedId
-	private OrderLinePK key;
+//
+//	@EmbeddedId
+//	private OrderLinePK key;	
+	@Id
+	private Order order;
 	
-	@Column
-	@Null
+	@Id
 	private Product product;
 	
 	@Column
@@ -45,7 +47,7 @@ public class OrderLine implements Serializable
 	 */
 	public OrderLine()
 	{
-		key = new OrderLinePK();
+		//key = new OrderLinePK();
 		quantity = 0;
 	}
 	
@@ -70,7 +72,8 @@ public class OrderLine implements Serializable
 	 */
 	public void setProduct(Product product, int quantity)
 	{
-		this.key.setProduct(product);
+		this.product = product;
+	///	this.key.setProduct(product);
 		this.quantity = quantity;
 	}
 	
@@ -80,7 +83,8 @@ public class OrderLine implements Serializable
 	 */
 	public Product getProduct() 
 	{
-		return key.getProduct();
+		return product;
+	//	return key.getProduct();
 	}
 	
 	/**

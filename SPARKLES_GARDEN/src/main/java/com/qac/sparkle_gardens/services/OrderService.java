@@ -5,14 +5,6 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.jms.JMSException;
-import javax.jms.MapMessage;
-import javax.jms.Queue;
-import javax.jms.QueueReceiver;
-import javax.jms.QueueSender;
-import javax.jms.QueueSession;
-import javax.jms.TextMessage;
-
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
@@ -39,12 +31,9 @@ public class OrderService
 	
 	List<OrderLine> basket = new ArrayList<OrderLine>();
 	
-<<<<<<< HEAD
 	MessageSender sender = new MessageSender();
-=======
 //	@Inject
 //	MessageSender sender;
->>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 	
 	/**
 	 * Default constructor

@@ -3,12 +3,11 @@ package com.qac.sparkle_gardens.controllers;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.Product;
+import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.services.WishlistService;
 
@@ -26,6 +25,8 @@ public class WishlistController {
 	
 	@Inject 
 	WishlistService wishlistService;
+	@Inject
+	private CustomerRepository customerRepository;
 	@Inject 
 	OrderService orderService;
 	
@@ -35,7 +36,7 @@ public class WishlistController {
 	 * @param wishlistName
 	 */
 	public void createWishlist(long accountId, String wishlistName) {
-		wishlistService.createWishlist(accountId, wishlistName);
+		wishlistService.createWishlist(customerRepository.findByID(accountId), wishlistName);
 	}
 	
 	/**

@@ -7,8 +7,6 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.*;
 
-import com.qac.sparkle_gardens.entities.Address;
-import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.entities.CustomerHasCard;
@@ -119,8 +117,6 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			return null;
 		}
 		
-<<<<<<< HEAD
-		
 		@Override 
 		public List<CustomerHasAddress> findCustomerAddresses(Customer customer){
 
@@ -147,28 +143,24 @@ public class CustomerRepositoryOffline implements CustomerRepository
 					}
 		
 					return cards;
-=======
-		public Address findCustomerAddresses(Customer customer){
-			Address address; 
-			address= (Address) initialData.getAddresses();
-			return address;
-			//TODO: get compost class return addresses
 		}
 		
-		public Card findCustomerCards(Customer customer){
+//		public Address findCustomerAddresses(Customer customer){
+//			Address address; 
+//			address= (Address) initialData.getAddresses();
+//			return address;
+//			//TODO: get compost class return addresses
+//		}
+		
+		/*public Card findCustomerCards(Customer customer){
 			Card card;
 			card = initialData.getCards().get(0); 
 			return card;
 			//TODO: and do this return type is wrong;  
-		}
+		}*/
 
 		@Override
 		public void findCustomerAdresses(Customer c) {
 			// TODO Auto-generated method stub
-			
->>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 		}
-
-		
-		
 }

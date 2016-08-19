@@ -3,7 +3,6 @@ package com.qac.sparkle_gardens.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 
@@ -25,8 +24,8 @@ import javax.inject.Inject;
 @Named(value="searchItems")
 @RequestScoped
 public class SearchItemsController {
-	@Inject
-	ProductService productService;
+//	@Inject
+//	private ProductService productService;
 	
 	private List<Product> searchQueryResults = new ArrayList<Product>();
 	private String error = "";
@@ -40,10 +39,10 @@ public class SearchItemsController {
 	 * @return search, blank_search
 	 */
 	public String createProductList(String customerInput){
-		searchQueryResults = productService.createProductListByTags(customerInput);
-		if (productService.validateResultsOfSearch(searchQueryResults)){
-			return "search";
-		}
+//		searchQueryResults = productService.createProductListByTags(customerInput);
+//		if (productService.validateResultsOfSearch(searchQueryResults)){
+//			return "search";
+//		}
 		error = "No results found for your search.";
 		return "blank_search";
 	}
@@ -58,10 +57,10 @@ public class SearchItemsController {
 	 * @return search, blank_search
 	 */
 	public String createProductList(double minimumPrice, double maximumPrice){
-		searchQueryResults = productService.createProductListByPriceRange(minimumPrice, maximumPrice);
-		if (productService.validateResultsOfSearch(searchQueryResults)){
-			return "search";
-		}
+//		searchQueryResults = productService.createProductListByPriceRange(minimumPrice, maximumPrice);
+//		if (productService.validateResultsOfSearch(searchQueryResults)){
+//			return "search";
+//		}
 		error = "No results found for your search";
 		return "blank_search";
 	}
@@ -71,12 +70,12 @@ public class SearchItemsController {
 	 * @return
 	 */
 	public String clearProductList(){
-		productService.clearSearchQuery();
+//		productService.clearSearchQuery();
 		return "home";
 	}
 	
 	public String getProductList(){
-		searchQueryResults = productService.getProductList();
+//		searchQueryResults = productService.getProductList();
 		return "search";
 	}
 }

@@ -3,8 +3,7 @@
  */
 package com.qac.sparkle_gardens.jms;
 
-import java.io.Serializable;
-
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -21,9 +20,10 @@ import com.qac.sparkle_gardens.controllers.Controller;
  *
  *Accounts project needs its own Sender, receiver, and listener classes
  */
+@Stateless
 public class AccountsMessageListener<T> implements MessageListener {
-	@Inject
-	private Controller<T> controller;
+//	@Inject
+//	private Controller<T> controller;
 	
 	/* (non-Javadoc)
 	 * @see javax.jms.MessageListener#onMessage(javax.jms.Message)
@@ -35,7 +35,7 @@ public class AccountsMessageListener<T> implements MessageListener {
 			System.out.println("received " + objectMessage.getObject().toString());
 			//generic object is taken
 			T object = (T) objectMessage.getObject();
-			controller.handleMessage((T) objectMessage.getObject());
+//			controller.handleMessage((T) objectMessage.getObject());
 		} catch (ClassCastException castException){
 			System.out.println("ERROR: Type T was not the type of the Object sent. check the setter for the message listener");
 			castException.printStackTrace();

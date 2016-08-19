@@ -123,7 +123,7 @@ public class CardService {
 			if (co.getCustomer().equals(customer) && co.getCard().equals(card)){
 				cardOwnershipRepository.removeCustomerHasCard(co);
 				if (!checkIfAnyoneOwnsCard(card)){
-					cardRepository.removeCard(card.getCardId());
+//					cardRepository.removeCard(card.getCardId());
 				}
 			}
 		}
@@ -145,7 +145,7 @@ public class CardService {
 			if (co.getCustomerId() == accountId && co.getCardId() == cardId){
 				cardOwnershipRepository.removeCustomerHasCard(co);
 				if (!checkIfAnyoneOwnsCard(cardId)){
-					cardRepository.removeCard(cardId);
+//					cardRepository.removeCard(cardId);
 				}
 			}
 		}

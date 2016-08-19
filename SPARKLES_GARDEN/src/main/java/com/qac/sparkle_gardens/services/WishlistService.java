@@ -3,6 +3,8 @@ package com.qac.sparkle_gardens.services;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
@@ -53,8 +55,8 @@ public class WishlistService {
 	 * @param accountId
 	 * @param list
 	 */
-	public void createWishlist(long accountId, String name) {
-		Wishlist wish = new Wishlist(accountId, name);
+	public void createWishlist(Customer customer, String name) {
+		Wishlist wish = new Wishlist(customer, name);
 		wishlistRepository.persistWishlist(wish);
 	}
 	

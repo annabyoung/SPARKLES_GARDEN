@@ -38,7 +38,7 @@ public class Wishlist {
 	@OneToOne
 	@JoinColumn(name = "accountID", nullable = false)
 	@NotNull
-	private long acccountId;
+	private Customer customer;
 	
 	/**
 	 * A wishlist would have a list of products associated with one
@@ -47,14 +47,8 @@ public class Wishlist {
 	@OneToMany
 	@JoinColumn(name="product_fk", nullable = false)
 	// the list of products in wishlist
-<<<<<<< HEAD
 	private List<Product> products;
 	
-	@Deprecated
-=======
-	private ArrayList<Product> products;
-
->>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 	@Column
 	@NotNull
 	private String wishlistName;
@@ -77,9 +71,7 @@ public class Wishlist {
 	
 	
 	// default constructor
-	public Wishlist () {
-		this.acccountId = 0;
-	}
+	public Wishlist () { }
 	
 	@Deprecated
 	/**
@@ -88,8 +80,8 @@ public class Wishlist {
 	 * @param products
 	 * @param wishlistName
 	 */
-	public Wishlist(long acccountId, List<Product> products, String wishlistName) {
-		this.acccountId = acccountId;
+	public Wishlist(Customer customer, List<Product> products, String wishlistName) {
+		this.customer = customer;
 		this.products = (ArrayList<Product>) products;
 		this.wishlistName = wishlistName;
 	}
@@ -99,8 +91,8 @@ public class Wishlist {
 	 * @param acccountId
 	 * @param products
 	 */
-	public Wishlist(long acccountId, List<Product> products) {
-		this.acccountId = acccountId;
+	public Wishlist(Customer customer, List<Product> products) {
+		this.customer = customer;
 		this.products = (ArrayList<Product>) products;
 	}
 	@Deprecated
@@ -112,8 +104,8 @@ public class Wishlist {
 	 * @param acccountId
 	 * @param wishlistName
 	 */
-	public Wishlist(long acccountId, String wishlistName) {
-		this.acccountId = acccountId;
+	public Wishlist(Customer customer, String wishlistName) {
+		this.customer = customer;
 		this.wishlistName = wishlistName;
 	}
 	
@@ -145,11 +137,11 @@ public class Wishlist {
 		this.wishlistName = wishlistName;
 	}
 
-	public long getAccountId() {
-		return acccountId;
+	public Customer getCustomer() {
+		return customer;
 	}
 	
-	public ArrayList<Product> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 	/*

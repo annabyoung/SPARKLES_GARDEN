@@ -3,7 +3,7 @@ package com.qac.sparkle_gardens.test_data;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 
 import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Card;
@@ -11,7 +11,6 @@ import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.entities.Order;
-import com.qac.sparkle_gardens.entities.OrderLine;
 //import com.qac.sparkle_gardens.entities.Payment;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
@@ -25,6 +24,7 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
  *
  */
 @Deprecated
+@Stateless
 public class InitialData 
 {
 	private List<Address> addresses = new ArrayList<Address>();
@@ -79,19 +79,19 @@ public class InitialData
 		orders.add(new Order(5, customers.get(4)));
 		
 		// Add order line to order by product, quantity & price
-		orders.get(0).addOrderLine(new OrderLine(new Product("Pretty trainers", 3, 30), 3));
-		orders.get(0).addOrderLine(new OrderLine(new Product("Funky gnome", 5, 12), 2));
-		
-		orders.get(1).addOrderLine(new OrderLine(new Product("Awesome boots", 3, 100), 1));
-		
-		orders.get(2).addOrderLine(new OrderLine(new Product("Amazing watch", 1, 50), 2));
-		
-		orders.get(3).addOrderLine(new OrderLine(new Product("Superduper gaming rig!", 2, 600), 10));
-		orders.get(3).addOrderLine(new OrderLine(new Product("Great socks!", 10, 40), 2));
-		orders.get(3).addOrderLine(new OrderLine(new Product("Allen's Mac", 1, 231), 12));
-		
-		orders.get(4).addOrderLine(new OrderLine(new Product("Impressive glasses", 2, 200), 1)); 
-		orders.get(5).addOrderLine(new OrderLine(new Product("Gandhi's Nukes", -1, 9001), 1));
+//		orders.get(0).addOrderLine(new OrderLine(new Product("Pretty trainers", 3, 30), 3));
+//		orders.get(0).addOrderLine(new OrderLine(new Product("Funky gnome", 5, 12), 2));
+//		
+//		orders.get(1).addOrderLine(new OrderLine(new Product("Awesome boots", 3, 100), 1));
+//		
+//		orders.get(2).addOrderLine(new OrderLine(new Product("Amazing watch", 1, 50), 2));
+//		
+//		orders.get(3).addOrderLine(new OrderLine(new Product("Superduper gaming rig!", 2, 600), 10));
+//		orders.get(3).addOrderLine(new OrderLine(new Product("Great socks!", 10, 40), 2));
+//		orders.get(3).addOrderLine(new OrderLine(new Product("Allen's Mac", 1, 231), 12));
+//		
+//		orders.get(4).addOrderLine(new OrderLine(new Product("Impressive glasses", 2, 200), 1)); 
+//		orders.get(5).addOrderLine(new OrderLine(new Product("Gandhi's Nukes", -1, 9001), 1));
 		
 		/*
 		// Add payments
@@ -100,16 +100,16 @@ public class InitialData
 		Payments.add(new Payment(3, 3, 3, PaymentStatus.PENDING));
 		*/
 		
-		Product p = new Product("The Great American Challenge", 50, 79.99);
-		p.addProductTags("Dildo");
-		products.add(p);
-		p = new Product("Fleshlight Original", 100, 99.99);
-		p.addProductTags("Masturbator");
-		products.add(p);
-		p = new Product("The Screaming O", 500, 19.99);
-		p.addProductTags("Vibrating");
-		products.add(p);
-		wishlists.add(new Wishlist((long) 24, products));
+//		Product p = new Product("The Great American Challenge", 50, 79.99);
+//		p.addProductTags("Dildo");
+//		products.add(p);
+//		p = new Product("Fleshlight Original", 100, 99.99);
+//		p.addProductTags("Masturbator");
+//		products.add(p);
+//		p = new Product("The Screaming O", 500, 19.99);
+//		p.addProductTags("Vibrating");
+//		products.add(p);
+//		wishlists.add(new Wishlist((long) 24, products));
 	}
 
 	@MethodAuthor(author = "Tyler Deans")
