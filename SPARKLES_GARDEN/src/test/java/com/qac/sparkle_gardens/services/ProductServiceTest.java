@@ -262,8 +262,8 @@ public class ProductServiceTest {
 	 * Returned list should be empty if there are no products matching all tags searched for
 	 */
 	@Test
-	public void createProductListWithAllTagsShouldReturnEmptyListForInvalidInput(){
-		System.out.println("createProductListWithAllTagsShouldReturnEmptyListForInvalidInput");
+	public void createProductListWithAllTagsShouldReturnEmptyListForNoProductsWithAllTags(){
+		System.out.println("createProductListWithAllTagsShouldReturnEmptyListForNoProductsWithAllTags");
 		resultList = pi.createProductListWithAllTags("dildo dong american challenge poop");
 		boolean result = !(resultList.isEmpty());
 		assertFalse(result);

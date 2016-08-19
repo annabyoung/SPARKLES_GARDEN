@@ -41,7 +41,7 @@ public class CancelOrder
 	public String cancelOrder(long orderID)
 	{
 		Order order = service.getOrder(orderID);
-		if (service.validateOrderStatus(order)){
+		if (service.canCancelOrder(order)){
 			if(order.isPayLater()){
 				order.setPaymentStatus(PaymentStatus.VOID);
 			}
