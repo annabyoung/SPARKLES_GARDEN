@@ -11,7 +11,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
 import com.qac.sparkle_gardens.test_data.ProductInitialData;
@@ -25,7 +24,7 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
  */
 
 @Stateless
-public class ProductService implements ProductInterface{
+public class ProductService {
 	@Inject ProductRepository productRepository= new ProductRepositoryOffline();
 	
 	

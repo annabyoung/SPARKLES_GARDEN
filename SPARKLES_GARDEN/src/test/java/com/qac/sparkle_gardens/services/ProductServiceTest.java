@@ -8,17 +8,11 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//import javax.inject.Inject;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.entities.Product;
-//import com.qac.sparkle_gardens.repositories.ProductRepository;
-//import com.qac.sparkle_gardens.test_data.InitialData;
-//import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * @author Annabelle Young
@@ -28,14 +22,10 @@ import com.qac.sparkle_gardens.entities.Product;
  *
  */
 public class ProductServiceTest {
-	//@Inject InitialData initialData;
-	//@Inject ProductRepository productRepository;
 	
-	//Product product;
-	Product p;
-	ProductInterface pi;
-	List<Product> resultList;
-	//InitialData initData;
+	private Product p;
+	private ProductService pi;
+	private List<Product> resultList;
 	
 	
 	@Before
