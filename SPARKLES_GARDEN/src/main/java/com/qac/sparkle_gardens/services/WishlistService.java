@@ -1,11 +1,8 @@
 package com.qac.sparkle_gardens.services;
 
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-
-import com.qac.sparkle_gardens.controllers.WishlistServiceInterface;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
@@ -16,7 +13,7 @@ import com.qac.sparkle_gardens.repositories.WishlistRepository;
  * This is the Wishlist Service Bean
  */
 @Stateless
-public class WishlistService implements WishlistServiceInterface {
+public class WishlistService {
 	@Inject WishlistRepository wishlistRepository;
 	/**
 	 * Get wishlist information
@@ -54,20 +51,10 @@ public class WishlistService implements WishlistServiceInterface {
 	/**
 	 *  Creates a new wishlist
 	 * @param accountId
-	 * @param name (name of the wishlist)
+	 * @param list
 	 */
 	public void createWishlist(long accountId, String name) {
 		Wishlist wish = new Wishlist(accountId, name);
-		wishlistRepository.persistWishlist(wish);
-	}
-	
-	/**
-	 * Overloaded create wishlist method
-	 * @param accountId
-	 * @param product
-	 */
-	public void createWishlist(long accountId, Product product) {
-		Wishlist wish = new Wishlist(accountId, product);
 		wishlistRepository.persistWishlist(wish);
 	}
 	
@@ -82,7 +69,7 @@ public class WishlistService implements WishlistServiceInterface {
 	
 	/**
 	 * Overloaded addProduct method
-	 * if the name of the wishlist is passed instead of the wishlist ID
+	 * if the name of the wislist is passed instead of the wishlist ID
 	 * @param product
 	 * @param wishlistName
 	 */
@@ -115,9 +102,5 @@ public class WishlistService implements WishlistServiceInterface {
 	 */
 	public List<Product> getProducts(String wishlistName) {
 		return wishlistRepository.getProducts(wishlistName);
-	}
-	
-	public List<Product> getProducts(long accountId) {
-		return wishlistRepository.getProducts(accountId);
 	}
 }

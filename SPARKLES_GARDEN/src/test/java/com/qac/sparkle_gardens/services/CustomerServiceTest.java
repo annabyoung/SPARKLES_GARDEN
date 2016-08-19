@@ -7,21 +7,11 @@ import javax.inject.Inject;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-
-import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
-import com.qac.sparkle_gardens.util.CreditStatus;
-//import com.qac.sparkle_gardens.controllers.CustomerInterface;
-
-
-
-import com.qac.sparkle_gardens.entities.Customer;
-import com.qac.sparkle_gardens.repositories.CustomerRepository;
-//import com.qac.sparkle_gardens.controllers.CustomerInterface;
-
+import com.qac.sparkle_gardens.controllers.CustomerInterface;
 
 import junit.framework.TestCase;
 
@@ -35,6 +25,7 @@ public class CustomerServiceTest extends TestCase {
 	
 	@Inject 
 	CustomerRepository customerRepository; 
+<<<<<<< HEAD
 	
 	//CustomerInterface customerInterface = new CustomerService();
 	// saw this in demo unsure why its needed. 
@@ -50,11 +41,28 @@ public class CustomerServiceTest extends TestCase {
 	  */
 	@Test
 	public void  findByIDTest(){
+=======
+	Customer dummyCustomer; 
+	
+	
+	public void persistCustomerTest(Customer customer){
+	
+		  customerRepository.persistCustomer(customer);	
+	}
+	
+	public void persistCustomerTest(List<Customer> customers){
+	
+		customerRepository.persistCustomer(customers);
+	}
+	
+	public void  findByIDTest(long accountID){
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 		
 		Customer result = customerRepository.findByID(dummyCustomer.getAccountID());
 		assertNotNull(result);
 	}
 	
+<<<<<<< HEAD
 	@Test
 	public void  findByIDTestNOT(long accountID){
 		
@@ -66,19 +74,24 @@ public class CustomerServiceTest extends TestCase {
 	
 	@Test	
 	public void getCustomerTest(){
+=======
+	public void getCustomerTest(Customer c){
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 		
 		Customer customer = customerRepository.getCustomer(dummyCustomer); 
 		assertNotNull(customer);
-
-		assertEquals(customer, dummyCustomer);
-
+		assertsEquals(customer, dummyCustomer)
 	}
 		
+<<<<<<< HEAD
 	@Test	
 	public void getCustomerTestNOT(){
 		
 		Customer customer = customerRepository.getCustomer(wrongCustomer); 
 		assertNotNull(customer);
+=======
+	public void updateCustomerTest(Customer c){
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 
 		assertNotEquals(customer, wrongCustomer);
 // not sure if this is right?
@@ -91,6 +104,7 @@ public class CustomerServiceTest extends TestCase {
 	 assertTrue(result);
 	}
 		
+<<<<<<< HEAD
 	@Test
 	public void updateCustomerTestNot(){
 
@@ -137,14 +151,34 @@ public class CustomerServiceTest extends TestCase {
 
 		List<CustomerHasCard> cards = customerRepository.findCustomerCards(c);
 
+=======
+	
+	public void removeCustomerTest(Customer c){
+		customerRepository.removeCustomer(c); //remove customer
+	}
+	
+	public void findCustomerAdressesTest(Customer c){
+	
+		customerRepository.findCustomerAdresses(c);
+	}
+		
+		
+	public void findCustomerCardsTest(Customer c){
+		
+		Cards cards customerRepository.findCustomerCards(c);
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 		assertNotNull(cards);
 		
 	}
 	
+<<<<<<< HEAD
 	@Test
 	public void findCustomerCardsTestNot(Customer c){
 
 		List<CustomerHasCard> cards = customerRepository.findCustomerCards(c);
+=======
+	public Customer findByEmail(String email){
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 
 		assertNull(cards);
 		

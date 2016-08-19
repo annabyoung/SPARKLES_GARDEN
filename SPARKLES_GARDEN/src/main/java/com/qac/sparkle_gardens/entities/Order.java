@@ -1,6 +1,5 @@
 package com.qac.sparkle_gardens.entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD
 import javax.persistence.IdClass;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+=======
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
@@ -30,6 +32,7 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
  * 
  * @author Damien Lloyd
  */
+<<<<<<< HEAD
 
 @NamedQueries (
 		{
@@ -38,23 +41,26 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
 		}
 )
 
+=======
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 @Entity
 @Table (name = "Order")
-public class Order implements Serializable
+public class Order 
 {
-	/**
-	 * Serial ID of Order
-	 */
-	private static final long serialVersionUID = -8868918125632312195L;
-
 	@Id
 	@NotNull
 	@Column (name = "orderID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long orderID;
 	
+<<<<<<< HEAD
 	@ManyToOne
 	@JoinTable (name = "customers")
+=======
+	@Id
+	@Column (name = "customerID", nullable = false)
+	@NotNull
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 	private Customer customer;
 	
 	@Column (name = "payLater", nullable = true)
@@ -210,7 +216,4 @@ public class Order implements Serializable
 	{
 		this.paymentStatus = paymentStatus;
 	}
-	
-	public static final String FIND_BY_ID = "Order.getOrderID()";
-	public static final String GET_PRODUCTS = "Order.getOrderLines().getProduct()";
 }

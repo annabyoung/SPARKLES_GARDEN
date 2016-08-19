@@ -40,7 +40,7 @@ public interface CardRepository
 	 * Removes a card.
 	 * @param c
 	 */
-	public void removeCard(long id);
+	public void removeCard(Card c);
 
 	/**
 	 * Finds all cards using cardNumber.

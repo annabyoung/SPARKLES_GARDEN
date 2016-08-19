@@ -41,7 +41,6 @@ public class InitialData
 	
 	public InitialData() 
 	{
-		System.out.println("BLAH");
 		//Object Creation.
 		//long addressId, int buildingNum, String streetName, String city, String county, String country, String postCode
 		Address dummyAddress = new Address("Anchorage 1", "Floor 5", "Anchorage Quay", "Salford Quay", "Greater Manchester", "United Kingdom", "M50 3YJ", "Shipping");
@@ -234,13 +233,12 @@ public class InitialData
 
 	@MethodAuthor(author="Annabelle Young")
 	public List<Product> getProducts(){
-		
 		return products;
 	}
 	
 	@MethodAuthor(author="Annabelle Young")
 	public void addProduct(Product product){
-		this.products.add(product);
+		products.add(product);
 	}
 
 	@MethodAuthor(author="Annabelle Young")

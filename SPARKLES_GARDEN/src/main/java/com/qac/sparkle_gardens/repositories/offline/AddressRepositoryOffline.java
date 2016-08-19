@@ -106,7 +106,15 @@ public class AddressRepositoryOffline implements AddressRepository {
 		}
 		initialData.setAddresses(addresses);
 	}
+<<<<<<< HEAD
 	
+=======
+
+	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
+		List<Address> addresses = initialData.getAddresses();
+	}
+
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 	/**
 	 * @param address
 	 */
@@ -125,12 +133,15 @@ public class AddressRepositoryOffline implements AddressRepository {
 		return false;
 	}
 	
+<<<<<<< HEAD
 	@Deprecated
 	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
 		List<Address> addresses = initialData.getAddresses();
 	}
 	
 	@Deprecated
+=======
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 	public void removeCustomerHasAddress(CustomerHasAddress cust, long accountId) {
 		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {

@@ -39,14 +39,19 @@ public class OrderService
 	
 	List<OrderLine> basket = new ArrayList<OrderLine>();
 	
+<<<<<<< HEAD
 	MessageSender sender = new MessageSender();
+=======
+//	@Inject
+//	MessageSender sender;
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 	
 	/**
 	 * Default constructor
 	 */
 	public OrderService()
 	{
-
+		//sender = new MessageSender();
 	}
 	
 	/**
@@ -121,39 +126,40 @@ public class OrderService
 	 */
 	public String generateInvoice(long orderID)
 	{
-		String invoice = "";
-		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
-		
-		invoice += "\n\n\n----------------------------------------------";
-		
-		invoice += "Thank you for shopping at NBGardens!\n";
-		invoice += "You have purchased the following items: \n";
-		QueueSession session = sender.getSession();
-		Queue queue = sender.getQueue();
-		String result = "";
-		
-		try
-		{
-			MapMessage msg = session.createMapMessage();
-			msg.setString("Invoice", "Invoice");
-			
-			QueueSender sender = session.createSender(queue);
-			sender.send(msg);
-			
-			String inv = "JMSCorrelationID = " + msg.getJMSMessageID();
-			QueueReceiver receiver = 
-					session.createReceiver(queue, inv);
-			
-			TextMessage tm = (TextMessage) receiver.receive(30_000);
-			
-			if (tm == null)
-			{
-				result = "No invoice!";
-			} else result = tm.getText();
-		} catch (JMSException jmse) {
-			jmse.printStackTrace();
-		}
-		return result;
+//		String invoice = "";
+//		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
+//		
+//		invoice += "\n\n\n----------------------------------------------";
+//		
+//		invoice += "Thank you for shopping at NBGardens!\n";
+//		invoice += "You have purchased the following items: \n";
+//		QueueSession session = sender.getSession();
+////		Queue queue = sender.getQueue();
+//		String result = "";
+//		
+//		try
+//		{
+//			MapMessage msg = session.createMapMessage();
+//			msg.setString("Invoice", "Invoice");
+//			
+//			QueueSender sender = session.createSender(queue);
+//			sender.send(msg);
+//			
+//			String inv = "JMSCorrelationID = " + msg.getJMSMessageID();
+//			QueueReceiver receiver = 
+//					session.createReceiver(queue, inv);
+//			
+//			TextMessage tm = (TextMessage) receiver.receive(30_000);
+//			
+//			if (tm == null)
+//			{
+//				result = "No invoice!";
+//			} else result = tm.getText();
+//		} catch (JMSException jmse) {
+//			jmse.printStackTrace();
+//		}
+//		return result;
+		return "";
 	}
 	
 	/**

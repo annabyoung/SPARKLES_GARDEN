@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.repositories.CardRepository;
 import com.qac.sparkle_gardens.test_data.InitialData;
-import com.qac.sparkle_gardens.util.MethodAuthor;
 
 
 /**
@@ -20,6 +20,7 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
  */
 @Stateless
 @Default
+@Alternative
 public class CardRepositoryOffline implements CardRepository
 {
 	@Inject
@@ -57,16 +58,10 @@ public class CardRepositoryOffline implements CardRepository
 		return initialData.getCards();
 	}
 	
-	@MethodAuthor (author = "Damien Lloyd")
-	public void removeCard(long cardID) 
+	public void removeCard(Card c) 
 	{
 		List<Card> cl = initialData.getCards();
-		
-		for (int i = 0; i < cl.size(); i++)
-		{
-			if (cl.get(i).getCardId() == cardID)
-				cl.remove(i);
-		}
+		cl.remove(c);
 	}
 	
 	public List<Card> findByCardNumber(String cardNumber) 

@@ -5,6 +5,7 @@ package com.qac.sparkle_gardens.services;
 
 import static org.junit.Assert.*;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,22 +13,25 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
+=======
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 import org.junit.Test;
 
 import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.entities.Product;
+<<<<<<< HEAD
 //import com.qac.sparkle_gardens.repositories.ProductRepository;
 //import com.qac.sparkle_gardens.test_data.InitialData;
 //import com.qac.sparkle_gardens.test_data.InitialData;
+=======
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 
 /**
  * @author Annabelle Young
- * 
- * JUnit tests for ProductService class which implements ProductInterface
- * Verify that all functions in ProductService produce valid results
  *
  */
 public class ProductServiceTest {
+<<<<<<< HEAD
 	//@Inject InitialData initialData;
 	//@Inject ProductRepository productRepository;
 	
@@ -80,18 +84,13 @@ public class ProductServiceTest {
 	}
 	/*
 	@Deprecated
+=======
+
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 	@Test
-	public void getProductDescriptionFromIDShouldReturnDescription(){
+	public void checkInStockShouldReturnValidOutput() {
 		ProductInterface pi = new ProductService();
-		
-		String result = pi.getProductDescriptionFromID(product.getProductID());
-		assertEquals("This is a massive dildo", result);
-	}
-	
-	@Deprecated
-	@Test(expected = IllegalArgumentException.class)
-	public void getProductDescriptionFromIDShouldThrowIllegalExceptionForNullID(){
-		ProductInterface pi = new ProductService();
+<<<<<<< HEAD
 		pi.getProductDescriptionFromID(0);
 	}
 	*/
@@ -348,4 +347,12 @@ public class ProductServiceTest {
 
 
 
+=======
+		Product product = new Product("The Great American Challenge", 50, 79.99); 
+		Boolean result = pi.checkInStock(product);
+		assertNotNull(result);
+		assertEquals(true, result);
+	}
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 
+}

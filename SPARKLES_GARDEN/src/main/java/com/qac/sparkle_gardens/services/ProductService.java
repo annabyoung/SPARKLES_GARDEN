@@ -13,8 +13,11 @@ import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
+<<<<<<< HEAD
 import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
 import com.qac.sparkle_gardens.test_data.ProductInitialData;
+=======
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 
 /**
  * @author Annabelle Young
@@ -26,6 +29,7 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 @Stateless
 public class ProductService implements ProductInterface{
+<<<<<<< HEAD
 	@Inject ProductRepository productRepository= new ProductRepositoryOffline();
 	
 	
@@ -33,6 +37,13 @@ public class ProductService implements ProductInterface{
 	private List<Product> productL = productRepository.getProducts(); 
 	private List<String> tags = new ArrayList<String>();
 	
+=======
+	@Inject ProductRepository productRepository;
+	
+	private ArrayList<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
+	private ArrayList<String> tags = new ArrayList<String>();
+		
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 	
 	/**
 	 * If the product has enough stock to meet the request, return true and decrement stock
@@ -62,9 +73,6 @@ public class ProductService implements ProductInterface{
 	 * 
 	 */
 	public boolean checkInStock(Product p){
-		if(p == null){
-			throw new IllegalArgumentException();
-		}
 		if (p.getStockLevel() == 0)
 		/**
 		 * Need to consult with Chris and Luke about further details for what exactly they want to happen
@@ -77,11 +85,7 @@ public class ProductService implements ProductInterface{
 	 * Retrieve product's info from productID
 	 * Find the product from its ID and return its description
 	 */
-	@Deprecated
 	public String getProductDescriptionFromID(long productID){
-		if(productID == 0){
-			throw new IllegalArgumentException();
-		}
 		Product p = getProductByID(productID);
 		return p.getProductDescription();
 	}
@@ -92,11 +96,7 @@ public class ProductService implements ProductInterface{
 	 * if there is not enough stock to meet the quantity requested, false will be returned
 	 */
 	public boolean checkIfEnoughQuantity(Product p, int quantityRequested){
-		if(p == null || quantityRequested <= 0){
-			throw new IllegalArgumentException();
-		}
-		
-		return (p.getStockLevel() >= quantityRequested);
+		return (p.getStockLevel() <= quantityRequested);
 	}
 	
 	/**
@@ -104,12 +104,10 @@ public class ProductService implements ProductInterface{
 	 * Use a product's ID to find the whole product, including its other attributes
 	 */
 	public Product getProductByID(long productID){
-		if(productID == 0){
-			throw new IllegalArgumentException();
-		}
 		return productRepository.findByProductID(productID);
 	}
 	
+<<<<<<< HEAD
 	/**
 	 * Verify that minimum price entered is not larger than maximum price
 	 * Verify that minimum price and maximum price entered are not negative
@@ -120,6 +118,8 @@ public class ProductService implements ProductInterface{
 		}
 		return true;
 	}
+=======
+>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 	/**
 	 * Search for items within a price range entered
 	 * @param minimumPrice

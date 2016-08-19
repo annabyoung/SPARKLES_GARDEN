@@ -37,7 +37,7 @@ public class OrderLine implements Serializable
 	private Product product;
 	
 	@Column
-	@Null
+	@NotNull
 	private int quantity; // Quantity of Product ordered
 	
 	/**
