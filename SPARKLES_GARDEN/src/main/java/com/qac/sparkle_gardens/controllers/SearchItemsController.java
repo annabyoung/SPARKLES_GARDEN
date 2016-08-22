@@ -24,8 +24,7 @@ import javax.inject.Inject;
 @Named(value="Search_Items")
 @RequestScoped
 public class SearchItemsController {
-	@Inject
-	ProductService productService;
+	@Inject	private ProductService productService;
 	
 	private List<Product> searchQueryResults = new ArrayList<Product>();
 	private String error = "";

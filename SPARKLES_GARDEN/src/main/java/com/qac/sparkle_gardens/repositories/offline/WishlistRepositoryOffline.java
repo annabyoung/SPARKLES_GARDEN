@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
+import com.qac.sparkle_gardens.test_data.InitialData;
 import com.qac.sparkle_gardens.test_data.WishlistInitialData;
 
 /**
@@ -19,7 +20,7 @@ import com.qac.sparkle_gardens.test_data.WishlistInitialData;
 @Stateless
 @Default
 public class WishlistRepositoryOffline implements WishlistRepository{
-	@Inject private WishlistInitialData initialData;
+	@Inject private InitialData initialData;
 	
 	/**
 	 * @param Wishlist wishlist
@@ -31,7 +32,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 			throw new IllegalArgumentException();
 		}
 		
-		initialData.addWishlist(wishlist);
+//		initialData.addWishlist(wishlist);
 	}
 	
 	public void persistWishlists(List<Wishlist> wishlists) {
@@ -79,7 +80,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		List<Wishlist> list = initialData.getWishlists();
 		Wishlist wish = new Wishlist();
 		for (int index = 0; index < list.size(); index++) {
-			if (list.get(index).getAccountId() == id) {
+			if (list.get(index).getCustomer().getAccountID() == id) {
 				wish = list.get(index);
 			}
 		}
@@ -207,11 +208,6 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	 */
 	public List<Product> getProducts(String wishlistName) {
 		Wishlist list = findByName(wishlistName);
-		return list.getProducts();
-	}
-	
-	public List<Product> getProducts(long accountId) {
-		Wishlist list = findByAccountId(accountId);
 		return list.getProducts();
 	}
 	

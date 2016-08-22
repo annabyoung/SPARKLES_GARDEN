@@ -12,7 +12,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
-import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
 import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 /**
@@ -27,10 +26,6 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 public class ProductService {
 	@Inject private ProductRepository productRepository;
 	@Inject private ProductInitialData initialData;
-	/*
-	 * Access Initial Data not repository
-	 * Inject Initial Data 
-	 */
 	
 	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
 	private List<Product> productL = initialData.getAllProducts(); 

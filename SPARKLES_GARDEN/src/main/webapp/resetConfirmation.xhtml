@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="https://www.w3.org/1999/xhtml"
+<ui:composition xmlns="https://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<link rel="stylesheet" type="text/css" href="\js\bootstrap.min.js" />
-	<link rel="stylesheet" type="text/css" href="\css\bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="\css\register.css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Reset Password</title>
-</h:head>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="templates/noSearchTemplate.xhtml">
+	<ui:define name="mainContent">
+		<meta charset="utf-8" />
 <f:view>
 	<h:body>
-		<h1>
-			<div id="homelink" class="center-block">
-				<h:outputLink value="homepage.xhtml">
-					<h:graphicImage class="img-responsive center-block" id="logo"
-						value="\img\Logo.png" width="200px" height="150px" />
-				</h:outputLink>
-			</div>
-		</h1>
 		<div class="container-fluid" id="formdiv">
 			<table style="width: 100%">
 				<tr>
@@ -45,9 +32,10 @@
 		</div>
 		<div>
 			<p id="contact">
-				<a href="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</a>
+				<a href="contact.xhtml">Contact</a>
 			</p>
 		</div>
 	</h:body>
 </f:view>
-</html>
+</ui:define>
+</ui:composition>
