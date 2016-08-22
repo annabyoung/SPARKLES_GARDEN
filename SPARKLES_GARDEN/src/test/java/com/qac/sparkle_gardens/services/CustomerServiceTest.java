@@ -28,7 +28,10 @@ import junit.framework.TestCase;
 /**
  * 
  * @author Sean Connelly 
- *
+ * did basic  pass and fail tests
+ * 
+ * need to add throw exception cases and validate inputs 
+ * 
  */
 
 public class CustomerServiceTest extends TestCase {
