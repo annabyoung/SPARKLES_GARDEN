@@ -3,13 +3,12 @@ function regValidation() {
 	var firstNCheck = document.getElementById('formdiv:firstName');
 	var surnameCheck = document.getElementById('formdiv:surname');
 	var emailCheck = document.getElementById('formdiv:email');
-	var emailConCheck = document.getElementById('formdiv:emailCon');
 	var passwordCheck = document.getElementById('formdiv:password');
-	var passwordConCheck = document.getElementById('formdiv:passCon');
+	var phoneCheck = document.getElementById('formdiv:phone');
 	
 	var error=""; 
 	
-	var variablesToCheck = [firstNCheck, surnameCheck, emailCheck, emailConCheck, passwordCheck, passwordConCheck];
+	var variablesToCheck = [firstNCheck, surnameCheck, emailCheck, passwordCheck, phoneCheck];
 	
 	for(i=0; i < variablesToCheck.length; i++){
 		if(variablesToCheck[i].value == null || variablesToCheck[i].value == ""){

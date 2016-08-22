@@ -1,8 +1,8 @@
 $(function(){
 	$("#submit").click(function(){
-		var number = document.getElementById("cardNumber");
+		var number = document.getElementById("#cardNumber").validity.typeMismatch;
 		if(number.validity.typeMismatch){
-			alert("Not correct");
+			number.setCustomValidity("Data type mismatch");
 		} else{
 			number.setCustomValidity("");
 		}

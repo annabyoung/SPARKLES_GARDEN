@@ -16,41 +16,36 @@
 						<div class="form-group">
 							<label class="control-label col-sm-4">First Name:</label>
 							<div class="col-sm-4">
-								<h:inputText name="firstName" id="firstName" require="true" />
+								<h:inputText name="firstName" id="firstName" require="true"
+									value="#{Register.firstName}" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">Surname:</label>
 							<div class="col-sm-4">
-								<h:inputText name="surname" required="true" id="surname" />
+								<h:inputText name="surname" required="true" id="surname"
+									value="#{Register.lastName}" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-4">EmailAddress:</label>
+							<label class="control-label col-sm-4">Email Address:</label>
 							<div class="col-sm-4">
 								<h:inputText name="email" type="Email" id="email"
-									required="true" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-4">Confirm Email
-								Address:</label>
-							<div class="col-sm-4">
-								<h:inputText name="confirmEmail" type="Email" id="emailCon"
-									required="true" />
+									required="true" value="#{Register.email}" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">Password:</label>
 							<div class="col-sm-4">
-								<h:inputSecret name="password" id="password" required="true" />
+								<h:inputSecret name="password" id="password" required="true"
+									value="#{Register.password}" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-4">Confirm Password:</label>
+							<label class="control-label col-sm-4">Phone Number:</label>
 							<div class="col-sm-4">
-								<h:inputSecret name="confrimPassword" id="passCon"
-									required="true" />
+								<h:inputText name="phone" id="phone" required="true"
+									value="#{Register.phone}" />
 							</div>
 						</div>
 						<div>
