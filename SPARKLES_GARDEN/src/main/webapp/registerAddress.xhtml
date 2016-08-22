@@ -14,7 +14,7 @@
 							<p id="errorMessage"></p>
 						</div>
 						<div>
-							<p id="addressCount"></p>
+							<p id="initAddressCount" id="addressCount"></p>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">*House number/
@@ -69,9 +69,11 @@
 							</div>
 						</div>
 					</h:form>
+					<div id= "clonePoint">
+					</div>
 					<div>
 						<span> <h:commandButton value="Add Another Address"
-								class="btn btn-primary" role="button" />
+								class="btn btn-primary" role="button" id="extraForm" />
 						</span> <span> <h:commandButton class="btn btn-primary"
 								type="button" role="button" value="Continue to add payment"
 								onclick="addressValidation()" />

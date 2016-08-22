@@ -1,17 +1,18 @@
 $(function(){
 	
+	var initCount=1;
 	var count=1;
+	var initAddressCount = $("#initAddressCount");
 	var addressCount = $("#addressCount");
 	
-	$("#addressCount").load(function(){
-		$(this).html("Address" + count);
+	$(document).ready(function(){
+		$(addressCount).html("Address" + " " + initCount);
 	});
 	
 	$("#extraForm").click(function(){
-		console.log("Cloning form");
 		count++; 
 		$("#formdiv").clone().appendTo("#clonePoint");
-		addressCount.html("Address" + count);
+		addressCount.html("Address" + " " + count);
 	});
 	
 });
