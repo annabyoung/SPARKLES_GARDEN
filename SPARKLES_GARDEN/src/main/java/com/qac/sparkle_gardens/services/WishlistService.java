@@ -60,32 +60,15 @@ public class WishlistService {
 		wishlistRepository.persistWishlist(wish);
 	}
 	
-	/**
-	 * Adds a product to a wishlist
-	 * @param product
-	 * @param wishlistId
-	 */
-	public void addProduct(Product product, long wishlistId) {
-		wishlistRepository.addProductToList(product, wishlistId);
-	}
+	
 	
 	/**
-	 * Overloaded addProduct method
-	 * if the name of the wislist is passed instead of the wishlist ID
+	 * 
 	 * @param product
-	 * @param wishlistName
+	 * @param accountId
 	 */
-	public void addProduct(Product product, String wishlistName) {
-		wishlistRepository.addProductToList(product, wishlistName);
-	}
-	
-	/**
-	 * Removes a product from a wishlist
-	 * @param product
-	 * @param wishlistName
-	 */
-	public void removeProduct(Product product, String wishlistName) {
-		wishlistRepository.removeProduct(product, wishlistName);
+	public void addProduct(Product product, long accountId) {
+		wishlistRepository.addProductToListWithAcctId(product, accountId);
 	}
 	
 	/**
@@ -95,6 +78,27 @@ public class WishlistService {
 	 */
 	public void removeProduct(Product product, long accountId) {
 		wishlistRepository.removeProduct(product, accountId);
+	}
+	
+	@Deprecated
+	/**
+	 * Removes a product from a wishlist
+	 * @param product
+	 * @param wishlistName
+	 */
+	public void removeProduct(Product product, String wishlistName) {
+		wishlistRepository.removeProduct(product, wishlistName);
+	}
+	
+	@Deprecated
+	/**
+	 * Overloaded addProduct method
+	 * if the name of the wislist is passed instead of the wishlist ID
+	 * @param product
+	 * @param wishlistName
+	 */
+	public void addProduct(Product product, String wishlistName) {
+		wishlistRepository.addProductToList(product, wishlistName);
 	}
 	
 	/**

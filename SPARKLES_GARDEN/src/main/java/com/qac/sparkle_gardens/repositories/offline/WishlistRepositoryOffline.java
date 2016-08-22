@@ -202,6 +202,11 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		initialData.setWishlists(list);
 	}
 	
+	/*
+	 * Create a find wishlist method
+	 * in order to find a specific wishlist
+	 */
+	
 	/**
 	 * Returns all the products in a wishlist
 	 * @param wishlist
