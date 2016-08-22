@@ -17,15 +17,13 @@ import com.qac.sparkle_gardens.controllers.RefundCard;
  * In case customer realizes they ordered incorrect quantity, item, or no longer desire the item before it is dispatched to them.
  *
  */
-@Named (value = "cancelOrder")
+@Named (value = "Cancel_Order")
 @RequestScoped
 public class CancelOrder 
 {
-	@Inject
-	OrderService service;
+	@Inject	private OrderService service;
 	
-	@Inject
-	RefundCard refund;
+	@Inject private RefundCard refund;
 	
 	private String error = "";
 	
@@ -44,11 +42,13 @@ public class CancelOrder
 		if (service.canCancelOrder(order)){
 			if(order.isPayLater()){
 				order.setPaymentStatus(PaymentStatus.VOID);
+				return "home";
 			}
 			refund.refundCard(order);
+			return "home";
 		}
 		error = "Order is not valid for cancellation.";
-		return "home";
+		return error;
 	}
 	
 	public String getError(){
