@@ -19,11 +19,11 @@ public class WishlistInitialData {
 	
 	// adds dummy data into the wishlists list
 	public WishlistInitialData() {
-		products.add(new Product("Cookie Gnomonster", 2300, 5.50));
-		products.add(new Product("Gnomzilla", 5000, 6.00));
+//		products.add(new Product("Cookie Gnomonster", 2300, 5.50));
+//		products.add(new Product("Gnomzilla", 5000, 6.00));
 		
-		wishlists.add(new Wishlist((long) 24, products));
-		wishlists.add(new Wishlist((long) 25, products));
+//		wishlists.add(new Wishlist((long) 24, products));
+//		wishlists.add(new Wishlist((long) 25, products));
 	}
 	
 	public ArrayList<Wishlist> getWishlists() {

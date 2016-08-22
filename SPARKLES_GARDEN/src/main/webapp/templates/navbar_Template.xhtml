@@ -11,12 +11,13 @@
 	<link rel="stylesheet" type="text/css" href="..\css\Navbar.css"></link>
 	<link rel="stylesheet" type="text/css" href="..\css\Homepage.css"></link>
 	<link rel="stylesheet" type="text/css" href="..\css\basketItem.css"></link>
-
-	
-	
-	
 	<meta charset="utf-8"></meta>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" />
+<script src="../js/basket.js" />
+<script src="../js/homepage.js" />
+
 </h:head>
 <h:body>
 	<f:view>
@@ -35,7 +36,7 @@
 						</h:link>
 					</p>
 				</div>
-				<table class="container-fluid col-xs-8" style="width: 100%">
+				<table class="left-block" style="width: 100%">
 					<tr>
 						<th></th>
 						<th></th>
@@ -43,12 +44,10 @@
 					<tr>
 						<td>
 							<div id="logo">
-								<h1>
-									<h:outputLink value="homepage.xhtml">
-										<h:graphicImage class="img-responsive left-block" id="logo"
-											value="\img\Logo.png" width="200px" height="150px" />
-									</h:outputLink>
-								</h1>
+								<h:outputLink value="homepage.xhtml">
+									<h:graphicImage class="left-block" id="logo"
+										value="\img\Logo.png" width="200px" height="150px" />
+								</h:outputLink>
 							</div>
 						</td>
 						<td></td>
@@ -56,22 +55,17 @@
 					<tr>
 						<td></td>
 						<td>
-							<div>
-								<div class="row">
-									<div class="col-md-6">
-										<div id="custom-search-input">
-											<div class="input-group col-md-12">
-												<h:inputText id="search" type="text"
-													class="form-control input-lg" placeholder="Search"></h:inputText>
-												<span class="input-group-btn">
-													<button id="searchbutton" type="button"
-														class="btn btn-default" aria-label="Search Button">
-														<span class="glyphicon glyphicon-search"
-															aria-hidden="true"></span>
-													</button>
-												</span>
-											</div>
-										</div>
+							<div class="col-md-6 col-sm-4 col-xs-2">
+								<div id="custom-search-input">
+									<div class="input-group">
+										<h:inputText id="search" type="text"
+											class="form-control input-lg" placeholder="Search"></h:inputText>
+										<span class="input-group-btn">
+											<button id="searchbutton" type="button"
+												class="btn btn-default" aria-label="Search Button">
+												<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+											</button>
+										</span>
 									</div>
 								</div>
 							</div>
@@ -118,8 +112,6 @@
 		</div>
 	</f:view>
 </h:body>
-<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" />
 </html>
 
 

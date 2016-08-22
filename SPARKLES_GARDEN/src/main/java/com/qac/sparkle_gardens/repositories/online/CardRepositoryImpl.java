@@ -2,11 +2,13 @@ package com.qac.sparkle_gardens.repositories.online;
 
 import java.util.List;
 
+import javax.enterprise.inject.Alternative;
 import javax.persistence.EntityManager;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.repositories.CardRepository;
 
+@Alternative
 public class CardRepositoryImpl implements CardRepository{
 
 	private EntityManager em;

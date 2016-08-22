@@ -19,8 +19,8 @@ public class RemoveItem
 	@Inject
 	OrderService service;
 	
-	@Inject
-	ProductService pService;
+//	@Inject
+//	private ProductService pService;
 	
 	/**
 	 * Remove item from the basket by its product ID
@@ -29,8 +29,8 @@ public class RemoveItem
 	 */
 	String removeItem(long productID)
 	{
-		if (!service.isBasketEmpty())
-			service.removeItemFromBasket(pService.getProductByID(productID));
+//		if (!service.isBasketEmpty())
+//			service.removeItemFromBasket(pService.getProductByID(productID));
 		
 		return "home";
 	}

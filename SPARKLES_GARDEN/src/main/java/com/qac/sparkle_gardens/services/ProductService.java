@@ -13,7 +13,6 @@ import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
-import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 /**
  * @author Annabelle Young
@@ -25,17 +24,17 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 @Stateless
 public class ProductService {
-	@Inject private ProductRepository productRepository= new ProductRepositoryOffline();
 	/*
 	 * Access Initial Data not repository
 	 * Inject Initial Data 
 	 */
 	
-	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
-	private List<Product> productL = productRepository.getProducts(); 
+	@Inject 
+	private ProductRepository productRepository;
+	
 	private List<String> tags = new ArrayList<String>();
 	
-	
+		
 	/**
 	 * If the product has enough stock to meet the request, return true and decrement stock
 	 * if the product does not have enough stock to meet orderline's request, output error message
@@ -64,9 +63,6 @@ public class ProductService {
 	 * 
 	 */
 	public boolean checkInStock(Product p){
-		if(p == null){
-			throw new IllegalArgumentException();
-		}
 		if (p.getStockLevel() == 0)
 		/**
 		 * Need to consult with Chris and Luke about further details for what exactly they want to happen
@@ -79,11 +75,7 @@ public class ProductService {
 	 * Retrieve product's info from productID
 	 * Find the product from its ID and return its description
 	 */
-	@Deprecated
 	public String getProductDescriptionFromID(long productID){
-		if(productID == 0){
-			throw new IllegalArgumentException();
-		}
 		Product p = getProductByID(productID);
 		return p.getProductDescription();
 	}
@@ -94,11 +86,7 @@ public class ProductService {
 	 * if there is not enough stock to meet the quantity requested, false will be returned
 	 */
 	public boolean checkIfEnoughQuantity(Product p, int quantityRequested){
-		if(p == null || quantityRequested <= 0){
-			throw new IllegalArgumentException();
-		}
-		
-		return (p.getStockLevel() >= quantityRequested);
+		return (p.getStockLevel() <= quantityRequested);
 	}
 	
 	/**
@@ -106,12 +94,9 @@ public class ProductService {
 	 * Use a product's ID to find the whole product, including its other attributes
 	 */
 	public Product getProductByID(long productID){
-		if(productID == 0){
-			throw new IllegalArgumentException();
-		}
 		return productRepository.findByProductID(productID);
 	}
-	
+
 	/**
 	 * Verify that minimum price entered is not larger than maximum price
 	 * Verify that minimum price and maximum price entered are not negative
@@ -131,12 +116,12 @@ public class ProductService {
 	public List<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
 		List<Product> productsInRange = new ArrayList<Product>();
 		//List<Product> pl = productRepository.getProducts();
-		for(Product p : productL){
+		for(Product p : productRepository.getProducts()){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
 				productsInRange.add(p);
 			}
 		}
-		productList.addAll(productsInRange);
+//		productList.addAll(productsInRange);
 		return productsInRange;
 	}
 	
@@ -190,7 +175,7 @@ public class ProductService {
 		}
 		tags = convertStringToArrayList(input);
 		List<Product> productsWithAllTags = new ArrayList<Product>();
-		for(Product p : productL){
+		for(Product p : productRepository.getProducts()){
 			if (p.getProductTags().containsAll(tags)){
 				productsWithAllTags.add(p);
 			} 
@@ -210,7 +195,7 @@ public class ProductService {
 		}
 		tags = convertStringToArrayList(input);
 		List<Product> productsWithSubsetOfTags = new ArrayList<Product>();
-		for(Product p : productL){
+		for(Product p : productRepository.getProducts()){
 			if (!Collections.disjoint(p.getProductTags(), tags)){
 				productsWithSubsetOfTags.add(p);
 			}
@@ -254,17 +239,38 @@ public class ProductService {
 	/**
 	 * Return the list of all products that meet the search parameters
 	 */
-	public List<Product> getProductList(){
-		//There should be a query here, but we're not at that point yet
-		return productList;
-	}
+//	public List<Product> getProductList(){
+//		//There should be a query here, but we're not at that point yet
+//		return productList;
+//	}
 	
 	/**
 	 * Clears the search query
 	 */
-	public void clearSearchQuery(){
-		productList.clear();
-	}
+//	public void clearSearchQuery(){
+//		productList.clear();
+//	}
+
+
+//	@Override
+//	public List<Product> createProductListByTags(String input) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//
+//	@Override
+//	public List<Product> getProductList() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//
+//	@Override
+//	public void clearSearchQuery() {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 
 }
