@@ -45,6 +45,7 @@ public class CancelOrder
 				return "home";
 			}
 			refund.refundCard(order);
+
 			return "home";
 		}
 		error = "Order is not valid for cancellation.";

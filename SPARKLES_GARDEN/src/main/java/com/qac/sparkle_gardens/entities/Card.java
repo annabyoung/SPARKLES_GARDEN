@@ -13,8 +13,8 @@ import javax.validation.constraints.Size;
 @Table(name = "Cards")
 
 @NamedQueries({
-		@NamedQuery(name = Card.FIND_BY_CARD_NUMBER, query = "SELECT a FROM Cards a WHERE a.cardNumber = :cardNumber"),
-		@NamedQuery(name = Card.FIND_BY_CARDID, query = "SELECT a FROM Cards a WHERE a.cardId = :cardId"),
+//		@NamedQuery(name = Card.FIND_BY_CARD_NUMBER, query = "SELECT a FROM Cards a WHERE a.cardNumber = :cardNumber"),
+//		@NamedQuery(name = Card.FIND_BY_CARDID, query = "SELECT a FROM Cards a WHERE a.cardId = :cardId"),
 		})
 
 public class Card {
@@ -23,7 +23,7 @@ public class Card {
 	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long cardId;
-	@Column(name = "nameOnCard", nullable = false, length = 225)
+	@Column(name = "cardOwnerName", nullable = false, length = 225)
 	@NotNull
 	@Size(min = 2, max = 225)
 	private String cardOwnerName;

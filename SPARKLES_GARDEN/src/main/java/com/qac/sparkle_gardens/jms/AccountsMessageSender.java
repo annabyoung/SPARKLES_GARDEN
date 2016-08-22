@@ -5,9 +5,9 @@ package com.qac.sparkle_gardens.jms;
 
 import static javax.jms.Session.AUTO_ACKNOWLEDGE;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.jms.JMSException;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
@@ -29,6 +29,7 @@ import com.qac.sparkle_gardens.test_data.InitialData;
  * Customer may request the credit check only once, and it is so they can make buy now pay later orders
  *
  */
+@Stateless
 public class AccountsMessageSender {
 	private InitialContext context = null;
 	private Queue requestQueue = null;

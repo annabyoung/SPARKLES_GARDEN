@@ -38,7 +38,7 @@ public class Wishlist {
 	@OneToOne
 	@JoinColumn(name = "accountID", nullable = false)
 	@NotNull
-	private long acccountId;
+	private Customer customer;
 	
 	/**
 	 * A wishlist would have a list of products associated with one
@@ -49,7 +49,6 @@ public class Wishlist {
 	// the list of products in wishlist
 	private List<Product> products;
 	
-	@Deprecated
 	@Column
 	@NotNull
 	private String wishlistName;
@@ -72,9 +71,7 @@ public class Wishlist {
 	
 	
 	// default constructor
-	public Wishlist () {
-		this.acccountId = 0;
-	}
+	public Wishlist () { }
 	
 	@Deprecated
 	/**
@@ -83,8 +80,8 @@ public class Wishlist {
 	 * @param products
 	 * @param wishlistName
 	 */
-	public Wishlist(long acccountId, List<Product> products, String wishlistName) {
-		this.acccountId = acccountId;
+	public Wishlist(Customer customer, List<Product> products, String wishlistName) {
+		this.customer = customer;
 		this.products = (ArrayList<Product>) products;
 		this.wishlistName = wishlistName;
 	}
@@ -94,8 +91,8 @@ public class Wishlist {
 	 * @param acccountId
 	 * @param products
 	 */
-	public Wishlist(long acccountId, List<Product> products) {
-		this.acccountId = acccountId;
+	public Wishlist(Customer customer, List<Product> products) {
+		this.customer = customer;
 		this.products = (ArrayList<Product>) products;
 	}
 	@Deprecated
@@ -107,15 +104,9 @@ public class Wishlist {
 	 * @param acccountId
 	 * @param wishlistName
 	 */
-	public Wishlist(long acccountId, String wishlistName) {
-		this.acccountId = acccountId;
+	public Wishlist(Customer customer, String wishlistName) {
+		this.customer = customer;
 		this.wishlistName = wishlistName;
-	}
-	
-	public Wishlist (long accountId, Product product) {
-		this.acccountId = accountId;
-		products = new ArrayList<Product>();
-		addProduct(product);
 	}
 	
 	/**
@@ -146,8 +137,8 @@ public class Wishlist {
 		this.wishlistName = wishlistName;
 	}
 
-	public long getAccountId() {
-		return acccountId;
+	public Customer getCustomer() {
+		return customer;
 	}
 	
 	public List<Product> getProducts() {
@@ -172,7 +163,7 @@ public class Wishlist {
 	 * @param product
 	 */
 	public void addProduct(Product product) {
-		this.products.add(product);
+		products.add(product);
 	}
 	
 	/**

@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package com.qac.sparkle_gardens.services;
 
 import static org.junit.Assert.*;
@@ -368,7 +366,6 @@ public class ProductServiceTest {
 	
 	
 }
-
 
 
 

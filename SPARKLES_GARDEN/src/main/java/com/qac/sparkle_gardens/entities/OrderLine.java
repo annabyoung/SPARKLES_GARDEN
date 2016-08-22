@@ -3,15 +3,21 @@ package com.qac.sparkle_gardens.entities;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+<<<<<<< HEAD
+=======
+<<<<<<< .merge_file_XwX6cM
+import javax.persistence.Table;
+=======
+>>>>>>> 7c4d37f8e3d8bb39c9a08d970d6bc58309a7710c
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+>>>>>>> .merge_file_1jS2d2
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+
+import com.qac.sparkle_gardens.entities.composite.OrderLineId;
 
 /**
  * The OrderLine class contains information regarding one product &
@@ -23,12 +29,40 @@ import javax.validation.constraints.Null;
  */
 
 @Entity
+<<<<<<< HEAD
 @IdClass(value = OrderLinePK.class)
 public class OrderLine implements Serializable
 {
 	private static final long serialVersionUID = 2617329345043164043L;
 	
 	@Column
+=======
+<<<<<<< .merge_file_XwX6cM
+@IdClass(OrderLineId.class)
+@Table(name="OrderLine")
+=======
+@IdClass(value = OrderLinePK.class)
+>>>>>>> .merge_file_1jS2d2
+public class OrderLine implements Serializable
+{
+	private static final long serialVersionUID = 2617329345043164043L;
+<<<<<<< .merge_file_XwX6cM
+//
+//	@EmbeddedId
+//	private OrderLinePK key;	
+	@Id
+	private Order order;
+	
+	@Id
+	private Product product;
+	
+	@Column
+	@NotNull
+	private int quantity; // Quantity of Product ordered
+=======
+	
+	@Column
+>>>>>>> 7c4d37f8e3d8bb39c9a08d970d6bc58309a7710c
 	@Id
 	@Null
 	private Order order;
@@ -41,12 +75,23 @@ public class OrderLine implements Serializable
 	@Column
 	@Null
 	private int quantity; // Product amount ordered
+<<<<<<< HEAD
+=======
+>>>>>>> .merge_file_1jS2d2
+>>>>>>> 7c4d37f8e3d8bb39c9a08d970d6bc58309a7710c
 	
 	/**
 	 * Default constructor of OrderLine. 
 	 */
 	public OrderLine()
 	{
+<<<<<<< HEAD
+=======
+<<<<<<< .merge_file_XwX6cM
+		//key = new OrderLinePK();
+=======
+>>>>>>> .merge_file_1jS2d2
+>>>>>>> 7c4d37f8e3d8bb39c9a08d970d6bc58309a7710c
 		quantity = 0;
 	}
 	
@@ -72,6 +117,13 @@ public class OrderLine implements Serializable
 	public void setProduct(Product product, int quantity)
 	{
 		this.product = product;
+<<<<<<< HEAD
+=======
+<<<<<<< .merge_file_XwX6cM
+	///	this.key.setProduct(product);
+=======
+>>>>>>> .merge_file_1jS2d2
+>>>>>>> 7c4d37f8e3d8bb39c9a08d970d6bc58309a7710c
 		this.quantity = quantity;
 	}
 	
@@ -82,6 +134,13 @@ public class OrderLine implements Serializable
 	public Product getProduct() 
 	{
 		return product;
+<<<<<<< HEAD
+=======
+<<<<<<< .merge_file_XwX6cM
+	//	return key.getProduct();
+=======
+>>>>>>> .merge_file_1jS2d2
+>>>>>>> 7c4d37f8e3d8bb39c9a08d970d6bc58309a7710c
 	}
 	
 	/**

@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+//import org.mockito.Mock;
+//import org.mockito.MockitoAnnotations;
 
 import com.qac.sparkle_gardens.entities.Product;
 
@@ -18,12 +18,12 @@ import com.qac.sparkle_gardens.entities.Product;
  */
 public class SearchItemsControllerTest {
 	
-	@Mock
+	//@Mock
 	private Product product;
 	
 	@Before
 	public void setup(){
-		MockitoAnnotations.initMocks(this);
+		//MockitoAnnotations.initMocks(this);
 	}
 	
 	@Test

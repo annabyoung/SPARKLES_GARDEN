@@ -1,12 +1,9 @@
 package com.qac.sparkle_gardens.controllers;
 
-import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 
-import com.qac.sparkle_gardens.entities.*;
-import com.qac.sparkle_gardens.repositories.*;
-import com.qac.sparkle_gardens.services.*;
+import com.qac.sparkle_gardens.services.CustomerService;
 
 /**
  * logging in. probably need to do more or borrow 

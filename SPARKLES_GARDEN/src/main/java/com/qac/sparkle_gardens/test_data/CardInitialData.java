@@ -11,7 +11,6 @@ import com.qac.sparkle_gardens.entities.Card;
  * deprecated in favour of InitialData (9/8/16)
  */
 @Singleton
-@Deprecated
 public class CardInitialData 
 {
 	private List<Card> Cards = new ArrayList<Card>();
