@@ -17,7 +17,7 @@ import com.qac.sparkle_gardens.repositories.WishlistRepository;
  */
 @Stateless
 public class WishlistService implements WishlistServiceInterface {
-	@Inject WishlistRepository wishlistRepository;
+	@Inject private WishlistRepository wishlistRepository;
 	/**
 	 * Get wishlist information
 	 * Create wishlist 
