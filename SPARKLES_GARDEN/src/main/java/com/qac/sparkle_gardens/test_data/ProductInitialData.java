@@ -57,12 +57,12 @@ public class ProductInitialData {
 		p5.addProductTags("external_stimulation");
 		products.add(p5);
 		
-		setProducts(products);
+		//setProducts(products);
 		
 	}
 	
 	public List<Product> getAllProducts(){
-		return products;
+		return this.products;
 	}
 	
 	public void addProduct(Product product){
