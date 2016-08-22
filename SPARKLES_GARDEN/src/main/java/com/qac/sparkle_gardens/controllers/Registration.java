@@ -78,8 +78,6 @@ public class Registration {
 		return "home";
 	}
 
-
-
 	public String getFirstName() {
 		return firstName;
 	}

@@ -57,7 +57,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 		}
 		List <Address> places = new ArrayList <Address>();
 		// retrieves all the addresses a customer has 
-	    List<CustomerHasAddress> custAddress = (ArrayList<CustomerHasAddress>) custAddressRepository.findByCustomerID(accountId);
+	    List<CustomerHasAddress> custAddress = (ArrayList<CustomerHasAddress>) custAddressRepository.findByAddressId(accountId);
 		
 		for (CustomerHasAddress cust : custAddress) {
 			places.add(cust.getAddress());

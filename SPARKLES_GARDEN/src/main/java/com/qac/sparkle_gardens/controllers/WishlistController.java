@@ -6,6 +6,7 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.services.OrderService;
@@ -31,21 +32,44 @@ public class WishlistController {
 	OrderService orderService;
 	
 	/**
+	 * 
+	 * @param accountId
+	 * @param product
+	 */
+	public void createWishlist(Customer customer, Product product) {
+		wishlistService.createWishlist(customerRepository.findByID(customer.getAccountID()), product);
+	}
+	
+	public void createWishlist(Customer customer, List<Product> products) {
+		wishlistService.createWishlist(customer, products);
+	}
+	/**
 	 * Creates a wishlist for a given customer
 	 * @param accountId
 	 * @param wishlistName
 	 */
-	public void createWishlist(long accountId, String wishlistName) {
-		wishlistService.createWishlist(customerRepository.findByID(accountId), wishlistName);
-	}
+	//@Deprecated
+	//public void createWishlist(long accountId, String wishlistName) {
+		//wishlistService.createWishlist(customerRepository.findByID(accountId), wishlistName);
+	//}
 	
 	/**
 	 * Adds a product to the wishlist
 	 * @param product
 	 * @param wishlistName
 	 */
-	public void addProductToWishlist(Product product, String wishlistName) {
-		wishlistService.addProduct(product, wishlistName);
+	//@Deprecated
+	//public void addProductToWishlist(Product product, String wishlistName) {
+		//wishlistService.addProduct(product, wishlistName);
+	//}
+	
+	/**
+	 * 
+	 * @param product
+	 * @param accountId
+	 */
+	public void addProductToWishlist(Product product, long accountId) {
+		wishlistService.addProduct(product, accountId);
 	}
 	
 	/**
@@ -61,8 +85,13 @@ public class WishlistController {
 	 * Gets all the products in the wishlist
 	 * @return
 	 */
-	public List<Product> getProducts(String wishlistName) {
-		return wishlistService.getProducts(wishlistName);
+	//@Deprecated
+	//public List<Product> getProducts(String wishlistName) {
+		//return wishlistService.getProducts(wishlistName);
+	//}
+	
+	public List<Product> getProducts(Customer customer) {
+		return wishlistService.getProducts(customer.getAccountID());
 	}
 	
 	

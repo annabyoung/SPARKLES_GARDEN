@@ -20,8 +20,8 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
  *
  */
 public class ProductServiceTest {
-	@Inject private ProductInitialData initialData;
-	@Inject private ProductRepository productRepository;
+	@Inject private ProductInitialData initialData = new ProductInitialData();
+	//@Inject private ProductRepository productRepository;
 	
 	Product p;
 	ProductService pi;
@@ -239,6 +239,7 @@ public class ProductServiceTest {
 		pi.createProductListWithAllTags("");
 	}
 	
+	
 	/**
 	 * Returned list should not be empty if there are products matching all tags searched for
 	 */
@@ -281,22 +282,74 @@ public class ProductServiceTest {
 	}
 	
 	
-	/*
+	/**
+	 * Returned list should not be empty if there are products matching some tags searched for
+	 */
 	@Test
-	public void convertStringToArrayListShouldReturnValidOutput(){
-		System.out.println("convertStringToArrayListShouldReturnValidOutput");
-		resultList
-		
+	public void createProductListWithSomeTagsShouldReturnNotEmptyListForValidInput(){
+		System.out.println("createProductListWithSomeTagsShouldReturnNotEmptyListForValidInput");
+		resultList = pi.createProductListWithSomeTags("dildo dong");
+		boolean result = !(resultList.isEmpty());
+		assertTrue(result);
 	}
 	
-	*/
+	/**
+	 * Returned list should be empty if there are no products matching any tags searched for
+	 */
+	@Test
+	public void createProductListWithSomeTagsShouldReturnEmptyListForInvalidInput(){
+		System.out.println("createProductListWithSomeTagsShouldReturnEmptyListForInvalidInput");
+		resultList = pi.createProductListWithSomeTags("invalid");
+		boolean result = !(resultList.isEmpty());
+		assertFalse(result);
+	}
+	
+	/**
+	 * Returned list should only contain products matching some tags searched for
+	 */
+	@Test
+	public void createProductListWithSomeTagsShouldOnlyContainItemsWithMatchingTags(){
+		System.out.println("createProductListWithSomeTagsShouldOnlyContainItemsWithMatchingTags");
+		resultList = pi.createProductListWithSomeTags("vibrating multi_speed");
+		assertEquals(resultList.size(), 3);
+	}
+	
+	/**
+	 * Throw illegal argument exception for empty input
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void convertStringToArrayListShouldThrowIllegalExceptionForEmptyInput(){
+		System.out.println("convertStringToArrayListShouldThrowIllegalExceptionForEmptyInput");
+		pi.convertStringToArrayList("");		
+	}
+	
+	/**
+	 * A not empty list should be returned for valid input
+	 */
+	@Test
+	public void convertStringToArrayListShouldReturnNotEmptyListForValidInput(){
+		System.out.println("convertStringToArrayListShouldReturnNotEmptyListForValidInput");
+		List<String> resultL = pi.convertStringToArrayList("this that");
+		boolean result = !(resultL.isEmpty());
+		assertTrue(result);
+	}
+	
+	/**
+	 * An empty list should be returned for invalid input
+	 */
+	@Test
+	public void convertStringToArrayListShouldReturnEmptyListForInvalidInput(){
+		System.out.println("convertStringToArrayListShouldReturnNotEmptyListForValidInput");
+		List<String> resultL = pi.convertStringToArrayList(" ");
+		boolean result = !(resultL.isEmpty());
+		assertFalse(result);
+	}
 	
 	@After
 	public void teardown(){
 		System.out.println("Teardown");
-		//product = null;
+		productL.clear();
 		pi = null;
-		//products.clear();
 		p = null;
 		resultList.clear();
 	}

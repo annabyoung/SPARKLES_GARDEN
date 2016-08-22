@@ -54,19 +54,19 @@ public interface CustomerHasAddressRepository {
 	 * @param customerID
 	 * @return
 	 */
-	public List<CustomerHasAddress> findByCustomerID(long customerID);
+	public List<CustomerHasAddress> findByAccountId(long customerId);
 	
 	/**
 	 * Finds instances of Customer Owning Addresss by Address.
 	 * @param AddressID
 	 * @return
 	 */
-	public List<CustomerHasAddress> findByAddressID(long AddressID);
+	public List<CustomerHasAddress> findByAddressId(long addressId);
 	
 	/**
 	 * @MethodAuthor Tyler Deans
 	 * Checks if there are any customer addresses associated with an given address
 	 * @return
 	 */
-	public boolean isCustomerId(Address address);
+	public boolean isAccountId(Address address);
 }

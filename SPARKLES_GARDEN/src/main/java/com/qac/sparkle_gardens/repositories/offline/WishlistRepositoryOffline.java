@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
-import com.qac.sparkle_gardens.test_data.InitialData;
 import com.qac.sparkle_gardens.test_data.WishlistInitialData;
 
 /**
@@ -20,7 +19,7 @@ import com.qac.sparkle_gardens.test_data.WishlistInitialData;
 @Stateless
 @Default
 public class WishlistRepositoryOffline implements WishlistRepository{
-	@Inject private InitialData initialData;
+	@Inject private WishlistInitialData initialData;
 	
 	/**
 	 * @param Wishlist wishlist
@@ -87,23 +86,23 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		return wish;
 	}
 	
-	@Deprecated
+	//@Deprecated
 	/**
 	 * No longer necessary
 	 * Finds a wishlist according to the name of the wishlist
 	 * @param name
 	 * @return
 	 */
-	public Wishlist findByName(String name) {
-		List<Wishlist> list = initialData.getWishlists();
-		Wishlist wish = new Wishlist();
-		for (int index = 0; index < list.size(); index++) {
-			if (list.get(index).getWishlistName().equals(name)) {
-				wish = list.get(index);
-			}
-		}
-		return wish;
-	}
+	//public Wishlist findByName(String name) {
+		//List<Wishlist> list = initialData.getWishlists();
+		//Wishlist wish = new Wishlist();
+		//for (int index = 0; index < list.size(); index++) {
+			//if (list.get(index).getWishlistName().equals(name)) {
+				//wish = list.get(index);
+			//}
+		//}
+		//return wish;
+	//}
 	/**
 	 * This method adds a product to the wishlist
 	 * @param product
@@ -127,32 +126,6 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		Wishlist aList = findByAccountId(acctId); 
 		aList.addProduct(product); // adds the product to the list
 		updateWishlist(aList); // updates the original list with the updated lists
-	}
-	
-	@Deprecated
-	/**
-	 * This method adds a product to the wishlist according to the name 
-	 *  of the wishlist
-	 * @param product
-	 * @param name
-	 */
-	public void addProductToList(Product product, String name) {
-		// Creates a wishlist object based on the given ID
-		Wishlist aList = findByName(name); 
-		aList.addProduct(product); // adds the product to the list
-		updateWishlist(aList); // updates the original list with the updated lists
-	}
-	
-	@Deprecated
-	/**
-	 * Removes a product from a wishlist
-	 * @param product
-	 * @param name
-	 */
-	public void removeProduct(Product product, String name) {
-		Wishlist aList = findByName(name);
-		aList.removeProduct(product);
-		updateWishlist(aList);
 	}
 	
 	/**
@@ -202,12 +175,8 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		initialData.setWishlists(list);
 	}
 	
-	/**
-	 * Returns all the products in a wishlist
-	 * @param wishlist
-	 */
-	public List<Product> getProducts(String wishlistName) {
-		Wishlist list = findByName(wishlistName);
+	public List<Product> getProducts(long accountId) {
+		Wishlist list = findByAccountId(accountId);
 		return list.getProducts();
 	}
 	

@@ -18,7 +18,7 @@
 								Username</label>
 							<div class="col-sm-4">
 								<h:inputText name="Username" id="username" required="true"
-									value="#{login.email}" />
+									value="#{login.username}" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -32,14 +32,14 @@
 						<div>
 							<h:commandButton class="btn btn-warning" type="button"
 								role="button" value="Login" onclick="loginValidation()"
-								update="UsernameCheck" />
+								update="getDetails" />
 						</div>
 						<p>
 							<h:outputLink value="requestResetEmail.xhtml">Forgot Password?</h:outputLink>
 
 						</p>
 						<h:panelGroup id="getDetails" style="background-color: yellow;">
-							<label>Username: </label><h:outputText id="UsernameCheck" value="#{login.email}" style="text-align: left"></h:outputText>
+							<label>Username: </label><h:outputText id="UsernameCheck" value="#{login.username}" style="text-align: left"></h:outputText>
 							<br></br>
 							<label>Password: </label><h:outputText id="PasswordCheck" value="#{login.password}" style="text-align: left"></h:outputText>
 						</h:panelGroup>
