@@ -39,7 +39,7 @@ public class AddressService {
 			throw new IllegalArgumentException();
 		}
 		// Retrieve all the addresses under a given address ID
-		ArrayList<CustomerHasAddress> custAdd = (ArrayList<CustomerHasAddress>) custAddressRepository.findByAddressID(addressId);
+		ArrayList<CustomerHasAddress> custAdd = (ArrayList<CustomerHasAddress>) custAddressRepository.findByAddressId(addressId);
 		
 		CustomerHasAddress custAddress = new CustomerHasAddress();
 		// Finds the given account ID with that address ID
@@ -55,7 +55,7 @@ public class AddressService {
 		/** if there are no other customers who have this associated address
 		 * then the address is removed
 		 */
-		if (!custAddressRepository.isCustomerId(address)) {
+		if (!custAddressRepository.isAccountId(address)) {
 			addressRepository.removeAddress(address);
 		}
 		
@@ -157,7 +157,7 @@ public class AddressService {
 		/** if there are no other customers who have this associated address
 		 * then the address is removed
 		 */
-		if (!custAddressRepository.isCustomerId(address)) {
+		if (!custAddressRepository.isAccountId(address)) {
 			addressRepository.removeAddress(address);
 		}
 		
