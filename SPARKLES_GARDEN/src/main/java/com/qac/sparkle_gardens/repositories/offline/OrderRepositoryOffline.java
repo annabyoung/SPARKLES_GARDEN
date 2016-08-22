@@ -30,7 +30,7 @@ public class OrderRepositoryOffline
 	
 	public void persistOrder(Order o) 
 	{
-		initialData.addOrder(o);
+//		initialData.addOrder(o);
 	}
 	
 	public void persistOrders(List<Order> o) 

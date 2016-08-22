@@ -20,8 +20,8 @@ public class AddItem
 	@Inject
 	OrderService service;
 	
-	@Inject
-	ProductService pService;
+//	@Inject
+//	private ProductService pService;
 	
 	private int quantity = 0;
 	private int price = 0;
@@ -33,12 +33,12 @@ public class AddItem
 	 */
 	public String addItem(long productID)
 	{
-		Product p = pService.getProductByID(productID);
+//		Product p = pService.getProductByID(productID);
 
-		if (!pService.checkInStock(p))
-			return "product_not_in_stock";
+/*		if (!pService.checkInStock(p))
+			return "product_not_in_stock";*/
 
-		service.addProductToBasket(p, quantity);
+//		service.addProductToBasket(p, quantity);
 		
 		return "home";
 	}

@@ -5,6 +5,7 @@ package com.qac.sparkle_gardens.jms;
 
 import static javax.jms.Session.AUTO_ACKNOWLEDGE;
 
+import javax.ejb.Stateless;
 import javax.jms.JMSException;
 import javax.jms.Queue;
 import javax.jms.QueueConnection;
@@ -22,6 +23,7 @@ import javax.naming.NamingException;
  * Customer's CreditStatus will be changed by Accounts after Credit Check and then they will send back a message
  *
  */
+@Stateless
 public class AccountsMessageReceiver {
 	private InitialContext context = null;
 	private Queue responseQueue = null;
