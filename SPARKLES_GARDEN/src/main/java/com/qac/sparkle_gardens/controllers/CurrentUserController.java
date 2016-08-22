@@ -7,7 +7,7 @@ public class CurrentUserController {
 	private long customerId;
 
 	public long getCustomerId() {
-		return 3;
+		return customerId;
 	}
 
 	public void setCustomerId(long customerId) {
