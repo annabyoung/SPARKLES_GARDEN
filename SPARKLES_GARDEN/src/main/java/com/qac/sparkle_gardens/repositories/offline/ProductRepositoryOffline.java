@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 import com.qac.sparkle_gardens.test_data.ProductInitialData;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.util.MethodAuthor;
 
 @Stateless
 @Default
@@ -27,6 +26,7 @@ public class ProductRepositoryOffline implements ProductRepository
 	public void persistProducts(List<Product> p) {
 		
 	}
+	
 	//find a product by ID
 	public Product findByProductID(long productID){
 		for (Product p : initialData.getAllProducts()){ //search through all products in product list
@@ -36,6 +36,7 @@ public class ProductRepositoryOffline implements ProductRepository
 		}
 		return null;
 	}
+	
 	//find a product by name
 	public Product findByProductName(String productName) {
 		for (Product p : initialData.getAllProducts()){ //search through all products in product list
@@ -45,6 +46,7 @@ public class ProductRepositoryOffline implements ProductRepository
 		}
 		return null;
 	}
+	
 	//Search for products by price
 	public List<Product> findByProductPrice(double price){
 		List<Product> productsByPrice = new ArrayList<Product>();
@@ -80,6 +82,7 @@ public class ProductRepositoryOffline implements ProductRepository
 	public void createProduct(Product p) {
 		
 	}
+	
 	//update the product
 	public void updateProduct(Product p) {
 		List<Product> ps = initialData.getAllProducts();

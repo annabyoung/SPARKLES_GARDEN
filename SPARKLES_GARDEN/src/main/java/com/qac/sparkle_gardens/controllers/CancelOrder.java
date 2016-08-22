@@ -21,11 +21,9 @@ import com.qac.sparkle_gardens.controllers.RefundCard;
 @RequestScoped
 public class CancelOrder 
 {
-	@Inject
-	OrderService service;
+	@Inject private	OrderService service;
 	
-	@Inject
-	RefundCard refund;
+	@Inject private	RefundCard refund;
 	
 	private String error = "";
 	
@@ -44,14 +42,21 @@ public class CancelOrder
 		if (service.canCancelOrder(order)){
 			if(order.isPayLater()){
 				order.setPaymentStatus(PaymentStatus.VOID);
+				return "home";
 			}
 			refund.refundCard(order);
+			return "home";
 		}
 		error = "Order is not valid for cancellation.";
-		return "home";
+		return getError();
 	}
 	
+	/**
+	 * Retrieve the error message if there is one
+	 * @return
+	 */
 	public String getError(){
+		System.out.println(error);
 		return error;
 	}
 }

@@ -25,14 +25,16 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 @Stateless
 public class ProductService {
-	@Inject private ProductRepository productRepository= new ProductRepositoryOffline();
 	/*
 	 * Access Initial Data not repository
 	 * Inject Initial Data 
 	 */
 	
+	@Inject private ProductRepository productRepository= new ProductRepositoryOffline();
+	@Inject private ProductInitialData productData = new ProductInitialData();
+	
 	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
-	private List<Product> productL = productRepository.getProducts(); 
+	private List<Product> productL = productData.getAllProducts(); 
 	private List<String> tags = new ArrayList<String>();
 	
 	
@@ -130,7 +132,6 @@ public class ProductService {
 	 */
 	public List<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
 		List<Product> productsInRange = new ArrayList<Product>();
-		//List<Product> pl = productRepository.getProducts();
 		for(Product p : productL){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
 				productsInRange.add(p);
@@ -230,6 +231,9 @@ public class ProductService {
 	 */
 	
 	public List<String> convertStringToArrayList(String tag){
+		if(tag.isEmpty() || tag == null){
+			throw new IllegalArgumentException();
+		}
 		List<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tag.split(" ")));
 		
 		return tagsToSearch;

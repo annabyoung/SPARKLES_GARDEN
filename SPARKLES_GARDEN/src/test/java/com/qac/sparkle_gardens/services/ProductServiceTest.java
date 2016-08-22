@@ -288,16 +288,73 @@ public class ProductServiceTest {
 		pi.createProductListWithSomeTags("");
 	}
 	
-	
-	/*
+	/**
+	 * Returned list should not be empty if there are products matching all tags searched for
+	 */
 	@Test
-	public void convertStringToArrayListShouldReturnValidOutput(){
-		System.out.println("convertStringToArrayListShouldReturnValidOutput");
-		resultList
-		
+	public void createProductListWithSomeTagsShouldReturnNotEmptyListForValidInput(){
+		System.out.println("createProductListWithSomeTagsShouldReturnNotEmptyListForValidInput");
+		resultList = pi.createProductListWithSomeTags("dildo");
+		boolean result = !(resultList.isEmpty());
+		assertTrue(result);
 	}
 	
-	*/
+	/**
+	 * Returned list should be empty if there are no products matching all tags searched for
+	 */
+	@Test
+	public void createProductListWithSomeTagsShouldReturnEmptyListForNoProductsWithMatchingTags(){
+		System.out.println("createProductListWithSomeTagsShouldReturnEmptyListForNoProductsWithMatchingTags");
+		resultList = pi.createProductListWithSomeTags("star_wars");
+		boolean result = !(resultList.isEmpty());
+		assertFalse(result);
+	}
+	
+	/**
+	 * The resulting list should contain 3 items since there are 3 producs in initial data that
+	 * contain the tag "vibrating"
+	 */
+	@Test
+	public void createProductListWithSomeTagsShouldReturnListOfAllProductsWithAnyMatchingTags(){
+		System.out.println("createProductListWithSomeTagsShouldReturnListOfAllProductsWithAnyMatchingTags");
+		resultList = pi.createProductListWithSomeTags("vibrating");
+		for (Product p : resultList){
+			System.out.println("Product: " + p.getProductName());
+		}
+		assertEquals(resultList.size(),3);
+	}
+	
+	/**
+	 * Illegal argument exception should be thrown for empty String
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void convertStringToArrayListShouldThrowIllegalExceptionForEmptyString(){
+		System.out.println("convertStringToArrayListShouldThrowIllegalExceptionForEmptyString");
+		pi.convertStringToArrayList("");
+	}
+	
+	
+	/**
+	 *  Illegal argument exception should be thrown for null input
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void convertStringToArrayListShouldThrowIllegalExceptionForNull(){
+		System.out.println("convertStringToArrayListShouldThrowIllegalExceptionForNull");
+		pi.convertStringToArrayList(null);
+	}
+	
+	/**
+	 * If valid input is inserted then a non-empty list should be returned
+	 */
+	@Test
+	public void convertStringToArrayListShouldReturnValidOutputForValidInput(){
+		System.out.println("convertStringToArrayListShouldReturnValidOutputForValidInput");
+		List<String> tagList = pi.convertStringToArrayList("tags test"); 
+		boolean result = !(tagList.isEmpty());
+		assertTrue(result);
+		}
+	
+	
 	
 	@After
 	public void teardown(){
