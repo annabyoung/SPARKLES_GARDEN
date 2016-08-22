@@ -22,7 +22,7 @@ import com.qac.sparkle_gardens.services.CustomerService;
  */
 
 @Stateless
-@Named (value ="Login")
+@Named (value ="login")
 public class Login {
 
 	  private String username;
