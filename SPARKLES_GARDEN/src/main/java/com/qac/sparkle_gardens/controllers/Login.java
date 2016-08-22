@@ -21,8 +21,8 @@ import com.qac.sparkle_gardens.services.CustomerService;
  * need to create a session bean now?
  */
 
-@Stateless
-@Named (value ="Login")
+@RequestScoped
+@Named (value ="login")
 public class Login {
 
 	  private String username;
@@ -32,7 +32,7 @@ public class Login {
 	    return this.username;
 	  }
 
-	  public void setUserName(String username) {
+	  public void setUsername(String username) {
 	    this.username = username;
 	  }
 
