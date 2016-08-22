@@ -74,6 +74,7 @@ public class Card implements Serializable{
 	 */
 	
 	public Card(long cardID, String customerName, String cardNumber, String expirationDate) {
+		this.cardID = cardID;
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
@@ -147,6 +148,11 @@ public class Card implements Serializable{
 	 */
 	public boolean equals(Card anotherCard){
 		return anotherCard.getCardID() == cardID;
+	}
+
+	public void setCardID(long cardID) {
+		// TODO Auto-generated method stub
+		this.cardID = cardID;
 	}
 
 

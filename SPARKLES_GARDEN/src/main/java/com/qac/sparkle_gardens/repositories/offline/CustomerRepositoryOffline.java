@@ -47,6 +47,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		@Override 
 		public Customer findByID(long accountID) {
 		
+			customers = initialData.getCustomers();
 			for (int i=0; i<customers.size(); i++)
 			{
 				if(customers.get(i).getAccountID() == accountID){

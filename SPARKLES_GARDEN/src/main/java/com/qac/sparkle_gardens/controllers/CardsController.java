@@ -20,7 +20,8 @@ public class CardsController {
 	private List<Card> cards;
 	
 	public List<Card> getCards() {
-		return cardService.getCardsByCustomer(currentUserController.getCustomerId());
+		//return cardService.getCardsByCustomer(currentUserController.getCustomerId());
+		return cardService.getCardsByCustomer(3);
 	}
 	
 	public void setCards(List<Card> cards) {

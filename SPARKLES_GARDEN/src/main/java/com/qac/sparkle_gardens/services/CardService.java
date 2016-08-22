@@ -33,6 +33,10 @@ public class CardService {
 		
 	}
 	
+	public Card setupCard(String cardOwnerName, String cardNumber, String expirationDate){
+		return new Card(cardOwnerName, cardNumber, expirationDate);
+	}
+	
 	/**
 	 * Check to make sure that the card details are valid.
 	 * 
