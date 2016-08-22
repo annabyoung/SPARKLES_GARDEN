@@ -56,6 +56,7 @@ public class WishlistService implements WishlistServiceInterface {
 	 * @param accountId
 	 * @param name (name of the wishlist)
 	 */
+	@Deprecated
 	public void createWishlist(long accountId, String name) {
 		Wishlist wish = new Wishlist(accountId, name);
 		wishlistRepository.persistWishlist(wish);
@@ -71,15 +72,11 @@ public class WishlistService implements WishlistServiceInterface {
 		wishlistRepository.persistWishlist(wish);
 	}
 	
-	/**
-	 * Adds a product to a wishlist
-	 * @param product
-	 * @param wishlistId
-	 */
-	public void addProduct(Product product, long wishlistId) {
-		wishlistRepository.addProductToList(product, wishlistId);
+	public void addProduct(Product product, long accountId) {
+		wishlistRepository.addProductToListWithAcctId(product, accountId);
 	}
 	
+	@Deprecated
 	/**
 	 * Overloaded addProduct method
 	 * if the name of the wishlist is passed instead of the wishlist ID
@@ -89,7 +86,12 @@ public class WishlistService implements WishlistServiceInterface {
 	public void addProduct(Product product, String wishlistName) {
 		wishlistRepository.addProductToList(product, wishlistName);
 	}
+	//@Deprecated
+		//public void addProduct(Product product, long wishlistId) {
+		//	wishlistRepository.addProductToList(product, wishlistId);
+		//}
 	
+	@Deprecated
 	/**
 	 * Removes a product from a wishlist
 	 * @param product
@@ -113,6 +115,7 @@ public class WishlistService implements WishlistServiceInterface {
 	 * @param wishlistName
 	 * @return
 	 */
+	@Deprecated
 	public List<Product> getProducts(String wishlistName) {
 		return wishlistRepository.getProducts(wishlistName);
 	}

@@ -10,7 +10,7 @@ import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.repositories.AddressRepository;
 //import com.qac.sparkle_gardens.test_data.InitialData;
 
-public class AddressRepositoryTest {
+public class AddressRepositoryOfflineTest {
 	
 	
 	Address address;
