@@ -27,26 +27,20 @@ public class UpdateCustomer implements Controller<Customer>
 	private long userID;
 	private String errors="unable to update information";
 	
+	// update cards and address need to be thier own controllers 
 	
-	//form inputs
-	
-	
-	// update cards and address need to be their own controllers 
-	
-	public String updateCustomers(long customerID)
+	public String updateCustomer(long customerID)
 	{
-		
 		
 		Customer customer = service.getCustomerByID(userID);
 		
 		//change value here with science 
-		//display values
-	
+		//do thing
 		//validate stuff
 		
 	
 		if (service.updateAccountDetails(customer))		
-		return "home"; // successfully added a customer 
+		return "home";
 		else
 			return errors;
 	

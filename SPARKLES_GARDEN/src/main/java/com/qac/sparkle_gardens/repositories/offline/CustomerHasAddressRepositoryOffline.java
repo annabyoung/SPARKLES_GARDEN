@@ -27,7 +27,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * @param CustomerHasAddress c
 	 */
 	public void persistCustomerHasAddress(CustomerHasAddress c) {
-		initialData.addCustomerHasAddress(c);
+//		initialData.addCustomerHasAddress(c);
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * @param ArrayList<CustomerHasAddress> c
 	 */
 	public void persistCustomerHasAddresses(List<CustomerHasAddress> c) {
-		initialData.setCustomerHasAddresses(c);
+//		initialData.setCustomerHasAddresses(c);
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * @return
 	 */
 	public List<CustomerHasAddress> getCustomerHasAddresses() {
-		return initialData.getCustomerHasAddresses();
+		return initialData.getCusHasAddress();
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * @param c
 	 */
 	public void addCustomerHasAddress(CustomerHasAddress c) {
-		initialData.addCustomerHasAddress(c);
+//		initialData.addCustomerHasAddress(c);
 	}
 
 	/**
@@ -59,14 +59,14 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * @param C
 	 */
 	public void updateCustomerHasAddress(CustomerHasAddress C) {
-		List<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
+		List<CustomerHasAddress> custAddress = initialData.getCusHasAddress();
 		for (int index = 0; index < custAddress.size(); index++) {
 			
 			if(custAddress.get(index).getAccountId() == C.getAccountId() && custAddress.get(index).getAddressId() == C.getAddressId() ) {
 				custAddress.set(index, C);
 			}
 		}
-		initialData.setCustomerHasAddresses(custAddress);
+//		initialData.setCustomerHasAddresses(custAddress);
 	}
 
 	/**
@@ -74,14 +74,14 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * @param c
 	 */
 	public void removeCustomerHasAddress(CustomerHasAddress c) {
-		List<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
+		List<CustomerHasAddress> custAddress = initialData.getCusHasAddress();
 		for (int index = 0; index < custAddress.size(); index++) {
 			
 			if(custAddress.get(index).getAccountId() == c.getAccountId() && custAddress.get(index).getAddressId() == c.getAddressId() ) {
 				custAddress.remove(index);
 			}
 		}
-		initialData.setCustomerHasAddresses(custAddress);
+//		initialData.setCustomerHasAddresses(custAddress);
 	}
 
 
@@ -91,7 +91,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * @return
 	 */
 	public List<CustomerHasAddress> findByCustomerID(long accountID) {
-		List<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
+		List<CustomerHasAddress> custAddress = initialData.getCusHasAddress();
 		List<CustomerHasAddress> customerOwned = new ArrayList<CustomerHasAddress>();
 		for (int index = 0; index < custAddress.size(); index++) {
 			
@@ -108,7 +108,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * @return
 	 */
 	public List<CustomerHasAddress> findByAddressID(long AddressID) {
-		List<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
+		List<CustomerHasAddress> custAddress = initialData.getCusHasAddress();
 		List<CustomerHasAddress> customerOwned = new ArrayList<CustomerHasAddress>();
 		for (int index = 0; index < custAddress.size(); index++) {
 			
@@ -124,7 +124,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * @return
 	 */
 	public boolean isCustomerId(Address address) {
-		List<CustomerHasAddress> custAddress = initialData.getCustomerHasAddresses();
+		List<CustomerHasAddress> custAddress = initialData.getCusHasAddress();
 		
 		for (int index = 0; index < custAddress.size(); index++) {
 			if (custAddress.get(index).getAddressId() == address.getAddressId()) {

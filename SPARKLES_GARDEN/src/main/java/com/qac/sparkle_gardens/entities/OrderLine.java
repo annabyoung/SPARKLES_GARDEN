@@ -3,15 +3,15 @@ package com.qac.sparkle_gardens.entities;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+
+import com.qac.sparkle_gardens.entities.composite.OrderLineId;
 
 /**
  * The OrderLine class contains information regarding one product &
@@ -23,31 +23,28 @@ import javax.validation.constraints.Null;
  */
 
 @Entity
-@IdClass(value = OrderLinePK.class)
+@IdClass(OrderLineId.class)
+@Table(name="OrderLine")
 public class OrderLine implements Serializable
 {
 	private static final long serialVersionUID = 2617329345043164043L;
 	
-	@Column
+
 	@Id
-	@Null
 	private Order order;
 	
-	@Column
 	@Id
-	@Null
 	private Product product;
 	
 	@Column
-	@Null
-	private int quantity; // Product amount ordered
+	@NotNull
+	private int quantity; // Quantity of Product ordered
 	
 	/**
 	 * Default constructor of OrderLine. 
 	 */
 	public OrderLine()
 	{
-		quantity = 0;
 	}
 	
 	/**

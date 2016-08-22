@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.ejb.Stateless;
+import javax.ejb.Stateless; 
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Card;
@@ -93,19 +93,38 @@ public class CardService {
 		}
 		return true;
 	}
+
+	/**
+	 * Returns an ArrayList of <Card>'s based on customerId.
+	 * @param customerId
+	 * @return List<Card>
+	 */
+	public List<Card> getCardsByCustomer(long customer){
+		System.out.println(">>> Customer ID: " + customer + " <<<");
+		if (customer == 0)
+			return new ArrayList<Card>();
+		return filterCards(cardOwnershipRepository.findByAccountID(customer));
+	}
+	
 	/**
 	 * Returns an ArrayList of <Card>'s based on customer.
 	 * @param customer
 	 * @return List<Card>
 	 */
+	@Deprecated
 	public List<Card> getCardsByCustomer(Customer customer){
-		ArrayList<Card> cardsOwnedByCustomer = new ArrayList<Card>();
-		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
-			if (co.getCustomer().equals(customer)){
-				cardsOwnedByCustomer.add(co.getCard());
-			}
+		if (customer.equals(null))
+			return new ArrayList<Card>();
+		return filterCards(cardOwnershipRepository.findByAccountID(customer.getAccountID()));
+	}
+	
+	private List<Card> filterCards(List<CustomerHasCard> cardsOwnedByCustomer) {
+		List<Card> cards = new ArrayList<>();
+		System.out.println(">>> cursomers Cards: " + cardsOwnedByCustomer.isEmpty() + " <<<");
+		for(CustomerHasCard customerHasCard : cardsOwnedByCustomer) {
+			cards.add(cardRepository.findByID(customerHasCard.getCard().getCardID()));
 		}
-		return cardsOwnedByCustomer;
+		return cards;
 	}
 	
 	/**
@@ -123,7 +142,7 @@ public class CardService {
 			if (co.getCustomer().equals(customer) && co.getCard().equals(card)){
 				cardOwnershipRepository.removeCustomerHasCard(co);
 				if (!checkIfAnyoneOwnsCard(card)){
-					cardRepository.removeCard(card.getCardId());
+//					cardRepository.removeCard(card.getCardId());
 				}
 			}
 		}
@@ -142,10 +161,10 @@ public class CardService {
 	 */
 	public boolean deleteCardOfCustomer(long cardId, long accountId){
 		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
-			if (co.getCustomerId() == accountId && co.getCardId() == cardId){
+			if (co.getCustomer().getAccountID() == accountId && co.getCard().getCardID() == cardId){
 				cardOwnershipRepository.removeCustomerHasCard(co);
 				if (!checkIfAnyoneOwnsCard(cardId)){
-					cardRepository.removeCard(cardId);
+//					cardRepository.removeCard(cardId);
 				}
 			}
 		}
@@ -175,7 +194,7 @@ public class CardService {
 	 */
 	public boolean checkIfAnyoneOwnsCard(long cardId){
 		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
-			if (co.getCardId() == cardId){
+			if (co.getCard().getCardID() == cardId){
 				return true;
 			}
 		}
