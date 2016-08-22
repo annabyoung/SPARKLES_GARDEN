@@ -11,7 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
+import com.qac.sparkle_gardens.repositories.ProductRepository;
 import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 
@@ -25,8 +25,8 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 @Stateless
 public class ProductService {
-	@Inject private ProductRepositoryOffline productRepository = new ProductRepositoryOffline();
-	@Inject private ProductInitialData productData = new ProductInitialData();
+	@Inject private ProductRepository productRepository;
+	@Inject private ProductInitialData productData;
 	
 	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
 	private List<Product> productL = productData.getAllProducts(); 
@@ -238,20 +238,17 @@ public class ProductService {
 
 	/**
 	 * Return the list of all products that meet the search parameters
-	 */
-	
+	 */	
 	public List<Product> getProductList() {
-		// TODO Auto-generated method stub
-		return null;
+		return productList;
 	}
 
 
 	/**
 	 * Clears the search query
 	 */
-	
 	public void clearSearchQuery() {
-		// TODO Auto-generated method stub
+		productList.clear();
 		
 	}
 

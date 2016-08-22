@@ -18,19 +18,22 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 	
 	@Override
 	public void persistCustomerHasCard(CustomerHasCard c) {
+		
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void persistCustomerHasCards(List<CustomerHasCard> c) {
+		
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public List<CustomerHasCard> getCustomerHasCards() {
-		// TODO Auto-generated method stub
+		
+	
 		return null;
 	}
 
@@ -43,19 +46,25 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 	@Override
 	public void updateCustomerHasCard(CustomerHasCard C) {
 		// TODO Auto-generated method stub
+		initialData.getCusHasCards().
+		
 
 	}
 
 	@Override
 	public void removeCustomerHasCard(CustomerHasCard c) {
 		// TODO Auto-generated method stub
-
+			
+		
 	}
 
 	@Override
 	public List<CustomerHasCard> findByCardID(long cardID) {
-		// TODO Auto-generated method stub
-		return null;
+		List<CustomerHasCard> customerHasCards = new ArrayList<CustomerHasCard>();
+		
+		
+		
+		return customerHasCards;
 	}
 
 	@Override
