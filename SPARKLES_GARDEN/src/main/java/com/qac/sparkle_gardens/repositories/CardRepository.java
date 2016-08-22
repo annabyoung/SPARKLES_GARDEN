@@ -15,7 +15,7 @@ public interface CardRepository
 	 * Keeps cards in database.
 	 * @param Card c
 	 */
-	public void persistCard(Card c);
+	public void addCard(Card c);
 
 	/**
 	 * Keeps ArrayList of cards.
@@ -40,7 +40,7 @@ public interface CardRepository
 	 * Removes a card.
 	 * @param c
 	 */
-	public void removeCard(long id);
+	public void removeCard(Card c);
 
 	/**
 	 * Finds all cards using cardNumber.

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.repositories.CardRepository;
@@ -23,9 +24,9 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
 public class CardRepositoryOffline implements CardRepository
 {
 	@Inject
-	InitialData initialData;
+	InitialData initialData = new InitialData();
 
-	public void persistCard(Card c) 
+	public void addCard(Card c) 
 	{
 		initialData.addCard(c);
 	}
@@ -51,20 +52,19 @@ public class CardRepositoryOffline implements CardRepository
 		}
 		return null;
 	}
-	
+	@Named("cards")
 	public List<Card> getCards() 
 	{
 		return initialData.getCards();
 	}
-	
-	@MethodAuthor (author = "Damien Lloyd")
-	public void removeCard(long cardID) 
+
+	public void removeCard(Card c) 
 	{
 		List<Card> cl = initialData.getCards();
 		
 		for (int i = 0; i < cl.size(); i++)
 		{
-			if (cl.get(i).getCardId() == cardID)
+			if (cl.get(i).equals(c))
 				cl.remove(i);
 		}
 	}

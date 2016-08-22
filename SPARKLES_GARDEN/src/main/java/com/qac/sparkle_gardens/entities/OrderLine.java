@@ -7,6 +7,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -15,37 +16,37 @@ import javax.validation.constraints.Null;
 /**
  * The OrderLine class contains information regarding one product &
  * its quantity. Note: the quantity of the product
- * in the OrderLine is NOT equal to the quantity of the product's stock level.
+ * in the OrderLine is NOT the product's stock level.
  * 
  * @author Damien Lloyd
  *
  */
 
 @Entity
+@IdClass(value = OrderLinePK.class)
 public class OrderLine implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2617329345043164043L;
-
-	@EmbeddedId
-	private OrderLinePK key;
 	
 	@Column
+	@Id
+	@Null
+	private Order order;
+	
+	@Column
+	@Id
 	@Null
 	private Product product;
 	
 	@Column
 	@Null
-	private int quantity; // Quantity of Product ordered
+	private int quantity; // Product amount ordered
 	
 	/**
 	 * Default constructor of OrderLine. 
 	 */
 	public OrderLine()
 	{
-		key = new OrderLinePK();
 		quantity = 0;
 	}
 	
@@ -70,7 +71,7 @@ public class OrderLine implements Serializable
 	 */
 	public void setProduct(Product product, int quantity)
 	{
-		this.key.setProduct(product);
+		this.product = product;
 		this.quantity = quantity;
 	}
 	
@@ -80,7 +81,7 @@ public class OrderLine implements Serializable
 	 */
 	public Product getProduct() 
 	{
-		return key.getProduct();
+		return product;
 	}
 	
 	/**

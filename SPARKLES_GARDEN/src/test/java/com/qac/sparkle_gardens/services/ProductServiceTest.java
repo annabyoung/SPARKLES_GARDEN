@@ -8,17 +8,11 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//import javax.inject.Inject;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.entities.Product;
-//import com.qac.sparkle_gardens.repositories.ProductRepository;
-//import com.qac.sparkle_gardens.test_data.InitialData;
-//import com.qac.sparkle_gardens.test_data.InitialData;
 
 /**
  * @author Annabelle Young
@@ -28,21 +22,17 @@ import com.qac.sparkle_gardens.entities.Product;
  *
  */
 public class ProductServiceTest {
-	//@Inject InitialData initialData;
-	//@Inject ProductRepository productRepository;
 	
-	//Product product;
-	Product p;
-	ProductInterface pi;
-	List<Product> resultList;
-	//InitialData initData;
+	private Product p;
+	private ProductService pi;
+	private List<Product> resultList;
 	
 	
 	@Before
 	public void setup(){
 		System.out.println("Setup");
 		pi = new ProductService();
-		p = new Product("The Great American Challenge", 50, 79.99, "/images/gnome0.jpg");
+		p = new Product("The Great American Challenge", 50, 79.99);
 		resultList = new ArrayList<>();
 		
 	}
@@ -146,7 +136,7 @@ public class ProductServiceTest {
 	}
 	
 	/**
-	 * Verifies that long productID value passed into getProductById is not 0
+	 * Verifies that long productID value passed in returns the product associated with ID
 	 */
 	/*
 	 * Currently there is no database, so ID's are unknown, thus can't verify that passing in an ID returns a product
@@ -272,8 +262,8 @@ public class ProductServiceTest {
 	 * Returned list should be empty if there are no products matching all tags searched for
 	 */
 	@Test
-	public void createProductListWithAllTagsShouldReturnEmptyListForInvalidInput(){
-		System.out.println("createProductListWithAllTagsShouldReturnEmptyListForInvalidInput");
+	public void createProductListWithAllTagsShouldReturnEmptyListForNoProductsWithAllTags(){
+		System.out.println("createProductListWithAllTagsShouldReturnEmptyListForNoProductsWithAllTags");
 		resultList = pi.createProductListWithAllTags("dildo dong american challenge poop");
 		boolean result = !(resultList.isEmpty());
 		assertFalse(result);
