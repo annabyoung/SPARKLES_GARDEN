@@ -3,7 +3,6 @@ package com.qac.sparkle_gardens.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 
@@ -22,7 +21,7 @@ import javax.inject.Inject;
  *
  */
 
-@Named(value="searchItems")
+@Named(value="Search_Items")
 @RequestScoped
 public class SearchItemsController {
 	@Inject
@@ -46,7 +45,7 @@ public class SearchItemsController {
 			return "search";
 		}
 		error = "No results found for your search.";
-		return "blank_search";
+		return error;
 	}
 	
 	/**
@@ -64,7 +63,7 @@ public class SearchItemsController {
 			return "search";
 		}
 		error = "No results found for your search";
-		return "blank_search";
+		return error;
 	}
 	
 	/**
