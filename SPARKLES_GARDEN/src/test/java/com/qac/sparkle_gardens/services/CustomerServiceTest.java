@@ -12,7 +12,6 @@
 //import com.qac.sparkle_gardens.entities.CustomerHasCard;
 //import com.qac.sparkle_gardens.repositories.CustomerRepository;
 //import com.qac.sparkle_gardens.controllers.CustomerInterface;
-//
 //import junit.framework.TestCase;
 //
 ///**
@@ -25,8 +24,6 @@
 //	
 //	@Inject 
 //	CustomerRepository customerRepository; 
-//<<<<<<< HEAD
-//	
 //	//CustomerInterface customerInterface = new CustomerService();
 //	// saw this in demo unsure why its needed. 
 //
@@ -41,7 +38,7 @@
 //	  */
 //	@Test
 //	public void  findByIDTest(){
-//=======
+
 //	Customer dummyCustomer; 
 //	
 //	
@@ -55,14 +52,15 @@
 //		customerRepository.persistCustomer(customers);
 //	}
 //	
-//	public void  findByIDTest(long accountID){
-//>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
+///	public void  findByIDTest(long accountID){
+//
+//
 //		
 //		Customer result = customerRepository.findByID(dummyCustomer.getAccountID());
 //		assertNotNull(result);
 //	}
 //	
-//<<<<<<< HEAD
+//
 //	@Test
 //	public void  findByIDTestNOT(long accountID){
 //		
@@ -74,24 +72,22 @@
 //	
 //	@Test	
 //	public void getCustomerTest(){
-//=======
 //	public void getCustomerTest(Customer c){
-//>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
-//		
+//
 //		Customer customer = customerRepository.getCustomer(dummyCustomer); 
 //		assertNotNull(customer);
 //		assertsEquals(customer, dummyCustomer)
 //	}
 //		
-//<<<<<<< HEAD
+
 //	@Test	
 //	public void getCustomerTestNOT(){
 //		
 //		Customer customer = customerRepository.getCustomer(wrongCustomer); 
 //		assertNotNull(customer);
-//=======
+
 //	public void updateCustomerTest(Customer c){
-//>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
+//
 //
 //		assertNotEquals(customer, wrongCustomer);
 //// not sure if this is right?
@@ -103,8 +99,8 @@
 //		boolean result = customerRepository.updateCustomer(dummyCustomer); //update customer what am i updating tho? I may need more of these 
 //	 assertTrue(result);
 //	}
-//		
-//<<<<<<< HEAD
+//
+//
 //	@Test
 //	public void updateCustomerTestNot(){
 //
@@ -150,8 +146,6 @@
 //	public void findCustomerCardsTest(Customer c){
 //
 //		List<CustomerHasCard> cards = customerRepository.findCustomerCards(c);
-//
-//=======
 //	
 //	public void removeCustomerTest(Customer c){
 //		customerRepository.removeCustomer(c); //remove customer
@@ -166,19 +160,15 @@
 //	public void findCustomerCardsTest(Customer c){
 //		
 //		Cards cards customerRepository.findCustomerCards(c);
-//>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 //		assertNotNull(cards);
 //		
 //	}
 //	
-//<<<<<<< HEAD
 //	@Test
 //	public void findCustomerCardsTestNot(Customer c){
 //
 //		List<CustomerHasCard> cards = customerRepository.findCustomerCards(c);
-//=======
 //	public Customer findByEmail(String email){
-//>>>>>>> a0f8dbfaebece88cde011b8538a7caf32abec5ea
 //
 //		assertNull(cards);
 //		
