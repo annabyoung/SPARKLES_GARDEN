@@ -46,7 +46,7 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 	@Override
 	public void updateCustomerHasCard(CustomerHasCard C) {
 		// TODO Auto-generated method stub
-		initialData.getCusHasCards().
+		//initialData.getCusHasCards().
 		
 
 	}
