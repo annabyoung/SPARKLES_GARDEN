@@ -12,6 +12,7 @@ import com.qac.sparkle_gardens.services.OrderService;
  *
  */
 
+@Deprecated
 @Named (value = "clearBasket")
 @RequestScoped
 public class ClearBasket 

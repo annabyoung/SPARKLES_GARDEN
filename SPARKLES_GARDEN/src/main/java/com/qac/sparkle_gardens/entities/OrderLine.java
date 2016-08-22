@@ -9,7 +9,7 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.qac.sparkle_gardens.entities.composite.OrderLineId;
+import com.qac.sparkle_gardens.entities.composite.OrderLinePK;
 
 /**
  * The OrderLine class contains information regarding one product &
@@ -21,17 +21,12 @@ import com.qac.sparkle_gardens.entities.composite.OrderLineId;
  */
 
 @Entity
-@IdClass(OrderLineId.class)
+@IdClass(OrderLinePK.class)
 @Table(name="OrderLine")
 public class OrderLine implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2617329345043164043L;
-//
-//	@EmbeddedId
-//	private OrderLinePK key;	
+	
 	@Id
 	private Order order;
 	
@@ -47,7 +42,6 @@ public class OrderLine implements Serializable
 	 */
 	public OrderLine()
 	{
-		//key = new OrderLinePK();
 		quantity = 0;
 	}
 	
@@ -73,7 +67,6 @@ public class OrderLine implements Serializable
 	public void setProduct(Product product, int quantity)
 	{
 		this.product = product;
-	///	this.key.setProduct(product);
 		this.quantity = quantity;
 	}
 	
@@ -84,7 +77,6 @@ public class OrderLine implements Serializable
 	public Product getProduct() 
 	{
 		return product;
-	//	return key.getProduct();
 	}
 	
 	/**

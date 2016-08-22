@@ -12,6 +12,8 @@ import com.qac.sparkle_gardens.services.ProductService;
  * @author Damien Lloyd
  *
  */
+
+@Deprecated
 @Named (value = "removeItem")
 @RequestScoped
 public class RemoveItem 

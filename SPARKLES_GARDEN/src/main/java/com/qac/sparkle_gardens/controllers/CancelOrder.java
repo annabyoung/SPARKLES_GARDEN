@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.services.OrderService;
+import com.qac.sparkle_gardens.util.OrderStatus;
 import com.qac.sparkle_gardens.util.PaymentStatus;
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.controllers.RefundCard;
@@ -17,6 +18,7 @@ import com.qac.sparkle_gardens.controllers.RefundCard;
  * In case customer realizes they ordered incorrect quantity, item, or no longer desire the item before it is dispatched to them.
  *
  */
+
 @Named (value = "cancelOrder")
 @RequestScoped
 public class CancelOrder 
@@ -26,8 +28,6 @@ public class CancelOrder
 	
 	@Inject
 	RefundCard refund;
-	
-	private String error = "";
 	
 	/**
 	 * Take the order's ID, check that the order's status is not empty, dispatched or delivered
@@ -41,17 +41,26 @@ public class CancelOrder
 	public String cancelOrder(long orderID)
 	{
 		Order order = service.getOrder(orderID);
-//		if (service.validateOrderStatus(order)){
-			if(order.isPayLater()){
+		if (service.isEligibleForRefund(orderID));
+		{
+			if(order.isPayLater())
+			{
 				order.setPaymentStatus(PaymentStatus.VOID);
 			}
 			refund.refundCard(order);
-//		}
-		error = "Order is not valid for cancellation.";
-		return "home";
+			return "cancelled_order";
+		}
+		return "order_not_cancelled";
 	}
 	
-	public String getError(){
-		return error;
+	public String cancelOrder(long orderID)
+	{
+		Order order = service.getOrder(orderID);
+		
+		if (order.getOrderStatus() == OrderStatus.DISPATCHED
+				order.getOrderStatus() == OrderStatus.DELIVERED)
+		{
+			return "cannot_cancel_order";
+		}
 	}
 }
