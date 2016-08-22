@@ -26,7 +26,7 @@
 				</div>
 				<div>
 					<h:commandButton class="btn btn-warning" type="button"
-						role="button" value="Login" onclick="loginValidation(#{login.didItWork})" action="#{login.beanCheck}"  />
+						role="button" value="Login" onclick="loginValidation()" action="#{login.beanCheck}"  />
 				</div>
 				<p>
 					<h:outputLink value="requestResetEmail.xhtml">Forgot Password?</h:outputLink>
@@ -38,6 +38,7 @@
 				</p>
 			</div>
 		</div>
+		<h:commandButton id="hiddenButton" actionListener="#{login.beanCheck}" style="display: none"/>
 		<script src="..\js\loginValidation.js" />
 	</h:body>
 </f:view>

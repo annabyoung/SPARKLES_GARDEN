@@ -14,5 +14,12 @@ function loginValidation() {
 		}
 	}
 	window.location=('../homepage.xhtml');
+	var didItWork = "";
+	document.getElementById('hiddenButton').click();
+	didItWork="worked";
+	
+	
+	
+	console.log(didItWork);
 	return true;
 }
