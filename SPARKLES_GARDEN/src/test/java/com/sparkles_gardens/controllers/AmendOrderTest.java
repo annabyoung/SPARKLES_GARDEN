@@ -38,7 +38,7 @@ public class AmendOrderTest
 	@Test
 	public void amendedQuantity()
 	{
-		Order o = OrderSamples.techies();
+		Order o = OrderSamples.food();
 		Product p = o.getOrderLines().get(1).getProduct();
 		
 		amendment.amendOrder(o.getOrderID(), p.getProductID(), 9);
