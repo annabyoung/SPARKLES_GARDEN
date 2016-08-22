@@ -46,16 +46,18 @@ import javax.validation.constraints.Size;
 	@NamedQuery(name = Product.FIND_BY_PRICE, 
 		query = "SELECT a FROM Product a WHERE a.price = :price"),
 	@NamedQuery(name = Product.FIND_BY_TAG, 
+<<<<<<< .merge_file_qoHit6
 		query = "SELECT a FROM Product a WHERE a.price = :price"),
 //	@NamedQuery(name = "FindProductsByCustomer",
 //		query = "SELECT b FROM Customer b JOIN b.customer a WHERE a.product = :product")
+=======
+		query = "SELECT a FROM Product a WHERE a.price = :price")
+>>>>>>> .merge_file_1nCSBc
 })
+
 @Table (name = "products")
 public class Product {
-	/*
-	 * To do:
-	 * Product Image
-	*/
+	
 	@Id
 	@Column (name = "productID")
 	@GeneratedValue  (strategy = GenerationType.IDENTITY)//
@@ -84,7 +86,6 @@ public class Product {
 	@NotNull
 	private List<String> productTags = new ArrayList<>();
 	
-	private String productImage = "";
 	
 	//Many products to one wish list
 	@ManyToOne
@@ -107,11 +108,10 @@ public class Product {
 	public Product() {	}
 	
 	//constructor for Product
-	public Product(String productName, int stockLevel, double price, String productImage){	
+	public Product(String productName, int stockLevel, double price){	
 		this.productName = productName;	
 		this.stockLevel = stockLevel;
 		this.price = price;
-		this.productImage = productImage;
 	}
 		
 	/**
@@ -194,24 +194,6 @@ public class Product {
 	public void addProductTags(String productTag) {
 		this.productTags.add(productTag);
 	}
-
-	/**
-	 * Retrieve the location of a product's image 
-	 * @return
-	 */
-	public String getProductImage() {
-		return productImage;
-	}
-
-	/**
-	 * Store the resource location of a product's image
-	 * @param productImage
-	 */
-	public void setProductImage(String productImage) {
-		this.productImage = productImage;
-	}
-	
-	
 	
 	
 }

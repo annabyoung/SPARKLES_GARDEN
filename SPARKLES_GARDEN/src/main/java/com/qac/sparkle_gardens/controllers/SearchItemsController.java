@@ -39,10 +39,18 @@ public class SearchItemsController {
 	 * @return search, blank_search
 	 */
 	public String createProductList(String customerInput){
+<<<<<<< .merge_file_bZOvoN
 //		searchQueryResults = productService.createProductListByTags(customerInput);
 //		if (productService.validateResultsOfSearch(searchQueryResults)){
 //			return "search";
 //		}
+=======
+		searchQueryResults.addAll(productService.createProductListWithAllTags(customerInput));
+		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
+		if (productService.validateResultsOfSearch(searchQueryResults)){
+			return "search";
+		}
+>>>>>>> .merge_file_zN9gPi
 		error = "No results found for your search.";
 		return "blank_search";
 	}

@@ -41,7 +41,11 @@ public class CancelOrder
 	public String cancelOrder(long orderID)
 	{
 		Order order = service.getOrder(orderID);
+<<<<<<< .merge_file_yXCZC4
 //		if (service.validateOrderStatus(order)){
+=======
+		if (service.canCancelOrder(order)){
+>>>>>>> .merge_file_5n7Yue
 			if(order.isPayLater()){
 				order.setPaymentStatus(PaymentStatus.VOID);
 			}

@@ -12,6 +12,7 @@ import com.qac.sparkle_gardens.repositories.OrderRepository;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
 import com.qac.sparkle_gardens.util.MessageSender;
 import com.qac.sparkle_gardens.util.OrderStatus;
+import com.qac.sparkle_gardens.util.MethodAuthor;
 
 /**
  * The OrderService provides the functionality required for 
@@ -287,6 +288,7 @@ public class OrderService
 	 * @param order
 	 * @return true; false
 	 */
+	@MethodAuthor(author="Annabelle Young")
 	public boolean canCancelOrder(Order order)
 	{
 		OrderStatus orderStatus = order.getOrderStatus();

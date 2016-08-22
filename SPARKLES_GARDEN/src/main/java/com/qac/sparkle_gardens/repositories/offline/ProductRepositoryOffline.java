@@ -15,8 +15,14 @@ import com.qac.sparkle_gardens.entities.Product;
 @Default
 public class ProductRepositoryOffline implements ProductRepository
 {
+<<<<<<< .merge_file_XaqS7u
 	@Inject
 	private InitialData initialData;
+=======
+	@Inject private ProductInitialData initialData = new ProductInitialData();
+	
+
+>>>>>>> .merge_file_Mu8MLj
 	
 	public void persistProduct(Product p){
 //		initialData.addProduct(p);

@@ -11,7 +11,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.controllers.ProductInterface;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 
 /**
@@ -23,10 +22,19 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
  */
 
 @Stateless
+<<<<<<< .merge_file_pmEMPV
 public class ProductService implements ProductInterface{
 
 	@Inject 
 	private ProductRepository productRepository;
+=======
+public class ProductService {
+	@Inject private ProductRepository productRepository= new ProductRepositoryOffline();
+	/*
+	 * Access Initial Data not repository
+	 * Inject Initial Data 
+	 */
+>>>>>>> .merge_file_RWwKs5
 	
 	private List<String> tags = new ArrayList<String>();
 	
