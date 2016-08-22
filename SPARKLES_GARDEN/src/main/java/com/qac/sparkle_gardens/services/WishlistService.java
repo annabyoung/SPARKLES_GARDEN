@@ -30,6 +30,9 @@ public class WishlistService {
 	 * @return
 	 */
 	public Wishlist getWishlist(long id) {
+		if (id <= 0) {
+			throw new IllegalArgumentException();
+		}
 		return wishlistRepository.findById(id);
 	}
 	
@@ -47,25 +50,45 @@ public class WishlistService {
 	 * @param product
 	 */
 	public void createWishlist(Customer customer, Product product) {
+		if (customer == null || product == null) {
+			throw new IllegalArgumentException();
+		}
 		Wishlist wish = new Wishlist(customer, product);
 		wishlistRepository.persistWishlist(wish);
 	}
 	
 	public void createWishlist(Customer customer, List<Product> products) {
+		if (customer == null || products.isEmpty()) {
+			throw new IllegalArgumentException();
+		}
 		Wishlist wish = new Wishlist(customer, products);
 		wishlistRepository.persistWishlist(wish);
 	}
 	
 	/**
 	 * deletes the wishlist
-	 * @param id
+	 * @param wishlistId
 	 */
-	public void deleteWishlist(long id) {
+	public void deleteWishlist(long wishlistId) {
+		if (wishlistId <= 0) {
+			throw new IllegalArgumentException();
+		}
 		Wishlist wishlist;
-		wishlist = wishlistRepository.findById(id);
+		wishlist = wishlistRepository.findById(wishlistId);
 		wishlistRepository.removeWishlist(wishlist);
 	}
 	
+	/**
+	 * 
+	 * @param customer
+	 */
+	public void deleteWishlist(Customer customer) {
+		if (customer == null) {
+			throw new IllegalArgumentException();
+		}
+ 		Wishlist wish = wishlistRepository.findByAccountId(customer.getAccountID());
+		wishlistRepository.removeWishlist(wish);
+	}
 	/**
 	 *  Creates a new wishlist
 	 * @param accountId
@@ -90,6 +113,9 @@ public class WishlistService {
 	//}
 	
 	public void addProduct(Product product, long accountId) {
+		if (product == null || accountId <= 0) {
+			throw new IllegalArgumentException();
+		}
 		wishlistRepository.addProductToListWithAcctId(product, accountId);
 	}
 	
@@ -124,13 +150,22 @@ public class WishlistService {
 	 * @param accountId
 	 */
 	public void removeProduct(Product product, long accountId) {
+		if (product == null || accountId <= 0) {
+			throw new IllegalArgumentException();
+		}
 		wishlistRepository.removeProduct(product, accountId);
 	}
 	public List<Product> getProducts(Customer customer) {
+		if (customer == null) {
+			throw new IllegalArgumentException();
+		}
 		return wishlistRepository.getProducts(customer.getAccountID());
 	}
 	
 	public List<Product> getProducts(long accountId) {
+		if (accountId <= 0) {
+			throw new IllegalArgumentException();
+		}
 		return wishlistRepository.getProducts(accountId);
 	}
 	
