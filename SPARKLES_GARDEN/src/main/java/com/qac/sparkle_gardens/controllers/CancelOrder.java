@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.services.OrderService;
+import com.qac.sparkle_gardens.util.MethodAuthor;
 import com.qac.sparkle_gardens.util.OrderStatus;
 import com.qac.sparkle_gardens.util.PaymentStatus;
 import com.qac.sparkle_gardens.entities.Order;
@@ -23,11 +24,11 @@ import com.qac.sparkle_gardens.controllers.RefundCard;
 @RequestScoped
 public class CancelOrder 
 {
-	@Inject
-	OrderService service;
+	@Inject private	OrderService service;
 	
-	@Inject
-	RefundCard refund;
+	@Inject private	RefundCard refund;
+	
+	//String error = "";
 	
 	/**
 	 * Take the order's ID, check that the order's status is not empty, dispatched or delivered
@@ -38,29 +39,49 @@ public class CancelOrder
 	 * @param orderID
 	 * @return
 	 */
-	public String cancelOrder(long orderID)
+	/*public String cancelOrder(long orderID)
 	{
 		Order order = service.getOrder(orderID);
+
 		if (service.isEligibleForRefund(orderID));
 		{
 			if(order.isPayLater())
 			{
+		if (service.canCancelOrder(order))
+		{
+			if(order.isPayLater())
+			{
 				order.setPaymentStatus(PaymentStatus.VOID);
+				return "home";
 			}
 			refund.refundCard(order);
 			return "cancelled_order";
 		}
 		return "order_not_cancelled";
-	}
+	}*/
 	
+	@MethodAuthor (author = "Damien Lloyd")
 	public String cancelOrder(long orderID)
 	{
 		Order order = service.getOrder(orderID);
 		
-		if (order.getOrderStatus() == OrderStatus.DISPATCHED
+		if (order.getOrderStatus() == OrderStatus.DISPATCHED ||
 				order.getOrderStatus() == OrderStatus.DELIVERED)
 		{
 			return "cannot_cancel_order";
 		}
+		
+		if (service.isEligibleForRefund(orderID))
+		{
+			refund.refundCard(order);
+			order.setPaymentStatus(PaymentStatus.VOID);
+			return "cancelled_order";
+		}
+		return "cancelled_order";
 	}
+	
+	/*String getError()
+	{
+		return error;
+	}*/
 }

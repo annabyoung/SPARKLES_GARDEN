@@ -24,9 +24,7 @@ import javax.inject.Inject;
 @Named(value="searchItems")
 @RequestScoped
 public class SearchItemsController {
-//	@Inject
-//	private ProductService productService;
-	
+	@Inject private	ProductService productService;
 	private List<Product> searchQueryResults = new ArrayList<Product>();
 	private String error = "";
 	
@@ -39,12 +37,14 @@ public class SearchItemsController {
 	 * @return search, blank_search
 	 */
 	public String createProductList(String customerInput){
-//		searchQueryResults = productService.createProductListByTags(customerInput);
-//		if (productService.validateResultsOfSearch(searchQueryResults)){
-//			return "search";
-//		}
+
+		searchQueryResults.addAll(productService.createProductListWithAllTags(customerInput));
+		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
+		if (productService.validateResultsOfSearch(searchQueryResults)){
+			return "search";
+		}
 		error = "No results found for your search.";
-		return "blank_search";
+		return getError();
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class SearchItemsController {
 //			return "search";
 //		}
 		error = "No results found for your search";
-		return "blank_search";
+		return getError();
 	}
 	
 	/**
@@ -77,5 +77,14 @@ public class SearchItemsController {
 	public String getProductList(){
 //		searchQueryResults = productService.getProductList();
 		return "search";
+	}
+	
+	/**
+	 * Retrieve the error message if there is one
+	 * @return
+	 */
+	public String getError(){
+		System.out.println(error);
+		return error;
 	}
 }

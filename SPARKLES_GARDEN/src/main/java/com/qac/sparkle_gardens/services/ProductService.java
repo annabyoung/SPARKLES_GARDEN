@@ -11,8 +11,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
-import com.qac.sparkle_gardens.controllers.ProductInterface;
-import com.qac.sparkle_gardens.repositories.ProductRepository;
+import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
+import com.qac.sparkle_gardens.test_data.ProductInitialData;
+
 
 /**
  * @author Annabelle Young
@@ -23,11 +24,12 @@ import com.qac.sparkle_gardens.repositories.ProductRepository;
  */
 
 @Stateless
-public class ProductService implements ProductInterface{
-
-	@Inject 
-	private ProductRepository productRepository;
+public class ProductService {
+	@Inject private ProductRepositoryOffline productRepository = new ProductRepositoryOffline();
+	@Inject private ProductInitialData productData = new ProductInitialData();
 	
+	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
+	private List<Product> productL = productData.getAllProducts(); 
 	private List<String> tags = new ArrayList<String>();
 	
 		
@@ -111,8 +113,7 @@ public class ProductService implements ProductInterface{
 	 */
 	public List<Product> createProductListByPriceRange(double minimumPrice, double maximumPrice){		
 		List<Product> productsInRange = new ArrayList<Product>();
-		//List<Product> pl = productRepository.getProducts();
-		for(Product p : productRepository.getProducts()){
+		for(Product p : productL){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
 				productsInRange.add(p);
 			}
@@ -211,6 +212,9 @@ public class ProductService implements ProductInterface{
 	 */
 	
 	public List<String> convertStringToArrayList(String tag){
+		if(tag.isEmpty() || tag == null){
+			throw new IllegalArgumentException();
+		}
 		List<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tag.split(" ")));
 		
 		return tagsToSearch;
@@ -231,38 +235,21 @@ public class ProductService implements ProductInterface{
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Return the list of all products that meet the search parameters
 	 */
-//	public List<Product> getProductList(){
-//		//There should be a query here, but we're not at that point yet
-//		return productList;
-//	}
 	
-	/**
-	 * Clears the search query
-	 */
-//	public void clearSearchQuery(){
-//		productList.clear();
-//	}
-
-
-	@Override
-	public List<Product> createProductListByTags(String input) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
 	public List<Product> getProductList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
-	@Override
+	/**
+	 * Clears the search query
+	 */
+	
 	public void clearSearchQuery() {
 		// TODO Auto-generated method stub
 		

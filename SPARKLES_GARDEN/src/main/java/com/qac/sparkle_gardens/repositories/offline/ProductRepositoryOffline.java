@@ -8,15 +8,16 @@ import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.repositories.ProductRepository;
-import com.qac.sparkle_gardens.test_data.InitialData;
+import com.qac.sparkle_gardens.test_data.ProductInitialData;
 import com.qac.sparkle_gardens.entities.Product;
 
 @Stateless
 @Default
 public class ProductRepositoryOffline implements ProductRepository
 {
-	@Inject
-	private InitialData initialData;
+	@Inject private ProductInitialData initialData = new ProductInitialData();
+	
+
 	
 	public void persistProduct(Product p){
 //		initialData.addProduct(p);
@@ -25,6 +26,7 @@ public class ProductRepositoryOffline implements ProductRepository
 	public void persistProducts(List<Product> p) {
 		
 	}
+	
 	//find a product by ID
 	public Product findByProductID(long productID){
 //		for (Product p : initialData.getAllProducts()){ //search through all products in product list
@@ -34,7 +36,7 @@ public class ProductRepositoryOffline implements ProductRepository
 //		}
 		return null;
 	}
-
+	
 	//find a product by name
 	public Product findByProductName(String productName) {
 //		for (Product p : initialData.getAllProducts()){ //search through all products in product list
@@ -44,7 +46,7 @@ public class ProductRepositoryOffline implements ProductRepository
 //		}
 		return null;
 	}
-
+	
 	//Search for products by price
 	public List<Product> findByProductPrice(double price){
 		List<Product> productsByPrice = new ArrayList<Product>();
@@ -74,15 +76,16 @@ public class ProductRepositoryOffline implements ProductRepository
 	public List<Product> getProducts() {
 		//List<Product> prodlist = initialData.getAllProducts();
 		//return prodlist;
-		return initialData.getProducts();
+		return initialData.getAllProducts();
 	}
 		
 	public void createProduct(Product p) {
 		
 	}
+	
 	//update the product
 	public void updateProduct(Product p) {
-		List<Product> ps = initialData.getProducts();
+		List<Product> ps = initialData.getAllProducts();
 		for(int i=0; i<ps.size(); i++) {
 			if(ps.get(i).equals(p))
 			ps.set(i, p);
@@ -91,7 +94,7 @@ public class ProductRepositoryOffline implements ProductRepository
 	}
 
 	public void deleteProduct(Product p) {
-		List<Product> ps = initialData.getProducts();
+		List<Product> ps = initialData.getAllProducts();
 		for(int i=0; i<ps.size(); i++) {
 			if(ps.get(i).equals(p))
 				ps.remove(i);
