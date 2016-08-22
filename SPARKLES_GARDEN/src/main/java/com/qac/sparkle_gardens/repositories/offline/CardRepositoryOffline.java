@@ -11,7 +11,6 @@ import javax.inject.Named;
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.repositories.CardRepository;
 import com.qac.sparkle_gardens.test_data.InitialData;
-import com.qac.sparkle_gardens.util.MethodAuthor;
 
 
 /**
@@ -26,9 +25,11 @@ public class CardRepositoryOffline implements CardRepository
 	@Inject
 	InitialData initialData = new InitialData();
 
-	public void addCard(Card c) 
+	public void addCard(Card card) 
 	{
-		initialData.addCard(c);
+		List<Card> cards = initialData.getCards();
+		cards.add(card);
+		initialData.setCards(cards);
 	}
 	
 	public List<Card> listCards() 
@@ -45,7 +46,7 @@ public class CardRepositoryOffline implements CardRepository
 	{
 		for (Card c : initialData.getCards())
 		{
-			if(id == c.getCardId())
+			if(id == c.getCardID())
 			{
 				return c;
 			}
@@ -58,15 +59,11 @@ public class CardRepositoryOffline implements CardRepository
 		return initialData.getCards();
 	}
 
+
 	public void removeCard(Card c) 
 	{
 		List<Card> cl = initialData.getCards();
-		
-		for (int i = 0; i < cl.size(); i++)
-		{
-			if (cl.get(i).equals(c))
-				cl.remove(i);
-		}
+		cl.remove(c);
 	}
 	
 	public List<Card> findByCardNumber(String cardNumber) 

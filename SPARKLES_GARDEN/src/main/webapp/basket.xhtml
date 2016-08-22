@@ -7,9 +7,7 @@
 	<ui:define name="mainContent">
 		<h:form>
 			<div class="row container-fluid" id="formdiv">
-				<h2>Order Number: 6969696969</h2>
-				<br></br>
-				<table style="width: 100%">
+				<table id="basketTable" style="width: 100%">
 					<tr>
 						<th>Item</th>
 						<th>Info</th>
@@ -44,13 +42,12 @@
 									<f:selectItem itemValue="5" itemlabel="5" />
 								</h:selectOneMenu>
 							</div></td>
-						<td>£89.97</td>
-						<td><h:outputLink value="basket.xhtml">
-								<span style="color: red" class="glyphicon glyphicon-remove"></span>
-							</h:outputLink></td>
+						<td>£69.69</td>
+					<td><h:commandButton onclick="deleteItem()" type="button">
+								<span style="color: red" class="glyphicon glyphicon-remove"
+									id="5"></span>
+							</h:commandButton></td>
 					</tr>
-				</table>
-				<table style="width: 100%">
 					<tr>
 						<th>Item</th>
 						<th>Info</th>
@@ -85,11 +82,10 @@
 							</div></td>
 						<td>£89.97</td>
 						<td><h:outputLink value="basket.xhtml">
-								<span style="color: red" class="glyphicon glyphicon-remove"></span>
+								<span style="color: red" class="glyphicon glyphicon-remove"
+									id="2"></span>
 							</h:outputLink></td>
 					</tr>
-				</table>
-				<table style="width: 100%">
 					<tr>
 						<th>Item</th>
 						<th>Info</th>
@@ -124,11 +120,10 @@
 							</div></td>
 						<td>£89.97</td>
 						<td><h:outputLink value="basket.xhtml">
-								<span style="color: red" class="glyphicon glyphicon-remove"></span>
+								<span style="color: red" class="glyphicon glyphicon-remove"
+									id="3"></span>
 							</h:outputLink></td>
 					</tr>
-				</table>
-				<table style="width: 100%">
 					<tr>
 						<th>Item</th>
 						<th>Info</th>
@@ -163,13 +158,12 @@
 								</h:selectOneMenu>
 							</div>
 						</td>
-						<td>£89.97</td>
+						<td>£89</td>
 						<td><h:outputLink value="basket.xhtml">
-								<span style="color: red" class="glyphicon glyphicon-remove"></span>
+								<span style="color: red" class="glyphicon glyphicon-remove"
+									id="4"></span>
 							</h:outputLink></td>
 					</tr>
-				</table>
-				<table style="width: 100%">
 					<tr>
 						<th>Item</th>
 						<th>Info</th>
@@ -202,10 +196,11 @@
 									<f:selectItem itemValue="5" itemlabel="5" />
 								</h:selectOneMenu>
 							</div></td>
-						<td>£89.97</td>
-						<td><h:outputLink value="basket.xhtml">
-								<span style="color: red" class="glyphicon glyphicon-remove"></span>
-							</h:outputLink></td>
+						<td>£22</td>
+						<td><h:commandButton onclick="deleteItem()" type="button">
+								<span style="color: red" class="glyphicon glyphicon-remove"
+									id="5"></span>
+							</h:commandButton></td>
 					</tr>
 				</table>
 				<h:outputLink value="basket.xhtml" class="btn btn-warning"

@@ -6,7 +6,9 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Product;
+import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.services.WishlistService;
 
@@ -24,6 +26,8 @@ public class WishlistController {
 	
 	@Inject 
 	WishlistService wishlistService;
+	@Inject
+	private CustomerRepository customerRepository;
 	@Inject 
 	OrderService orderService;
 	
@@ -32,28 +36,32 @@ public class WishlistController {
 	 * @param accountId
 	 * @param product
 	 */
-	public void createWishlist(long accountId, Product product) {
-		wishlistService.createWishlist(accountId, product);
+	public void createWishlist(Customer customer, Product product) {
+		wishlistService.createWishlist(customerRepository.findByID(customer.getAccountID()), product);
+	}
+	
+	public void createWishlist(Customer customer, List<Product> products) {
+		wishlistService.createWishlist(customer, products);
 	}
 	/**
 	 * Creates a wishlist for a given customer
 	 * @param accountId
 	 * @param wishlistName
 	 */
-	@Deprecated
-	public void createWishlist(long accountId, String wishlistName) {
-		wishlistService.createWishlist(accountId, wishlistName);
-	}
+	//@Deprecated
+	//public void createWishlist(long accountId, String wishlistName) {
+		//wishlistService.createWishlist(customerRepository.findByID(accountId), wishlistName);
+	//}
 	
 	/**
 	 * Adds a product to the wishlist
 	 * @param product
 	 * @param wishlistName
 	 */
-	@Deprecated
-	public void addProductToWishlist(Product product, String wishlistName) {
-		wishlistService.addProduct(product, wishlistName);
-	}
+	//@Deprecated
+	//public void addProductToWishlist(Product product, String wishlistName) {
+		//wishlistService.addProduct(product, wishlistName);
+	//}
 	
 	/**
 	 * 
@@ -77,13 +85,13 @@ public class WishlistController {
 	 * Gets all the products in the wishlist
 	 * @return
 	 */
-	@Deprecated
-	public List<Product> getProducts(String wishlistName) {
-		return wishlistService.getProducts(wishlistName);
-	}
+	//@Deprecated
+	//public List<Product> getProducts(String wishlistName) {
+		//return wishlistService.getProducts(wishlistName);
+	//}
 	
-	public List<Product> getProducts(long accountId) {
-		return wishlistService.getProducts(accountId);
+	public List<Product> getProducts(Customer customer) {
+		return wishlistService.getProducts(customer.getAccountID());
 	}
 	
 	

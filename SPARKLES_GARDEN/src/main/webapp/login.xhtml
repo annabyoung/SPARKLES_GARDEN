@@ -5,40 +5,42 @@
 	template="templates/noSearchTemplate.xhtml">
 	<ui:define name="mainContent">
 		<meta charset="utf-8" />
-		<f:view>
-			<h:body>
-				<div class="container-fluid" id="loginContainer">
-					<h:form class="form-horizontal center_div" role="form" id="formdiv"
-						onsubmit="return checkvalue(this)">
-						<div class="form-group">
-							<label id="loginlabel" class="control-label col-sm-4">
-								Username</label>
-							<div class="col-sm-4">
-								<h:inputText name="Username" id="Username" required="true" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label id="loginlabel" class="control-label col-sm-4">
-								Password</label>
-							<div class="col-sm-4">
-								<h:inputSecret name="Password" id="Password" required="true" />
-							</div>
-						</div>
-						<div>
-							<h:outputLink value="homepage.xhtml" class="btn btn-warning"
-								role="button">Login</h:outputLink>
-						</div>
-						<p>
-							<h:outputLink value="requestResetEmail.xhtml">Forgot Password?</h:outputLink>
-						</p>
-					</h:form>
-					<div>
-						<p id="contact">
-							<h:outputLink value="https://www.youtube.com/watch?v=WXQCo9fLYWI">Contact</h:outputLink>
-						</p>
+<f:view>
+	<h:body>
+		<div class="container-fluid" id="loginContainer">
+			<h:form class="form-horizontal center_div" role="form" id="formdiv" onsubmit="return checkvalue(this)">
+			<div>
+				<p id="errorMessage"></p>
+			</div>
+				<div class="form-group">
+					<label id="loginlabel" class="control-label col-sm-4"> Username</label>
+					<div class="col-sm-4">
+						<h:inputText name="Username" id="username" required="true" value="#{login.email}" />
 					</div>
 				</div>
-			</h:body>
-		</f:view>
-	</ui:define>
+				<div class="form-group">
+					<label id="loginlabel" class="control-label col-sm-4"> Password</label>
+					<div class="col-sm-4">
+						<h:inputSecret name="Password" id="password" required="true" value="#{login.password}"/>
+					</div>
+				</div>
+				<div>
+					<h:commandButton class="btn btn-warning" type="button"
+						role="button" value="Login" onclick="loginValidation()" action="#{login.beanCheck}"  />
+				</div>
+				<p>
+					<h:outputLink value="requestResetEmail.xhtml">Forgot Password?</h:outputLink>
+				</p>
+			</h:form>
+			<div>
+				<p id="contact">
+					<h:outputLink value="contact.xhtml">Contact</h:outputLink>
+				</p>
+			</div>
+		</div>
+		<h:commandButton id="hiddenButton" actionListener="#{login.beanCheck}" style="display: none"/>
+		<script src="..\js\loginValidation.js" />
+	</h:body>
+</f:view>
+</ui:define>
 </ui:composition>
