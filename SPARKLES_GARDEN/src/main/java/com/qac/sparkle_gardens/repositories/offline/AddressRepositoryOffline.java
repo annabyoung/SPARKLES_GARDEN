@@ -106,10 +106,6 @@ public class AddressRepositoryOffline implements AddressRepository {
 		}
 		initialData.setAddresses(addresses);
 	}
-	
-//	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId) {
-//		List<Address> addresses = initialData.getAddresses();
-//	}
 
 	/**
 	 * @param address
