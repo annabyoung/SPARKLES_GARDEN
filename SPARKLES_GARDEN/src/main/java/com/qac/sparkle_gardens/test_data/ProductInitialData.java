@@ -56,7 +56,6 @@ public class ProductInitialData {
 		p5.addProductTags("external_stimulation");
 		products.add(p5);
 		
-		//setProducts(products);
 		
 	}
 	
