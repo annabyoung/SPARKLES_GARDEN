@@ -31,6 +31,7 @@ public class Card implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long cardID;
 	
+	@Column(name = "cardOwnerName", nullable = false, length = 225)
 	@NotNull
 	@Size(min = 2, max = 25)
 	private String cardOwnerName;
@@ -73,7 +74,6 @@ public class Card implements Serializable{
 	 */
 	
 	public Card(long cardID, String customerName, String cardNumber, String expirationDate) {
-		this.cardID = cardID;
 		this.cardOwnerName = customerName;
 		this.cardNumber = cardNumber;
 		this.expirationDate = expirationDate;
@@ -84,7 +84,7 @@ public class Card implements Serializable{
 	 * 
 	 * @return
 	 */
-	public long getCardId() {
+	public long getCardID() {
 		return cardID;
 	}
 
@@ -146,7 +146,7 @@ public class Card implements Serializable{
 	 * @return boolean
 	 */
 	public boolean equals(Card anotherCard){
-		return anotherCard.getCardId() == cardID;
+		return anotherCard.getCardID() == cardID;
 	}
 
 

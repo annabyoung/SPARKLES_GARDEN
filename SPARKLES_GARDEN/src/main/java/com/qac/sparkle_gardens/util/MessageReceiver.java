@@ -13,7 +13,6 @@ import javax.jms.QueueReceiver;
 import javax.jms.QueueSender;
 import javax.jms.QueueSession;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -31,7 +30,7 @@ public class MessageReceiver implements MessageListener
 	private Queue queue = null;
 	private Context context = null;
 	private QueueReceiver receiver = null;
-	 
+	
 	private Object object = null;
 	
 	private Serializable serial = null;

@@ -5,11 +5,7 @@ import java.util.List;
 
 import javax.inject.Singleton;
 
-import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Order;
-import com.qac.sparkle_gardens.entities.OrderLine;
-import com.qac.sparkle_gardens.entities.Product;
-import com.sparkle_gardens.sample_data.OrderSamples;
 
 /**
  * OrderInitialData contains initial data that will hold orders offline.
@@ -28,9 +24,9 @@ public class OrderInitialData
 	 */
 	public OrderInitialData()
 	{
-		orders.add(OrderSamples.shoes());
-		orders.add(OrderSamples.kinky());
-		orders.add(OrderSamples.food());
+//		orders.add(OrderSamples.shoes());
+//		orders.add(OrderSamples.kinky());
+//		orders.add(OrderSamples.food());
 	}
 	
 	/**

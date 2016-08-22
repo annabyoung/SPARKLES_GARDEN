@@ -2,13 +2,11 @@ package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.*;
 
-
-import com.qac.sparkle_gardens.entities.Address;
-import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.entities.CustomerHasCard;
@@ -119,16 +117,15 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			return null;
 		}
 		
-		
 		@Override 
 		public List<CustomerHasAddress> findCustomerAddresses(Customer customer){
 
-			List<CustomerHasAddress> composites = initialData.getCustomerHasAddresses(); // i probably need to come back and get composite types 
+//			List<CustomerHasAddress> composites = initialData.getCustomerHasAddresses(); // i probably need to come back and get composite types 
 			List<CustomerHasAddress> addys=  new ArrayList<CustomerHasAddress>();
-						for (CustomerHasAddress addyz : composites)
+//						for (CustomerHasAddress addyz : composites)
 						{
-							if(addyz.getCustomerId() == customer.getAccountID())
-							addys.add(addyz);
+	//						if(addyz.getCustomerId() == customer.getAccountID())
+	//						addys.add(addyz);
 						}
 			
 						return addys;
@@ -141,13 +138,29 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		List<CustomerHasCard> cards=  new ArrayList<CustomerHasCard>();
 					for (CustomerHasCard cardz : composites)
 					{
-						if(cardz.getCustomerId() == customer.getAccountID())
+						if(cardz.getCustomer().getAccountID() == customer.getAccountID())
 						cards.add(cardz);
 					}
 		
 					return cards;
 		}
+		
+//		public Address findCustomerAddresses(Customer customer){
+//			Address address; 
+//			address= (Address) initialData.getAddresses();
+//			return address;
+//			//TODO: get compost class return addresses
+//		}
+		
+		/*public Card findCustomerCards(Customer customer){
+			Card card;
+			card = initialData.getCards().get(0); 
+			return card;
+			//TODO: and do this return type is wrong;  
+		}*/
 
-		
-		
+		@Override
+		public void findCustomerAdresses(Customer c) {
+			// TODO Auto-generated method stub
+		}
 }
