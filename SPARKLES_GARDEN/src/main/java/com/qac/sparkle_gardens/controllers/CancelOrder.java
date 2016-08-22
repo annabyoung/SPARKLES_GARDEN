@@ -28,7 +28,7 @@ public class CancelOrder
 	
 	@Inject private	RefundCard refund;
 	
-	//String error = "";
+	String error = "";
 	
 	/**
 	 * Take the order's ID, check that the order's status is not empty, dispatched or delivered
@@ -39,7 +39,7 @@ public class CancelOrder
 	 * @param orderID
 	 * @return
 	 */
-	/*public String cancelOrder(long orderID)
+	public String cancelOrder(long orderID)
 	{
 		Order order = service.getOrder(orderID);
 
@@ -47,41 +47,24 @@ public class CancelOrder
 		{
 			if(order.isPayLater())
 			{
-		if (service.canCancelOrder(order))
-		{
-			if(order.isPayLater())
+			if (service.canCancelOrder(order))
 			{
-				order.setPaymentStatus(PaymentStatus.VOID);
-				return "home";
+				if(order.isPayLater())
+				{
+					order.setPaymentStatus(PaymentStatus.VOID);
+					return "home";
+				}
+				refund.refundCard(order);
+				return "cancelled_order";
 			}
-			refund.refundCard(order);
-			return "cancelled_order";
+			return error;
+			}
 		}
-		return "order_not_cancelled";
-	}*/
-	
-	@MethodAuthor (author = "Damien Lloyd")
-	public String cancelOrder(long orderID)
-	{
-		Order order = service.getOrder(orderID);
-		
-		if (order.getOrderStatus() == OrderStatus.DISPATCHED ||
-				order.getOrderStatus() == OrderStatus.DELIVERED)
-		{
-			return "cannot_cancel_order";
-		}
-		
-		if (service.isEligibleForRefund(orderID))
-		{
-			refund.refundCard(order);
-			order.setPaymentStatus(PaymentStatus.VOID);
-			return "cancelled_order";
-		}
-		return "cancelled_order";
+		return "order_cancelled";
 	}
 	
-	/*String getError()
+	String getError()
 	{
 		return error;
-	}*/
+	}
 }
