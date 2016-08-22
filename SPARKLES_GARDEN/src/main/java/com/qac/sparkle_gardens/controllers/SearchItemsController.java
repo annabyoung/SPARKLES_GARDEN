@@ -21,11 +21,10 @@ import javax.inject.Inject;
  *
  */
 
-@Named(value="searchItems")
+@Named(value="search")
 @RequestScoped
 public class SearchItemsController {
-//	@Inject
-//	private ProductService productService;
+	@Inject	private ProductService productService;
 	
 	private List<Product> searchQueryResults = new ArrayList<Product>();
 	private String error = "";
@@ -39,13 +38,13 @@ public class SearchItemsController {
 	 * @return search, blank_search
 	 */
 	public String createProductList(String customerInput){
-//		searchQueryResults.addAll(productService.createProductListWithAllTags(customerInput));
-//		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
-//		if (productService.validateResultsOfSearch(searchQueryResults)){
-//			return "search";
-//		}
-//		error = "No results found for your search.";
-		return "blank_search";
+		searchQueryResults.addAll(productService.createProductListWithAllTags(customerInput));
+		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
+		if (productService.validateResultsOfSearch(searchQueryResults)){
+			return "search";
+		}
+		error = "No results found for your search.";
+		return error;
 	}
 	
 	/**
@@ -58,12 +57,12 @@ public class SearchItemsController {
 	 * @return search, blank_search
 	 */
 	public String createProductList(double minimumPrice, double maximumPrice){
-//		searchQueryResults = productService.createProductListByPriceRange(minimumPrice, maximumPrice);
-//		if (productService.validateResultsOfSearch(searchQueryResults)){
-//			return "search";
-//		}
+		searchQueryResults = productService.createProductListByPriceRange(minimumPrice, maximumPrice);
+		if (productService.validateResultsOfSearch(searchQueryResults)){
+			return "search";
+		}
 		error = "No results found for your search";
-		return "blank_search";
+		return error;
 	}
 	
 	/**
@@ -71,12 +70,12 @@ public class SearchItemsController {
 	 * @return
 	 */
 	public String clearProductList(){
-//		productService.clearSearchQuery();
+		productService.clearSearchQuery();
 		return "home";
 	}
 	
 	public String getProductList(){
-//		searchQueryResults = productService.getProductList();
+		searchQueryResults = productService.getProductList();
 		return "search";
 	}
 }

@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.qac.sparkle_gardens.entities.OrderLinePK;
+import com.qac.sparkle_gardens.entities.composite.OrderLinePK;
 
 /**
  * The OrderLine class contains information regarding one product &

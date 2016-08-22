@@ -1,10 +1,13 @@
-package com.qac.sparkle_gardens.entities;
+package com.qac.sparkle_gardens.entities.composite;
 
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.qac.sparkle_gardens.entities.Order;
+import com.qac.sparkle_gardens.entities.Product;
 
 public class OrderLinePK implements Serializable
 {
