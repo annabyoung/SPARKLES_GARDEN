@@ -16,8 +16,7 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
 @Default
 public class ProductRepositoryOffline implements ProductRepository
 {
-	@Inject 
-	ProductInitialData initialData = new ProductInitialData();
+	@Inject private ProductInitialData initialData = new ProductInitialData();
 	
 
 	
