@@ -21,7 +21,7 @@ import javax.inject.Inject;
  *
  */
 
-@Named(value="Search_Items")
+@Named(value="search")
 @RequestScoped
 public class SearchItemsController {
 	@Inject	private ProductService productService;

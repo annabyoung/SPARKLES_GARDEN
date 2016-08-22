@@ -25,13 +25,13 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 @Stateless
 public class ProductService {
 	@Inject private ProductRepository productRepository;
-	@Inject private ProductInitialData initialData;
+	@Inject private ProductInitialData initialData = new ProductInitialData();
 	
 	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
 	private List<Product> productL = initialData.getAllProducts(); 
 	private List<String> tags = new ArrayList<String>();
 	
-	
+	public ProductService(){}
 	/**
 	 * If the product has enough stock to meet the request, return true and decrement stock
 	 * if the product does not have enough stock to meet orderline's request, output error message
@@ -180,7 +180,7 @@ public class ProductService {
 	 * Returns a list of all products that contain all of the tags searched for
 	 */
 	public List<Product> createProductListWithAllTags(String input){
-		if(input.isEmpty()){
+		if(input.isEmpty() || input == null){
 			throw new IllegalArgumentException();
 		}
 		tags = convertStringToArrayList(input);
@@ -225,6 +225,9 @@ public class ProductService {
 	 */
 	
 	public List<String> convertStringToArrayList(String tag){
+		if(tag.isEmpty() || tag == null){
+			throw new IllegalArgumentException();
+		}
 		List<String> tagsToSearch = new ArrayList<String>(Arrays.asList(tag.split(" ")));
 		
 		return tagsToSearch;
