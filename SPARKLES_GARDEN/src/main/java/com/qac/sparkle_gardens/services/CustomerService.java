@@ -2,7 +2,8 @@ package com.qac.sparkle_gardens.services;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
@@ -61,12 +62,23 @@ public class CustomerService {
 	 *   
 	 * @param email
 	 * @return
+	 * @throws AddressException 
 	 */
 	
-	public boolean validateEmailInputs(String email)
+	public boolean validateEmailInputs(String email) throws AddressException
 	{
+		 boolean ans=true;
+		 InternetAddress validator = new InternetAddress(email);
+		 try{
+			 validator.validate();
+		 }
+		 finally{
+			 ans=false;
+		 }
+		 return ans;
 		//TODO: write code 
-		return true;
+		
+		// I wrote this and its dissappeared in the great merge. find again on the google machine 
 		
 	}
 	
