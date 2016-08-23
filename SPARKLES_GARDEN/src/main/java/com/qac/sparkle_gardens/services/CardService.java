@@ -3,6 +3,7 @@ package com.qac.sparkle_gardens.services;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless; 
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ public class CardService {
 	@Inject CardRepository cardRepository;
 	@Inject CustomerRepository customerRepository;
 	@Inject CustomerHasCardRepository cardOwnershipRepository;
+	@Inject Logger log;
 	
 	/**
 	 * TODO:PLACEHOLDER.
@@ -44,11 +46,17 @@ public class CardService {
 			card = cardRepository.addCard(newCard);
 			CustomerHasCard cusCard = new CustomerHasCard(cardOwner, card);
 			cardOwnershipRepository.addCustomerHasCard(cusCard);
+			log.info("Registering new card to customer.");
 		}
 		else{
-			
-			CustomerHasCard cusCard = new CustomerHasCard(cardOwner, card);
-			cardOwnershipRepository.addCustomerHasCard(cusCard);
+			if (!checkIfCustomerRegisteredCardAlready(newCard, cardOwner)){
+				CustomerHasCard cusCard = new CustomerHasCard(cardOwner, card);
+				cardOwnershipRepository.addCustomerHasCard(cusCard);
+				log.info("Linking Customer to previously registered Card.");
+			}
+			else{
+				log.info("Customer has already registered Card.");
+			}
 		}
 	}
 	
@@ -62,7 +70,6 @@ public class CardService {
 		List<Card> cards = cardRepository.getCards();
 		for (Card existingCard: cards){
 			if (card.getCardNumber() == existingCard.getCardNumber() && 
-					card.getCardOwnerName() == existingCard.getCardOwnerName() &&
 					card.getExpirationDate() == existingCard.getExpirationDate()){
 				return existingCard;
 			}
@@ -73,7 +80,7 @@ public class CardService {
 	public boolean checkIfCustomerRegisteredCardAlready(Card card, Customer cardOwner){
 		List<Card> cusCards = getCardsByCustomer(cardOwner.getAccountID());
 		for (Card cusCard: cusCards){
-			if (cusCard.equals(card))
+			if (cusCard.getCardNumber() == card.getCardNumber() && cusCard.getExpirationDate() == card.getExpirationDate())
 				return true;
 		}
 		return false;

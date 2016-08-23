@@ -36,7 +36,6 @@ public class CardsController {
 	}
 	
 	public List<Card> getCards() {
-		//return cardService.getCardsByCustomer(currentUserController.getCustomerId());
-		return cardService.getCardsByCustomer(3);
+		return cardService.getCardsByCustomer(currentUserController.getCustomerId());
 	}
 }
