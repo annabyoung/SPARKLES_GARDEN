@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
+import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CustomerHasCardRepository;
 import com.qac.sparkle_gardens.test_data.InitialData;
@@ -17,57 +18,69 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 	@Inject private InitialData initialData;
 	
 	@Override
-	public void persistCustomerHasCard(CustomerHasCard c) {
-		// TODO Auto-generated method stub
-
+	public void persistCustomerHasCard(CustomerHasCard cusCard) {
+		List<CustomerHasCard> cusCards = initialData.getCusHasCards();
+		cusCards.add(cusCard);
+		initialData.setCusHasCards(cusCards);
 	}
 
 	@Override
 	public void persistCustomerHasCards(List<CustomerHasCard> c) {
-		// TODO Auto-generated method stub
-
+		List<CustomerHasCard> cusCards = initialData.getCusHasCards();
+		for (CustomerHasCard cusCard: c){
+			cusCards.add(cusCard);
+		}
+		initialData.setCusHasCards(cusCards);
 	}
 
 	@Override
 	public List<CustomerHasCard> getCustomerHasCards() {
-		// TODO Auto-generated method stub
-		return null;
+		return initialData.getCusHasCards();
 	}
 
 	@Override
-	public void addCustomerHasCard(CustomerHasCard c) {
-		// TODO Auto-generated method stub
-
+	public void addCustomerHasCard(CustomerHasCard cusCard) {
+		List<CustomerHasCard> cusCards = initialData.getCusHasCards();
+		cusCards.add(cusCard);
+		initialData.setCusHasCards(cusCards);
 	}
 
 	@Override
-	public void updateCustomerHasCard(CustomerHasCard C) {
-		// TODO Auto-generated method stub
-
+	public void updateCustomerHasCard(CustomerHasCard cusCard) {
+		//Why is this here???
 	}
 
 	@Override
 	public void removeCustomerHasCard(CustomerHasCard c) {
-		// TODO Auto-generated method stub
-
+		List<CustomerHasCard> cusCards = initialData.getCusHasCards();
+		for (CustomerHasCard cusCard: cusCards){
+			if (cusCard.equals(c)){
+				cusCards.remove(cusCard);
+			}
+		}
+		initialData.setCusHasCards(cusCards);
 	}
 
 	@Override
 	public List<CustomerHasCard> findByCardID(long cardID) {
-		// TODO Auto-generated method stub
-		return null;
+		List<CustomerHasCard> customerHasCards = new ArrayList<CustomerHasCard>();
+		for(CustomerHasCard hasCard : initialData.getCusHasCards()) {
+			if(hasCard.getCard().getCardID() == cardID)
+				customerHasCards.add(hasCard);
+		}
+		return customerHasCards;
 	}
 
 	@Override
 	public List<CustomerHasCard> findByAccountID(long accountID) {
 		List<CustomerHasCard> customerHasCards = new ArrayList<CustomerHasCard>();
-		System.out.println(">>> Customer Cards " + customerHasCards.isEmpty() + " <<< ");
+		//System.out.println(">>> Customer Cards " + customerHasCards.isEmpty() + " <<< ");
 		for(CustomerHasCard hasCard : initialData.getCusHasCards()) {
-			System.out.println(">>> Card belongs to " + hasCard.getCustomer().getAccountID() + " <<< ");
+			//System.out.println(">>> Card belongs to " + hasCard.getCustomer().getAccountID() + " <<< ");
 			if(hasCard.getCustomer().getAccountID() == accountID)
 				customerHasCards.add(hasCard);
 		}
-		System.out.println(">>> Customer Cards " + customerHasCards.size() + " <<< ");
+		//System.out.println(">>> Customer Cards " + customerHasCards.size() + " <<< ");
 		return customerHasCards;
 	}
 }

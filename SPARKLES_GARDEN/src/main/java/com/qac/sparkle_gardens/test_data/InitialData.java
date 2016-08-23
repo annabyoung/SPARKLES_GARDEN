@@ -42,7 +42,6 @@ public class InitialData
 	
 	private void setupInitialData() {
 	//Object Creation.
-		//long addressId, int buildingNum, String streetName, String city, String county, String country, String postCode
 		Address dummyAddress = new Address("Anchorage 1", "Floor 5", "Anchorage Quay", "Salford Quay", "Greater Manchester", "United Kingdom", "M50 3YJ", "Shipping");
 		Customer customer = new Customer(1, "John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890");
 		Customer customer2 = new Customer(2, "Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, "password01", "0987654321");

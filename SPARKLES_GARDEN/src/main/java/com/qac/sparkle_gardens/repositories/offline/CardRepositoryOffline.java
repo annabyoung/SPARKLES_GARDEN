@@ -28,6 +28,14 @@ public class CardRepositoryOffline implements CardRepository
 	public void addCard(Card card) 
 	{
 		List<Card> cards = initialData.getCards();
+		if (card.getCardID() == 0){
+			card.setCardID(cards.get(cards.size() - 1).getCardID() + 1);
+			/*
+			 * If Card doesn't have an ID, set ID to the ID of the largest one in initialData
+			 * +1. Doesn't work if there is one or less members in the initialData, but this is only
+			 * for testing purposes anyway.
+			 */
+		}
 		cards.add(card);
 		initialData.setCards(cards);
 	}

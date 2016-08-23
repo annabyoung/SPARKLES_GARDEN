@@ -42,7 +42,8 @@ public class CardService {
 	 * @return
 	 */
 	public boolean validateCardDetails(String cardOwnerName, String cardNumber, String expirationDate) {
-		if (!cardOwnerName.isEmpty() || !cardNumber.isEmpty() || !expirationDate.isEmpty() && cardNumber.matches("[0-9]{16}")) {
+		if (!cardOwnerName.isEmpty() || !cardNumber.isEmpty() || !expirationDate.isEmpty() && 
+				cardNumber.matches("[0-9]{16}")) {
 			return true;
 		}
 		return false;
@@ -100,7 +101,7 @@ public class CardService {
 	 * @return List<Card>
 	 */
 	public List<Card> getCardsByCustomer(long customer){
-		System.out.println(">>> Customer ID: " + customer + " <<<");
+		//System.out.println(">>> Customer ID: " + customer + " <<<");
 		if (customer == 0)
 			return new ArrayList<Card>();
 		return filterCards(cardOwnershipRepository.findByAccountID(customer));
@@ -120,7 +121,7 @@ public class CardService {
 	
 	private List<Card> filterCards(List<CustomerHasCard> cardsOwnedByCustomer) {
 		List<Card> cards = new ArrayList<>();
-		System.out.println(">>> cursomers Cards: " + cardsOwnedByCustomer.isEmpty() + " <<<");
+		//System.out.println(">>> cursomers Cards: " + cardsOwnedByCustomer.isEmpty() + " <<<");
 		for(CustomerHasCard customerHasCard : cardsOwnedByCustomer) {
 			cards.add(cardRepository.findByID(customerHasCard.getCard().getCardID()));
 		}
@@ -225,5 +226,11 @@ public class CardService {
 	 */
 	public boolean refundCard(String cardNumber, String expirationDate){
 		return true;
+	}
+
+	public void registerCard(Card newCard, Customer cardOwner) {
+		cardRepository.addCard(newCard);
+		CustomerHasCard cusCard = new CustomerHasCard(cardOwner, newCard);
+		cardOwnershipRepository.addCustomerHasCard(cusCard);
 	}
 }

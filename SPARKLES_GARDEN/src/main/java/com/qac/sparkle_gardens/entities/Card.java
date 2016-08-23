@@ -21,6 +21,10 @@ import javax.validation.constraints.Size;
 
 public class Card implements Serializable{
 	
+	public void setCardID(long cardID) {
+		this.cardID = cardID;
+	}
+
 	/**
 	 * 
 	 */
@@ -32,16 +36,16 @@ public class Card implements Serializable{
 	private long cardID;
 	
 	@Column(name = "cardOwnerName", nullable = false, length = 225)
-	@NotNull
+	@NotNull(message = "Please fill this in")
 	@Size(min = 2, max = 25)
 	private String cardOwnerName;
-	@Pattern(regexp = "[0-9]{16}", message = "{invalid.cardNumber}")
-
-	@NotNull
+	
+	@Pattern(regexp = "[0-9]{16}", message = "16 Digit number required.")
+	@NotNull(message = "Please fill this in")
 	private String cardNumber;
 
-	@NotNull
-	@Pattern(regexp = "[0-1][0-9]/[0-9]{2}", message = "{invalid.expirationDate}")
+	@NotNull(message = "Please fill this in")
+	@Pattern(regexp = "[0-1][0-9]/[0-9]{2}", message = "Please use the xx/xx format.")
 	private String expirationDate;
 	
 	public static final String FIND_BY_CARD_NUMBER = "Card.getCardNumber";
