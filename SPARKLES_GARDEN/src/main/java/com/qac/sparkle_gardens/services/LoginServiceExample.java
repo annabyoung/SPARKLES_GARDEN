@@ -4,7 +4,8 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-@Path("/logintest")
+@Deprecated
+@Path("/")
 public class LoginServiceExample {
 	@Path("logintest")
 	@POST
