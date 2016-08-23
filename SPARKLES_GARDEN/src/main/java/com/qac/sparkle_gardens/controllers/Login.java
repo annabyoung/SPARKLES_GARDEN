@@ -2,6 +2,8 @@ package com.qac.sparkle_gardens.controllers;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 
 import com.qac.sparkle_gardens.services.CustomerService;
 
@@ -16,8 +18,15 @@ import com.qac.sparkle_gardens.services.CustomerService;
  */
 
 @RequestScoped
-@Named (value ="login")
+// @Named (value ="login")
+//going path now
+
+
+@Path("/")
+
 public class Login {
+
+
 
 	@Inject 
 	CustomerService customerService;
@@ -45,6 +54,8 @@ public class Login {
 	    this.password = password;
 	  }
 
+	  @Path("login")
+	  @POST
 	  public String login () {
 		  if (username.equals("")){
 			  error = "please enter a username";

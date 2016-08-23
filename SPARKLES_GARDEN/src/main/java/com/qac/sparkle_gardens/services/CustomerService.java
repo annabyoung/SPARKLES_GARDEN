@@ -3,8 +3,9 @@ package com.qac.sparkle_gardens.services;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-
+import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
 
@@ -186,5 +187,15 @@ public class CustomerService {
 		return customer;
 	}
 	
+	//need to make one for cards as well. 
+	/*
+	 * add an address associated with customer. need to make silimar function to card
+	 * but allen is still working on card.  
+	 */
+	public void updateCustomerAddress(Customer customer , Address newAddress){
+		CustomerHasAddress cha = new CustomerHasAddress(customer, newAddress);
+		
+		// should persist this SOMEWHERE 
+	}
 	
 }
