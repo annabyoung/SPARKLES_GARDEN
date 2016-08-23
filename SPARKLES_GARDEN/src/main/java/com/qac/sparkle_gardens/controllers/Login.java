@@ -20,20 +20,16 @@ import com.qac.sparkle_gardens.services.CustomerService;
  */
 
 @RequestScoped
-// @Named (value ="login")
-//going path now
-
-
-@Path("/")
+@Named (value ="login")
 
 public class Login {
 
 
 
 	@Inject 
-	CustomerService customerService;
+	private CustomerService customerService;
 	@Inject
-	CurrentUserController userCredentials;
+	private CurrentUserController userCredentials;
 	
 	
 	  private String username="";
@@ -56,10 +52,7 @@ public class Login {
 	    this.password = password;
 	  }
 
-	  @Path("login")
-	  @POST
-	  @Consumes
-	  public String login (@FormParam("username") String user, @FormParam("password") String password) {
+	  public String login () {
 		  if (username.equals("")){
 			  error = "please enter a username";
 			  password="";

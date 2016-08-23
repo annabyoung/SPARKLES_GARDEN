@@ -24,9 +24,9 @@ public class CustomerRESTController {
 	 */
 		
 		@Inject 
-		CustomerService customerService;
+		private CustomerService customerService;
 		@Inject 
-		AddressService addressService; // do i still need this?
+		private AddressService addressService; // do i still need this?
 		
 		//how do i get data from front end? what does that look like 
 		/**
