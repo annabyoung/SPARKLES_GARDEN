@@ -3,6 +3,7 @@ package com.qac.sparkle_gardens.controllers;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.ws.rs.Path;
 
 import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.services.CustomerService;
@@ -18,8 +19,10 @@ import com.qac.sparkle_gardens.services.AddressService;
  * creates a new customer 
  *
  */
-@Named(value= "Register")
+
+
 @RequestScoped
+@Path("/Register")
 public class Registration { 
 	
 	@Inject 
