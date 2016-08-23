@@ -1,29 +1,31 @@
-package com.qac.sparkle_gardens.controllers;
+/**
+ * 
+ */
+package com.qac.sparkle_gardens.rest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.services.ProductService;
 
-import javax.inject.Inject;
-
-
-
 /**
  * @author Annabelle Young
- * 
- * Search Items controller
- * This controller handles the search queries of customers and returns list of products based on search parameters
  *
  */
-
-@Named(value="search")
+@Path(value="search")
 @RequestScoped
-public class SearchItemsController {
+public class SearchItemsRESTController {
+
 	@Inject	private ProductService productService;
 	
 	private List<Product> searchQueryResults = new ArrayList<Product>();
@@ -37,6 +39,9 @@ public class SearchItemsController {
 	 * 
 	 * @return search, blank_search
 	 */
+	@POST
+	@Consumes("text/plain")
+	@Path("/createbytags")
 	public String createProductListByTags(String customerInput){
 		searchQueryResults.addAll(productService.createProductListWithAllTags(customerInput));
 		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
@@ -57,7 +62,10 @@ public class SearchItemsController {
 	 * @param maximumPrice
 	 * @return search, blank_search
 	 */
-	public String createProductListByPrice(double minimumPrice, double maximumPrice){
+	@POST
+	@Consumes("text/plain")
+	@Path("/createbyprice")
+	public String createProductListByPrice(@FormParam("minimum") double minimumPrice, @FormParam("maximum") double maximumPrice){
 		searchQueryResults.addAll(productService.createProductListByPriceRange(minimumPrice, maximumPrice));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
 			return "Created with: " + minimumPrice + " : " + maximumPrice;
@@ -78,21 +86,21 @@ public class SearchItemsController {
 	/**
 	 * Retrieve the list of products that resulted from search queries
 	 */
+	@Path("{id}")
+	@GET
+	//@Produces("text/plain")
 	public List<Product> getSearchResultList(){
 		return searchQueryResults;
+		//return (List<Product>)productService.getProductList();
 	}
 	
 	/**
 	 * Retrieve error message if there is one
 	 */
+	@Path("{id}")
+	@GET
+	@Produces("text/plain")
 	public String getError(){
 		return error;
 	}
 }
-
-
-
-
-
-
-

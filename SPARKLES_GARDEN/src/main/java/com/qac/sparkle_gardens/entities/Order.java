@@ -29,6 +29,7 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
 @NamedQueries (
 		{
 //			@NamedQuery (name = Order.FIND_BY_ID, query = "SELECT o FROM Order o WHERE o.orderID = :orderID"),
+	
 		}
 )
 @Entity
@@ -198,4 +199,6 @@ public class Order
 	{
 		this.paymentStatus = paymentStatus;
 	}
+	
+	
 }

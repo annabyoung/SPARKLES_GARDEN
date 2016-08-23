@@ -167,6 +167,7 @@ public class OrderService
 		
 		basket.add(new OrderLine(p, quantity));
 		
+		
 		return true;
 	}
 	
@@ -322,5 +323,18 @@ public class OrderService
 			return true;
 		}
 		return false;
+	}
+	
+	
+	public int getQuanity(Product p){
+		
+		 Order order = repository.getOrder(1);
+		for( OrderLine orderline : order.getOrderLines() )
+		{
+			if (orderline.getProduct().equals(p))
+      			return orderline.getQuantity();	
+		}
+		return 0; 
+		
 	}
 }

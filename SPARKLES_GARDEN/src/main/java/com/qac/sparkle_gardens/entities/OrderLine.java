@@ -55,8 +55,8 @@ public class OrderLine implements Serializable
 	 */
 	public OrderLine(Product product, int quantity)
 	{
-		this();
-		setProduct(product, quantity);
+		this.product= product;
+		this.quantity=quantity;		
 	}
 	
 	/**
@@ -66,10 +66,9 @@ public class OrderLine implements Serializable
 	 * @param product The product to be ordered
 	 * @param quantity The quantity of that product to be ordered
 	 */
-	public void setProduct(Product product, int quantity)
+	public void setProduct(Product product)
 	{
 		this.product = product;
-		this.quantity = quantity;
 	}
 	
 	/**

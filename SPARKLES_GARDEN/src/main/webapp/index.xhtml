@@ -19,6 +19,14 @@
             <em>Some registered cards.</em>
         </h:panelGroup>
         
+        <form method="POST" action="/api/cards/registerCard">
+	        cardOwnerName: <input type="text" name="cardOwnerName"/>
+	        cardNumber: <input type="text" name="cardNumber"/>
+	        expirationDate: <input type="text" name="expirationDate"/>
+	        <input type="submit"/>
+        </form>
+        
+        
          <h:form id="reg">
             <h2>Card Registration</h2>
             <p>Enforces annotation-based constraints defined on the
