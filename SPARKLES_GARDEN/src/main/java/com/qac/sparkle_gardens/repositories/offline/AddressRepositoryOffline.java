@@ -8,6 +8,7 @@ import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Address;
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.AddressRepository;
 import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
@@ -57,7 +58,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 		}
 		List <Address> places = new ArrayList <Address>();
 		// retrieves all the addresses a customer has 
-	    List<CustomerHasAddress> custAddress = (ArrayList<CustomerHasAddress>) custAddressRepository.findByAddressId(accountId);
+	    List<CustomerHasAddress> custAddress = (ArrayList<CustomerHasAddress>) custAddressRepository.findByAccountId(accountId);
 		
 		for (CustomerHasAddress cust : custAddress) {
 			places.add(cust.getAddress());
@@ -79,7 +80,7 @@ public class AddressRepositoryOffline implements AddressRepository {
 		if (address == null) {
 			throw new IllegalArgumentException();
 		}
-		
+	
 		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
 			if (addresses.get(index).getAddressId() == address.getAddressId()) {

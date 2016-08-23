@@ -17,23 +17,24 @@ import com.qac.sparkle_gardens.repositories.WishlistRepository;
 @Stateless
 public class WishlistService {
 	@Inject private WishlistRepository wishlistRepository;
-
-	/**
-	 * Get wishlist information
-	 * Create wishlist 
-	 * Delete wishlist
-	 */
 	
 	/**
-	 * Retrieves the wishlist - the list of products
-	 * @param id
+	 * 
+	 * @param customer
 	 * @return
 	 */
-	public Wishlist getWishlist(long id) {
-		if (id <= 0) {
+	public Wishlist getWishlist(Customer customer) {
+		if (customer == null) {
 			throw new IllegalArgumentException();
 		}
-		return wishlistRepository.findById(id);
+		return wishlistRepository.findByAccountId(customer.getAccountID());
+	}
+	
+	public Wishlist getWishlist(long accountId) {
+		if (accountId <= 0) {
+			throw new IllegalArgumentException();
+		}
+		return wishlistRepository.findByAccountId(accountId);
 	}
 	
 	/**
@@ -89,6 +90,40 @@ public class WishlistService {
  		Wishlist wish = wishlistRepository.findByAccountId(customer.getAccountID());
 		wishlistRepository.removeWishlist(wish);
 	}
+	
+	public void removeProduct(Product product, long accountId) {
+		if (product == null || accountId <= 0) {
+			throw new IllegalArgumentException();
+		}
+		wishlistRepository.removeProduct(product, accountId);
+	}
+	public List<Product> getProducts(Customer customer) {
+		if (customer == null) {
+			throw new IllegalArgumentException();
+		}
+		return wishlistRepository.getProducts(customer.getAccountID());
+	}
+	
+	public List<Product> getProducts(long accountId) {
+		if (accountId <= 0) {
+			throw new IllegalArgumentException();
+		}
+		return wishlistRepository.getProducts(accountId);
+	}
+	
+	public void addProduct(Product product, long accountId) {
+		if (product == null || accountId <= 0) {
+			throw new IllegalArgumentException();
+		}
+		wishlistRepository.addProductToListWithAcctId(product, accountId);
+	}
+	
+	public void addProduct(Product product, Customer customer) {
+		if (product == null || customer == null) {
+			throw new IllegalArgumentException();
+		}
+		wishlistRepository.addProductToListWithAcctId(product, customer.getAccountID());
+	}
 	/**
 	 *  Creates a new wishlist
 	 * @param accountId
@@ -111,13 +146,6 @@ public class WishlistService {
 		//Wishlist wish = new Wishlist(customer, name);
 		//wishlistRepository.persistWishlist(wish);
 	//}
-	
-	public void addProduct(Product product, long accountId) {
-		if (product == null || accountId <= 0) {
-			throw new IllegalArgumentException();
-		}
-		wishlistRepository.addProductToListWithAcctId(product, accountId);
-	}
 	
 	//@Deprecated
 	/**
@@ -149,25 +177,7 @@ public class WishlistService {
 	 * @param product
 	 * @param accountId
 	 */
-	public void removeProduct(Product product, long accountId) {
-		if (product == null || accountId <= 0) {
-			throw new IllegalArgumentException();
-		}
-		wishlistRepository.removeProduct(product, accountId);
-	}
-	public List<Product> getProducts(Customer customer) {
-		if (customer == null) {
-			throw new IllegalArgumentException();
-		}
-		return wishlistRepository.getProducts(customer.getAccountID());
-	}
 	
-	public List<Product> getProducts(long accountId) {
-		if (accountId <= 0) {
-			throw new IllegalArgumentException();
-		}
-		return wishlistRepository.getProducts(accountId);
-	}
 	
 	/**
 	 * 
