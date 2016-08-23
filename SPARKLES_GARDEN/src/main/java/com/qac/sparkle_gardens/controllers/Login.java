@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,7 @@ import com.qac.sparkle_gardens.services.CustomerService;
 
 /**
  * logging in. probably need to do more or borrow 
- * a real library thats already done it.
+ * gotta rework this 
  * 
  * @author Sean Connelly 
  *
@@ -25,9 +26,16 @@ import com.qac.sparkle_gardens.services.CustomerService;
 @Named (value ="login")
 public class Login {
 
-	  private String username;
-	  private String password;
-
+	@Inject 
+	CustomerService customerService;
+	@Inject
+	CurrentUserController userCredentials;
+	
+	
+	  private String username="";
+	  private String password="";
+      private String error = "";
+      
 	  public String getUsername() {
 	    return this.username;
 	  }
@@ -45,26 +53,30 @@ public class Login {
 	  }
 
 	  public String login () {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    HttpServletRequest request = (HttpServletRequest) 
-	        context.getExternalContext().getRequest();
-	    try {
-	      request.login(this.username, this.password);
-	    } catch (ServletException e) {
-	      context.addMessage(null, new FacesMessage("Login failed."));
-	      return "error";
-	    }
-	    return "admin/index";
+		  if (username.equals("")){
+			  error = "please enter a username";
+			  password="";
+			  return "login";
+		  }
+		  if (password.equals("")){
+			  error = "please enter a password";
+					  password="";
+			  return "login";
+		  }
+		  
+		  if(!customerService.validateDetails(username, password)){
+			  error = "Invalid Login";
+					  password= "";
+			  return "login";
+		  }
+		  userCredentials.setCustomerId(customerService.getUserID(username).getAccountID());
+		  return "home";	  
+		  
+		  
 	  }
 
-	  public void logout() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    HttpServletRequest request = (HttpServletRequest) 
-	        context.getExternalContext().getRequest();
-	    try {
-	      request.logout();
-	    } catch (ServletException e) {
-	      context.addMessage(null, new FacesMessage("Logout failed."));
-	    }
+	  public String logout() {
+	    userCredentials.setCustomerId(0);
+	    return "home"; 
 	  }
 }

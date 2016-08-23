@@ -4,13 +4,13 @@ import javax.faces.bean.SessionScoped;
 
 @SessionScoped
 public class CurrentUserController {
-	private long customerId;
+	private long accountId;
 
 	public long getCustomerId() {
-		return customerId;
+		return accountId;
 	}
 
-	public void setCustomerId(long customerId) {
-		this.customerId = customerId;
+	public void setCustomerId(long accountId) {
+		this.accountId = accountId;
 	}
 }

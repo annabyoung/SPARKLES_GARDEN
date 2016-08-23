@@ -161,6 +161,30 @@ public class CustomerService {
 		return customerRepository.findByID(userID);
 		
  	}
+
+
+
+	public boolean validateDetails(String username, String password) {
+		Customer user  = customerRepository.findByEmail(username);
+		
+		if (user == null)
+			return false; 
+			
+		
+		if(user.getPassword().equals(password))
+			return true;
+		else 		
+		return false;
+	}
+
+
+
+	public Customer getUserID(String email) {
+		
+		Customer customer = customerRepository.findByEmail(email);
+		
+		return customer;
+	}
 	
 	
 }
