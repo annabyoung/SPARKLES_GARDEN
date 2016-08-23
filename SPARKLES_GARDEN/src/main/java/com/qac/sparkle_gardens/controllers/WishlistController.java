@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Product;
@@ -19,8 +22,8 @@ import com.qac.sparkle_gardens.services.WishlistService;
  * This controller adds items to the wishlist and gets the product information
  * 
  */
-@Named (value = "wishlist")
 
+@Path (value = "/")
 @RequestScoped
 public class WishlistController {
 	
@@ -32,7 +35,8 @@ public class WishlistController {
 	OrderService orderService;
 	
 	/**
-	 * 
+	 * Creates a wishlist when one product is added to the list
+	 * when created
 	 * @param accountId
 	 * @param product
 	 */
@@ -40,8 +44,57 @@ public class WishlistController {
 		wishlistService.createWishlist(customerRepository.findByID(customer.getAccountID()), product);
 	}
 	
+	
+	/**
+	 * Creates a wishlist where a list of products are added
+	 * @param customer
+	 * @param products
+	 */
 	public void createWishlist(Customer customer, List<Product> products) {
 		wishlistService.createWishlist(customer, products);
+	}
+	
+	/**
+	 * Overloading addProductToWishlist method because 
+	 * a customer object can be passed or the account ID.
+	 * 
+	 * Accounting for both just in case.
+	 * @param product
+	 * @param accountId
+	 */
+	public void addProductToWishlist(Product product, long accountId) {
+		wishlistService.addProduct(product, accountId);
+	}
+	
+	public void addProductToWishlist(Product product, Customer customer) {
+		wishlistService.addProduct(product, customer.getAccountID());
+	}
+	
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("wishlist")
+	public void getWishlist(Customer customer) {
+		wishlistService.getWishlist(customer);
+	}
+	
+	/**
+	 * Removes a product from the wishlist
+	 * @param product
+	 * @param wishlistName
+	 */
+	public void removeProductFromWishlist(Product product, long accountId) {
+		wishlistService.removeProduct(product, accountId);
+	}
+	
+	public void removeProductFromWishlist(Product product, Customer customer) {
+		wishlistService.removeProduct(product, customer.getAccountID());
+	}
+	
+	/**
+	 *  @param customer
+	 */
+	public List<Product> getProducts(Customer customer) {
+		return wishlistService.getProducts(customer.getAccountID());
 	}
 	/**
 	 * Creates a wishlist for a given customer
@@ -63,23 +116,7 @@ public class WishlistController {
 		//wishlistService.addProduct(product, wishlistName);
 	//}
 	
-	/**
-	 * 
-	 * @param product
-	 * @param accountId
-	 */
-	public void addProductToWishlist(Product product, long accountId) {
-		wishlistService.addProduct(product, accountId);
-	}
 	
-	/**
-	 * Removes a product from the wishlist
-	 * @param product
-	 * @param wishlistName
-	 */
-	public void removeProductFromWishlist(Product product, long accountId) {
-		wishlistService.removeProduct(product, accountId);
-	}
 	
 	/**
 	 * Gets all the products in the wishlist
@@ -89,10 +126,5 @@ public class WishlistController {
 	//public List<Product> getProducts(String wishlistName) {
 		//return wishlistService.getProducts(wishlistName);
 	//}
-	
-	public List<Product> getProducts(Customer customer) {
-		return wishlistService.getProducts(customer.getAccountID());
-	}
-	
 	
 }

@@ -6,10 +6,14 @@ package com.qac.sparkle_gardens.services;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+
+import org.hibernate.mapping.Set;
+
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 import com.qac.sparkle_gardens.test_data.ProductInitialData;
@@ -30,6 +34,7 @@ public class ProductService {
 	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
 	private List<Product> productL = initialData.getAllProducts(); 
 	private List<String> tags = new ArrayList<String>();
+	private LinkedHashSet<Product> searchList = new LinkedHashSet<Product>();
 	
 	public ProductService(){}
 	/**
@@ -129,6 +134,7 @@ public class ProductService {
 		for(Product p : productL){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
 				productsInRange.add(p);
+				searchList.add(p);
 			}
 		}
 		productList.addAll(productsInRange);
@@ -188,6 +194,7 @@ public class ProductService {
 		for(Product p : productL){
 			if (p.getProductTags().containsAll(tags)){
 				productsWithAllTags.add(p);
+				searchList.add(p);
 			} 
 		}
 		return productsWithAllTags;
@@ -208,6 +215,7 @@ public class ProductService {
 		for(Product p : productL){
 			if (!Collections.disjoint(p.getProductTags(), tags)){
 				productsWithSubsetOfTags.add(p);
+				searchList.add(p);
 			}
 		}
 		return productsWithSubsetOfTags;
@@ -254,6 +262,7 @@ public class ProductService {
 	 */
 	public List<Product> getProductList(){
 		//There should be a query here, but we're not at that point yet
+//		return (searchList.to)
 		return productList;
 	}
 	

@@ -3,6 +3,7 @@ package com.qac.sparkle_gardens.repositories;
 import java.util.List;
 
 import com.qac.sparkle_gardens.entities.Address;
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 
 /**

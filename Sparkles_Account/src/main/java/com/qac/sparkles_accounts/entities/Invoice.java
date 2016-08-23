@@ -2,6 +2,7 @@ package com.qac.sparkles_accounts.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -36,17 +37,17 @@ public class Invoice implements Serializable
 	 */
 	private static final long serialVersionUID = -7791470121898410338L;
 	
-	Customer customer;
-	Order order;
+	private Customer customer;
+	private Order order;
 	
-	private MessageReceiver receiver;
+	private MessageReceiver receiver = new MessageReceiver(customer);
 	
 	public Invoice(Customer customer, Order order, String queuecf, String requestQueue)
 	{
 		this.customer = customer;
 		this.order = order;
 		
-		receiver = new MessageReceiver();
+		//this.receiver = new MessageReceiver();
 	}
 
 	public void onMessage(Message msg) 
@@ -76,7 +77,7 @@ public class Invoice implements Serializable
 	private String generate()
 	{
 		String invoice = "";
-		ArrayList<OrderLine> lines = order.getOrderLines();
+		List<OrderLine> lines = order.getOrderLines();
 		
 		invoice += "\n\n\n----------------------------------------------";
 		
