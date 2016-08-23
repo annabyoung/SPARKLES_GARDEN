@@ -2,6 +2,7 @@ package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -15,29 +16,34 @@ import com.qac.sparkle_gardens.test_data.InitialData;
 @Default
 public class CustomerHasCardRepositoryOffline implements CustomerHasCardRepository {
 	@Inject private InitialData initialData;
+	@Inject private Logger log;
 	
 	@Override
 	public void persistCustomerHasCard(CustomerHasCard c) {
-		// TODO Auto-generated method stub
-
+		List<CustomerHasCard> customerHasCards = initialData.getCusHasCards();
+		customerHasCards.add(c);
+		log.info(">>>>>> Adding CustomerHasCard");
 	}
 
 	@Override
 	public void persistCustomerHasCards(List<CustomerHasCard> c) {
-		// TODO Auto-generated method stub
-
+		List<CustomerHasCard> customerHasCards = initialData.getCusHasCards();
+		for (CustomerHasCard cusCard: c){
+			customerHasCards.add(cusCard);
+		}
+		initialData.setCusHasCards(customerHasCards);
 	}
 
 	@Override
 	public List<CustomerHasCard> getCustomerHasCards() {
-		// TODO Auto-generated method stub
-		return null;
+		return initialData.getCusHasCards();
 	}
 
 	@Override
 	public void addCustomerHasCard(CustomerHasCard c) {
-		// TODO Auto-generated method stub
-
+		List<CustomerHasCard> customerHasCards = initialData.getCusHasCards();
+		customerHasCards.add(c);
+		log.info(">>>>>> Adding CustomerHasCard");
 	}
 
 	@Override
@@ -48,8 +54,9 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 
 	@Override
 	public void removeCustomerHasCard(CustomerHasCard c) {
-		// TODO Auto-generated method stub
-
+		List<CustomerHasCard> customerHasCards = initialData.getCusHasCards();
+		customerHasCards.remove(c);
+		log.info(">>>>>> Removing customer has card");
 	}
 
 	@Override

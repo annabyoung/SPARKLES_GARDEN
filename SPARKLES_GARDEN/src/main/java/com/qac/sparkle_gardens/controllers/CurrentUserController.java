@@ -5,7 +5,8 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class CurrentUserController {
 	private long accountId;
-
+	
+	
 	public long getCustomerId() {
 		return accountId;
 	}

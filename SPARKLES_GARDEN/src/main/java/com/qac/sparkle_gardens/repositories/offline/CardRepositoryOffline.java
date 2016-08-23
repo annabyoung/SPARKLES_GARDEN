@@ -2,6 +2,7 @@ package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -23,13 +24,19 @@ import com.qac.sparkle_gardens.test_data.InitialData;
 public class CardRepositoryOffline implements CardRepository
 {
 	@Inject
+	private Logger log;
+	@Inject
 	InitialData initialData = new InitialData();
 
 	public void addCard(Card card) 
 	{
 		List<Card> cards = initialData.getCards();
+		if (card.getCardID() == 0){
+			card.setCardID(((long)cards.size()));
+		}
 		cards.add(card);
 		initialData.setCards(cards);
+		log.info(">>>>>> Adding card to repository" + card.getCardNumber());
 	}
 	
 	public List<Card> listCards() 
