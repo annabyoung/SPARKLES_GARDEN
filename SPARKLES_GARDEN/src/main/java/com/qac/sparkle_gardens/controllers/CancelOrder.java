@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.services.OrderService;
+import com.qac.sparkle_gardens.util.MethodAuthor;
+import com.qac.sparkle_gardens.util.OrderStatus;
 import com.qac.sparkle_gardens.util.PaymentStatus;
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.controllers.RefundCard;
@@ -17,15 +19,16 @@ import com.qac.sparkle_gardens.controllers.RefundCard;
  * In case customer realizes they ordered incorrect quantity, item, or no longer desire the item before it is dispatched to them.
  *
  */
-@Named (value = "Cancel_Order")
+
+@Named (value = "cancelOrder")
 @RequestScoped
 public class CancelOrder 
 {
-	@Inject	private OrderService service;
+	@Inject private	OrderService service;
 	
-	@Inject private RefundCard refund;
+	@Inject private	RefundCard refund;
 	
-	private String error = "";
+	//String error = "";
 	
 	/**
 	 * Take the order's ID, check that the order's status is not empty, dispatched or delivered
@@ -36,22 +39,60 @@ public class CancelOrder
 	 * @param orderID
 	 * @return
 	 */
-	public String cancelOrder(long orderID)
+	/*public String cancelOrder(long orderID)
 	{
 		Order order = service.getOrder(orderID);
+<<<<<<< HEAD
 		if (service.canCancelOrder(order)){
 			if(order.isPayLater()){
+=======
+
+		if (service.isEligibleForRefund(orderID));
+		{
+			if(order.isPayLater())
+			{
+		if (service.canCancelOrder(order))
+		{
+			if(order.isPayLater())
+			{
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 				order.setPaymentStatus(PaymentStatus.VOID);
 				return "home";
 			}
 			refund.refundCard(order);
+<<<<<<< HEAD
 			return "home";
 		}
 		error = "Order is not valid for cancellation.";
 		return error;
+=======
+			return "cancelled_order";
+		}
+		return "order_not_cancelled";
+	}*/
+	
+	@MethodAuthor (author = "Damien Lloyd")
+	public String cancelOrder(long orderID)
+	{
+		Order order = service.getOrder(orderID);
+		
+		if (order.getOrderStatus() == OrderStatus.DISPATCHED ||
+				order.getOrderStatus() == OrderStatus.DELIVERED)
+		{
+			return "cannot_cancel_order";
+		}
+		
+		if (service.isEligibleForRefund(orderID))
+		{
+			refund.refundCard(order);
+			order.setPaymentStatus(PaymentStatus.VOID);
+			return "cancelled_order";
+		}
+		return "cancelled_order";
 	}
 	
-	public String getError(){
+	/*String getError()
+	{
 		return error;
-	}
+	}*/
 }

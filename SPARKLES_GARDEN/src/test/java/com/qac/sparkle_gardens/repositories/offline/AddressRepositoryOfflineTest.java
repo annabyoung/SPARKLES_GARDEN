@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 package com.qac.sparkle_gardens.repositories.offline;
 
 import static org.junit.Assert.assertTrue;
@@ -9,13 +12,21 @@ import org.junit.Test;
 
 import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.repositories.AddressRepository;
+<<<<<<< HEAD
 //import com.qac.sparkle_gardens.test_data.InitialData;
+=======
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 
 public class AddressRepositoryOfflineTest {
 	
 	
+<<<<<<< HEAD
 	Address address;
 	AddressRepository addressRepo;
+=======
+	private Address address;
+	private AddressRepository addressRepo;
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 	
 	@Before
 	public void setup() {
@@ -64,4 +75,8 @@ public class AddressRepositoryOfflineTest {
 		addressRepo = null;
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed

@@ -18,24 +18,43 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 	@Inject private InitialData initialData;
 	
 	@Override
+<<<<<<< HEAD
 	public void persistCustomerHasCard(CustomerHasCard cusCard) {
 		List<CustomerHasCard> cusCards = initialData.getCusHasCards();
 		cusCards.add(cusCard);
 		initialData.setCusHasCards(cusCards);
+=======
+	public void persistCustomerHasCard(CustomerHasCard c) {
+		
+		// TODO Auto-generated method stub
+
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 	}
 
 	@Override
 	public void persistCustomerHasCards(List<CustomerHasCard> c) {
+<<<<<<< HEAD
 		List<CustomerHasCard> cusCards = initialData.getCusHasCards();
 		for (CustomerHasCard cusCard: c){
 			cusCards.add(cusCard);
 		}
 		initialData.setCusHasCards(cusCards);
+=======
+		
+		// TODO Auto-generated method stub
+
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 	}
 
 	@Override
 	public List<CustomerHasCard> getCustomerHasCards() {
+<<<<<<< HEAD
 		return initialData.getCusHasCards();
+=======
+		
+	
+		return null;
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 	}
 
 	@Override
@@ -46,12 +65,21 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void updateCustomerHasCard(CustomerHasCard cusCard) {
 		//Why is this here???
+=======
+	public void updateCustomerHasCard(CustomerHasCard C) {
+		// TODO Auto-generated method stub
+		//initialData.getCusHasCards().
+		
+
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 	}
 
 	@Override
 	public void removeCustomerHasCard(CustomerHasCard c) {
+<<<<<<< HEAD
 		List<CustomerHasCard> cusCards = initialData.getCusHasCards();
 		for (CustomerHasCard cusCard: cusCards){
 			if (cusCard.equals(c)){
@@ -59,15 +87,26 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 			}
 		}
 		initialData.setCusHasCards(cusCards);
+=======
+		// TODO Auto-generated method stub
+			
+		
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 	}
 
 	@Override
 	public List<CustomerHasCard> findByCardID(long cardID) {
 		List<CustomerHasCard> customerHasCards = new ArrayList<CustomerHasCard>();
+<<<<<<< HEAD
 		for(CustomerHasCard hasCard : initialData.getCusHasCards()) {
 			if(hasCard.getCard().getCardID() == cardID)
 				customerHasCards.add(hasCard);
 		}
+=======
+		
+		
+		
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 		return customerHasCards;
 	}
 

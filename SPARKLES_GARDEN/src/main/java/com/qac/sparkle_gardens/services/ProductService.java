@@ -13,6 +13,10 @@ import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
 import com.qac.sparkle_gardens.test_data.ProductInitialData;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 
 /**
  * @author Annabelle Young
@@ -25,10 +29,17 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 @Stateless
 public class ProductService {
 	@Inject private ProductRepository productRepository;
+<<<<<<< HEAD
 	@Inject private ProductInitialData initialData = new ProductInitialData();
 	
 	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
 	private List<Product> productL = initialData.getAllProducts(); 
+=======
+	@Inject private ProductInitialData productData;
+	
+	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
+	private List<Product> productL = productData.getAllProducts(); 
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 	private List<String> tags = new ArrayList<String>();
 	
 	public ProductService(){}
@@ -248,9 +259,10 @@ public class ProductService {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Return the list of all products that meet the search parameters
+<<<<<<< HEAD
 	 */
 	public List<Product> getProductList(){
 		//There should be a query here, but we're not at that point yet
@@ -262,6 +274,20 @@ public class ProductService {
 	 */
 	public void clearSearchQuery(){
 		productList.clear();
+=======
+	 */	
+	public List<Product> getProductList() {
+		return productList;
+	}
+
+
+	/**
+	 * Clears the search query
+	 */
+	public void clearSearchQuery() {
+		productList.clear();
+		
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 	}
 
 

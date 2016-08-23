@@ -11,6 +11,7 @@ import com.qac.sparkle_gardens.services.OrderService;
  * @author Damien Lloyd
  *
  */
+@Deprecated
 @Named (value = "placeOrder")
 @RequestScoped
 public class PlaceOrder 

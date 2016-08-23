@@ -43,4 +43,11 @@ public interface WishlistRepository {
 	// checks if a product is in a wishlist
 	public boolean inWishlist(Product product, long accountId);
 	
+<<<<<<< HEAD
+=======
+	//public List<Product> getProducts(long accountId);
+	@Deprecated
+	//Returns all the products in a wishlist
+	public List<Product> getProducts(String wishlistName);
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 }

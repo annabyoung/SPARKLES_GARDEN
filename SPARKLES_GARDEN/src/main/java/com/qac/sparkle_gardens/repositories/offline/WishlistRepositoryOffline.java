@@ -175,8 +175,22 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		initialData.setWishlists(list);
 	}
 	
+<<<<<<< HEAD
 	public List<Product> getProducts(long accountId) {
 		Wishlist list = findByAccountId(accountId);
+=======
+	/*
+	 * Create a find wishlist method
+	 * in order to find a specific wishlist
+	 */
+	
+	/**
+	 * Returns all the products in a wishlist
+	 * @param wishlist
+	 */
+	public List<Product> getProducts(String wishlistName) {
+		Wishlist list = findByName(wishlistName);
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 		return list.getProducts();
 	}
 	

@@ -25,7 +25,7 @@ import com.qac.sparkle_gardens.services.WishlistService;
 public class WishlistController {
 	
 	@Inject 
-	WishlistService wishlistService;
+	private WishlistService wishlistService;
 	@Inject
 	private CustomerRepository customerRepository;
 	@Inject 

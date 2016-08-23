@@ -38,13 +38,15 @@ public class SearchItemsController {
 	 * @return search, blank_search
 	 */
 	public String createProductList(String customerInput){
+
 		searchQueryResults.addAll(productService.createProductListWithAllTags(customerInput));
 		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
 			return "search";
 		}
 		error = "No results found for your search.";
-		return error;
+
+		return getError();
 	}
 	
 	/**
@@ -62,7 +64,8 @@ public class SearchItemsController {
 			return "search";
 		}
 		error = "No results found for your search";
-		return error;
+
+		return getError();
 	}
 	
 	/**
@@ -77,5 +80,14 @@ public class SearchItemsController {
 	public String getProductList(){
 		searchQueryResults = productService.getProductList();
 		return "search";
+	}
+	
+	/**
+	 * Retrieve the error message if there is one
+	 * @return
+	 */
+	public String getError(){
+		System.out.println(error);
+		return error;
 	}
 }

@@ -13,6 +13,7 @@ import com.qac.sparkle_gardens.services.ProductService;
  * @author Damien Lloyd
  *
  */
+
 @Named (value = "addItem")
 @RequestScoped
 public class AddItem
@@ -20,8 +21,8 @@ public class AddItem
 	@Inject
 	OrderService service;
 	
-//	@Inject
-//	private ProductService pService;
+	@Inject
+	private ProductService pService;
 	
 	private int quantity = 0;
 	private int price = 0;
@@ -33,12 +34,12 @@ public class AddItem
 	 */
 	public String addItem(long productID)
 	{
-//		Product p = pService.getProductByID(productID);
+		Product p = pService.getProductByID(productID);
 
-/*		if (!pService.checkInStock(p))
-			return "product_not_in_stock";*/
-
-//		service.addProductToBasket(p, quantity);
+		if (!pService.checkInStock(p))
+			return "product_not_in_stock";
+		
+		service.addProductToBasket(p, quantity);
 		
 		return "home";
 	}

@@ -1,20 +1,41 @@
-package com.qac.sparkle_gardens.entities;
+package com.qac.sparkle_gardens.entities.composite;
 
 import java.io.Serializable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.qac.sparkle_gardens.entities.Order;
+import com.qac.sparkle_gardens.entities.Product;
+
+/**
+ * Primary key class for OrderLine
+ * 
+ * @author Damien Lloyd
+ *
+ */
 public class OrderLinePK implements Serializable
 {
 	private static final long serialVersionUID = 1517213253333547928L;
-	
-	@ManyToOne
+
 	@JoinColumn (name = "orderID", nullable = false)
+	@ManyToOne
 	private Order order;
 	
-	@ManyToOne
 	@JoinColumn (name = "productID", nullable = false)
-	private Product product;
+	@ManyToOne
+	private Product product;	
+	
+	public OrderLinePK()
+	{
+		order = null;
+		product = null;
+	}
+	
+	public OrderLinePK(Order order, Product product)
+	{
+		this.order = order;
+		this.product = product;
+	}
 	
 	public void setOrder(Order order) 
 	{

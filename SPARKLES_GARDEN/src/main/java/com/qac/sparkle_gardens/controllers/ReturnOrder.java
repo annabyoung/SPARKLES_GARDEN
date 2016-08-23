@@ -13,6 +13,7 @@ import com.qac.sparkle_gardens.util.OrderStatus;
  * @author Damien Lloyd
  *
  */
+@Deprecated
 @RequestScoped
 public class ReturnOrder 
 {

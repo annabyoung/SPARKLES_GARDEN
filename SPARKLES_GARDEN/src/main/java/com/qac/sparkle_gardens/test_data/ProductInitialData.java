@@ -14,7 +14,6 @@ import com.qac.sparkle_gardens.entities.Product;
  * Since there is no database yet, storing data at runtime for testing purposes.
  * Functions are included to get, add, and set products.
  *
- *deprecated in favour of InitialData (9/8/16)
  */
 @Singleton
 
@@ -57,7 +56,10 @@ public class ProductInitialData {
 		p5.addProductTags("external_stimulation");
 		products.add(p5);
 		
+<<<<<<< HEAD
 		//setProducts(products);
+=======
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 		
 	}
 	

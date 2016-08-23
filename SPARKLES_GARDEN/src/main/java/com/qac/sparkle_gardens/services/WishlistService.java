@@ -78,7 +78,10 @@ public class WishlistService {
 		//wishlistRepository.persistWishlist(wish);
 	//}
 	
+	
+	
 	/**
+<<<<<<< HEAD
 	 * Overloaded create wishlist method
 	 * @param accountId
 	 * @param product
@@ -89,17 +92,23 @@ public class WishlistService {
 		//wishlistRepository.persistWishlist(wish);
 	//}
 	
+=======
+	 * 
+	 * @param product
+	 * @param accountId
+	 */
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 	public void addProduct(Product product, long accountId) {
 		wishlistRepository.addProductToListWithAcctId(product, accountId);
 	}
 	
 	//@Deprecated
 	/**
-	 * Overloaded addProduct method
-	 * if the name of the wislist is passed instead of the wishlist ID
+	 * Overloaded removeProduct method
 	 * @param product
-	 * @param wishlistName
+	 * @param accountId
 	 */
+<<<<<<< HEAD
 	//public void addProduct(Product product, String wishlistName) {
 		//wishlistRepository.addProductToList(product, wishlistName);
 	//}
@@ -109,6 +118,13 @@ public class WishlistService {
 		//}
 	
 	//@Deprecated
+=======
+	public void removeProduct(Product product, long accountId) {
+		wishlistRepository.removeProduct(product, accountId);
+	}
+	
+	@Deprecated
+>>>>>>> 95130093bd8f8cc7b7d8dcb75b08d1e1e3436eed
 	/**
 	 * Removes a product from a wishlist
 	 * @param product
@@ -118,13 +134,15 @@ public class WishlistService {
 		//wishlistRepository.removeProduct(product, wishlistName);
 	//}
 	
+	@Deprecated
 	/**
-	 * Overloaded removeProduct method
+	 * Overloaded addProduct method
+	 * if the name of the wislist is passed instead of the wishlist ID
 	 * @param product
-	 * @param accountId
+	 * @param wishlistName
 	 */
-	public void removeProduct(Product product, long accountId) {
-		wishlistRepository.removeProduct(product, accountId);
+	public void addProduct(Product product, String wishlistName) {
+		wishlistRepository.addProductToList(product, wishlistName);
 	}
 	public List<Product> getProducts(Customer customer) {
 		return wishlistRepository.getProducts(customer.getAccountID());

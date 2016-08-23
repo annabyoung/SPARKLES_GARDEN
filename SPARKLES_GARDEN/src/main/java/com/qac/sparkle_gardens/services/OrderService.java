@@ -2,9 +2,17 @@ package com.qac.sparkle_gardens.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jms.JMSException;
+import javax.jms.MapMessage;
+import javax.jms.QueueReceiver;
+import javax.jms.QueueSender;
+import javax.jms.QueueSession;
+import javax.jms.TextMessage;
+
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.qac.sparkle_gardens.entities.Product;
@@ -33,15 +41,13 @@ public class OrderService
 	List<OrderLine> basket = new ArrayList<OrderLine>();
 	
 	MessageSender sender = new MessageSender();
-//	@Inject
-//	MessageSender sender;
 	
 	/**
 	 * Default constructor
 	 */
 	public OrderService()
 	{
-		//sender = new MessageSender();
+
 	}
 	
 	/**
@@ -116,39 +122,39 @@ public class OrderService
 	 */
 	public String generateInvoice(long orderID)
 	{
-//		String invoice = "";
-//		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
-//		
-//		invoice += "\n\n\n----------------------------------------------";
-//		
-//		invoice += "Thank you for shopping at NBGardens!\n";
-//		invoice += "You have purchased the following items: \n";
-//		QueueSession session = sender.getSession();
-////		Queue queue = sender.getQueue();
-//		String result = "";
-//		
-//		try
-//		{
-//			MapMessage msg = session.createMapMessage();
-//			msg.setString("Invoice", "Invoice");
-//			
-//			QueueSender sender = session.createSender(queue);
-//			sender.send(msg);
-//			
-//			String inv = "JMSCorrelationID = " + msg.getJMSMessageID();
-//			QueueReceiver receiver = 
-//					session.createReceiver(queue, inv);
-//			
-//			TextMessage tm = (TextMessage) receiver.receive(30_000);
-//			
-//			if (tm == null)
-//			{
-//				result = "No invoice!";
-//			} else result = tm.getText();
-//		} catch (JMSException jmse) {
-//			jmse.printStackTrace();
-//		}
-//		return result;
+		/*String invoice = "";
+		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
+		
+		invoice += "\n\n\n----------------------------------------------";
+		
+		invoice += "Thank you for shopping at NBGardens!\n";
+		invoice += "You have purchased the following items: \n";
+		QueueSession session = sender.getSession();
+		Queue queue = sender.getQueue();
+		String result = "";
+		
+		try
+		{
+			MapMessage msg = session.createMapMessage();
+			msg.setString("Invoice", "Invoice");
+			
+			QueueSender sender = session.createSender(queue);
+			sender.send(msg);
+			
+			String inv = "JMSCorrelationID = " + msg.getJMSMessageID();
+			QueueReceiver receiver = 
+					session.createReceiver(queue, inv);
+			
+			TextMessage tm = (TextMessage) receiver.receive(30_000);
+			
+			if (tm == null)
+			{
+				result = "No invoice!";
+			} else result = tm.getText();
+		} catch (JMSException jmse) {
+			jmse.printStackTrace();
+		}
+		return result;*/
 		return "";
 	}
 	
