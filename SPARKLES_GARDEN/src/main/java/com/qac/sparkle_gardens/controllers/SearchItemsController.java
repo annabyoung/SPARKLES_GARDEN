@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.bean.RequestScoped;
 //import javax.inject.Named;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -46,7 +47,7 @@ public class SearchItemsController {
 	@POST
 	@Consumes("text/plain")
 	@Path("createbytags")
-	public String createProductList(String customerInput){
+	public String createProductListByTags(String customerInput){
 		searchQueryResults.addAll(productService.createProductListWithAllTags(customerInput));
 		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
@@ -69,10 +70,10 @@ public class SearchItemsController {
 	@POST
 	@Consumes("text/plain")
 	@Path("createbyprice")
-	public String createProductList(double minimumPrice, double maximumPrice){
+	public String createProductListByPrice(@FormParam("minimum") double minimumPrice, @FormParam("maximum") double maximumPrice){
 		searchQueryResults.addAll(productService.createProductListByPriceRange(minimumPrice, maximumPrice));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
-			return "";
+			return "Created with: " + minimumPrice + " : " + maximumPrice;
 		}
 		error = "No results found for your search";
 		return error;

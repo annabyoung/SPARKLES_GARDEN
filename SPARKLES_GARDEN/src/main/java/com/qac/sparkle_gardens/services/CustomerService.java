@@ -3,8 +3,9 @@ package com.qac.sparkle_gardens.services;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-
+import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.util.CreditStatus;
 
@@ -161,6 +162,40 @@ public class CustomerService {
 		return customerRepository.findByID(userID);
 		
  	}
+
+
+
+	public boolean validateDetails(String username, String password) {
+		Customer user  = customerRepository.findByEmail(username);
+		
+		if (user == null)
+			return false; 
+			
+		
+		if(user.getPassword().equals(password))
+			return true;
+		else 		
+		return false;
+	}
+
+
+
+	public Customer getUserID(String email) {
+		
+		Customer customer = customerRepository.findByEmail(email);
+		
+		return customer;
+	}
 	
+	//need to make one for cards as well. 
+	/*
+	 * add an address associated with customer. need to make silimar function to card
+	 * but allen is still working on card.  
+	 */
+	public void updateCustomerAddress(Customer customer , Address newAddress){
+		CustomerHasAddress cha = new CustomerHasAddress(customer, newAddress);
+		
+		// should persist this SOMEWHERE 
+	}
 	
 }
