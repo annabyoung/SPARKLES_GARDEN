@@ -16,6 +16,7 @@ import java.util.List;
 import com.qac.sparkle_gardens.controllers.CurrentUserController;
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.services.CardService;
+import com.qac.sparkle_gardens.services.CustomerService;
 
 
 @Path("/cards")
@@ -24,6 +25,7 @@ public class CardRESTService {
 	
     @Inject private Logger log;
     @Inject private CardService cardService;
+    @Inject private CustomerService customerService;
     @Inject private CurrentUserController currentUserController;
     
  
@@ -35,9 +37,15 @@ public class CardRESTService {
     	return cardService.getCardsByCustomer(currentUserController.getCustomerId());
     }
     
-//    @POST
-//    @Path("")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/registerCard")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Card> createNewCard(@FormParam("cardOwnerName") String cardOwnerName, 
+    		@FormParam("cardNumber") String cardNumber, @FormParam("expirationDate") String expirationDate){
+    	log.info("creating new card");
+    	Card newCard = cardService.setupCard(cardOwnerName, cardNumber, expirationDate);
+    	cardService.registerCard(newCard, customerService.getCustomerByID(currentUserController.getCustomerId()));
+    	return getCustomerCards();
+    }
     
 }
