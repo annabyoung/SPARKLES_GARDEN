@@ -15,7 +15,7 @@ import com.qac.sparkle_gardens.entities.Product;
 @Default
 public class ProductRepositoryOffline implements ProductRepository
 {
-	@Inject private ProductInitialData initialData;
+	@Inject private ProductInitialData initialData = new ProductInitialData();
 	
 
 	public void persistProduct(Product p){
