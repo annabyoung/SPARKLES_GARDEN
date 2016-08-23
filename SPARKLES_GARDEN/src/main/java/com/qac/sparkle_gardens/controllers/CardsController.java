@@ -7,17 +7,13 @@ import javax.enterprise.inject.Produces;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.services.CardService;
 import com.qac.sparkle_gardens.services.CustomerService;
 
-@Path("cards")
+@Named(value="cards")
 @RequestScoped
 public class CardsController {
 	@Inject private CurrentUserController currentUserController;
@@ -28,16 +24,15 @@ public class CardsController {
 	@Named
 	private Card newCard;
 	
+	@PostConstruct
+	public void initNewCard(){
+		newCard = new Card();
+	}
 	
-	@POST
-	@Consumes("text/plain")
-	@Path("registerCard")
-	public void register(@FormParam("cardOwnerName") String cardOwnerName, 
-			@FormParam("cardNumber") String cardNumber, @FormParam("expirationDate") String expirationDate){
-		
-		Card newCard = cardService.setupCard(cardOwnerName, cardNumber, expirationDate);
+	public void register(){
 		Customer currentCustomer = cusService.getCustomerByID(currentUserController.getCustomerId());
 		cardService.registerCard(newCard, currentCustomer);
+		initNewCard();
 	}
 	
 	public List<Card> getCards() {
