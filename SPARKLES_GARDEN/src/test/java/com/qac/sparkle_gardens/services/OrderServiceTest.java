@@ -51,6 +51,13 @@ public class OrderServiceTest
 		assertFalse(result);
 	}
 	
+	@Test
+	public void orderNotEmpty()
+	{
+		boolean result = service.isOrderEmpty(order.getOrderID());
+		assertFalse(result);
+	}
+	
 	/**
 	 * Test if the order is valid or no.
 	 * Should return false as the desired 
@@ -60,16 +67,31 @@ public class OrderServiceTest
 	public void checkOrderValid()
 	{
 		product = ProductSamples.cucumber();
-		boolean result = service.isValid(45, 
+		boolean result = service.isValid(2, 
 				product.getPrice(), product.getStockLevel());
 		assertFalse(result);
 	}
 	
 	@Test
-	public void ensurePricePositive()
+	public void checkOrderNotValid()
 	{
-		order = OrderSamples.food();
-		assertTrue(service.getTotalPrice(order.getOrderID()) <= 0);
+		product = ProductSamples.dildoInch8();
+		boolean result = service.isValid(20, 
+				product.getPrice(), product.getStockLevel());
+		assertFalse(result);
+	}
+	
+	@Test
+	public void ensureTotalPriceZero()
+	{
+		assertTrue(service.getTotalPrice() == 0);
+	}
+	
+	@Test
+	public void ensureTotalPriceNotZero()
+	{
+		service.addProductToBasket(ProductSamples.cucumber(), 3);
+		assertNotEquals(service.getTotalPrice(), 0);
 	}
 	
 	/**
@@ -83,6 +105,12 @@ public class OrderServiceTest
 		order = OrderSamples.food();
 		String invoice = service.generateInvoice(order.getOrderID());
 		assertNotEquals(invoice, "");
+	}
+	
+	@Test
+	public void isInvoiceNotNull()
+	{
+		
 	}
 	
 	/**
@@ -116,7 +144,7 @@ public class OrderServiceTest
 	 * It should return false as the product was not added.
 	 */
 	@Test
-	public void productBasketRemove()
+	public void productBasketNotRemove()
 	{
 		product = ProductSamples.nikeTrainers();
 		
@@ -129,7 +157,7 @@ public class OrderServiceTest
 	 * It should return true as the product was added.
 	 */
 	@Test
-	public void productBasketAddRemove()
+	public void productBasketCanRemove()
 	{
 		product = ProductSamples.vegasHeelz();
 		
@@ -194,7 +222,7 @@ public class OrderServiceTest
 		order = OrderSamples.shoes();
 		order.setOrderStatus(OrderStatus.PLACED);
 		
-		boolean result = service.canCancelOrder(order);
+		boolean result = service.canCancelOrder(order.getOrderID());
 		
 		assertFalse(result);
 	}

@@ -90,33 +90,15 @@ public class OrderControllerTest
 	
 	// ##
 	// ***********************************************************************
-	// PLACE ORDER
-	
-	@Test
-	public void testPlacingOrder()
-	{
-		Order o = OrderSamples.shoes();
-		
-		orderCon.setCardNumber("12345");
-		orderCon.setExpirationDate("12/19");
-		orderCon.setCvs("123");
-		
-		String result = orderCon.placeOrder(o.getOrderID(), false);
-		
-		assertFalse(result == "home");
-	}
-	
-	// ##
-	// ***********************************************************************
 	// RETURN ORDER
 		
 	@Test
-	public void returnOK()
+	public void canReturnOrder()
 	{
 		Order o = OrderSamples.kinky();
 		
-		String result = orderCon.returnOrder(o.getOrderID());
+		String result = orderCon.returnOrder(o.getOrderID(), "1234", "12/12");
 		
-		assertFalse(result == "order_not_returned");
+		assertFalse(result == "order_return_accepted");
 	}
 }
