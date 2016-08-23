@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
+//import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -26,7 +26,7 @@ import javax.inject.Inject;
  *
  */
 
-@Named(value="search")
+//@Named(value="search")
 @Path(value="search")
 @RequestScoped
 public class SearchItemsController {
@@ -51,6 +51,7 @@ public class SearchItemsController {
 		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
 			return "Created with: " + customerInput;
+			//return "search/" + customerInput;
 		}
 		error = "No results found for your search.";
 		return error;
@@ -71,7 +72,7 @@ public class SearchItemsController {
 	public String createProductList(double minimumPrice, double maximumPrice){
 		searchQueryResults.addAll(productService.createProductListByPriceRange(minimumPrice, maximumPrice));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
-			return "search";
+			return "";
 		}
 		error = "No results found for your search";
 		return error;
@@ -88,7 +89,6 @@ public class SearchItemsController {
 	
 	/**
 	 * Retrieve the list of products that resulted from search queries
-	 * @return
 	 */
 	@Path("{id}")
 	@GET
@@ -96,6 +96,16 @@ public class SearchItemsController {
 	public List<Product> getSearchResultList(){
 		return searchQueryResults;
 		//return (List<Product>)productService.getProductList();
+	}
+	
+	/**
+	 * Retrieve error message if there is one
+	 */
+	@Path("{id}")
+	@GET
+	@Produces("text/plain")
+	public String getError(){
+		return error;
 	}
 }
 
