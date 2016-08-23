@@ -39,7 +39,6 @@ public class CardRESTService {
     
     @POST
     @Path("/registerCard")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<Card> createNewCard(@FormParam("cardOwnerName") String cardOwnerName, 
     		@FormParam("cardNumber") String cardNumber, @FormParam("expirationDate") String expirationDate){
     	log.info("creating new card");
