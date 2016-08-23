@@ -40,12 +40,18 @@ public class CardService {
 	 */
 	public void registerCard(Card newCard, Customer cardOwner){
 		Card card = returnIfExisting(newCard);
-		if (card == null)
+		if (card == null){
 			card = cardRepository.addCard(newCard);
-		//Todo: check if card exists, and then give cardID.
-		CustomerHasCard cusCard = new CustomerHasCard(cardOwner, card);
-		cardOwnershipRepository.addCustomerHasCard(cusCard);
+			CustomerHasCard cusCard = new CustomerHasCard(cardOwner, card);
+			cardOwnershipRepository.addCustomerHasCard(cusCard);
+		}
+		else{
+			
+			CustomerHasCard cusCard = new CustomerHasCard(cardOwner, card);
+			cardOwnershipRepository.addCustomerHasCard(cusCard);
+		}
 	}
+	
 	
 	/**
 	 * Returns an existing card if every parameter is found on repository.
@@ -62,6 +68,15 @@ public class CardService {
 			}
 		}
 		return null;
+	}
+	
+	public boolean checkIfCustomerRegisteredCardAlready(Card card, Customer cardOwner){
+		List<Card> cusCards = getCardsByCustomer(cardOwner.getAccountID());
+		for (Card cusCard: cusCards){
+			if (cusCard.equals(card))
+				return true;
+		}
+		return false;
 	}
 	
 	public Card setupCard(String cardOwnerName, String cardNumber, String expirationDate){

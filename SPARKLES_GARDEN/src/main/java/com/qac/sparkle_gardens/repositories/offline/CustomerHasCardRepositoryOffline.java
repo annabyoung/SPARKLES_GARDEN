@@ -68,13 +68,13 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 	@Override
 	public List<CustomerHasCard> findByAccountID(long accountID) {
 		List<CustomerHasCard> customerHasCards = new ArrayList<CustomerHasCard>();
-		System.out.println(">>> Customer Cards " + customerHasCards.isEmpty() + " <<< ");
+		//System.out.println(">>> Customer Cards " + customerHasCards.isEmpty() + " <<< ");
 		for(CustomerHasCard hasCard : initialData.getCusHasCards()) {
-			System.out.println(">>> Card belongs to " + hasCard.getCustomer().getAccountID() + " <<< ");
+			//System.out.println(">>> Card belongs to " + hasCard.getCustomer().getAccountID() + " <<< ");
 			if(hasCard.getCustomer().getAccountID() == accountID)
 				customerHasCards.add(hasCard);
 		}
-		System.out.println(">>> Customer Cards " + customerHasCards.size() + " <<< ");
+		//System.out.println(">>> Customer Cards " + customerHasCards.size() + " <<< ");
 		return customerHasCards;
 	}
 }

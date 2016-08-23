@@ -13,8 +13,9 @@ public class CardRepositoryImpl implements CardRepository{
 
 	private EntityManager em;
 	@Override
-	public void addCard(Card c) {
+	public Card addCard(Card c) {
 		em.persist(c);
+		return c;
 	}
 
 	@Override
