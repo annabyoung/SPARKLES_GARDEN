@@ -17,7 +17,7 @@ import com.qac.sparkle_gardens.services.CardService;
 @Named(value = "PayByCard")
 @RequestScoped
 public class PayByCard {
-	@Inject CardRepository cardRepository;
+	@Inject private CardRepository cardRepository;
 	
 	private String error = "";
 	

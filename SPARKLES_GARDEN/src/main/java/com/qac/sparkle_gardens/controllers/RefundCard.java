@@ -18,7 +18,7 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
 @RequestScoped
 public class RefundCard {
 	//@Inject PaymentRepository paymentRepository;
-	@Inject CardRepository cardRepository;
+	@Inject private CardRepository cardRepository;
 
 	private String error = "";
 	/**
