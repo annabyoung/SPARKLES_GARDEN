@@ -13,5 +13,6 @@ function loginValidation() {
 			return false;
 		}
 	}
+	window.location=("../homepage.xhtml");
 	return true;
 }
