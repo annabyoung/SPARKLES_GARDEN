@@ -5,6 +5,11 @@ import java.util.List;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.services.ProductService;
@@ -21,7 +26,8 @@ import javax.inject.Inject;
  *
  */
 
-@Named(value="Search_Items")
+@Named(value="search")
+@Path(value="search")
 @RequestScoped
 public class SearchItemsController {
 	@Inject	private ProductService productService;
@@ -37,11 +43,14 @@ public class SearchItemsController {
 	 * 
 	 * @return search, blank_search
 	 */
+	@POST
+	@Consumes("text/plain")
+	@Path("createbytags")
 	public String createProductList(String customerInput){
 		searchQueryResults.addAll(productService.createProductListWithAllTags(customerInput));
 		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
-			return "search";
+			return "Created with: " + customerInput;
 		}
 		error = "No results found for your search.";
 		return error;
@@ -56,8 +65,11 @@ public class SearchItemsController {
 	 * @param maximumPrice
 	 * @return search, blank_search
 	 */
+	@POST
+	@Consumes("text/plain")
+	@Path("createbyprice")
 	public String createProductList(double minimumPrice, double maximumPrice){
-		searchQueryResults = productService.createProductListByPriceRange(minimumPrice, maximumPrice);
+		searchQueryResults.addAll(productService.createProductListByPriceRange(minimumPrice, maximumPrice));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
 			return "search";
 		}
@@ -74,8 +86,22 @@ public class SearchItemsController {
 		return "home";
 	}
 	
-	public String getProductList(){
-		searchQueryResults = productService.getProductList();
-		return "search";
+	/**
+	 * Retrieve the list of products that resulted from search queries
+	 * @return
+	 */
+	@Path("{id}")
+	@GET
+	//@Produces("text/plain")
+	public List<Product> getSearchResultList(){
+		return searchQueryResults;
+		//return (List<Product>)productService.getProductList();
 	}
 }
+
+
+
+
+
+
+

@@ -90,12 +90,12 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * @param accountID
 	 * @return
 	 */
-	public List<CustomerHasAddress> findByCustomerID(long accountID) {
+	public List<CustomerHasAddress> findByAccountId(long accountId) {
 		List<CustomerHasAddress> custAddress = initialData.getCusHasAddress();
 		List<CustomerHasAddress> customerOwned = new ArrayList<CustomerHasAddress>();
 		for (int index = 0; index < custAddress.size(); index++) {
 			
-			if(custAddress.get(index).getAccountId() == accountID) {
+			if(custAddress.get(index).getAccountId() == accountId) {
 				customerOwned.add(custAddress.get(index));
 			}
 		}
@@ -107,12 +107,12 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * @param AddressID
 	 * @return
 	 */
-	public List<CustomerHasAddress> findByAddressID(long AddressID) {
+	public List<CustomerHasAddress> findByAddressId(long addressId) {
 		List<CustomerHasAddress> custAddress = initialData.getCusHasAddress();
 		List<CustomerHasAddress> customerOwned = new ArrayList<CustomerHasAddress>();
 		for (int index = 0; index < custAddress.size(); index++) {
 			
-			if(custAddress.get(index).getAddressId() == AddressID) {
+			if(custAddress.get(index).getAddressId() == addressId) {
 				customerOwned.add(custAddress.get(index));
 			}
 		}
@@ -123,7 +123,7 @@ public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRe
 	 * Checks if there are any customer addresses associated with an given address
 	 * @return
 	 */
-	public boolean isCustomerId(Address address) {
+	public boolean isAccountId(Address address) {
 		List<CustomerHasAddress> custAddress = initialData.getCusHasAddress();
 		
 		for (int index = 0; index < custAddress.size(); index++) {

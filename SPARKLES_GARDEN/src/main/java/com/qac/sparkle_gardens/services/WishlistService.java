@@ -30,6 +30,9 @@ public class WishlistService {
 	 * @return
 	 */
 	public Wishlist getWishlist(long id) {
+		if (id <= 0) {
+			throw new IllegalArgumentException();
+		}
 		return wishlistRepository.findById(id);
 	}
 	
@@ -42,52 +45,104 @@ public class WishlistService {
 	}
 	
 	/**
-	 * deletes the wishlist
-	 * @param id
+	 * 
+	 * @param customer
+	 * @param product
 	 */
-	public void deleteWishlist(long id) {
+	public void createWishlist(Customer customer, Product product) {
+		if (customer == null || product == null) {
+			throw new IllegalArgumentException();
+		}
+		Wishlist wish = new Wishlist(customer, product);
+		wishlistRepository.persistWishlist(wish);
+	}
+	
+	public void createWishlist(Customer customer, List<Product> products) {
+		if (customer == null || products.isEmpty()) {
+			throw new IllegalArgumentException();
+		}
+		Wishlist wish = new Wishlist(customer, products);
+		wishlistRepository.persistWishlist(wish);
+	}
+	
+	/**
+	 * deletes the wishlist
+	 * @param wishlistId
+	 */
+	public void deleteWishlist(long wishlistId) {
+		if (wishlistId <= 0) {
+			throw new IllegalArgumentException();
+		}
 		Wishlist wishlist;
-		wishlist = wishlistRepository.findById(id);
+		wishlist = wishlistRepository.findById(wishlistId);
 		wishlistRepository.removeWishlist(wishlist);
 	}
 	
+	/**
+	 * 
+	 * @param customer
+	 */
+	public void deleteWishlist(Customer customer) {
+		if (customer == null) {
+			throw new IllegalArgumentException();
+		}
+ 		Wishlist wish = wishlistRepository.findByAccountId(customer.getAccountID());
+		wishlistRepository.removeWishlist(wish);
+	}
 	/**
 	 *  Creates a new wishlist
 	 * @param accountId
 	 * @param list
 	 */
-	public void createWishlist(Customer customer, String name) {
-		Wishlist wish = new Wishlist(customer, name);
-		wishlistRepository.persistWishlist(wish);
-	}
+
+	//@Deprecated
+	//public void createWishlist(long accountId, String name) {
+		//Wishlist wish = new Wishlist(accountId, name);
+		//wishlistRepository.persistWishlist(wish);
+	//}
 	
 	/**
-	 * Adds a product to a wishlist
+	 * Overloaded create wishlist method
+	 * @param accountId
 	 * @param product
-	 * @param wishlistId
 	 */
-	public void addProduct(Product product, long wishlistId) {
-		wishlistRepository.addProductToList(product, wishlistId);
+	//@Deprecated
+	//public void createWishlist(Customer customer, String name) {
+		//Wishlist wish = new Wishlist(customer, name);
+		//wishlistRepository.persistWishlist(wish);
+	//}
+	
+	public void addProduct(Product product, long accountId) {
+		if (product == null || accountId <= 0) {
+			throw new IllegalArgumentException();
+		}
+		wishlistRepository.addProductToListWithAcctId(product, accountId);
 	}
 	
+	//@Deprecated
 	/**
 	 * Overloaded addProduct method
 	 * if the name of the wislist is passed instead of the wishlist ID
 	 * @param product
 	 * @param wishlistName
 	 */
-	public void addProduct(Product product, String wishlistName) {
-		wishlistRepository.addProductToList(product, wishlistName);
-	}
+	//public void addProduct(Product product, String wishlistName) {
+		//wishlistRepository.addProductToList(product, wishlistName);
+	//}
+	//@Deprecated
+		//public void addProduct(Product product, long wishlistId) {
+		//	wishlistRepository.addProductToList(product, wishlistId);
+		//}
 	
+	//@Deprecated
 	/**
 	 * Removes a product from a wishlist
 	 * @param product
 	 * @param wishlistName
 	 */
-	public void removeProduct(Product product, String wishlistName) {
-		wishlistRepository.removeProduct(product, wishlistName);
-	}
+	//public void removeProduct(Product product, String wishlistName) {
+		//wishlistRepository.removeProduct(product, wishlistName);
+	//}
 	
 	/**
 	 * Overloaded removeProduct method
@@ -95,7 +150,23 @@ public class WishlistService {
 	 * @param accountId
 	 */
 	public void removeProduct(Product product, long accountId) {
+		if (product == null || accountId <= 0) {
+			throw new IllegalArgumentException();
+		}
 		wishlistRepository.removeProduct(product, accountId);
+	}
+	public List<Product> getProducts(Customer customer) {
+		if (customer == null) {
+			throw new IllegalArgumentException();
+		}
+		return wishlistRepository.getProducts(customer.getAccountID());
+	}
+	
+	public List<Product> getProducts(long accountId) {
+		if (accountId <= 0) {
+			throw new IllegalArgumentException();
+		}
+		return wishlistRepository.getProducts(accountId);
 	}
 	
 	/**
@@ -103,7 +174,8 @@ public class WishlistService {
 	 * @param wishlistName
 	 * @return
 	 */
-	public List<Product> getProducts(String wishlistName) {
-		return wishlistRepository.getProducts(wishlistName);
-	}
+	//@Deprecated
+	//public List<Product> getProducts(String wishlistName) {
+		//return wishlistRepository.getProducts(wishlistName);
+	//}
 }

@@ -1,6 +1,7 @@
 package com.qac.sparkle_gardens.repositories;
 
 import java.util.List;
+
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 
@@ -27,9 +28,8 @@ public interface WishlistRepository {
 	public void addProductToList(Product product, long wishId);
 	
 	public void addProductToListWithAcctId(Product product, long acctId);
-	@Deprecated
-	// Adds a product to a wishlist based on the name of the wishlist
-	public void addProductToList(Product product, String name);
+	
+	public List<Product> getProducts(long accountId);
 	
 	// Update wishlist
 	public void updateWishlist(Wishlist wishlist);
@@ -37,16 +37,10 @@ public interface WishlistRepository {
 	//Remove wishlist
 	public void removeWishlist(Wishlist wishlist);
 	
-	// Remove a product from the list 
-	public void removeProduct(Product product, String name);
-	
 	// overloaded method with accountId parameter
 	public void removeProduct(Product product, long accountId);
 	
 	// checks if a product is in a wishlist
 	public boolean inWishlist(Product product, long accountId);
 	
-	@Deprecated
-	//Returns all the products in a wishlist
-	public List<Product> getProducts(String wishlistName);
 }

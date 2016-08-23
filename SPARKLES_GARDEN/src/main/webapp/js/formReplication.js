@@ -8,7 +8,6 @@ $(function(){
 	});
 	
 	$("#extraForm").click(function(){
-		console.log("Cloning form");
 		count++; 
 		$("#formdiv").clone().appendTo("#clonePoint");
 		addressCount.html("Address" + count);
