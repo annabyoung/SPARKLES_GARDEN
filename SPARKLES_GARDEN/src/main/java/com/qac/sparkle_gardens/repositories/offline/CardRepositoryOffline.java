@@ -28,15 +28,17 @@ public class CardRepositoryOffline implements CardRepository
 	@Inject
 	InitialData initialData = new InitialData();
 
-	public void addCard(Card card) 
+	public Card addCard(Card card) 
 	{
 		List<Card> cards = initialData.getCards();
 		if (card.getCardID() == 0){
-			card.setCardID(((long)cards.size()));
+			long largestID = cards.get(cards.size() - 1).getCardID();
+			card.setCardID(largestID + 1);
 		}
 		cards.add(card);
 		initialData.setCards(cards);
 		log.info(">>>>>> Adding card to repository" + card.getCardNumber());
+		return card;
 	}
 	
 	public List<Card> listCards() 

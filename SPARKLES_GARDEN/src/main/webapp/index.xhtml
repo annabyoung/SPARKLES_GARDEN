@@ -25,23 +25,22 @@
                 card class.</p>
             <h:panelGrid columns="3" columnClasses="titleCell">
                 <h:outputLabel for="number" value="cardNumber: " />
-                <h:inputText id="number" value="#{registerCard.cardNumber}" />
+                <h:inputText id="number" value="#{newCard.cardNumber}" />
                 <h:message for="number" errorClass="invalid" />
 
                 <h:outputLabel for="cardOwnerName" value="cardOwnerName:" />
-                <h:inputText id="cardOwnerName" value="#{registerCard.nameOnCard}" />
+                <h:inputText id="cardOwnerName" value="#{newCard.cardOwnerName}" />
                 <h:message for="cardOwnerName" errorClass="invalid" />
 
                 <h:outputLabel for="expirationDate" value="expirationDate:" />
-                <h:inputText id="expirationDate"
-                    value="#{registerCard.expirationDate}" />
+                <h:inputText id="expirationDate" value="#{newCard.expirationDate}" />
                 <h:message for="expirationDate" errorClass="invalid" />
             </h:panelGrid>
 
             <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="register"
-                        action="#{registerCard.register()}"
+                        action="#{cards.register}"
                         value="Register" styleClass="register" />
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"
