@@ -1,0 +1,46 @@
+<ui:composition xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="templates/noSearchTemplate.xhtml">
+	<ui:define name="mainContent">
+		<meta charset="utf-8" />
+		<f:view>
+			<h:body>
+				<div class="container">
+					<div id="formdiv">
+						<h2>Manage Cards</h2>
+						<div>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Card 1:</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Name:</td>
+										<td>Mr LD Smith</td>
+									</tr>
+									<tr>
+										<td>Card Number:</td>
+										<td>************1234</td>
+									</tr>
+									<tr>
+										<td>Expiration:</td>
+										<td>07/17</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p id="contact">
+						<h:outputLink value="contact.xhtml">Contact</h:outputLink>
+					</p>
+				</div>
+			</h:body>
+		</f:view>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,33 @@
+<ui:composition xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="templates/noSearchTemplate.xhtml">
+	<ui:define name="mainContent">
+		<meta charset="utf-8" />
+		<f:view>
+			<h:body>
+				<div class="container-fluid" id="formdiv">
+					<h2>Manage Your Account</h2>
+					<div>
+						<h:link class="col-sm-4" outcome="manageAdresses.xhtml"
+							value="Manage Addresses" />
+					</div>
+					<div>
+						<h:link class="col-sm-4" outcome="manageCards.xhtml"
+							value="Manage Cards" />
+					</div>
+					<div>
+						<h:link class="col-sm-4"
+							outcome="homepage.xhtml" value="Back To Home" />
+					</div>
+				</div>
+				<div>
+					<p id="contact">
+						<h:outputLink value="contact.xhtml">Contact</h:outputLink>
+					</p>
+				</div>
+			</h:body>
+		</f:view>
+	</ui:define>
+</ui:composition>

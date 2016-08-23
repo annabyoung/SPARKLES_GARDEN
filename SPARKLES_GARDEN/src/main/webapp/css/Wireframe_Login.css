@@ -54,17 +54,10 @@ label{
 	height: 150px;
 }
 
-input[type="radio"]{
-	margin: 0 5px 0 5px;
-}
-
 #registration_prompt{
 	float:down;
 }
 
-.col-xs-12{
-	
-}
 /*Pads the input fields so they're aligned */
 #holdingdiv{
 	width: 100%;
@@ -74,9 +67,7 @@ input[type="radio"]{
 #formholder{
 	width:50%
 }
-.form-control{
-	
-}
+
 select{
 	text-align: center;
 	text-align-last: center;
@@ -91,4 +82,8 @@ option{
 #errorMessage{
 	
 	color:red;
+}
+
+table td {
+	width: auto !important;
 }
