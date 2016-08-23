@@ -19,37 +19,36 @@ import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.AddressRepository;
 import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
 
-@Path("/")
 @Stateless
 public class AddressService {
-	
 	@Inject AddressRepository addressRepository;
 	@Inject CustomerHasAddressRepository custAddressRepository;
 	
 	/**
-	 * Retrieves the address - the list of products
-	 * @param id
-	 * @return
-	 */
-	@GET
-	@Produces("text/plain")
-	@Path("{acctId}/addresses")
-	public List<Address> getAddress(@PathParam("acctId") long acctId) {
-		if (acctId <= 0) {
-			throw new IllegalArgumentException();
-		}
-		return addressRepository.findByAccountId(acctId);
-	}
+     * Retrieves the address - the list of products
+     * @param id
+     * @return
+     */
+    @GET
+    @Produces("text/plain")
+    @Path("{acctId}/addresses")
+    public List<Address> getAddress(@PathParam("acctId") long acctId) {
+        if (acctId <= 0) {
+            throw new IllegalArgumentException();
+        }
+        return addressRepository.findByAccountId(acctId);
+    }
 	
-	@GET
-	@Produces("text/plain")
-	@Path("{acctId}/addresses")
-	public List<Address> getAddress(@PathParam("customer") Customer customer) {
-		if (customer == null) {
-			throw new IllegalArgumentException();
-		}
-		return addressRepository.findByAccountId(customer.getAccountID());
-	}
+    @GET
+    @Produces("text/plain")
+    @Path("{acctId}/addresses")
+    public List<Address> getAddress(@PathParam("customer") Customer customer) {
+        if (customer == null) {
+            throw new IllegalArgumentException();
+        }
+        return addressRepository.findByAccountId(customer.getAccountID());
+    }
+    
 	/**
 	 * deletes the address
 	 * @param id
@@ -81,105 +80,91 @@ public class AddressService {
 		
 	}
 	
-	/**
-	 * 
-	 * @param customer
-	 * @param newAddress
-	 */
-	@Path("address")
-	@POST
-	public void createAddress(Customer customer, @FormParam("newAddress") Address newAddress) {
-		if (customer == null || newAddress == null) {
-			throw new IllegalArgumentException();
-		}
-		Address address = newAddress;
-		CustomerHasAddress custAdd = new CustomerHasAddress(customer, address); 
-		custAddressRepository.persistCustomerHasAddress(custAdd);
-		
-		/** This code prevents duplicate address objects from being created.
-		 * More than one customer can have the same address
-		 * If the address has not already been created then add a new address 
-		 * to the repository.
-		 */
-		if (!addressRepository.isDuplicate(address)) {
-			addressRepository.persistAddress(address);
-		}
-	}
+	   /**
+     * 
+     * @param customer
+     * @param newAddress
+     */
+    @Path("address")
+    @POST
+    public void createAddress(Customer customer, @FormParam("newAddress") Address newAddress) {
+        if (customer == null || newAddress == null) {
+            throw new IllegalArgumentException();
+        }
+        Address address = newAddress;
+        CustomerHasAddress custAdd = new CustomerHasAddress(customer, address); 
+        custAddressRepository.persistCustomerHasAddress(custAdd);
+        
+        /** This code prevents duplicate address objects from being created.
+         * More than one customer can have the same address
+         * If the address has not already been created then add a new address 
+         * to the repository.
+         */
+        if (!addressRepository.isDuplicate(address)) {
+            addressRepository.persistAddress(address);
+        }
+    }
 	
 	/**
-	 * A more complex but necessary create address method
-	 * @param customer
-	 * @param buildingNum
-	 * @param streetName
-	 * @param city
-	 * @param county
-	 * @param country
-	 * @param postCode
-	 */
-	@Path("address")
-	@POST
-	public void createAddress(Customer customer, @FormParam("buildingNum") String buildingNum, @FormParam("addressLine1") String addressLine1, @FormParam("addressLine2") String addressLine2, @FormParam("city") String city, @FormParam("county") String county, @FormParam("country") String country, @FormParam("postCode") String postCode, @FormParam("addressType") String addressType) {
-		if (customer == null || buildingNum == null || addressLine1 == null || addressLine2 == null || city == null || county == null|| country == null|| postCode == null|| addressType == null) {
-			throw new IllegalArgumentException();
-		}
-		Address address = new Address(buildingNum, addressLine1, addressLine2, city, county, country, postCode, addressType);
-		CustomerHasAddress custAdd = new CustomerHasAddress(customer, address); 
-		custAddressRepository.persistCustomerHasAddress(custAdd);
-		
-		/** This code prevents duplicate address objects from being created.
-		 * If the address has not already been created then add a new address 
-		 * to the repository.
-		 */
-		if (!addressRepository.isDuplicate(address)) {
-			addressRepository.persistAddress(address);
-		}
-	}	
+     * A more complex but necessary create address method
+     * @param customer
+     * @param buildingNum
+     * @param streetName
+     * @param city
+     * @param county
+     * @param country
+     * @param postCode
+     */
+    @Path("address")
+    @POST
+    public void createAddress(Customer customer, @FormParam("buildingNum") String buildingNum, @FormParam("addressLine1") String addressLine1, @FormParam("addressLine2") String addressLine2, @FormParam("city") String city, @FormParam("county") String county, @FormParam("country") String country, @FormParam("postCode") String postCode, @FormParam("addressType") String addressType) {
+        if (customer == null || buildingNum == null || addressLine1 == null || addressLine2 == null || city == null || county == null|| country == null|| postCode == null|| addressType == null) {
+            throw new IllegalArgumentException();
+        }
+        Address address = new Address(buildingNum, addressLine1, addressLine2, city, county, country, postCode, addressType);
+        CustomerHasAddress custAdd = new CustomerHasAddress(customer, address); 
+        custAddressRepository.persistCustomerHasAddress(custAdd);
+        
+        /** This code prevents duplicate address objects from being created.
+         * If the address has not already been created then add a new address 
+         * to the repository.
+         */
+        if (!addressRepository.isDuplicate(address)) {
+            addressRepository.persistAddress(address);
+        }
+    }   
 	
-	/**
-	 * 
-	 * @param customer
-	 * @param buildingNum
-	 * @param addressLine1
-	 * @param city
-	 * @param county
-	 * @param country
-	 * @param postCode
-	 * @param addressType
-	 */
-	@Path("address")
-	@POST
-	public void createAddress(Customer customer,  @FormParam("buildingNum") String buildingNum, @FormParam("addressLine1") String addressLine1, @FormParam("city") String city, @FormParam("county") String county, @FormParam("country") String country, @FormParam("postCode") String postCode, @FormParam("addressType") String addressType) {
-		if (customer == null || buildingNum == null || addressLine1 == null || city == null || county == null|| country == null|| postCode == null|| addressType == null) {
-			throw new IllegalArgumentException();
-		}
-		
-		Address address = new Address(buildingNum, addressLine1, city, county, country, postCode, addressType);
-		CustomerHasAddress custAdd = new CustomerHasAddress(customer, address); 
-		custAddressRepository.persistCustomerHasAddress(custAdd);
-		
-		/** This code prevents duplicate address objects from being created.
-		 * If the address has not already been created then add a new address 
-		 * to the repository.
-		 */
-		if (!addressRepository.isDuplicate(address)) {
-			addressRepository.persistAddress(address);
-		}
-		
-	}
-	
-	/**
-	 * Updates the address
-	 * @param address
-	 * @param customer
-	 */
-	public void updateAddress(Address address, Customer customer) {
-		if (customer == null || address == null) {
-			throw new IllegalArgumentException();
-		}
-		CustomerHasAddress custAdd = new CustomerHasAddress(customer, address);
-		custAddressRepository.updateCustomerHasAddress(custAdd);
-		addressRepository.updateAddress(address);
-	}
+    /**
+     * 
+     * @param customer
+     * @param buildingNum
+     * @param addressLine1
+     * @param city
+     * @param county
+     * @param country
+     * @param postCode
+     * @param addressType
+     */
+    @Path("address")
+    @POST
+    public void createAddress(Customer customer,  @FormParam("buildingNum") String buildingNum, @FormParam("addressLine1") String addressLine1, @FormParam("city") String city, @FormParam("county") String county, @FormParam("country") String country, @FormParam("postCode") String postCode, @FormParam("addressType") String addressType) {
+        if (customer == null || buildingNum == null || addressLine1 == null || city == null || county == null|| country == null|| postCode == null|| addressType == null) {
+            throw new IllegalArgumentException();
+        }
+        
+        Address address = new Address(buildingNum, addressLine1, city, county, country, postCode, addressType);
+        CustomerHasAddress custAdd = new CustomerHasAddress(customer, address); 
+        custAddressRepository.persistCustomerHasAddress(custAdd);
+        
+        /** This code prevents duplicate address objects from being created.
+         * If the address has not already been created then add a new address 
+         * to the repository.
+         */
+        if (!addressRepository.isDuplicate(address)) {
+            addressRepository.persistAddress(address);
+        }
+        
+    }
 	/**
 	 * 
 	 * @param customer
