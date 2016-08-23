@@ -72,14 +72,13 @@ public class ProductRepositoryOffline implements ProductRepository
 	
 	//retrieve all products
 	public List<Product> getProducts() {
-		//List<Product> prodlist = initialData.getAllProducts();
-		//return prodlist;
 		return initialData.getAllProducts();
 	}
 		
 	public void createProduct(Product p) {
 		
 	}
+	
 	//update the product
 	public void updateProduct(Product p) {
 		List<Product> ps = initialData.getAllProducts();

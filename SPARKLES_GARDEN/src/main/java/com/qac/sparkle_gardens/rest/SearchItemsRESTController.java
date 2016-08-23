@@ -5,6 +5,7 @@ package com.qac.sparkle_gardens.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.services.ProductService;
@@ -22,11 +24,12 @@ import com.qac.sparkle_gardens.services.ProductService;
  * @author Annabelle Young
  *
  */
-@Path(value="search")
+@Path(value="/search")
 @RequestScoped
 public class SearchItemsRESTController {
 
 	@Inject	private ProductService productService;
+	@Inject private Logger log;
 	
 	private List<Product> searchQueryResults = new ArrayList<Product>();
 	private String error = "";
@@ -86,9 +89,9 @@ public class SearchItemsRESTController {
 	/**
 	 * Retrieve the list of products that resulted from search queries
 	 */
-	@Path("{id}")
+	@Path("/searchResult")
 	@GET
-	//@Produces("text/plain")
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<Product> getSearchResultList(){
 		return searchQueryResults;
 		//return (List<Product>)productService.getProductList();
