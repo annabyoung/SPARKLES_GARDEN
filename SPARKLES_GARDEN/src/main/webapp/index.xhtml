@@ -18,6 +18,38 @@
         <h:panelGroup rendered="#{not empty cards.cards}">
             <em>Some registered cards.</em>
         </h:panelGroup>
+        
+         <h:form id="reg">
+            <h2>Card Registration</h2>
+            <p>Enforces annotation-based constraints defined on the
+                card class.</p>
+            <h:panelGrid columns="3" columnClasses="titleCell">
+                <h:outputLabel for="number" value="cardNumber: " />
+                <h:inputText id="number" value="#{registerCard.cardNumber}" />
+                <h:message for="number" errorClass="invalid" />
+
+                <h:outputLabel for="cardOwnerName" value="cardOwnerName:" />
+                <h:inputText id="cardOwnerName" value="#{registerCard.nameOnCard}" />
+                <h:message for="cardOwnerName" errorClass="invalid" />
+
+                <h:outputLabel for="expirationDate" value="expirationDate:" />
+                <h:inputText id="expirationDate"
+                    value="#{registerCard.expirationDate}" />
+                <h:message for="expirationDate" errorClass="invalid" />
+            </h:panelGrid>
+
+            <p>
+                <h:panelGrid columns="2">
+                    <h:commandButton id="register"
+                        action="#{registerCard.register()}"
+                        value="Register" styleClass="register" />
+                    <h:messages styleClass="messages"
+                        errorClass="invalid" infoClass="valid"
+                        warnClass="warning" globalOnly="true" />
+                </h:panelGrid>
+            </p>
+        </h:form>
+        
         <h:dataTable var="_card" value="#{cards.cards}"
             rendered="#{not empty cards}"
             styleClass="simpletablestyle">
