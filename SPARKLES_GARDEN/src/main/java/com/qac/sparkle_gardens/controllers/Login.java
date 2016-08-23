@@ -2,6 +2,8 @@ package com.qac.sparkle_gardens.controllers;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
@@ -56,7 +58,8 @@ public class Login {
 
 	  @Path("login")
 	  @POST
-	  public String login () {
+	  @Consumes
+	  public String login (@FormParam("username") String user, @FormParam("password") String password) {
 		  if (username.equals("")){
 			  error = "please enter a username";
 			  password="";
