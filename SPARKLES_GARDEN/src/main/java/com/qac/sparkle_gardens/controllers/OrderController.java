@@ -20,44 +20,33 @@ public class OrderController
 	@Inject
 	private RefundCard refund;
 	
-	@Inject
-	private PayByCard pay;
-	
-	private String cardNumber = "", expirationDate = "";
-	private String cardOwnerName = "", cvs = "";
-	
-	private long orderID, productID;
-	private int quantity;
-	
 	private String invoice = "";
 	
-	@SuppressWarnings("unused")
+	private int quantity;
+	
+	public OrderController()
+	{
+		
+	}
+	
+	/**
+	 * Amend the quantity of a product in an Order AFTER it is placed.
+	 * @param orderID
+	 * @param productID
+	 * @param quantity
+	 * @return
+	 */
 	public String amendOrder(long orderID, long productID, int quantity)
 	{
-		this.orderID = orderID;
-		this.productID = productID;
-		this.quantity = quantity;
-		
-		Order o = service.getOrder(orderID);
-		
-		if (o.getOrderStatus() == OrderStatus.DISPATCHED)
-			return "order_not_amended";
-		
-		for (int i = 0; i < o.getOrderLines().size(); i++)
-		{
-			if (o.getOrderLines().get(i).getProduct().getProductID() == productID)
-				o.getOrderLines().get(i).setQuantity(quantity);
-			
+		if (service.amendOrder(orderID, productID, quantity))
 			return "order_amended";
-		}
 		return "order_not_amended";
 	}
 	
 	/**
-	 * Take the order's ID, check that the order's status is not empty, dispatched or delivered
-	 * If status is valid for cancellation, check if the order is marked for 'pay later'
-	 * If it is pay later, then payment status is set to void, if not then customer must be refunded
-	 * 
+	 * Cancel the order based on the criteria that the order
+	 * is still in the warehouse; i.e. in packing stage. If the order
+	 * is a pay later kind, then the payment is rendered void.
 	 * 
 	 * @param orderID
 	 * @return
@@ -66,16 +55,17 @@ public class OrderController
 	public String cancelOrder(long orderID)
 	{
 		Order order = service.getOrder(orderID);
-		if (service.canCancelOrder(order))
+		
+		if (!service.canCancelOrder(orderID))
+			return "order_not_cancelled";
+		
+		if(order.isPayLater())
 		{
-			if(order.isPayLater())
-			{
-				order.setPaymentStatus(PaymentStatus.VOID);
-			}
-			refund.refundCard(order);
+			order.setPaymentStatus(PaymentStatus.VOID);
 			return "order_cancelled";
 		}
-		return "order_not_cancelled";
+		refund.refundCard(order);
+		return "order_cancelled";
 	}
 	
 	/**
@@ -91,125 +81,27 @@ public class OrderController
 	}
 	
 	/**
-	 * Place order with order ID and option to pay later
-	 * @param orderID The order ID Order pertains to
-	 * @param payLater Do you want to buy-now-pay-later?
-	 * @return
-	 */
-	public String placeOrder(long orderID, boolean payLater)
-	{
-		if (service.isOrderEmpty(orderID))
-			return "home";
-		
-		if (cardNumber.equals("") || cvs.equals("") || expirationDate.equals(""))
-			return "home";
-		
-		service.createOrder(payLater);	
-		
-		if (!payLater)
-		{
-			double price = service.getTotalPrice(orderID);
-			pay.payByCard(cardOwnerName, cardNumber, expirationDate, price, cvs);
-			return "home";
-		}
-		
-		this.createInvoice(orderID);
-		
-		return "home";
-	}
-	
-	/**
 	 * This function checks whether the Order is eligible for a refund 
 	 * (30 days after dispatch) and refunds the order based on card.
 	 * @param orderID
 	 * @return
 	 */
-	public String returnOrder(long orderID)
+	public String returnOrder(long orderID, 
+			String cardNumber, String expirationDate)
 	{
-		Order o = service.getOrder(orderID);
-		
-		if (service.isEligibleForRefund(orderID) && !o.isPayLater())
-		{
-			o.setOrderStatus(OrderStatus.RETURNED);
-			cService.refundCard(cardNumber, expirationDate);
-			return "order_returned";
-		}
-		return "order_not_returned";
-	}
-
-	public long getOrderID() 
-	{
-		return orderID;
-	}
-
-	public long getProductID() 
-	{
-		return productID;
-	}
-
-	public int getQuantity() 
-	{
-		return quantity;
-	}
-	
-	public String getCardNumber() 
-	{
-		return cardNumber;
-	}
-
-	public void setCardNumber(String cardNumber) 
-	{
-		this.cardNumber = cardNumber;
-	}
-
-	public String getExpirationDate() 
-	{
-		return expirationDate;
-	}
-
-	public void setExpirationDate(String expirationDate) 
-	{
-		this.expirationDate = expirationDate;
-	}
-
-	public String getCardOwnerName() 
-	{
-		return cardOwnerName;
-	}
-
-	public void setCardOwnerName(String cardOwnerName) 
-	{
-		this.cardOwnerName = cardOwnerName;
-	}
-
-	public String getCvs() 
-	{
-		return cvs;
-	}
-
-	public void setCvs(String cvs) 
-	{
-		this.cvs = cvs;
-	}
-	
-	public void setOrderID(long orderID) 
-	{
-		this.orderID = orderID;
-	}
-
-	public void setProductID(long productID) 
-	{
-		this.productID = productID;
-	}
-
-	public void setQuantity(int quantity) 
-	{
-		this.quantity = quantity;
+		if (service.returnOrder(orderID, cardNumber, expirationDate))
+			return "order_return_accepted";
+		return "order_return_rejected";
 	}
 	
 	public String getInvoice()
 	{
 		return invoice;
+	}
+	
+	public int getQuantity()
+	{
+		return quantity;
 	}
 }
 

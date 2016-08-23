@@ -12,6 +12,7 @@ import com.qac.sparkle_gardens.repositories.OrderRepository;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
 import com.qac.sparkle_gardens.util.MessageSender;
 import com.qac.sparkle_gardens.util.OrderStatus;
+import com.qac.sparkle_gardens.util.PaymentStatus;
 import com.qac.sparkle_gardens.util.MethodAuthor;
 
 /**
@@ -30,18 +31,17 @@ public class OrderService
 	@Inject
 	WishlistRepository w_repository;
 	
-	List<OrderLine> basket = new ArrayList<OrderLine>();
+	@Inject
+	CardService cService;
 	
-	MessageSender sender = new MessageSender();
-//	@Inject
-//	MessageSender sender;
+	List<OrderLine> basket = new ArrayList<OrderLine>();
 	
 	/**
 	 * Default constructor
 	 */
 	public OrderService()
 	{
-		//sender = new MessageSender();
+
 	}
 	
 	/**
@@ -89,12 +89,11 @@ public class OrderService
 	 * @param lines - The list of OrderLines to be passed
 	 * @return
 	 */
-	public double getTotalPrice(long orderID)
+	public double getTotalPrice()
 	{
-		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
 		double totalPrice = 0;
 		
-		for (OrderLine i : lines)
+		for (OrderLine i : basket)
 		{
 			totalPrice += (i.getProduct().getPrice() * i.getQuantity());
 		}
@@ -149,7 +148,7 @@ public class OrderService
 //			jmse.printStackTrace();
 //		}
 //		return result;
-		return "";
+		return "Thank you for shopping at NBGardens!";
 	}
 	
 	/**
@@ -183,7 +182,8 @@ public class OrderService
 		
 		for (int i = 0; i < basket.size(); i++)
 		{
-			if (basket.get(i).getProduct().equals(p))
+			if (basket.get(i).getProduct().
+					getProductID() == p.getProductID())
 			{
 				basket.remove(i);
 				return true;
@@ -262,14 +262,6 @@ public class OrderService
 	}
 	
 	/**
-	 * Get repository
-	 */
-	public final OrderRepository getRepository()
-	{
-		return repository;
-	}
-	
-	/**
 	 * Gets the number of days since an order 
 	 * has been dispatched
 	 * @param orderID The id of the order enquired
@@ -289,13 +281,44 @@ public class OrderService
 	 * @return true; false
 	 */
 	@MethodAuthor(author="Annabelle Young")
-	public boolean canCancelOrder(Order order)
+	public boolean canCancelOrder(long orderID)
 	{
+		Order order = repository.getOrder(orderID);
 		OrderStatus orderStatus = order.getOrderStatus();
 		
 		if (orderStatus == OrderStatus.PLACED || 
 			orderStatus == OrderStatus.PACKING)
 		{
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean amendOrder(long orderID, long productID, int quantity)
+	{
+		Order o = repository.getOrder(orderID);
+		
+		if (o.getOrderStatus() == OrderStatus.DISPATCHED)
+			return false;
+		
+		for (int i = 0; i < o.getOrderLines().size(); i++)
+		{
+			if (o.getOrderLines().get(i).getProduct().getProductID() == productID)
+				o.getOrderLines().get(i).setQuantity(quantity);
+			
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean returnOrder(long orderID, String cardNumber, String expirationDate)
+	{
+		Order o = repository.getOrder(orderID);
+		
+		if (this.isEligibleForRefund(orderID) && !o.isPayLater())
+		{
+			o.setOrderStatus(OrderStatus.RETURNED);
+			cService.refundCard(cardNumber, expirationDate);
 			return true;
 		}
 		return false;
