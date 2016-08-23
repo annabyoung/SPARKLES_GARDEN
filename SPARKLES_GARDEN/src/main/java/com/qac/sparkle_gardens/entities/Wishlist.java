@@ -51,6 +51,9 @@ public class Wishlist {
 	// default constructor
 	public Wishlist () { }
 	
+	public Wishlist(Customer customer) {
+		this.customer = customer;
+	}
 	public Wishlist(Customer customer, Product product) {
 		this.customer = customer;
 		products.add(product);
