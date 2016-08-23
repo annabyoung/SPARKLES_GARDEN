@@ -14,8 +14,9 @@ public interface CardRepository
 	/**
 	 * Keeps cards in database.
 	 * @param Card c
+	 * @return 
 	 */
-	public void addCard(Card c);
+	public Card addCard(Card c);
 
 	/**
 	 * Keeps ArrayList of cards.

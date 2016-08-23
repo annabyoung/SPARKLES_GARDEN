@@ -39,10 +39,29 @@ public class CardService {
 	 * @param cardOwner
 	 */
 	public void registerCard(Card newCard, Customer cardOwner){
-		cardRepository.addCard(newCard);
+		Card card = returnIfExisting(newCard);
+		if (card == null)
+			card = cardRepository.addCard(newCard);
 		//Todo: check if card exists, and then give cardID.
-		CustomerHasCard cusCard = new CustomerHasCard(cardOwner, newCard);
+		CustomerHasCard cusCard = new CustomerHasCard(cardOwner, card);
 		cardOwnershipRepository.addCustomerHasCard(cusCard);
+	}
+	
+	/**
+	 * Returns an existing card if every parameter is found on repository.
+	 * @param card
+	 * @return
+	 */
+	public Card returnIfExisting(Card card){
+		List<Card> cards = cardRepository.getCards();
+		for (Card existingCard: cards){
+			if (card.getCardNumber() == existingCard.getCardNumber() && 
+					card.getCardOwnerName() == existingCard.getCardOwnerName() &&
+					card.getExpirationDate() == existingCard.getExpirationDate()){
+				return existingCard;
+			}
+		}
+		return null;
 	}
 	
 	public Card setupCard(String cardOwnerName, String cardNumber, String expirationDate){
@@ -58,7 +77,8 @@ public class CardService {
 	 * @return
 	 */
 	public boolean validateCardDetails(String cardOwnerName, String cardNumber, String expirationDate) {
-		if (!cardOwnerName.isEmpty() || !cardNumber.isEmpty() || !expirationDate.isEmpty() && cardNumber.matches("[0-9]{16}")) {
+		if (!cardOwnerName.isEmpty() || !cardNumber.isEmpty() || !expirationDate.isEmpty() && 
+				cardNumber.matches("[0-9]{16}")) {
 			return true;
 		}
 		return false;
