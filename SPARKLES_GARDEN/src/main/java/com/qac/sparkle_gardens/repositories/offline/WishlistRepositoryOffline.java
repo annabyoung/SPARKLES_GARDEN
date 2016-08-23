@@ -86,23 +86,6 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		return wish;
 	}
 	
-	//@Deprecated
-	/**
-	 * No longer necessary
-	 * Finds a wishlist according to the name of the wishlist
-	 * @param name
-	 * @return
-	 */
-	//public Wishlist findByName(String name) {
-		//List<Wishlist> list = initialData.getWishlists();
-		//Wishlist wish = new Wishlist();
-		//for (int index = 0; index < list.size(); index++) {
-			//if (list.get(index).getWishlistName().equals(name)) {
-				//wish = list.get(index);
-			//}
-		//}
-		//return wish;
-	//}
 	/**
 	 * This method adds a product to the wishlist
 	 * @param product
@@ -179,5 +162,23 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 		Wishlist list = findByAccountId(accountId);
 		return list.getProducts();
 	}
+	
+	//@Deprecated
+		/**
+		 * No longer necessary
+		 * Finds a wishlist according to the name of the wishlist
+		 * @param name
+		 * @return
+		 */
+		//public Wishlist findByName(String name) {
+			//List<Wishlist> list = initialData.getWishlists();
+			//Wishlist wish = new Wishlist();
+			//for (int index = 0; index < list.size(); index++) {
+				//if (list.get(index).getWishlistName().equals(name)) {
+					//wish = list.get(index);
+				//}
+			//}
+			//return wish;
+		//}
 	
 }

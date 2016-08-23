@@ -45,6 +45,14 @@ public class WishlistService {
 		return wishlistRepository.getWishlists();
 	}
 	
+	public void createWishlist(Customer customer) {
+		if (customer == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		wishlistRepository.persistWishlist(new Wishlist(customer));
+	}
+	
 	/**
 	 * 
 	 * @param customer
@@ -58,6 +66,11 @@ public class WishlistService {
 		wishlistRepository.persistWishlist(wish);
 	}
 	
+	/**
+	 * 
+	 * @param customer
+	 * @param products
+	 */
 	public void createWishlist(Customer customer, List<Product> products) {
 		if (customer == null || products.isEmpty()) {
 			throw new IllegalArgumentException();
