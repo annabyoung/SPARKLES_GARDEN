@@ -15,8 +15,8 @@ import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
 
 @Stateless
 public class AddressService {
-	@Inject AddressRepository addressRepository;
-	@Inject CustomerHasAddressRepository custAddressRepository;
+	@Inject private AddressRepository addressRepository;
+	@Inject private CustomerHasAddressRepository custAddressRepository;
 	
 	/**
 	 * Retrieves the address - the list of products

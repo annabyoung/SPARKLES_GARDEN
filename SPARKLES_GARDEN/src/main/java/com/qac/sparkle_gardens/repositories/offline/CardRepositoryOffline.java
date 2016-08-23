@@ -26,7 +26,7 @@ public class CardRepositoryOffline implements CardRepository
 	@Inject
 	private Logger log;
 	@Inject
-	InitialData initialData = new InitialData();
+	private InitialData initialData;
 
 	public Card addCard(Card card) 
 	{
@@ -48,7 +48,11 @@ public class CardRepositoryOffline implements CardRepository
 	
 	public void persistCards(List<Card> c) 
 	{
-		initialData.setCards(c);
+		List<Card> cards = initialData.getCards();
+		for(Card card: c){
+			cards.add(card);
+		}
+		initialData.setCards(cards);
 	}
 	
 	public Card findByID(long id) 
@@ -62,7 +66,7 @@ public class CardRepositoryOffline implements CardRepository
 		}
 		return null;
 	}
-	@Named("cards")
+
 	public List<Card> getCards() 
 	{
 		return initialData.getCards();
