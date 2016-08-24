@@ -1,0 +1,29 @@
+{
+	"order":{
+		"productLine":[{
+			"productID":"",
+			"productName":"",
+			"quantity":"",
+			"costPerLine":""
+			}],
+		"billingAddress":{
+			"houseNum":"",
+			"line1":"",
+			"line2":"",
+			"city":"",
+			"county":"",
+			"country":"",
+			"postcode":""
+		},
+		"shippingAddress":{
+			"houseNum":"",
+			"line1":"",
+			"line2":"",
+			"city":"",
+			"county":"",
+			"country":"",
+			"postcode":""
+		},
+		"totalCost":""
+	}
+}

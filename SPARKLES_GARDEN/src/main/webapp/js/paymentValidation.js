@@ -1,13 +1,3 @@
-function CheckCard(){
-
-	
-	if(cardValidation()==true){
-		
-		Validity();
-	}
-}
-
-
 function cardValidation() {
 	
 	var nameCheck = document.getElementById('formdiv:cardName');
@@ -31,25 +21,3 @@ function cardValidation() {
 	window.location=('../homepage.xhtml');
 	return true;
 }
-
-function Validity() {
-	
-	var checkName=document.getElementById("formdiv:cardName");
-	var checkCard=document.getElementById("formdiv:cardnumber");
-	var checkExp=document.getElementById("formdiv:expDate");
-	
-	var error="";
-	
-	var inputChecks=[checkName, checkCard, checkExp];
-	
-	for (i=0; i < inputChecks.length; i++){
-		
-		if(inputChecks[i].value.validity.typeMismatch){
-			
-			console.log(i); 
-			error= "Your fields dont match the required input type. E.g Card Number must be a number"
-		}
-	}
-	
-	document.getElementById("errorMessage").innerHTML=error; 
-} 
