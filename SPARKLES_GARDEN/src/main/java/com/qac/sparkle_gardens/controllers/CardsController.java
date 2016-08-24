@@ -14,7 +14,7 @@ import com.qac.sparkle_gardens.services.CardService;
 import com.qac.sparkle_gardens.services.CustomerService;
 /**
  * 
- * @author Allen Su
+ * @author allensu
  *
  */
 @Named(value="cards")
