@@ -13,6 +13,11 @@ import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.services.CardService;
 import com.qac.sparkle_gardens.services.CustomerService;
 
+/**
+ * 
+ * @author allensu
+ *
+ */
 @Named(value="cards")
 @RequestScoped
 public class CardsController {
