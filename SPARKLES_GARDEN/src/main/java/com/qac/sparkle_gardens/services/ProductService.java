@@ -76,18 +76,6 @@ public class ProductService {
 		return true;
 	}
 	
-	/**
-	 * Retrieve product's info from productID
-	 * Find the product from its ID and return its description
-	 */
-	@Deprecated
-	public String getProductDescriptionFromID(long productID){
-		if(productID == 0){
-			throw new IllegalArgumentException();
-		}
-		Product p = getProductByID(productID);
-		return p.getProductDescription();
-	}
 	
 	/**
 	 * Check if the quantity request exceeds product's stocklevel/quantity 

@@ -9,7 +9,7 @@ function cardValidation() {
 	var variablesToCheck = [nameCheck, numCheck, expCheck];
 	
 	for(i=0; i < variablesToCheck.length; i++){
-		if(variablesToCheck[i].value == null || variablesToCheck[i].value == ""){
+		if(variablesToCheck[i] == null || variablesToCheck[i].value == ""){
 			
 			error="All fields marked with * must be filled in"
 			document.getElementById("errorMessage").innerHTML= error;
@@ -21,3 +21,4 @@ function cardValidation() {
 	window.location=('../homepage.xhtml');
 	return true;
 }
+

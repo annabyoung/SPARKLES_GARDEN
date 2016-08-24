@@ -29,7 +29,6 @@ import com.qac.sparkle_gardens.services.ProductService;
 public class SearchItemsRESTController {
 
 	@Inject	private ProductService productService;
-	@Inject private Logger log;
 	
 	private List<Product> searchQueryResults = new ArrayList<Product>();
 	private String error = "";
@@ -43,14 +42,13 @@ public class SearchItemsRESTController {
 	 * @return search, blank_search
 	 */
 	@POST
-	@Consumes("text/plain")
 	@Path("/createbytags")
-	public String createProductListByTags(String customerInput){
+	@Consumes("text/plain")
+	public String createProductListByTags(@FormParam("input") String customerInput){
 		searchQueryResults.addAll(productService.createProductListWithAllTags(customerInput));
 		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
 			return "Created with: " + customerInput;
-			//return "search/" + customerInput;
 		}
 		error = "No results found for your search.";
 		return error;
@@ -66,12 +64,14 @@ public class SearchItemsRESTController {
 	 * @return search, blank_search
 	 */
 	@POST
-	@Consumes("text/plain")
 	@Path("/createbyprice")
-	public String createProductListByPrice(@FormParam("minimum") double minimumPrice, @FormParam("maximum") double maximumPrice){
-		searchQueryResults.addAll(productService.createProductListByPriceRange(minimumPrice, maximumPrice));
+	@Consumes("text/plain")//???
+	public String createProductListByPrice(@FormParam("minimumPrice") String minimumPrice, @FormParam("maximumPrice") String maximumPrice){
+		double minimum = Double.parseDouble(minimumPrice);
+		double maximum = Double.parseDouble(maximumPrice);
+		searchQueryResults.addAll(productService.createProductListByPriceRange(minimum, maximum));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
-			return "Created with: " + minimumPrice + " : " + maximumPrice;
+			return "Created with: " + minimum + " : " + maximum;
 		}
 		error = "No results found for your search";
 		return error;
@@ -87,22 +87,31 @@ public class SearchItemsRESTController {
 	}
 	
 	/**
+	 * Retrieve the list of all products
+	 */
+	@GET
+	@Path("/productList")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Product> getProductList(){
+		return (List<Product>)productService.getProductList();
+	}
+	
+	/**
 	 * Retrieve the list of products that resulted from search queries
 	 */
-	@Path("/searchResult")
 	@GET
+	@Path("/searchResult")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Product> getSearchResultList(){
 		return searchQueryResults;
-		//return (List<Product>)productService.getProductList();
 	}
 	
 	/**
 	 * Retrieve error message if there is one
 	 */
-	@Path("{id}")
 	@GET
-	@Produces("text/plain")
+	@Path("/error")
+	@Produces(MediaType.APPLICATION_JSON)
 	public String getError(){
 		return error;
 	}
