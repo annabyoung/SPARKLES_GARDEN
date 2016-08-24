@@ -1,0 +1,14 @@
+{
+	"definitoins":{
+		"card":{
+			"type": "object",
+			"properties":{
+				"cardNameHolder": {"type": "string"},
+				"cardNumber": {"type": "number"},
+				"startDate": {"type": "string"},
+				"expDate": {"type": "string"}
+			},
+			"required": ["cardHolderName", "cardNumber", "expDate"]
+		}
+	}
+}

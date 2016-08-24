@@ -1,0 +1,39 @@
+{
+	"definitions": {
+		"product": {
+			"type": "object",
+			"properties": [
+				{
+					"productID": {
+						"type": "string"
+					},
+					"productName": {
+						"type": "string"
+					},
+					"productDesc": {
+						"type": "string"
+					},
+					"quantity": {
+						"type": "string"
+					},
+					"productPrice": {
+						"type": "double"
+					},
+					"tags": [
+						{
+							"name": {
+								"type": "string"
+							}
+						}
+					]
+				}
+			],
+			"required": [
+				"productID",
+				"productName",
+				"productDesc",
+				"productPrice"
+			]
+		}
+	}
+}
