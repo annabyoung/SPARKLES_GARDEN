@@ -30,22 +30,28 @@ public class OrderRepositoryOffline
 	
 	public void persistOrder(Order o) 
 	{
-//		initialData.addOrder(o);
+		List<Order> orders = initialData.getOrders();
+		orders.add(o);
+		initialData.setOrders(orders);
 	}
 	
 	public void persistOrders(List<Order> o) 
 	{
-		initialData.setOrders(o);
+		List<Order> orders = initialData.getOrders();
+		for (Order or: o){
+			orders.add(or);
+		}
+		initialData.setOrders(orders);
 	}
 	
 	public Order getOrder(long orderID) 
 	{
 		List<Order> ol = initialData.getOrders();
 		
-		for (int i = 0; i < ol.size(); i++)
-		{
-			if (ol.get(i).getOrderID() == orderID)
-				return ol.get(i);
+		for (Order order: ol){
+			if (order.getOrderID() == orderID){
+				return order;
+			}
 		}
 		return null;
 	}
@@ -58,12 +64,12 @@ public class OrderRepositoryOffline
 	public void removeOrder(long orderID) 
 	{
 		List<Order> ol = initialData.getOrders();
-		
-		for (int i = 0; i < ol.size(); i++)
-		{
-			if (ol.get(i).getOrderID() == orderID)
-				ol.remove(i);
+		for (Order order: ol){
+			if (order.getOrderID() == orderID){
+				 ol.remove(order);
+			}
 		}
+		initialData.setOrders(ol);
 	}
 	
 	
