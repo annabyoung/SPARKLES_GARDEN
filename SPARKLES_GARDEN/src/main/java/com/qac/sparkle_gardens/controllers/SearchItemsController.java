@@ -76,6 +76,13 @@ public class SearchItemsController {
 	}
 	
 	/**
+	 * Retrieve the list of all products
+	 */
+	public List<Product> getProductList(){
+		return (List<Product>)productService.getProductList();
+	}
+	
+	/**
 	 * Retrieve the list of products that resulted from search queries
 	 */
 	public List<Product> getSearchResultList(){
