@@ -1,13 +1,6 @@
 {
 	"basket": {
-		"productLine": [
-			{
-				"productID": "",
-				"productName": "",
-				"quantity": "",
-				"costPerLine": ""
-			}
-		],
+		"productLine": {"$ref": "productLineDefinitions.json#/definitions/productLine/"},
 		"totalCost": ""
 	}
 }
