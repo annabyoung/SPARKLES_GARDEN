@@ -6,10 +6,19 @@ function deleteItem(){
 }
 
 function addItem(){
-	/**
-	 * Call getProductByID in ProductRepository to get the Product p
-	 * Call addProductToBasket from com.qac.sparkle_gardens.services.OrderService using p
-	 */ 
+	var productID;
+	var productName;
+	var quantity;
+	var costOfProduct;
+	var costPerLine;
+	
+	productID = document.getElementById("productId");
+	productName = document.getElementById("productName");
+	quantity = document.getElementById("quantity");
+	costOfProduct = document.getElementById("price");
+	costPerLine = (costOfProduct * quantity);
+	
+	var lineToAdd = {productLineDefinitions:{productID: productID, productName: productName, quantity:quantity, costPerLine:costPerLine}}
 }
 function printTable(){
 	/**
