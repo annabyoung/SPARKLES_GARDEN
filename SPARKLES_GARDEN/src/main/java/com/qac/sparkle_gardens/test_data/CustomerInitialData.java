@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Singleton;
 
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.util.CreditStatus;
 /**
  * 
  * @author Sean Connelly
@@ -22,6 +23,17 @@ public class CustomerInitialData {
 			
 
 		public CustomerInitialData(){
+			
+			Customer customer = new Customer(1, "John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890");
+			Customer customer2 = new Customer(2, "Jane", "doe", "email01@email.com", CreditStatus.VALIDATING, "password01", "0987654321");
+			Customer customer3 = new Customer(3, "Joe", "Schmoe", "email999@email.com", CreditStatus.VALID, "password01", "1357908642");
+			Customer customer4 = new Customer(4, "Luke", "Skywalker", "theForce@deathstar.com", CreditStatus.VALID, "password01", "2468097531");
+			
+			customers.add(0, customer);
+			customers.add(1, customer2);
+			customers.add(2, customer3);
+			customers.add(3, customer4);
+
 
 		}
 		

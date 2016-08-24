@@ -23,13 +23,14 @@ import com.qac.sparkle_gardens.test_data.InitialData;
 public class CustomerRepositoryOffline implements CustomerRepository
 {	
 	@Inject 
-	private InitialData initialData;
-	private List<Customer> customers;
+	private InitialData initialData= new InitialData();
+	private List<Customer> customers = new ArrayList<>();
+	List<Customer> custlist = new ArrayList<>();
 		public CustomerRepositoryOffline()
 		{
 			initialData = new InitialData();
 			
-			List<Customer> customers = initialData.getCustomers();
+			//List<Customer> customers = initialData.getCustomers();
 			
 		}
 		
@@ -47,7 +48,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		@Override 
 		public Customer findByID(long accountID) {
 		
-			customers = initialData.getCustomers();
+			customers.addAll(initialData.getCustomers());
 			for (int i=0; i<customers.size(); i++)
 			{
 				if(customers.get(i).getAccountID() == accountID){
@@ -55,8 +56,8 @@ public class CustomerRepositoryOffline implements CustomerRepository
 				}
 				
 			}
-		       Customer nothing = new Customer();
-		       return nothing; //dunno if this works right 
+		      return null;
+		      //return nothing; //dunno if this works right 
 		}
 		
 		//get customer
@@ -67,7 +68,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		} 
 		@Override 
 		public Customer getCustomer(Customer c){
-			
+			customers.addAll(initialData.getCustomers());
 			for (int i=0; i<customers.size(); i++)
 			{
 				if(customers.get(i).equals(c)){
@@ -81,7 +82,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		//update customer 
 		@Override 
 		public boolean updateCustomer(Customer c){
-			
+			customers.addAll(initialData.getCustomers());
 			for (int i=0; i<customers.size(); i++)
 			{
 				if(customers.get(i).equals(c)){
@@ -97,7 +98,7 @@ public class CustomerRepositoryOffline implements CustomerRepository
 		@Override 
 		public boolean removeCustomer(Customer c){
 			
-			
+			customers.addAll(initialData.getCustomers());
 			for (int i=0; i<customers.size(); i++)
 			{
 				if(customers.get(i).equals(c)){
@@ -109,12 +110,26 @@ public class CustomerRepositoryOffline implements CustomerRepository
 			
 		}
 
+		@Override
+		public boolean isEmail(String email){
+			
+			custlist.addAll(initialData.getCustomers());
+			for(Customer customer : custlist){
+				if(email.equals(customer.getEmail()))
+					return true; 
+			}
+		
+			return false;
+		}
+		
 		@Override 
 		public Customer findByEmail(String email) 
 		{
-			for (Customer customer : initialData.getCustomers())
+			 custlist.addAll(initialData.getCustomers());
+			for (Customer customer : custlist){
 				if(customer.getEmail().equalsIgnoreCase(email))
 					return customer;
+			}
 			return null;
 		}
 		

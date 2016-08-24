@@ -326,6 +326,12 @@ public class OrderService
 	}
 	
 	
+	
+	/**
+	 * given a set product 
+	 * @param p
+	 * @return
+	 */
 	public int getQuanity(Product p){
 		
 		 Order order = repository.getOrder(1);

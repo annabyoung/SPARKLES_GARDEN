@@ -2,11 +2,14 @@ package com.qac.sparkle_gardens.services;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
+import com.qac.sparkle_gardens.repositories.offline.CustomerRepositoryOffline;
 import com.qac.sparkle_gardens.util.CreditStatus;
 
 /**
@@ -16,7 +19,7 @@ import com.qac.sparkle_gardens.util.CreditStatus;
  */
 @Stateless
 public class CustomerService {
-	@Inject CustomerRepository customerRepository;
+	@Inject private CustomerRepository customerRepository = new CustomerRepositoryOffline();
 	
 	
 	
@@ -34,16 +37,20 @@ public class CustomerService {
 	 * @return
 	 */
 	public boolean validateRegistrationDetails(String firstName, String lastName, String password, String email, String phone) {
-		if(customerRepository.findByEmail(email).equals(null)) {
+	//	if(customerRepository.findByEmail(email).equals(null)) {
+		Customer c = customerRepository.findByEmail(email);
+		if(customerRepository.isEmail(email)) {
 			// need to check is email is valid user@domain.com format?
 			
 					if(firstName.length() >= 3 && firstName.length() < 255 ){
 						if(lastName.length() >= 3 && lastName.length() < 255){
-							if(password.length() >= 6 && password.length() < 255){
+							if(phone.length() == 10){
+								if(password.length() >= 6 && password.length() < 255){
 									
 								return true; // all information is valid?
 							
-							}//password
+								}//password
+							}//phone
 						}//last name	
 					}//first name 
 					 
@@ -66,9 +73,14 @@ public class CustomerService {
 	
 	public boolean validateEmailInputs(String email)
 	{
-		//TODO: write code 
-		return true;
-		
+		boolean valid = false;
+		try{
+		InternetAddress internetAddress = new InternetAddress(email);
+		valid= true;
+		}catch(AddressException e) {
+			//false 
+		}
+		return valid;
 	}
 	
 	
@@ -105,7 +117,7 @@ public class CustomerService {
 	
 	public void makeNewCustomer(String firstName, String lastName, String email, CreditStatus creditStatus, String password, String phone){
 
-		Customer customer= new Customer();
+		Customer customer= new Customer(firstName, lastName, email, CreditStatus.VALIDATING, password, phone);
 		
 		customerRepository.persistCustomer(customer);
 		
@@ -123,9 +135,9 @@ public class CustomerService {
 	 * @param firstName
 	 * @return
 	 */
-	public void upgradeAccount(String firstName, String lastName, String email, CreditStatus creditstatus, String address, String password  )
+	public void upgradeAccount(String firstName, String lastName, String email, CreditStatus creditstatus, String password, String phone)
 	{
-		Customer upgradedCustomer = new Customer();
+		Customer upgradedCustomer = new Customer(firstName, lastName, email, CreditStatus.VALIDATING, password, phone);
 		
 		customerRepository.persistCustomer(upgradedCustomer); 
 		
