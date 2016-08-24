@@ -38,5 +38,6 @@ public interface CustomerRepository {
 	 */
 	@MethodAuthor(author="James")
 	public Customer findByEmail(String email);
+	boolean isEmail(String email);
 
 }
