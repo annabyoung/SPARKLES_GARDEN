@@ -8,65 +8,46 @@
 		<f:view>
 			<h:body>
 				<div class="container-fluid">
-					<h:form name="paymentForm" class="form-horizontal center_div"
-						role="form" id="formdiv">
+					<form name="paymentForm" class="form-horizontal center_div" id="formdiv">
 						<h2>Add a Payment Method</h2>
 						<div>
 							<p id="errorMessage"></p>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-4">Card Type: </label>
-							<div class="col-sm-4">
-								<h:selectOneListbox>
-									<f:selectItem itemValue="visa" itemLabel="Visa" />
-									<f:selectItem itemValue="maestro" itemLabel="Maestro" />
-									<f:selectItem itemValue="mastercard" itemLabel="Mastercard" />
-									<f:selectItem itemValue="americanExpress"
-										itemLabel="American Express" />
-								</h:selectOneListbox>
-							</div>
-						</div>
-						<div class="form-group">
 							<label class="control-label col-sm-4"> *Card Holder Name:
 							</label>
 							<div class="col-sm-4">
-								<h:inputText id="cardName" tpe="text" name="cardName"
-									required="true" />
+								<input id="cardName" tpe="text" name="cardName"
+									required="required" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4"> *Card Number: </label>
 							<div class="col-sm-4">
-								<h:inputText id="cardNumber" type="number" name="cardNumber"
-									required="true" />
+								<input id="cardNumber" type="number" name="cardNumber"
+									required="required" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">Start Date: </label>
 							<div class="col-sm-4">
-								<h:inputText id="startDate" name="startDate" type="month"
-									required="true" />
+								<input id="startDate" name="startDate" type="month"
+									/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4"> *Expiration Date:
 							</label>
 							<div class="col-sm-4">
-								<h:inputText id="expDate" type="month" name="expDate"
-									required="true" />
-							</div>
+								<input id="expDate" type="month" name="expDate"
+									required="required" />							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-4">Issue Number: </label>
-							<div class="col-sm-4">
-								<h:inputText type="number" id="issNum" name="issueNum" />
-							</div>
-						</div>
-						<div>
-							<h:commandButton id="submit" type="button" class="btn btn-warning"
-								value="Complete Registration!" onclick="cardValidation()" />
-						</div>
-					</h:form>
+						<p>fts</p>
+						<input type="button" id="submit" class="btn btn-warning"
+							value="Complete Registration!" onclick="cardValidation()"/>  
+						<!-- <h:commandButton id="submit" type="button" class="btn btn-warning"
+							value="Complete Registration!" onclick="cardValidation()" />-->
+					</form>
 				</div>
 				<div>
 					<p id="contact">
@@ -74,7 +55,7 @@
 					</p>
 				</div>
 				<script src="..\js\paymentValidation.js" />
-				<script src="..\js\typeValidationCard.js" />
+				<!-- <script src="..\js\typeValidationCard.js" /> -->
 			</h:body>
 		</f:view>
 	</ui:define>
