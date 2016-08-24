@@ -15,18 +15,6 @@
 							<p id="errorMessage"></p>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-4">Card Type: </label>
-							<div class="col-sm-4">
-								<h:selectOneListbox>
-									<f:selectItem itemValue="visa" itemLabel="Visa" />
-									<f:selectItem itemValue="maestro" itemLabel="Maestro" />
-									<f:selectItem itemValue="mastercard" itemLabel="Mastercard" />
-									<f:selectItem itemValue="americanExpress"
-										itemLabel="American Express" />
-								</h:selectOneListbox>
-							</div>
-						</div>
-						<div class="form-group">
 							<label class="control-label col-sm-4"> *Card Holder Name:
 							</label>
 							<div class="col-sm-4">
@@ -56,16 +44,8 @@
 									required="true" />
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-4">Issue Number: </label>
-							<div class="col-sm-4">
-								<h:inputText type="number" id="issNum" name="issueNum" />
-							</div>
-						</div>
-						<div>
-							<h:commandButton id="submit" type="button" class="btn btn-warning"
-								value="Complete Registration!" onclick="cardValidation()" />
-						</div>
+						<h:commandButton id="submit" type="button" class="btn btn-warning"
+							value="Complete Registration!" onclick="cardValidation()" />
 					</h:form>
 				</div>
 				<div>
