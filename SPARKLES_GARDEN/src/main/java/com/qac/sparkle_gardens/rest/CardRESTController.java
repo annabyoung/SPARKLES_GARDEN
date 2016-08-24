@@ -19,7 +19,7 @@ import com.qac.sparkle_gardens.services.CardService;
 import com.qac.sparkle_gardens.services.CustomerService;
 
 
-@Path("/cards")
+@Path("/cardrest")
 @RequestScoped
 public class CardRESTController {
 	
