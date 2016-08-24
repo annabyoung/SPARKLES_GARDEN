@@ -22,9 +22,9 @@ public class CardInitialData
 		Cards.add(new Card(3, "Hammer", "4552345647894531", "12/13"));
 	}
 	
-	public void addCard(Card p)
+	public void addCard(Card card)
 	{
-		this.Cards.add(p);
+		this.Cards.add(card);
 	}
 	
 	public List<Card> getCards()

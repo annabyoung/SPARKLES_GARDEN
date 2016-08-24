@@ -21,7 +21,7 @@ import com.qac.sparkle_gardens.services.CustomerService;
 
 @Path("/cards")
 @RequestScoped
-public class CardRESTService {
+public class CardRESTController {
 	
     @Inject private Logger log;
     @Inject private CardService cardService;

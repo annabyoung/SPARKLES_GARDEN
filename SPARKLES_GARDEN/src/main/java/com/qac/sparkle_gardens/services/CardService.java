@@ -24,7 +24,6 @@ import com.qac.sparkle_gardens.util.CreditStatus;
 @Stateless
 public class CardService {
 	@Inject private CardRepository cardRepository;
-	@Inject private CustomerRepository customerRepository;
 	@Inject private CustomerHasCardRepository cardOwnershipRepository;
 	@Inject private Logger log;
 	
