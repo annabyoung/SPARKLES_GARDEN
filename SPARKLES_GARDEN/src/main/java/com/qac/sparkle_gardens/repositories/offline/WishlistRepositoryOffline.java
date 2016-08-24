@@ -19,7 +19,7 @@ import com.qac.sparkle_gardens.test_data.WishlistInitialData;
 @Stateless
 @Default
 public class WishlistRepositoryOffline implements WishlistRepository{
-	@Inject private WishlistInitialData initialData;
+	@Inject private WishlistInitialData initialData = new WishlistInitialData();
 	
 	/**
 	 * @param Wishlist wishlist
@@ -31,7 +31,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 			throw new IllegalArgumentException();
 		}
 		
-//		initialData.addWishlist(wishlist);
+		initialData.addWishlist(wishlist);
 	}
 	
 	public void persistWishlists(List<Wishlist> wishlists) {
@@ -129,7 +129,7 @@ public class WishlistRepositoryOffline implements WishlistRepository{
 	 */
 	public boolean inWishlist(Product product, long accountId) {
 		Wishlist list = findByAccountId(accountId);
-		if (list.inWishlist(product.getProductID())) {
+		if (list.inWishlist(product.getProductName())) {
 			return true;
 		}
 		
