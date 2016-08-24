@@ -43,8 +43,8 @@ public class SearchItemsRESTController {
 	 */
 	@POST
 	@Path("/createbytags")
-	@Consumes("text/plain")
-	public String createProductListByTags(@FormParam("input") String customerInput){
+	//@Consumes(MediaType.APPLICATION_JSON)
+	public String createProductListByTags(@FormParam("customerInput") String customerInput){
 		searchQueryResults.addAll(productService.createProductListWithAllTags(customerInput));
 		searchQueryResults.addAll(productService.createProductListWithSomeTags(customerInput));
 		if (productService.validateResultsOfSearch(searchQueryResults)){
@@ -65,7 +65,7 @@ public class SearchItemsRESTController {
 	 */
 	@POST
 	@Path("/createbyprice")
-	@Consumes("text/plain")//???
+	//@Consumes(MediaType.APPLICATION_JSON)
 	public String createProductListByPrice(@FormParam("minimumPrice") String minimumPrice, @FormParam("maximumPrice") String maximumPrice){
 		double minimum = Double.parseDouble(minimumPrice);
 		double maximum = Double.parseDouble(maximumPrice);
