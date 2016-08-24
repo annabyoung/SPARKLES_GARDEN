@@ -1,7 +1,7 @@
 function loginValidation() {
 	
-	var usernameCheck = document.getElementById('formdiv:username');
-	var passwordCheck = document.getElementById('formdiv:password');
+	var usernameCheck = document.getElementById('username');
+	var passwordCheck = document.getElementById('password');
 	
 	var error=""; 
 	

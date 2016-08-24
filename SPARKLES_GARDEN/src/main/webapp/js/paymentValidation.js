@@ -1,8 +1,8 @@
 function cardValidation() {
 	
-	var nameCheck = document.getElementById('formdiv:cardName');
-	var numCheck = document.getElementById('formdiv:cardNumber');
-	var expCheck = document.getElementById('formdiv:expDate');
+	var nameCheck = document.getElementById('cardName');
+	var numCheck = document.getElementById('cardNumber');
+	var expCheck = document.getElementById('expDate');
 	
 	var error="";
 	

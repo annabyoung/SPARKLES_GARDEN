@@ -27,7 +27,7 @@
         </form>
         
         
-         <h:form id="reg">
+        <!--  <h:form id="reg">
             <h2>Card Registration</h2>
             <p>Enforces annotation-based constraints defined on the
                 card class.</p>
@@ -55,7 +55,7 @@
                         warnClass="warning" globalOnly="true" />
                 </h:panelGrid>
             </p>
-        </h:form>
+        </h:form> -->
         
         <h:dataTable var="_card" value="#{cards.cards}"
             rendered="#{not empty cards}"
@@ -76,6 +76,7 @@
             REST URL for all cards: <a
                     href="#{request.contextPath}/rest/cards">/rest/cards</a>
             </f:facet>
+            <script src="..\js\allenExample.js" />
         </h:dataTable>
     </ui:define>
 </ui:composition>
