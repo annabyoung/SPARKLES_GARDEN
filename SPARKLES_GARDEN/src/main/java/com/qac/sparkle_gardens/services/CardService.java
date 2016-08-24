@@ -14,7 +14,10 @@ import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CardRepository;
 import com.qac.sparkle_gardens.repositories.CustomerHasCardRepository;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
+import com.qac.sparkle_gardens.repositories.offline.CardRepositoryOffline;
+import com.qac.sparkle_gardens.repositories.offline.CustomerHasCardRepositoryOffline;
 import com.qac.sparkle_gardens.util.CreditStatus;
+import com.sparkle_gardens.sample_data.Testpurposes;
 
 /**
  * This is the Card Service Bean I have made as an example
@@ -23,8 +26,8 @@ import com.qac.sparkle_gardens.util.CreditStatus;
  */
 @Stateless
 public class CardService {
-	@Inject private CardRepository cardRepository;
-	@Inject private CustomerHasCardRepository cardOwnershipRepository;
+	@Inject private CardRepository cardRepository = new CardRepositoryOffline();
+	@Inject private CustomerHasCardRepository cardOwnershipRepository = new CustomerHasCardRepositoryOffline();
 	@Inject private Logger log;
 	
 	/**
@@ -45,16 +48,16 @@ public class CardService {
 			card = cardRepository.addCard(newCard);
 			CustomerHasCard cusCard = new CustomerHasCard(cardOwner, card);
 			cardOwnershipRepository.addCustomerHasCard(cusCard);
-			log.info("Registering new card to customer.");
+			//log.info("Registering new card to customer.");
 		}
 		else{
 			if (!checkIfCustomerRegisteredCardAlready(newCard, cardOwner)){
 				CustomerHasCard cusCard = new CustomerHasCard(cardOwner, card);
 				cardOwnershipRepository.addCustomerHasCard(cusCard);
-				log.info("Linking Customer to previously registered Card.");
+				//log.info("Linking Customer to previously registered Card.");
 			}
 			else{
-				log.info("Customer has already registered Card.");
+				//log.info("Customer has already registered Card.");
 			}
 		}
 	}

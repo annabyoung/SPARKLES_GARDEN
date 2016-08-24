@@ -1,3 +1,4 @@
+
 package com.qac.sparkle_gardens.repositories.offline;
 
 import java.util.ArrayList;
@@ -5,12 +6,14 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.repositories.CardRepository;
+import com.qac.sparkle_gardens.test_data.CardInitialData;
 import com.qac.sparkle_gardens.test_data.InitialData;
 
 
@@ -26,18 +29,21 @@ public class CardRepositoryOffline implements CardRepository
 	@Inject
 	private Logger log;
 	@Inject
-	private InitialData initialData;
+	private InitialData initialData = new InitialData();
+	//private InitialData initialData;
 
 	public Card addCard(Card card) 
 	{
 		List<Card> cards = initialData.getCards();
 		if (card.getCardID() == 0){
-			long largestID = cards.get(cards.size() - 1).getCardID();
-			card.setCardID(largestID + 1);
+			if (cards.size() != 0){
+				long largestID = cards.get(cards.size() - 1).getCardID();
+				card.setCardID(largestID + 1);
+			}
 		}
 		cards.add(card);
 		initialData.setCards(cards);
-		log.info(">>>>>> Adding card to repository" + card.getCardNumber());
+		//log.info(">>>>>> Adding card to repository" + card.getCardNumber());
 		return card;
 	}
 	
