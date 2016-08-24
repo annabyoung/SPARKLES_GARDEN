@@ -1,0 +1,13 @@
+{
+	"basket": {
+		"productLine": [
+			{
+				"productID": "",
+				"productName": "",
+				"quantity": "",
+				"costPerLine": ""
+			}
+		],
+		"totalCost": ""
+	}
+}

@@ -21,3 +21,4 @@ function cardValidation() {
 	window.location=('../homepage.xhtml');
 	return true;
 }
+
