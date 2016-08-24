@@ -16,6 +16,7 @@ import org.hibernate.mapping.Set;
 
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
+import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
 import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 /**
@@ -28,7 +29,7 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 @Stateless
 public class ProductService {
-	@Inject private ProductRepository productRepository;
+	@Inject private ProductRepository productRepository = new ProductRepositoryOffline();
 	@Inject private ProductInitialData initialData = new ProductInitialData();
 	
 	private List<Product> productL = initialData.getAllProducts(); 
@@ -88,6 +89,18 @@ public class ProductService {
 		}
 		
 		return (p.getStockLevel() >= quantityRequested);
+	}
+	
+	/**
+	 * 
+	 * Use a product's ID to find the whole product, including its other attributes
+	 */
+	public Product getProductByName(String productName){
+		/*if(productID == 0){
+			throw new IllegalArgumentException();
+		}*/
+		Product p = productRepository.findByProductName(productName);
+		return p;
 	}
 	
 	/**

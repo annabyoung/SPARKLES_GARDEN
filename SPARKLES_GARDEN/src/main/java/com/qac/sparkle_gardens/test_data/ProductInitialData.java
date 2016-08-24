@@ -27,6 +27,7 @@ public class ProductInitialData {
 		p1.addProductTags("dong");
 		p1.addProductTags("american");
 		p1.addProductTags("challenge");	
+		p1.setProductDescription("This is a massive purple dildo. It is American. It is a challenge. It is great.");
 		products.add(p1);
 		
 		
@@ -35,6 +36,7 @@ public class ProductInitialData {
 		p2.addProductTags("discreet");
 		p2.addProductTags("original");
 		p2.addProductTags("male_masturbator");
+		p2.setProductDescription("It looks like a flashlight. Take off the cap, and surprise! There's a fake vagina inside.");
 		products.add(p2);
 		
 		
@@ -43,18 +45,21 @@ public class ProductInitialData {
 		p3.addProductTags("cock_ring");
 		p3.addProductTags("ring");
 		p3.addProductTags("couples");
+		p3.setProductDescription("A simple vibrating cock ring. This is popular for couples that want to try something new in the bedroom.");
 		products.add(p3);
 		
 		Product p4 = new Product("Hatachi Wand", 25, 89.99);
 		p4.addProductTags("vibrating");
 		p4.addProductTags("massager");
 		p4.addProductTags("multi_speed");
+		p4.setProductDescription("A very powerful massager. It was originally meant to be a back or sore muscle massager since the vibrations are incredibly strong. It's more popularly purchased as a sex toy.");
 		products.add(p4);
 		
 		Product p5 = new Product("Power Bullet", 100, 24.99);
 		p5.addProductTags("vibrating");
 		p5.addProductTags("multi_speed");
 		p5.addProductTags("external_stimulation");
+		p2.setProductDescription("A small three-speed vibrator. It's perfect for people that haven't used a vibrator before and want to get an idea of what it's like to use one.");
 		products.add(p5);
 		
 		//setProducts(products);
