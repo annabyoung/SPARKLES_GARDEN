@@ -34,11 +34,11 @@
             </h:column>
             <h:column>
                 <f:facet name="header">REST URL</f:facet>
-                <a href="#{request.contextPath}/rest/cards/#{_card.cardID}">/rest/cards/#{_card.cardID}</a>
+                <a href="#{request.contextPath}/rest/cardrest/#{_card.cardID}">/rest/cards/#{_card.cardID}</a>
             </h:column>
             <f:facet name="footer">
             REST URL for all cards: <a
-                    href="#{request.contextPath}/rest/cards">/rest/cards</a>
+                    href="#{request.contextPath}/rest/cardrest">/rest/cards</a>
             </f:facet>
             <script src="..\js\allenExample.js" />
         </h:dataTable>

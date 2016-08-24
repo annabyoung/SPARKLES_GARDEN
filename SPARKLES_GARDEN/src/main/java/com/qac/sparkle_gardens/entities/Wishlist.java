@@ -1,5 +1,6 @@
 package com.qac.sparkle_gardens.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -53,10 +54,12 @@ public class Wishlist {
 	
 	public Wishlist(Customer customer) {
 		this.customer = customer;
+		products = new ArrayList<Product>();
 	}
 	public Wishlist(Customer customer, Product product) {
 		this.customer = customer;
-		products.add(product);
+		products = new ArrayList<Product>();
+		addProduct(product);
 	}
 	
 	/**
@@ -66,7 +69,7 @@ public class Wishlist {
 	 */
 	public Wishlist(Customer customer, List<Product> products) {
 		this.customer = customer;
-		this.products = products;
+		this.products = (ArrayList<Product>) products;
 	}
 	
 	
@@ -75,9 +78,9 @@ public class Wishlist {
 	 * @param productId
 	 * @return
 	 */
-	public boolean inWishlist(long productId) {
+	public boolean inWishlist(String productName) {
 		for (int index = 0; index < products.size(); index++) {
-			if (products.get(index).getProductID() == productId) {
+			if (products.get(index).getProductName().equals(productName)) {
 				return true;
 			}
 		}
@@ -93,7 +96,7 @@ public class Wishlist {
 	}
 	
 	public List<Product> getProducts() {
-		return products;
+		return (List<Product>) products;
 	}
 	
 	/**

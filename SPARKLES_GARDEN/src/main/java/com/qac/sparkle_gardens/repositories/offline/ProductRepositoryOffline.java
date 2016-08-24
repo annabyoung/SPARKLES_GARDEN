@@ -16,7 +16,7 @@ import com.qac.sparkle_gardens.entities.Product;
 public class ProductRepositoryOffline implements ProductRepository
 {
 	@Inject private ProductInitialData initialData = new ProductInitialData();
-	
+	private List<Product> productList = new ArrayList<>();
 
 	public void persistProduct(Product p){
 //		initialData.addProduct(p);
@@ -27,21 +27,24 @@ public class ProductRepositoryOffline implements ProductRepository
 	}
 	//find a product by ID
 	public Product findByProductID(long productID){
-//		for (Product p : initialData.getAllProducts()){ //search through all products in product list
-//			if (productID == p.getProductID()){ //check if the product's ID in product list matches the ID requested
-//				return p;
-//			}
-//		}
+		productList.addAll(initialData.getAllProducts());
+		for (Product p : productList){ //search through all products in product list
+			if (productID == p.getProductID()){ //check if the product's ID in product list matches the ID requested
+				return p;
+			}
+		}
 		return null;
 	}
 
 	//find a product by name
 	public Product findByProductName(String productName) {
-//		for (Product p : initialData.getAllProducts()){ //search through all products in product list
-//			if (productName.equals(p.getProductName())){ //check if the product in product list matches the name of product requested
-//				return p;
-//			}
-//		}
+		//for (Product p : initialData.getAllProducts()){ //search through all products in product list
+		productList.addAll(initialData.getAllProducts());
+		for (Product p : productList){ //search through all products in product list
+			if (productName.equals(p.getProductName())){ //check if the product in product list matches the name of product requested
+				return p;
+			}
+		}
 		return null;
 	}
 

@@ -147,7 +147,14 @@ public class ProductServiceTest {
 		pi.getProductByID(0);
 	}
 	
-	
+	/**
+	 * Verifies that retrieving product by name returns not null for valid input
+	 */
+	@Test
+	public void getProductByNameShouldNotBeNullForValidInput(){
+		System.out.println("getProductByNameShouldNotBeNullForValidInput");
+		assertNotNull(pi.getProductByName("The Great American Challenge"));
+	}
 	
 	/**
 	 * Verifies that true is returned if minimumPrice value entered
@@ -200,7 +207,6 @@ public class ProductServiceTest {
 		System.out.println("createProductListByPriceRangeShouldReturnNotEmptyListForProductsInRange");
 		List<Product> resultList = pi.createProductListByPriceRange(10.00, 80.00);
 		boolean result = !(resultList.isEmpty());
-		//boolean result = (pi.createProductListByPriceRange(10.00, 80.00)).isEmpty();
 		assertTrue(result);
 	}
 	

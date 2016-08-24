@@ -111,6 +111,7 @@ public class WishlistRESTController {
      */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Path("wishlist/products")
     public List<Product> getProducts(Customer customer) {
         return wishlistService.getProducts(customer.getAccountID());
     }

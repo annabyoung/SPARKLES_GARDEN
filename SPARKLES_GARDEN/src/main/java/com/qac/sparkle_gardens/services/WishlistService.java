@@ -8,6 +8,8 @@ import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.WishlistRepository;
+import com.qac.sparkle_gardens.repositories.offline.WishlistRepositoryOffline;
+import com.qac.sparkle_gardens.test_data.WishlistInitialData;
 
 /**
  * 
@@ -16,8 +18,8 @@ import com.qac.sparkle_gardens.repositories.WishlistRepository;
  */
 @Stateless
 public class WishlistService {
-	@Inject private WishlistRepository wishlistRepository;
-	
+	@Inject private WishlistRepository wishlistRepository = new WishlistRepositoryOffline();
+	@Inject private WishlistInitialData initialData = new WishlistInitialData();
 	/**
 	 * 
 	 * @param customer
@@ -30,6 +32,11 @@ public class WishlistService {
 		return wishlistRepository.findByAccountId(customer.getAccountID());
 	}
 	
+	/**
+	 * Retrieves the wishlist based on the account ID
+	 * @param accountId
+	 * @return
+	 */
 	public Wishlist getWishlist(long accountId) {
 		if (accountId <= 0) {
 			throw new IllegalArgumentException();
@@ -136,6 +143,15 @@ public class WishlistService {
 			throw new IllegalArgumentException();
 		}
 		wishlistRepository.addProductToListWithAcctId(product, customer.getAccountID());
+	}
+	
+	// checks if a product is in a list
+	public boolean inWishlist(Product product, Customer customer) {
+		if (product == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		return wishlistRepository.inWishlist(product, customer.getAccountID());
 	}
 	/**
 	 *  Creates a new wishlist

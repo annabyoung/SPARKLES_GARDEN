@@ -57,7 +57,7 @@ public class LoginREST {
 
 		  @Path("login")
 		  @POST
-		  @Consumes
+//		  @Consumes
 		  public String login (@FormParam("username") String user, @FormParam("password") String password) {
 			  if (username.equals("")){
 				  error = "please enter a username";
@@ -81,6 +81,7 @@ public class LoginREST {
 			  
 		  }
 
+		  @Path("logout")
 		  public String logout() {
 		    userCredentials.setCustomerId(0);
 		    return "home"; 

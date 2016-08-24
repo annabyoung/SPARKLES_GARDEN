@@ -16,6 +16,7 @@ import org.hibernate.mapping.Set;
 
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.ProductRepository;
+import com.qac.sparkle_gardens.repositories.offline.ProductRepositoryOffline;
 import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 /**
@@ -28,13 +29,13 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
 
 @Stateless
 public class ProductService {
-	@Inject private ProductRepository productRepository;
+	@Inject private ProductRepository productRepository = new ProductRepositoryOffline();
 	@Inject private ProductInitialData initialData = new ProductInitialData();
 	
-	private List<Product> productList = new ArrayList<Product>(); //This will be a composite product list in case customer wants to search by price and tags
 	private List<Product> productL = initialData.getAllProducts(); 
+	private List<Product> searchList = new ArrayList<>();
 	private List<String> tags = new ArrayList<String>();
-	private LinkedHashSet<Product> searchList = new LinkedHashSet<Product>();
+	private LinkedHashSet<Product> searchSet = new LinkedHashSet<Product>();
 	
 	public ProductService(){}
 	/**
@@ -94,6 +95,18 @@ public class ProductService {
 	 * 
 	 * Use a product's ID to find the whole product, including its other attributes
 	 */
+	public Product getProductByName(String productName){
+		/*if(productID == 0){
+			throw new IllegalArgumentException();
+		}*/
+		Product p = productRepository.findByProductName(productName);
+		return p;
+	}
+	
+	/**
+	 * 
+	 * Use a product's ID to find the whole product, including its other attributes
+	 */
 	public Product getProductByID(long productID){
 		if(productID == 0){
 			throw new IllegalArgumentException();
@@ -122,10 +135,9 @@ public class ProductService {
 		for(Product p : productL){
 			if(p.getPrice() >= minimumPrice && p.getPrice() <= maximumPrice){
 				productsInRange.add(p);
-				searchList.add(p);
+				searchSet.add(p);
 			}
 		}
-		productList.addAll(productsInRange);
 		return productsInRange;
 	}
 	
@@ -182,7 +194,7 @@ public class ProductService {
 		for(Product p : productL){
 			if (p.getProductTags().containsAll(tags)){
 				productsWithAllTags.add(p);
-				searchList.add(p);
+				searchSet.add(p);
 			} 
 		}
 		return productsWithAllTags;
@@ -203,7 +215,7 @@ public class ProductService {
 		for(Product p : productL){
 			if (!Collections.disjoint(p.getProductTags(), tags)){
 				productsWithSubsetOfTags.add(p);
-				searchList.add(p);
+				searchSet.add(p);
 			}
 		}
 		return productsWithSubsetOfTags;
@@ -244,21 +256,40 @@ public class ProductService {
 		}
 		return true;
 	}
+	/*
+	public List<Product> convertLinkedHashSetToList(LinkedHashSet<Product> productSet){
+		for (Product p : productSet){
+			searchList.add(p);
+		}
+		return searchList;
+	}
+*/	
+	public List<Product> convertLinkedHashSetToList(LinkedHashSet<Product> productSet){
+		for (Product p : productSet){
+			searchList.add(p);
+		}
+		return searchList;
+	}
+
+	/**
+	 * Retrieve list of all products in the system
+	 */
+	public List<Product> getProductList(){
+		return productL;
+	}
 	
 	/**
 	 * Return the list of all products that meet the search parameters
 	 */
-	public List<Product> getProductList(){
-		//There should be a query here, but we're not at that point yet
-//		return (searchList.to)
-		return productList;
+	public List<Product> getSearchList(){
+		return searchList;
 	}
 	
 	/**
 	 * Clears the search query
 	 */
 	public void clearSearchQuery(){
-		productList.clear();
+		searchList.clear();
 	}
 
 

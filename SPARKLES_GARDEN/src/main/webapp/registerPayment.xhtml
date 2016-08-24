@@ -8,7 +8,8 @@
 		<f:view>
 			<h:body>
 				<div class="container-fluid">
-					<form name="paymentForm" class="form-horizontal center_div" id="formdiv">
+					<form method="POST" action="/api/cardrest/registerCard"
+						name="paymentForm" class="form-horizontal center_div" id="formdiv">
 						<h2>Add a Payment Method</h2>
 						<div>
 							<p id="errorMessage"></p>
@@ -18,21 +19,20 @@
 							</label>
 							<div class="col-sm-4">
 								<input id="cardName" type="text" name="cardName"
-									required="required" />
+									required="true" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4"> *Card Number: </label>
 							<div class="col-sm-4">
 								<input id="cardNumber" type="number" name="cardNumber"
-									required="required" />
+									required="true" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-4">Start Date: </label>
 							<div class="col-sm-4">
-								<input id="startDate" name="startDate" type="month"
-									/>
+								<input id="startDate" name="startDate" type="month" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -40,13 +40,12 @@
 							</label>
 							<div class="col-sm-4">
 								<input id="expDate" type="month" name="expDate"
-									required="required" />							</div>
+									required="true" />
+							</div>
 						</div>
-						<p>fts</p>
-						<input type="button" id="submit" class="btn btn-warning"
-							value="Complete Registration!" onclick="cardValidation()"/>  
-						<!-- <h:commandButton id="submit" type="button" class="btn btn-warning"
-							value="Complete Registration!" onclick="cardValidation()" />-->
+						<input type="submit" id="submit"
+							class="btn btn-warning" value="Complete Registration!"
+							onclick="createCard()" />
 					</form>
 				</div>
 				<div>
@@ -55,7 +54,6 @@
 					</p>
 				</div>
 				<script src="..\js\paymentValidation.js" />
-				<!-- <script src="..\js\typeValidationCard.js" /> -->
 			</h:body>
 		</f:view>
 	</ui:define>

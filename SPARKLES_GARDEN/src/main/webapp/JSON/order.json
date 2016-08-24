@@ -1,29 +1,18 @@
 {
-	"order":{
-		"productLine":[{
-			"productID":"",
-			"productName":"",
-			"quantity":"",
-			"costPerLine":""
-			}],
-		"billingAddress":{
-			"houseNum":"",
-			"line1":"",
-			"line2":"",
-			"city":"",
-			"county":"",
-			"country":"",
-			"postcode":""
+	"order": {
+		"productLine": [{
+			"$ref": "productLineDefinitions.json#/definitions/productLine/"
+		}],
+		"billingAddress": {
+			"$ref": "addressDefintions.json#/definitions/address"
 		},
-		"shippingAddress":{
-			"houseNum":"",
-			"line1":"",
-			"line2":"",
-			"city":"",
-			"county":"",
-			"country":"",
-			"postcode":""
+		"shippingAddress": {
+			"$ref": "addressDefintions.json#/definitions/address"
 		},
-		"totalCost":""
+		"paymentCard": {
+			"ref": "card.json#/definitions/card"
+		},
+		"totalCost": "",
+		"status": ""
 	}
 }

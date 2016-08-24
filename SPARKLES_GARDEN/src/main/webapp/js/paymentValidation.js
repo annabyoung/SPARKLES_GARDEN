@@ -1,3 +1,12 @@
+function createCard(){
+	
+	if(cardValidation==true){
+		console.log("check passed");
+		createNewCard();
+	}
+}
+
+
 function cardValidation() {
 	var nameCheck = document.getElementById('cardName');
 	var numCheck = document.getElementById('cardNumber');
@@ -11,7 +20,21 @@ function cardValidation() {
 			return false;
 		}
 	}
-	window.location=('../homepage.xhtml');
+
 	return true;
 }
 
+function createNewCard(){
+	
+	var cardHolderName=document.getElementById('cardName').value;
+	var cardNumber=document.getElementById('cardNumber').value;
+	var startDate=document.getElementById('startDate').value;
+	var expDate=document.getElementById('expDate').value;
+	
+	var JSONObjCard={card:{cardHolderName: cardHolderName, cardNumber: cardNumber, startDate: startDate, expDate: expDate}};
+	
+	console.log(JSONObjCard.card.cardNumber);
+	window.location=('../homepage.xhtml');
+	return true;
+	
+}
