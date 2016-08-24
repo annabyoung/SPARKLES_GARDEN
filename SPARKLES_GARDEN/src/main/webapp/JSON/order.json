@@ -4,6 +4,7 @@
 		"billingAddress": { "$ref": "addressDefintions.json#/definitions/address"},
 		"shippingAddress": { "$ref": "addressDefintions.json#/definitions/address"},
 		"paymentCard":{ "ref": "card.json#/definitions/card"},
-		"totalCost":""
+		"totalCost":"",
+		"status":""
 	}
 }
