@@ -23,3 +23,4 @@ function addressValidation() {
 	window.location=('../registerPayment.xhtml');
 	return true;
 }
+

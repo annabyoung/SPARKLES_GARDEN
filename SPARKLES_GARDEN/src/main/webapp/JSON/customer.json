@@ -1,12 +1,10 @@
 {
 	"customer": {
-		"customerID": "",
-		"name": {
-			"firstName": "",
-			"lastName": ""
-		},
-		"phoneNumber": "",
-		"emailAddress": "",
+	
+		"firstName": "",
+		"surname": "",
+		"phone": "",
+		"email": "",
 		"password": ""
 	}
 }
