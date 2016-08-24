@@ -1,6 +1,6 @@
 {
 	"basket": {
-		"productLine": {"$ref": "productLineDefinitions.json#/definitions/productLine/"},
-		"totalCost": ""
+		"productLine":[{"$ref": "productLineDefinitions.json#/definitions/productLine/"}],
+		"totalCost":{"type":"number"}
 	}
 }
