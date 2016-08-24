@@ -12,11 +12,13 @@ import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.AddressRepository;
 import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
+import com.qac.sparkle_gardens.repositories.offline.AddressRepositoryOffline;
+import com.qac.sparkle_gardens.repositories.offline.CustomerHasAddressRepositoryOffline;
 
 @Stateless
 public class AddressService {
-	@Inject private AddressRepository addressRepository;
-	@Inject private CustomerHasAddressRepository custAddressRepository;
+	@Inject private AddressRepository addressRepository = new AddressRepositoryOffline();
+	@Inject private CustomerHasAddressRepository custAddressRepository = new CustomerHasAddressRepositoryOffline();
 	
 	/**
 	 * Retrieves the address - the list of products
