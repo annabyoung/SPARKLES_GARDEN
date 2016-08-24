@@ -6,27 +6,52 @@ import javax.inject.Inject;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
-import com.qac.sparkle_gardens.controllers.CurrentUserController;
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.repositories.CardRepository;
+import com.qac.sparkle_gardens.repositories.offline.CardRepositoryOffline;
+import com.qac.sparkle_gardens.test_data.CardInitialData;
+import com.qac.sparkle_gardens.test_data.InitialData;
 import com.qac.sparkle_gardens.util.CreditStatus;
+import com.sparkle_gardens.sample_data.CardRepositoryTestFake;
+
+import static org.mockito.Mockito.*;
+
+import java.util.logging.Logger;
 
 public class CardServiceTest {
-
+	@Mock
+	private Logger log;
+	@Mock
+	private CardInitialData initialData;
+	//private InitialData initialData;
+	@Mock
+	private CardRepositoryOffline cardRepository;
+	//private CardRepositoryTestFake cardRepository;// = new CardRepositoryOffline();
+	@InjectMocks
 	private CardService cardServ;
-//	private CustomerService cusServ;
-//	private CurrentUserController curUser;
+
 	private Card card;
 	private Customer customer;
 	
+	@Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
+	
 	@Before
 	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
 		card = new Card("Test", "4412345647894531", "10/10");
 		cardServ = new CardService();
 		//long accountID, String firstName, String lastName, String email, CreditStatus creditStatus,
-		//String password, String phone
+		//String password, String phone`
 		customer = new Customer(5, "Bob", "Bobby", "hello@gmail.com", CreditStatus.VALID, "hunter123", "2122122122");
 //		cusServ = new CustomerService();
 //		curUser = new CurrentUserController();
@@ -34,6 +59,9 @@ public class CardServiceTest {
 
 	@After
 	public void tearDown() throws Exception {
+		cardServ = null;
+		customer = null;
+		card = null;
 	}
 	
 	@Test
@@ -52,75 +80,79 @@ public class CardServiceTest {
 	
 	@Test
 	public void testRegisterCard() {
-		int startNumber = cardServ.getCardsByCustomer(customer.getAccountID()).size();
+		int one = cardServ.getCardsByCustomer(customer.getAccountID()).size();
 		cardServ.registerCard(card, customer);
-		assertTrue(cardServ.getCardsByCustomer(customer.getAccountID()).size() > startNumber);
+		assertTrue(cardServ.getCardsByCustomer(customer.getAccountID()).size() > one);
+	}
+	
+	@Test
+	public void testRegisterCardControl(){
+		int one = cardServ.getCardsByCustomer(customer.getAccountID()).size();
+		assertFalse(cardServ.getCardsByCustomer(customer.getAccountID()).size() > one);
 	}
 
 	@Test
 	public void testReturnIfExisting() {
 		cardServ.registerCard(card, customer);
+		assertTrue(cardServ.returnIfExisting(card) != null);
 	}
-
+//
+//	@Test
+//	public void testReturnIfExisting() {
+//		cardServ.registerCard(card, customer);
+//		assertTrue(cardServ.returnIfExisting(card) != null);
+//	}
+	
 	@Test
 	public void testCheckIfCustomerRegisteredCardAlready() {
-		fail("Not yet implemented");
+		cardServ.registerCard(card, customer);
+		assertTrue(cardServ.checkIfCustomerOwnsCard(card, customer));
+		
 	}
 
 
 	@Test
 	public void testValidateCardDetails() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testCheckInDate() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testCheckNotBlacklisted() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testGetCardsByCustomerLong() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testGetCardsByCustomerCustomer() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testDeleteCardOfCustomerCardCustomer() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testDeleteCardOfCustomerLongLong() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testCheckIfAnyoneOwnsCardCard() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testCheckIfAnyoneOwnsCardLong() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testCheckIfCustomerOwnsCard() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testRefundCard() {
-		fail("Not yet implemented");
 	}
 
 }

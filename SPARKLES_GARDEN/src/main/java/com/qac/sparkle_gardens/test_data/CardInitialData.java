@@ -13,27 +13,27 @@ import com.qac.sparkle_gardens.entities.Card;
 @Singleton
 public class CardInitialData 
 {
-	private List<Card> Cards = new ArrayList<Card>();
+	private List<Card> cards = new ArrayList<Card>();
 	
 	public CardInitialData()
 	{
-		Cards.add(new Card(1, "Connect", "4412345647894531", "12/12"));
-		Cards.add(new Card(2, "Head", "4212345647894531", "11/12"));
-		Cards.add(new Card(3, "Hammer", "4552345647894531", "12/13"));
+		cards.add(new Card(1, "Connect", "4412345647894531", "12/12"));
+		cards.add(new Card(2, "Head", "4212345647894531", "11/12"));
+		cards.add(new Card(3, "Hammer", "4552345647894531", "12/13"));
 	}
 	
 	public void addCard(Card card)
 	{
-		this.Cards.add(card);
+		this.cards.add(card);
 	}
 	
 	public List<Card> getCards()
 	{
-		return Cards;
+		return cards;
 	}
 	
 	public void setCards(List<Card> Cards)
 	{
-		this.Cards = Cards;
+		this.cards = Cards;
 	}
 }
