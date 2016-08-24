@@ -15,14 +15,14 @@ import com.qac.sparkle_gardens.test_data.InitialData;
 @Stateless
 @Default
 public class CustomerHasCardRepositoryOffline implements CustomerHasCardRepository {
-	@Inject private InitialData initialData;
+	@Inject private InitialData initialData = new InitialData();
 	@Inject private Logger log;
 	
 	@Override
 	public void persistCustomerHasCard(CustomerHasCard c) {
 		List<CustomerHasCard> customerHasCards = initialData.getCusHasCards();
 		customerHasCards.add(c);
-		log.info(">>>>>> Adding CustomerHasCard");
+		//log.info(">>>>>> Adding CustomerHasCard");
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 	public void addCustomerHasCard(CustomerHasCard c) {
 		List<CustomerHasCard> customerHasCards = initialData.getCusHasCards();
 		customerHasCards.add(c);
-		log.info(">>>>>> Adding CustomerHasCard");
+		//log.info(">>>>>> Adding CustomerHasCard");
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class CustomerHasCardRepositoryOffline implements CustomerHasCardReposito
 	public void removeCustomerHasCard(CustomerHasCard c) {
 		List<CustomerHasCard> customerHasCards = initialData.getCusHasCards();
 		customerHasCards.remove(c);
-		log.info(">>>>>> Removing customer has card");
+		//log.info(">>>>>> Removing customer has card");
 	}
 
 	@Override

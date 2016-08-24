@@ -88,6 +88,10 @@ public class SearchItemsRESTController {
 	
 	/**
 	 * Retrieve the list of all products
+	 * 
+	 * TODO:
+	 * ArrayList<GroupItem> groupsList =... ;
+	 * JSONArray JSONArray = new JSONArray(groupsList);
 	 */
 	@GET
 	@Path("/productList")

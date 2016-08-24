@@ -1,5 +1,5 @@
 {
-	"definitoins":{
+	"definitions":{
 		"card":{
 			"type": "object",
 			"properties":{
