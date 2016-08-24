@@ -7,7 +7,7 @@
 				"productID": {"type": "string"},
 				"productName": {"type": "string"},
 				"quantity": {"type": "number"},
-				"costPerLine": {"type": "double"}
+				"costPerLine": {"type": "number"}
 			}],
 			"required": ["productID", "productName", "quantity", "costPerLine"]
 		}
