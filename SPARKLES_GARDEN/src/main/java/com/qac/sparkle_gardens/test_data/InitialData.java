@@ -3,6 +3,7 @@ package com.qac.sparkle_gardens.test_data;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 
 import com.qac.sparkle_gardens.entities.Address;
@@ -23,7 +24,7 @@ import com.qac.sparkle_gardens.util.MethodAuthor;
  * @author James Thompson
  *
  */
-@Stateless
+@Singleton
 public class InitialData 
 {
 	private List<Address> addresses = new ArrayList<Address>();
@@ -38,9 +39,9 @@ public class InitialData
 	private List<CustomerHasCard> cusHasCards = new ArrayList<CustomerHasCard>();
 	private List<CustomerHasAddress> cusHasAddress = new ArrayList<CustomerHasAddress>();
 	
-	public InitialData() { }
+	//public InitialData() { }
 	
-	private void setupInitialData() {
+	public InitialData() {
 	//Object Creation.
 		//long addressId, int buildingNum, String streetName, String city, String county, String country, String postCode
 		Address dummyAddress = new Address("Anchorage 1", "Floor 5", "Anchorage Quay", "Salford Quay", "Greater Manchester", "United Kingdom", "M50 3YJ", "Shipping");
@@ -112,50 +113,50 @@ public class InitialData
 	}
 
 	public List<Address> getAddresses() {
-		if (addresses.isEmpty())
-			setupInitialData();
+//		if (addresses.isEmpty())
+//			setupInitialData();
 		return addresses;
 	}
 
 	public List<Wishlist> getWishlists() {
-		if (wishlists.isEmpty())
-			setupInitialData();
+//		if (wishlists.isEmpty())
+//			setupInitialData();
 		return wishlists;
 	}
 
 	public List<Card> getCards() {
-		if (cards.isEmpty())
-			setupInitialData();
+//		if (cards.isEmpty())
+//			setupInitialData();
 		return cards;
 	}
 
 	public List<Customer> getCustomers() {
-		if (customers.isEmpty())
-			setupInitialData();
+//		if (customers.isEmpty())
+//			setupInitialData();
 		return customers;
 	}
 
 	public List<Order> getOrders() {
-		if (orders.isEmpty())
-			setupInitialData();
+//		if (orders.isEmpty())
+//			setupInitialData();
 		return orders;
 	}
 
 	public List<Product> getProducts() {
-		if (products.isEmpty())
-			setupInitialData();
+//		if (products.isEmpty())
+//			setupInitialData();
 		return products;
 	}
 
 	public List<CustomerHasCard> getCusHasCards() {
-		if (cusHasCards.isEmpty())
-			setupInitialData();
+//		if (cusHasCards.isEmpty())
+//			setupInitialData();
 		return cusHasCards;
 	}
 
 	public List<CustomerHasAddress> getCusHasAddress() {
-		if (cusHasAddress.isEmpty())
-			setupInitialData();
+		/*if (cusHasAddress.isEmpty())
+			setupInitialData();*/
 		return cusHasAddress;
 	}
 
