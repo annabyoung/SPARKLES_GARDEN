@@ -2,7 +2,6 @@ package com.qac.sparkle_gardens.rest;
 
 import java.util.logging.Logger;
 
-import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -17,7 +16,7 @@ import com.qac.sparkle_gardens.controllers.CurrentUserController;
 import com.qac.sparkle_gardens.entities.Card;
 import com.qac.sparkle_gardens.services.CardService;
 import com.qac.sparkle_gardens.services.CustomerService;
-
+import javax.enterprise.context.RequestScoped;
 
 @Path("/cardrest")
 @RequestScoped
@@ -45,6 +44,6 @@ public class CardRESTController {
     	log.info("creating new card");
     	Card newCard = cardService.setupCard(cardOwnerName, cardNumber, expirationDate);
     	cardService.registerCard(newCard, customerService.getCustomerByID(currentUserController.getCustomerId()));
-    	return;
+    	//return;
     }
 }

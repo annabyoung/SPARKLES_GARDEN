@@ -147,6 +147,9 @@ public class Card implements Serializable{
 	 * @return boolean
 	 */
 	public boolean equals(Card anotherCard){
+		if (anotherCard == null){
+			return false;
+		}
 		return anotherCard.getCardID() == cardID;
 	}
 

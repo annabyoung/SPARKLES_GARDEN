@@ -42,17 +42,19 @@ public class CardServiceTest {
 
 	private Card card;
 	private Customer customer;
+	private Customer customer2;
 	
 	@Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
 	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		card = new Card("Test", "4412345647894531", "10/10");
+		card = new Card("Test", "4412315647894531", "10/20");
 		cardServ = new CardService();
 		//long accountID, String firstName, String lastName, String email, CreditStatus creditStatus,
 		//String password, String phone`
 		customer = new Customer(5, "Bob", "Bobby", "hello@gmail.com", CreditStatus.VALID, "hunter123", "2122122122");
+		customer2 = new Customer(6, "Banned", "Bobby", "Lacks@email", CreditStatus.BLACKLISTED, "hunter123", "212212212");
 //		cusServ = new CustomerService();
 //		curUser = new CurrentUserController();
 	}
@@ -61,12 +63,31 @@ public class CardServiceTest {
 	public void tearDown() throws Exception {
 		cardServ = null;
 		customer = null;
+		customer2 = null;
 		card = null;
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testCardCheckNoParam(){
+		Card failure = new Card("", "", "");
+		cardServ.cardChecker(failure);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testCardCheckCardExpired(){
+		Card failure = new Card("Bob", "1234123412341234", "01/01");
+		cardServ.cardChecker(failure);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testCardCheckCardNumberFailure(){
+		Card failure = new Card("Bob", "123412341a341234", "01/30");
+		cardServ.cardChecker(failure);
 	}
 	
 	@Test
 	public void testSetupCard() {
-		Card card2 = cardServ.setupCard("Test", "4412345647894531", "10/10");
+		Card card2 = cardServ.setupCard("Test", "4412315647894531", "10/10");
 		assertEquals(card.getCardNumber(), card2.getCardNumber());
 		
 	}
@@ -96,63 +117,134 @@ public class CardServiceTest {
 		cardServ.registerCard(card, customer);
 		assertTrue(cardServ.returnIfExisting(card) != null);
 	}
-//
-//	@Test
-//	public void testReturnIfExisting() {
-//		cardServ.registerCard(card, customer);
-//		assertTrue(cardServ.returnIfExisting(card) != null);
-//	}
+
+	@Test
+	public void testReturnIfExistingFalse() {
+		//cardServ.registerCard(card, customer);
+		assertFalse(cardServ.returnIfExisting(card) != null);
+	}
 	
 	@Test
 	public void testCheckIfCustomerRegisteredCardAlready() {
 		cardServ.registerCard(card, customer);
 		assertTrue(cardServ.checkIfCustomerOwnsCard(card, customer));
-		
 	}
 
 
 	@Test
-	public void testValidateCardDetails() {
+	public void testValidateCardDetailsValid() {
+		assertTrue(cardServ.validateCardDetails(card.getCardOwnerName(), card.getCardNumber(), card.getExpirationDate()));
 	}
 
 	@Test
-	public void testCheckInDate() {
+	public void testValidateCardDetailsInvalidMissing(){
+		assertFalse(cardServ.validateCardDetails("Bob", "", "10/12"));
+		assertFalse(cardServ.validateCardDetails("", "1231231231231234444", "10/12"));
+		assertFalse(cardServ.validateCardDetails("Bob", "1234123412341234", ""));
+	}
+	
+	@Test
+	public void testValidateCardDetailsInvalidInputs(){
+		assertFalse(cardServ.validateCardDetails("Bob", "123123", "10/12"));
+		assertFalse(cardServ.validateCardDetails("Bob", "1234123412341234", "10"));
+	}
+	
+	@Test
+	public void testCheckInDateTrue() {
+		assertTrue(cardServ.checkInDate("10/20"));
+	}
+	
+	@Test
+	public void testCheckInDateOutOfDateFalse() {
+		assertFalse(cardServ.checkInDate("10/02"));
 	}
 
 	@Test
-	public void testCheckNotBlacklisted() {
+	public void testCheckNotBlacklistedFine() {
+		cardServ.registerCard(card, customer);
+		assertTrue(cardServ.checkNotBlacklisted(card.getCardNumber(), card.getExpirationDate()));
+	}
+	
+	@Test
+	public void testCheckNotBlacklistedActuallyBlacklisted(){
+		cardServ.registerCard(card, customer2);
+		assertFalse(cardServ.checkNotBlacklisted(card.getCardNumber(), card.getExpirationDate()));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetCardsByCustomerLongSameCustomerNoID(){
+		cardServ.getCardsByCustomer(0);
+	}
+	
+	@Test
+	public void testGetCardsByCustomerLongSameCustomer(){
+		cardServ.registerCard(card,customer);
+		boolean test = false;
+		for (Card c: cardServ.getCardsByCustomer(customer.getAccountID())){
+			if (card.getCardNumber() == c.getCardNumber()){
+				test = true;
+			}
+		}
+		assertTrue(test);
 	}
 
 	@Test
-	public void testGetCardsByCustomerLong() {
+	public void testGetCardsByCustomerLongDifferentCustomer(){
+		cardServ.registerCard(card,customer2);
+		boolean test = false;
+		for (Card c: cardServ.getCardsByCustomer(customer.getAccountID())){
+			if (card.getCardNumber() == c.getCardNumber()){
+				test = true;
+			}
+		}
+		assertFalse(test);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testDeleteCardOfCustomerLongLongNoCardID() {
+		cardServ.deleteCardOfCustomer(0, customer.getAccountID());
+	}	
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testDeleteCardOfCustomerLongLongNoAccountID() {
+		cardServ.deleteCardOfCustomer(card.getCardID(), 0);
+	}	
+	
+	@Test
+	public void testDeleteCardOfCustomerLongLongNoDelete() {
+		cardServ.registerCard(card, customer);
+		assertTrue(cardServ.checkIfAnyoneOwnsCard(card.getCardID()));
+	}	
+	
+	@Test
+	public void testDeleteCardOfCustomerLongLongAfterDelete() {
+		cardServ.registerCard(card, customer);
+		cardServ.deleteCardOfCustomer(card.getCardID(), customer.getAccountID());
+		assertFalse(cardServ.checkIfCustomerOwnsCard(card, customer));
 	}
 
-	@Test
-	public void testGetCardsByCustomerCustomer() {
-	}
-
-	@Test
-	public void testDeleteCardOfCustomerCardCustomer() {
-	}
-
-	@Test
-	public void testDeleteCardOfCustomerLongLong() {
-	}
-
-	@Test
-	public void testCheckIfAnyoneOwnsCardCard() {
-	}
 
 	@Test
 	public void testCheckIfAnyoneOwnsCardLong() {
+		cardServ.registerCard(card, customer);
+		assertTrue(cardServ.checkIfAnyoneOwnsCard(card.getCardID()));
+	}
+	
+
+	@Test
+	public void testCheckIfAnyoneOwnsCardLongBeforeRegistrationShouldFalse() {
+		assertFalse(cardServ.checkIfAnyoneOwnsCard(card.getCardID()));
 	}
 
 	@Test
 	public void testCheckIfCustomerOwnsCard() {
+		cardServ.registerCard(card, customer);
+		assertTrue(cardServ.checkIfCustomerOwnsCard(card, customer));	
 	}
-
+	
 	@Test
-	public void testRefundCard() {
+	public void testCheckIfCustomerOwnsCardDoesnt(){
+		assertFalse(cardServ.checkIfCustomerOwnsCard(card, customer));
 	}
 
 }
