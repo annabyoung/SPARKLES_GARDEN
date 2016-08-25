@@ -32,6 +32,14 @@ public class SearchItemsRESTController {
 	
 	private List<Product> searchQueryResults = new ArrayList<Product>();
 	private String error = "";
+	private long productID = 0;
+	private String productName = "";
+	private int stockLevel = 0;
+	private double price = 0.00;
+	private String productDescription = "";
+	private List<String> productTags = new ArrayList<>();
+	private String tag = "";
+	
 	
 	/**
 	 * 
@@ -100,6 +108,9 @@ public class SearchItemsRESTController {
 		return (List<Product>)productService.getProductList();
 	}
 	
+	/**
+	 * Retrieve first item in product list
+	 */
 	@GET
 	@Path("/product")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -127,4 +138,83 @@ public class SearchItemsRESTController {
 	public String getError(){
 		return error;
 	}
+
+	public ProductService getProductService() {
+		return productService;
+	}
+
+	public void setProductService(ProductService productService) {
+		this.productService = productService;
+	}
+
+	public List<Product> getSearchQueryResults() {
+		return searchQueryResults;
+	}
+
+	public void setSearchQueryResults(List<Product> searchQueryResults) {
+		this.searchQueryResults = searchQueryResults;
+	}
+
+	public long getProductID() {
+		return productID;
+	}
+
+	public void setProductID(long productID) {
+		this.productID = productID;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public int getStockLevel() {
+		return stockLevel;
+	}
+
+	public void setStockLevel(int stockLevel) {
+		this.stockLevel = stockLevel;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getProductDescription() {
+		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
+	}
+
+	public List<String> getProductTags() {
+		return productTags;
+	}
+
+	public void setProductTags(List<String> productTags) {
+		this.productTags = productTags;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	
+	
+	
 }
