@@ -69,18 +69,21 @@ public class AddressServiceTest {
 		assertFalse(addressRepo.findByAccountId(customer.getAccountID()).isEmpty());
 	}
 	
-	/**
+	
 	@Test
 	public void getAddressShouldReturnAnAddressWithValidInput() {
 		addService.createAddress(customer, address);
 		assertFalse(addService.getAddress(customer.getAccountID()).isEmpty());
 	}
-	*/
+	
 	@After
 	public void teardown() {
 		System.out.println("Test done. PEACE OUT!!");
 		addService = null;
 		customer = null;
+		addressRepo = null;
+		address = null;
+		
 	}
 
 }
