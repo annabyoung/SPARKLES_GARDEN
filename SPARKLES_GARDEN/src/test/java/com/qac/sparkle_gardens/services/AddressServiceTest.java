@@ -8,7 +8,7 @@ public class AddressServiceTest {
 	
 	
 	@Parameter
-	AddressService addService = new AddressService(); 
+	private AddressService addService = new AddressService(); 
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void getAddressShouldThrowIllegalExceptionForInvalidAccountId() {
@@ -43,6 +43,10 @@ public class AddressServiceTest {
 		addService.createAddress(null, null);
 	}
 	
+	@Test
+	public void getAddressShouldReturn () {
+		
+	}
 	
 	@After
 	public void teardown() {

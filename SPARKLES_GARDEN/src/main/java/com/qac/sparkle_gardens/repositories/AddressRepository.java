@@ -30,14 +30,14 @@ public interface AddressRepository {
 	//Remove address
 	public void removeAddress(Address address);
 	
-	// Adds a CustomerHasAddress object
-	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId);
-	
 	// checks for duplicate objects
 	public boolean isDuplicate(Address address);
 	
 	@Deprecated
 	public void removeCustomerHasAddress(CustomerHasAddress custAddress, long customerId);
-
+	
+	// Adds a CustomerHasAddress object
+	@Deprecated
+	public void addCustomerHasAddress(CustomerHasAddress cust, long accountId);
 	
 }

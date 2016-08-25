@@ -20,7 +20,7 @@ import com.qac.sparkle_gardens.test_data.InitialData;
 @Stateless
 @Default
 public class CustomerHasAddressRepositoryOffline implements CustomerHasAddressRepository {
-	@Inject private InitialData initialData;
+	@Inject private InitialData initialData = new InitialData();
 	
 	/**
 	 * Keeps CustomerHasAddresss in database.

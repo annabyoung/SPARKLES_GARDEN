@@ -23,7 +23,7 @@ import com.qac.sparkle_gardens.test_data.AddressInitialData;
 @Default
 public class AddressRepositoryOffline implements AddressRepository {
 	@Inject private AddressInitialData  initialData = new AddressInitialData();
-	@Inject private CustomerHasAddressRepository custAddressRepository;
+	@Inject private CustomerHasAddressRepository custAddressRepository = new CustomerHasAddressRepositoryOffline();
 	/**
 	 * Creates an address
 	 * @param address
