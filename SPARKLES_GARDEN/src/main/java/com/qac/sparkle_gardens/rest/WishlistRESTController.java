@@ -39,7 +39,7 @@ public class WishlistRESTController {
     
     @POST
     @Consumes("text/plain")
-    @Path("wishlist")
+    @Path("new_wishlist")
     public void createWishlist(long accountId) {
         wishlistService.createWishlist(customerRepository.findByID(accountId));
     }
@@ -63,6 +63,10 @@ public class WishlistRESTController {
         wishlistService.createWishlist(customer, products);
     }
     
+    /**
+     * Adds a product from the wishlist to the basket
+     * @param product
+     */
     public void addProductToBasket(Product product) {
         //orderService.addProductToBasket(product.getproductID());
     }

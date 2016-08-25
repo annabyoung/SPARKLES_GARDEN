@@ -1,204 +1,156 @@
 package com.qac.sparkle_gardens.services;
 
-import java.util.List;
+import static org.junit.Assert.*;
 
 import javax.inject.Inject;
 
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
-import com.qac.sparkle_gardens.entities.Card;
+import com.qac.sparkle_gardens.entities.Address;
 import com.qac.sparkle_gardens.entities.Customer;
-import com.qac.sparkle_gardens.entities.CustomerHasAddress;
-import com.qac.sparkle_gardens.entities.CustomerHasCard;
-import com.qac.sparkle_gardens.repositories.CustomerRepository;
+import com.qac.sparkle_gardens.test_data.InitialData;
 import com.qac.sparkle_gardens.util.CreditStatus;
 
-import junit.framework.TestCase;
-
-/**
- * 
- * @author Sean Connelly 
- *
- */
-
-public class CustomerServiceTest extends TestCase {
+public class CustomerServiceTest {
 	
+	@Inject
+	private InitialData initialData = new InitialData();
 	@Inject 
-	CustomerRepository customerRepository; 
-	//CustomerInterface customerInterface = new CustomerService();
-	// saw this in demo unsure why its needed. 
-
-	Customer dummyCustomer =  new Customer(001, "John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890"); 
-	Customer wrongCustomer =  new Customer(999, "betty", "blarfengarf", "fight me", CreditStatus.BLACKLISTED, "obama", "blue"); 
-    
-
-
-	 /**
-	  * returns an ID 
-	  * @param accountID
-	  */
-	@Test
-	public void  findByIDTest(){
-		Customer dummyCustomer;
-		}
+	private Address address = new Address();
 	
-	@Test
-	public void persistCustomerTest(Customer customer){
+	Customer customer;
 	
-		  customerRepository.persistCustomer(customer);	
-		}
-	@Test
-	public void persistCustomerTest(List<Customer> customers){
+	@Mock 
+	CustomerService customerService;
 	
-		customerRepository.persistCustomer(customers);
-		}
-	
-	
-	
-	public void  findByIDTest(long accountID){
-
-
-		
-		Customer result = customerRepository.findByID(dummyCustomer.getAccountID());
-		
-		
-		assertNotNull(result);
-		}
+	Customer dummyCustomer; 
+	Customer wrongCustomer;
+	String firstName;
+	String lastName;
+	String email;
+	String password;
+	String phone;
+	long userID;
 	
 
-	@Test
-	public void  findByIDTestNOT(long accountID){
-		
-		Customer result = customerRepository.findByID(wrongCustomer.getAccountID());
-		assertNotNull(result); /// should change this or make more to accomodate the semaphore 
-		}
+	@Before 
 	
-	//need to make for all to see graceful failure 
-	
-	@Test	
-	
-	public void getCustomerTest(Customer c){
-
-		Customer customer = customerRepository.getCustomer(dummyCustomer); 
-		assertNotNull(customer);
-		assertEquals(customer, dummyCustomer);
-		}
-		
-		@Test	
-	public void getCustomerTestNOT(){
-		
-		Customer customer = customerRepository.getCustomer(wrongCustomer); 
-		assertNotNull(customer);
-		}
-
-	
-	
-	@Test
-	public void updateCustomerTest(){
-
-		boolean result = customerRepository.updateCustomer(dummyCustomer); //update customer what am i updating tho? I may need more of these 
-	 assertTrue(result);
-		}
-	
-	
-	public void updateCustomerTest(Customer c){
-
-
-		assertNotEquals(c, wrongCustomer);
-// not sure if this is right?
-		}
-
-	@Test
-	public void updateCustomerTestNot(){
-
-		boolean result = customerRepository.updateCustomer(wrongCustomer);
-	 assertFalse(result);
-	 //should return false because customer doesn't exists
-	 // should probably make other services for which
-	 //update customer gets a valid customer to update with invalid information.
-		}
-		
-	//unsure what to assert for these 
-	@Test
-	public void removeCustomerTest(){
-	customerRepository.removeCustomer(dummyCustomer); //remove customer
-	
-		}
-	
-	
-	@Test
-	public void removeCustomerTestNot(){
-	customerRepository.removeCustomer(wrongCustomer); //remove customer
-	
-		}
-	
-	@Test
-	public void findCustomerAddressesTest(){
-	
-		List<CustomerHasAddress> result = customerRepository.findCustomerAddresses(dummyCustomer);
-		
-		assertNotNull(result);
-		}
-	
-	@Test
-	public void findCustomerAddressesTestNot(){
-	
-		List<CustomerHasAddress> result = customerRepository.findCustomerAddresses(wrongCustomer);
-		assertNull(result);
-		//should be false for invalid customer
-		//but also need to chekc for valid customer with invalid address
-		
-		}
-		
-
-	public void removeCustomerTest(Customer c){
-		customerRepository.removeCustomer(c); //remove customer
-		}
-	
-	public void findCustomerAdressesTest(Customer c){
-	
-		customerRepository.findCustomerAdresses(c);
-		}
-		
-		
-	public void findCustomerCardsTest(Customer c){
-		
-		List<CustomerHasCard> cards = customerRepository.findCustomerCards(c);
-		assertNotNull(cards);
-		
-		}
-	
-	@Test
-	public void findCustomerCardsTestNot(Customer c){
-
-		List<CustomerHasCard> cards = customerRepository.findCustomerCards(c);
-			assertNull(cards);
-		
+	public void setup(){
+		//System.out.println("SET UP CUSTOMER SERVICE TESTS");
+		customerService= new CustomerService(); 
+		 dummyCustomer =  new Customer(001, "John", "Smith", "email@email.com", CreditStatus.ONHOLD, "password01", "1234567890"); 
+		 wrongCustomer =  new Customer(999, "betty", "blarfengarf", "fight me", CreditStatus.BLACKLISTED, "obama", "blue");
+		 firstName="meep";
+		 lastName="morp";
+		 email="laime@email.com";
+		 password="dorwssap";
+		 phone="0987654321";
+	     userID=001;
 	}
 	
-		
-	@Test 
-	public Customer findByEmail(String email){
-	
-		
-		return dummyCustomer;
-		}
 	
 	@Test
-	public void findByEmailTest(){
 
-	  // return customerRepository.findByEmail(email);
-	    assertNotNull(customerRepository.findByEmail(dummyCustomer.getEmail()));
-	
-		}
+	public void testValidateRegistrationDetails() {
+		
+		System.out.println("testValidateRegistrationDetails");
+		boolean result = customerService.validateRegistrationDetails(firstName, lastName, password, email, phone);
+		//System.out.println(result);
+		assertTrue(result); 
+		//fail("Not yet implemented");
+	}
 
 	@Test
-	public void findByEmailTestNot(){
+	public void testValidateEmailInputs() {
+		System.out.println("testValidateEmailInputs");
+		
+		boolean result = customerService.validateEmailInputs(email);
+		assertTrue(result);
+		
+		
+	}
 
-	  // return customerRepository.findByEmail(email);
-	    assertNull(customerRepository.findByEmail(wrongCustomer.getEmail()));
+	@Test
+	public void testGetUserIDAtLogin() {
+		long result;
+		System.out.println("testGetUserIDAtLogin");
+		result =customerService.getUserIDAtLogin(email, password);
+		assertNotNull(result);
+		
+	}
+
+	@Test
+	public void testMakeNewCustomer() {
+		System.out.println("testMakeNewCustomer");
+		boolean result;
+		result = customerService.makeNewCustomer(firstName, lastName, email, CreditStatus.VALID, password, phone);
+		assertTrue(result);
 	
-		}
+	}
+
+	@Test
+	public void testUpgradeAccount() {
+		System.out.println("testUpgradeAccount");
+		
+		boolean result;
+		result = customerService.upgradeAccount(firstName, lastName, email, CreditStatus.VALID, password, phone);
+		
+		assertTrue(result);
+	
+	}
+
+	@Test
+	public void testUpdateAccountDetails() {
+		System.out.println("testUpdateAccountDetails");
+		boolean result;
+		result= customerService.updateAccountDetails(customer);
+		assertTrue(result);
+	
+	}
+
+	@Test
+	public void testGetCustomerByID() {
+		System.out.println("testGetCustomerByID");
+		Customer result;
+		result = customerService.getCustomerByID(userID);
+		assertNotNull(result);
+	
+	}
+
+	@Test
+	public void testValidateDetails() {
+		System.out.println("testValidateDetails");
+		
+		customerService.validateDetails(email, password);
+		
+		
+	}
+
+	@Test
+	public void testGetUserID() {
+		System.out.println("testGetUserID");
+		
+		customerService.getUserID(email);
+		
+		
+	}
+
+	@Test
+	public void testUpdateCustomerAddress() {
+		System.out.println("testUpdateCustomerAddress");
+		boolean result;
+		result = customerService.updateCustomerAddress(customer, address);
+		assert(result);
+		
+	}	
+	
+	@After
+	public void teardown(){
+	//	System.out.println("teardown!");
+		//do science 
+	}
 
 }

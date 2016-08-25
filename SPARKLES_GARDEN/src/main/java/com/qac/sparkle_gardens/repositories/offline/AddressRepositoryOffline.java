@@ -8,7 +8,6 @@ import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Address;
-import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.repositories.AddressRepository;
 import com.qac.sparkle_gardens.repositories.CustomerHasAddressRepository;
@@ -24,6 +23,7 @@ import com.qac.sparkle_gardens.test_data.AddressInitialData;
 public class AddressRepositoryOffline implements AddressRepository {
 	@Inject private AddressInitialData  initialData = new AddressInitialData();
 	@Inject private CustomerHasAddressRepository custAddressRepository = new CustomerHasAddressRepositoryOffline();
+	
 	/**
 	 * Creates an address
 	 * @param address
@@ -83,7 +83,8 @@ public class AddressRepositoryOffline implements AddressRepository {
 	
 		List<Address> addresses = initialData.getAddresses();
 		for (int index = 0; index < addresses.size(); index++) {
-			if (addresses.get(index).getAddressId() == address.getAddressId()) {
+			
+			if (addresses.get(index).equals(address)) {
 				addresses.set(index, address);
 			}
 		}

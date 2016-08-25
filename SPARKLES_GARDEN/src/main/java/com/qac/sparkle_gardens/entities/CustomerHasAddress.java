@@ -59,7 +59,15 @@ public class CustomerHasAddress {
 
 	public long getCustomerId() {
 		return customer.getAccountID();
-	}	
+	}
+	
+	public boolean equals(CustomerHasAddress custAdd) {
+		if (custAdd.getAccountId() == getAccountId() && custAdd.getAddressId() == getAddressId()) {
+			return true;
+		}
+		
+		return false;
+	}
 }
 
 class CustomerHasAddressId implements Serializable {

@@ -43,6 +43,29 @@ public class WishlistController {
     public void createWishlist(Customer customer, List<Product> products) {
         wishlistService.createWishlist(customer, products);
     }
+    
+    /**
+     * 
+     * @param product
+     * @param accountId
+     */
+    public void addProductToWishlist(Product product, long accountId) {
+        wishlistService.addProduct(product, accountId);
+    }
+    
+    /**
+     * Removes a product from the wishlist
+     * @param product
+     * @param wishlistName
+     */
+    public void removeProductFromWishlist(Product product, long accountId) {
+        wishlistService.removeProduct(product, accountId);
+    }
+    
+    public List<Product> getProducts(Customer customer) {
+        return wishlistService.getProducts(customer.getAccountID());
+    }
+    
     /**
      * Creates a wishlist for a given customer
      * @param accountId
@@ -64,24 +87,6 @@ public class WishlistController {
     //}
     
     /**
-     * 
-     * @param product
-     * @param accountId
-     */
-    public void addProductToWishlist(Product product, long accountId) {
-        wishlistService.addProduct(product, accountId);
-    }
-    
-    /**
-     * Removes a product from the wishlist
-     * @param product
-     * @param wishlistName
-     */
-    public void removeProductFromWishlist(Product product, long accountId) {
-        wishlistService.removeProduct(product, accountId);
-    }
-    
-    /**
      * Gets all the products in the wishlist
      * @return
      */
@@ -89,10 +94,5 @@ public class WishlistController {
     //public List<Product> getProducts(String wishlistName) {
         //return wishlistService.getProducts(wishlistName);
     //}
-    
-    public List<Product> getProducts(Customer customer) {
-        return wishlistService.getProducts(customer.getAccountID());
-    }
-    
     
 }

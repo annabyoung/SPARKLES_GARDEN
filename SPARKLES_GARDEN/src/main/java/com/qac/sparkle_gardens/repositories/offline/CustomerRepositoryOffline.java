@@ -12,6 +12,7 @@ import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 import com.qac.sparkle_gardens.entities.CustomerHasCard;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.test_data.InitialData;
+import com.qac.sparkle_gardens.util.CreditStatus;
 
 /**
  * 
@@ -112,12 +113,11 @@ public class CustomerRepositoryOffline implements CustomerRepository
 
 		@Override
 		public boolean isEmail(String email){
-			
-			custlist.addAll(initialData.getCustomers());
-			for(Customer customer : custlist){
-				if(email.equals(customer.getEmail()))
+			Customer custlist = new Customer(1, "bob", "bob", "bob", CreditStatus.VALID, "bob", "bob");
+			/*for(Customer customer : custlist){*/
+				if(email.equals(custlist.getEmail()))
 					return true; 
-			}
+			//}
 		
 			return false;
 		}
