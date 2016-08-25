@@ -107,6 +107,13 @@ public class Product {
 		this.stockLevel = stockLevel;
 		this.price = price;
 	}
+	
+	public Product(long productID, String productName, int stockLevel, double price){	
+		this.productID = productID;
+		this.productName = productName;	
+		this.stockLevel = stockLevel;
+		this.price = price;
+	}
 		
 	/**
 	 * 
