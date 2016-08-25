@@ -26,15 +26,35 @@ function cardValidation() {
 
 function createNewCard(){
 	
-	var cardHolderName=document.getElementById('cardName').value;
+	var cardOwnerName=document.getElementById('cardName').value;
 	var cardNumber=document.getElementById('cardNumber').value;
-	var startDate=document.getElementById('startDate').value;
-	var expDate=document.getElementById('expDate').value;
+	var expirationDate=document.getElementById('expDate').value;
 	
-	var JSONObjCard={card:{cardHolderName: cardHolderName, cardNumber: cardNumber, startDate: startDate, expDate: expDate}};
+	var JSONObjCard={card:{cardOwnerName: cardOwnerName, cardNumber: cardNumber, expirationDate: expirationDate}};
 	
-	console.log(JSONObjCard.card.cardNumber);
+	$.postJSON("/api/cardrest/registerCard/", JSONObjCard, successCallback);
+	
 	window.location=('../homepage.xhtml');
 	return true;
 	
 }
+
+$.postJSON=function(url, data, callback){
+
+	return jQuery.ajax({
+		headers: { 
+			Accept: 'application/json',
+			contentType: 'application/json' 
+		},
+		type: 'POST',
+		url: url,
+		data: JSON.stringify(data),
+		dataType: 'json',
+		success: callback
+	});
+};
+
+$.successCallBack=function(){
+	
+	alert("Welcom to NBGardens :)");
+};

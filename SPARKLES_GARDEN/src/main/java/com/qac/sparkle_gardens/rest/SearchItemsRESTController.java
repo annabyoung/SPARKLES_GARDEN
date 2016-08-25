@@ -100,6 +100,14 @@ public class SearchItemsRESTController {
 		return (List<Product>)productService.getProductList();
 	}
 	
+	@GET
+	@Path("/product")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Product getProductListProduct(){
+		 List<Product> prod = productService.getProductList();
+		 return prod.get(0);
+	}
+	
 	/**
 	 * Retrieve the list of products that resulted from search queries
 	 */
