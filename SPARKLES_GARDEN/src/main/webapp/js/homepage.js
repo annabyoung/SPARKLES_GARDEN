@@ -9,27 +9,44 @@ function addProductToHomepage(productToAdd, i){
 	var x = document.getElementById(elemId);
 	x.appendChild(elem);
 	//End of create img
-	
-	
-	document.setElementById("productname").value = productToAdd.productName;
-	var thePrice = ("£" + productToAdd.price);
-	document.setElementById("price").value = thePrice;
-	
-	
+
+
+//	document.setElementById("productname").value = productToAdd.productName;
+//	var thePrice = ("£" + productToAdd.price);
+//	document.setElementById("price").value = thePrice;
+
+
 }
 function addAllProducts(productList){
 	console.log("addAllProducts entered and length of list is " + productList.length);
-	for (var i=0;i<productList.length;i++){
+	for (var i=0;i<5;i++){
 		console.log("in loop at position " + i);
+		console.log("productList["+i+"] = " + productList[i]);
 		addProductToHomepage(productList[i], i);
 	}
 }
 
 function getListOfProducts(){
-	var listOfProducts = $.getJSON("/api/search/productList");
-	
-	
-	alert(JSON.stringify(listOfProducts.responseJSON));
-	addAllProducts(listOfProducts);
-	console.log("addAllProducts called");
+	var listOfProducts;
+
+	listOfProducts = $.getJSON("/api/search/product").done(function getTheList(theData){
+
+		theData = listOfProducts;
+		console.log("Info Retrieved is " + theData); 
+		console.log(Object.keys(listOfProducts))
+		
+		console.log(theData);
+		
+		var theJSONObject = listOfProducts["responseText"];
+		console.log("theJSONObject = " +theJSONObject);
+		var key = "productName";
+		var prod = {productDefinition:theJSONObject}
+		console.log("Product ID = " + (prod["productDefinition"].productID));
+		
+
+//		addAllProducts(listOfProducts);
+//		console.log("addAllProducts called");
+	});
+
+
 }
