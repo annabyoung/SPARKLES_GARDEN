@@ -10,6 +10,7 @@ import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.sparkle_gardens.sample_data.ProductSamples;
 
+@Deprecated
 @Ignore
 public class OrderSamples 
 {
