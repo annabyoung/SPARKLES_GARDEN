@@ -38,10 +38,13 @@ public class Order
 {
 	public class OrderLinePairs {
 		
-		@Column 
+		@Column
+		@NotNull
 		private int quantity;
-		@Column 
-		Product product;
+		
+		@Column
+		@NotNull 
+		private Product product;
 		//check quantity is 1 
 		public OrderLinePairs(int quantity, Product product) {
 			this.quantity = quantity;

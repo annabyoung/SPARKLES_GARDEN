@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.Product;
 
+@Deprecated 
 public class OrderLinePK implements Serializable
 {
 	private static final long serialVersionUID = 1517213253333547928L;

@@ -81,17 +81,11 @@ public class OrderService
 	 * Clears all 
 	 * @return
 	 */
-	public boolean clearBasket()
+	public void clearBasket()
 	{
-		if (basket.lines.isEmpty())
-			return false;
-		// make a loop now need to remove all 
-		return basket.lines.remove(basket);
+		basket.lines.clear();
+		
 	}
-	
-	
-	
-	
 	/**
 	 * This function checks the order, ensuring the price is
 	 * not negative, and the quantity ordered is agreeable
@@ -122,10 +116,6 @@ public class OrderService
 		{
 			totalPrice += (i.getProduct().getPrice() * i.getQuantity());
 		}
-		
-		if (totalPrice == 0)
-			return 0.0;
-		
 		return totalPrice;
 	}
 	
@@ -182,7 +172,8 @@ public class OrderService
 	 * @param quantity Desired quantity
 	 * @return If product can be added or not
 	 */
-	public boolean addProductToBasket(Product p, int quantity)
+	//added order to paraamaters.... STILL TINKERING DUNNO IF WORK DO SCIENCE DANK MEME.GIF
+	public boolean addProductToBasket(Order basket, Product p, int quantity)
 	{
 		if (p == null)
 			return false;
@@ -190,7 +181,7 @@ public class OrderService
 		if (!isValid(quantity, p.getPrice(), p.getStockLevel()))
 			return false;
 		
-	//	basket.lines.add(new OrderLinePairs(quantity, p));
+	//basket.lines.add(new OrderLinePairs(quantity, p));
 		//TODO: FIX 
 		
 		return true;
