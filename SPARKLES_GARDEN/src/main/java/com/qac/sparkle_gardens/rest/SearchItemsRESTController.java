@@ -24,7 +24,7 @@ import com.qac.sparkle_gardens.services.ProductService;
  * @author Annabelle Young
  *
  */
-@Path(value="/search")
+@Path("/search")
 @RequestScoped
 public class SearchItemsRESTController {
 

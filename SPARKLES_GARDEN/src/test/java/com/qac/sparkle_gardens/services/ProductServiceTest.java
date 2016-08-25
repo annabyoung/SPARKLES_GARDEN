@@ -21,7 +21,6 @@ import com.qac.sparkle_gardens.test_data.ProductInitialData;
  */
 public class ProductServiceTest {
 	@Inject private ProductInitialData initialData = new ProductInitialData();
-	//@Inject private ProductRepository productRepository;
 	
 	Product p;
 	ProductService pi;
@@ -34,7 +33,7 @@ public class ProductServiceTest {
 		System.out.println("Setup");
 		pi = new ProductService();
 		productL = initialData.getAllProducts();
-		p = new Product("The Great American Challenge", 50, 79.99);
+		p = new Product(001, "The Great American Challenge", 50, 79.99);
 		resultList = new ArrayList<>();
 		
 	}
