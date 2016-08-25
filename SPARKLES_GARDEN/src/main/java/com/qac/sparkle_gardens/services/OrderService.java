@@ -179,12 +179,28 @@ public class OrderService
 		
 		if (!isValid(basket, quantity, product.getPrice(), product.getStockLevel()))
 			return false;
-		
+//		check if product is already in basket.
+//		if(orderhasProduct(basket, product)){
+//			basket.lines.get(i).setQuanity( += quanity);
+//		}
+//		else 
 		basket.add(quantity, product);
 		//TODO: FIX 
 		
 		return true;
 	}
+	
+	public int orderHasProduct(Order order, Product product ){
+			
+		for(int i= 0; i>order.lines.size(); i++){
+			if (order.lines.get(i).getProduct() == product)
+				return i;
+		}
+		return -1;
+	
+	}
+		
+	
 	
 	/**
 	 * Remove item from the basket by quantity
@@ -293,7 +309,7 @@ public class OrderService
 		return false;
 	}
 	
-	public Order amendOrder(Order order, long orderID, long productID, int quantity)
+	public Order amendOrder(Order order,  long productID, int quantity)
 	{
 		//Order o = repository.getOrder(orderID);
 		
