@@ -53,10 +53,10 @@ public class OrderService
 	 */
 	public boolean isOrderEmpty(long orderID)
 	{
-		 lines = repository.getOrder(orderID).getOrderLines();
+		List<OrderLinePairs> lines = repository.getOrder(orderID).getOrderLines();
 		int totalQuantity = 0;
 		
-		for (OrderLinePairs i : lines)
+		for (OrderLinePairs i : lines )
 		{
 			totalQuantity += i.getQuantity();
 		}
