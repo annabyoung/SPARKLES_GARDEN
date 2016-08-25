@@ -21,7 +21,7 @@ import com.qac.sparkle_gardens.entities.composite.OrderLinePK;
  * @author Damien Lloyd
  *
  */
-
+@Deprecated 
 @Entity
 @IdClass(OrderLinePK.class)
 @Table(name="OrderLine")
