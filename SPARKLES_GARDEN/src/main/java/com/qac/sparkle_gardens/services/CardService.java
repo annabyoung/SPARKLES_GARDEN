@@ -43,6 +43,7 @@ public class CardService {
 	 * @param cardOwner
 	 */
 	public void registerCard(Card newCard, Customer cardOwner){
+		cardChecker(newCard);
 		Card card = returnIfExisting(newCard);
 		if (card == null){
 			card = cardRepository.addCard(newCard);
@@ -62,6 +63,14 @@ public class CardService {
 		}
 	}
 	
+	public void cardChecker(Card card){
+		if (!validateCardDetails(card.getCardOwnerName(), card.getCardNumber(), card.getExpirationDate()))
+			throw new IllegalArgumentException("Invalid inputs");
+		if (!checkInDate(card.getExpirationDate())){
+			throw new IllegalArgumentException("Card expiration past");}
+		if (!checkNotBlacklisted(card.getCardNumber(), card.getExpirationDate())){
+			throw new IllegalArgumentException("Card Black Listed");}
+	}
 	
 	/**
 	 * Returns an existing card if every parameter is found on repository.
@@ -69,6 +78,7 @@ public class CardService {
 	 * @return
 	 */
 	public Card returnIfExisting(Card card){
+		cardChecker(card);
 		List<Card> cards = cardRepository.getCards();
 		for (Card existingCard: cards){
 			if (card.getCardNumber() == existingCard.getCardNumber() && 
@@ -80,6 +90,7 @@ public class CardService {
 	}
 	
 	public boolean checkIfCustomerRegisteredCardAlready(Card card, Customer cardOwner){
+		cardChecker(card);
 		List<Card> cusCards = getCardsByCustomer(cardOwner.getAccountID());
 		for (Card cusCard: cusCards){
 			if (cusCard.getCardNumber() == card.getCardNumber() && cusCard.getExpirationDate() == card.getExpirationDate())
@@ -101,11 +112,11 @@ public class CardService {
 	 * @return
 	 */
 	public boolean validateCardDetails(String cardOwnerName, String cardNumber, String expirationDate) {
-		if (!cardOwnerName.isEmpty() || !cardNumber.isEmpty() || !expirationDate.isEmpty() && 
-				cardNumber.matches("[0-9]{16}")) {
-			return true;
+		if (cardOwnerName.isEmpty() || cardNumber.isEmpty() || expirationDate.isEmpty() || 
+				!cardNumber.matches("[0-9]{16}") || !expirationDate.matches("[0-2][0-9]/[0-9][0-9]")) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	/**
@@ -116,11 +127,12 @@ public class CardService {
 	 */
 	public boolean checkInDate(String expirationDate) {
 
+		
 		java.util.Date currentDate = new java.util.Date();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(currentDate);
 		int currentMonth = 1 + calendar.get(Calendar.MONTH);
-		int currentYear = calendar.get(Calendar.YEAR);
+		int currentYear = calendar.get(Calendar.YEAR) % 100;
 		
 		Integer cardYear = Integer.parseInt(expirationDate.substring(3));
 		if (cardYear < currentYear){
@@ -162,7 +174,7 @@ public class CardService {
 	public List<Card> getCardsByCustomer(long customer){
 		//System.out.println(">>> Customer ID: " + customer + " <<<");
 		if (customer == 0)
-			return new ArrayList<Card>();
+			throw new IllegalArgumentException("CustomerID is missing");
 		return filterCards(cardOwnershipRepository.findByAccountID(customer));
 	}
 	
@@ -171,12 +183,6 @@ public class CardService {
 	 * @param customer
 	 * @return List<Card>
 	 */
-	@Deprecated
-	public List<Card> getCardsByCustomer(Customer customer){
-		if (customer.equals(null))
-			return new ArrayList<Card>();
-		return filterCards(cardOwnershipRepository.findByAccountID(customer.getAccountID()));
-	}
 	
 	private List<Card> filterCards(List<CustomerHasCard> cardsOwnedByCustomer) {
 		List<Card> cards = new ArrayList<>();
@@ -187,27 +193,6 @@ public class CardService {
 		return cards;
 	}
 	
-	/**
-	 * Deletes the card of a customer. Requires both a card and a customer.
-	 * Checks if there are any other people who own this card. If not, then the card
-	 * is deleted.
-	 * 
-	 * Method returns false if there was no card owned by such customer in the first place.
-	 * @param card
-	 * @param customer
-	 * @return
-	 */
-	public boolean deleteCardOfCustomer(Card card, Customer customer){
-		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
-			if (co.getCustomer().equals(customer) && co.getCard().equals(card)){
-				cardOwnershipRepository.removeCustomerHasCard(co);
-				if (!checkIfAnyoneOwnsCard(card)){
-//					cardRepository.removeCard(card.getCardId());
-				}
-			}
-		}
-		return false;
-	}
 	
 	/**
 	 * Deletes the card of a customer. Requires both a card and a customer.
@@ -219,32 +204,29 @@ public class CardService {
 	 * @param customer
 	 * @return
 	 */
-	public boolean deleteCardOfCustomer(long cardId, long accountId){
+	public boolean deleteCardOfCustomer(long cardID, long accountID){
+		//DeleteFlag is here so I don't get concurrent modification.
+		if (cardID == 0){
+			throw new IllegalArgumentException("Missing CardID");
+		}
+		if (accountID == 0){
+			throw new IllegalArgumentException("Missing AccountID");
+		}
+		CustomerHasCard deleteFlag = new CustomerHasCard();
 		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
-			if (co.getCustomer().getAccountID() == accountId && co.getCard().getCardID() == cardId){
-				cardOwnershipRepository.removeCustomerHasCard(co);
-				if (!checkIfAnyoneOwnsCard(cardId)){
-//					cardRepository.removeCard(cardId);
-				}
+			if (co.getCustomer().getAccountID() == accountID && co.getCard().getCardID() == cardID){
+				deleteFlag = co;
 			}
 		}
-		return false;
+		if (deleteFlag.getCard() == null){
+			return false;}
+		cardOwnershipRepository.removeCustomerHasCard(deleteFlag);
+		if (!checkIfAnyoneOwnsCard(cardID)){
+			cardRepository.removeCard(deleteFlag.getCard());
+		}
+		return true;
 	}
 	
-	/**
-	 * Returns true if anyone owns the card. Mostly used after deleteCardOfCustomer
-	 * to see if it is safe to delete a Card nobody uses anymore.
-	 * @param card
-	 * @return
-	 */
-	public boolean checkIfAnyoneOwnsCard(Card card){
-		for (CustomerHasCard co: cardOwnershipRepository.getCustomerHasCards()){
-			if (co.getCard().equals(card)){
-				return true;
-			}
-		}
-		return false;
-	}
 	
 	/**
 	 * Returns true if anyone owns the card. Mostly used after deleteCardOfCustomer
