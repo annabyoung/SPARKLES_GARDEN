@@ -29,7 +29,7 @@ public class WishlistController {
     @Inject
     private CustomerRepository customerRepository;
     @Inject 
-    private BasketController basket;
+    private OrderService orderService;
     
     /**
      * 
@@ -42,6 +42,15 @@ public class WishlistController {
     
     public void createWishlist(Customer customer, List<Product> products) {
         wishlistService.createWishlist(customer, products);
+    }
+    
+    /**
+     * Adds a product in the wishlist to the basket
+     * @param product
+     */
+    public boolean addProductToBasket(Product product) {
+    	int quantity = orderService.getQuanity(product);
+    	return orderService.addProductToBasket(product, quantity);
     }
     
     /**
