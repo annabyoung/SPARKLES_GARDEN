@@ -19,7 +19,7 @@ public class WishlistServiceTest {
 	private WishlistService wishService = new WishlistService();
 	
 	@Parameter
-	private long id = 0;
+	private long id = -1;
 	
 	private Customer customer;
 	private Product product;

@@ -21,12 +21,12 @@ public class AddressService {
 	@Inject private CustomerHasAddressRepository custAddressRepository = new CustomerHasAddressRepositoryOffline();
 	
 	/**
-	 * Retrieves the address - the list of products
+	 * Retrieves a list of the addresses a customer has
 	 * @param id
 	 * @return
 	 */
 	public List<Address> getAddress(long custId) {
-		if (custId <= 0) {
+		if (custId < 0) {
 			throw new IllegalArgumentException();
 		}
 		return addressRepository.findByAccountId(custId);
@@ -86,7 +86,7 @@ public class AddressService {
 	}
 	
 	/**
-	 * A more complex but necessary create address method
+	 * A create address method with more parameters
 	 * @param customer
 	 * @param buildingNum
 	 * @param streetName
@@ -144,7 +144,7 @@ public class AddressService {
 		
 	}
 	/**
-	 * 
+	 * Deletes the address
 	 * @param customer
 	 * @param otherAddress
 	 */
@@ -162,6 +162,21 @@ public class AddressService {
 		if (!custAddressRepository.isAccountId(address)) {
 			addressRepository.removeAddress(address);
 		}
+		
+	}
+	
+	/**
+	 * Updates the address
+	 * @param customer
+	 * @param address
+	 */
+	public void updateAddress(Customer customer, Address address) {
+		if (customer == null || address == null) {
+			throw new IllegalArgumentException();
+		}
+		CustomerHasAddress custAdd = new CustomerHasAddress(customer, address);
+		addressRepository.updateAddress(address);
+		custAddressRepository.updateCustomerHasAddress(custAdd);
 		
 	}
 	

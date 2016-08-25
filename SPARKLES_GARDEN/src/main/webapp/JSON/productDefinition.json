@@ -2,10 +2,10 @@
 	"definitions": {
 		"product": {
 			"type": "object",
-			"properties": [
-				{
+			"properties": 
+				[{
 					"productID": {
-						"type": "string"
+						"type": "number"
 					},
 					"productName": {
 						"type": "string"
@@ -14,10 +14,10 @@
 						"type": "string"
 					},
 					"quantity": {
-						"type": "string"
+						"type": "number"
 					},
 					"productPrice": {
-						"type": "double"
+						"type": "number"
 					},
 					"tags": [
 						{
@@ -26,8 +26,8 @@
 							}
 						}
 					]
-				}
-			],
+				}]
+			,
 			"required": [
 				"productID",
 				"productName",
