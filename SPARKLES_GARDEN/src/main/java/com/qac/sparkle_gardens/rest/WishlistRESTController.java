@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
@@ -67,9 +68,9 @@ public class WishlistRESTController {
      * Adds a product in the wishlist to the basket
      * @param product
      */
-    public boolean addProductToBasket(Product product) {
+    public boolean addProductToBasket(Product product, Order order) {
     	int quantity = orderService.getQuanity(product);
-    	return orderService.addProductToBasket(product, quantity);
+    	return orderService.addProductToBasket(order, product, quantity);
     }
     
     /**

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.services.OrderService;
@@ -48,9 +49,9 @@ public class WishlistController {
      * Adds a product in the wishlist to the basket
      * @param product
      */
-    public boolean addProductToBasket(Product product) {
+    public boolean addProductToBasket(Product product, Order order) {
     	int quantity = orderService.getQuanity(product);
-    	return orderService.addProductToBasket(product, quantity);
+    	return orderService.addProductToBasket(order, product, quantity);
     }
     
     /**
