@@ -39,7 +39,7 @@ public class CustomerService {
 	public boolean validateRegistrationDetails(String firstName, String lastName, String password, String email, String phone) {
 	//	if(customerRepository.findByEmail(email).equals(null)) {
 		Customer c = customerRepository.findByEmail(email);
-		if(customerRepository.isEmail(email)) {
+		if(!customerRepository.isEmail(email)) {
 			// need to check is email is valid user@domain.com format?
 			
 					if(firstName.length() >= 3 && firstName.length() < 255 ){
@@ -92,13 +92,18 @@ public class CustomerService {
 	 * If account cannot be accessed -3
 	 * If valid returns the Account ID
 	 * 
+	 *keep getting null pointers in testting.
+	 *not sure WHEN this comes up so deprecating for now and coming 
+	 *back later 
+	 *
 	 * @param email
 	 * @param password
 	 * @return
 	 */
+//	@Deprecated 
 	public long getUserIDAtLogin(String email, String password) {
 		Customer customer = customerRepository.findByEmail(email);
-		if(!customer.equals(null)) {
+		if(customer != null) {
 			if(customer.getPassword().equals(password)) {
 				if(customer.getCreditStatus().equals(CreditStatus.REJECTED) || customer.getCreditStatus().equals(CreditStatus.VALIDATING) || customer.getCreditStatus().equals(CreditStatus.DEACTIVATED))
 					return -3;
@@ -115,12 +120,22 @@ public class CustomerService {
 	 * 
 	 */
 	
-	public void makeNewCustomer(String firstName, String lastName, String email, CreditStatus creditStatus, String password, String phone){
+	public boolean makeNewCustomer(String firstName, String lastName, String email, CreditStatus creditStatus, String password, String phone){
 
 		Customer customer= new Customer(firstName, lastName, email, CreditStatus.VALIDATING, password, phone);
 		
-		customerRepository.persistCustomer(customer);
+		try{
+		 customerRepository.persistCustomer(customer);
+		 return true; 
+		 
+		} catch (NullPointerException e){
+			System.out.println("Failed to add. NO VALID INPUT Something dark side ");
+		} finally {
+			// nothing to do 
+		}
+		 return false; 
 		
+		 
 	}
 	
 	
@@ -135,12 +150,16 @@ public class CustomerService {
 	 * @param firstName
 	 * @return
 	 */
-	public void upgradeAccount(String firstName, String lastName, String email, CreditStatus creditstatus, String password, String phone)
+	public boolean upgradeAccount(String firstName, String lastName, String email, CreditStatus creditstatus, String password, String phone)
 	{
-		Customer upgradedCustomer = new Customer(firstName, lastName, email, CreditStatus.VALIDATING, password, phone);
-		
+		try{
+		Customer upgradedCustomer = new Customer(firstName, lastName, email, CreditStatus.VALIDATING, password, phone);		
 		customerRepository.persistCustomer(upgradedCustomer); 
-		
+		return true;
+		}catch(NullPointerException e){
+			System.out.println("ERROR: INVALID INPUT CANNOT UPGRADE ACCOUNT");
+		}
+		return false;
 	}
 
 	
@@ -162,21 +181,27 @@ public class CustomerService {
 	 */
 	
 	public boolean updateAccountDetails(Customer customer){
-		// validate 
+		// make a validate function;
+		try {
 		customerRepository.updateCustomer(customer);
 		return true;
+		} catch(NullPointerException e){
+			System.out.println("ERROR INVALID INPUT. cannot update customer");
+			return false;
+		}
 		
 		}
 	
 	
 	
 	public Customer getCustomerByID(long userID){
+		
 		return customerRepository.findByID(userID);
 		
  	}
 
-
-
+	
+   //validates login details. 
 	public boolean validateDetails(String username, String password) {
 		Customer user  = customerRepository.findByEmail(username);
 		
@@ -204,9 +229,15 @@ public class CustomerService {
 	 * add an address associated with customer. need to make silimar function to card
 	 * but allen is still working on card.  
 	 */
-	public void updateCustomerAddress(Customer customer , Address newAddress){
-		CustomerHasAddress cha = new CustomerHasAddress(customer, newAddress);
+	public boolean updateCustomerAddress(Customer customer , Address newAddress){
 		
+		try{
+		CustomerHasAddress cha = new CustomerHasAddress(customer, newAddress);
+		return true;
+		} catch(NullPointerException e){
+			System.out.println("ERROR WRONG THING HAPPENED. UNABLE TO UPDATE ADDRESS");
+			return false;
+		}
 		// should persist this SOMEWHERE 
 	}
 	
