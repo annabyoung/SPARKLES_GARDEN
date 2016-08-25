@@ -80,6 +80,11 @@ public class WishlistServiceTest {
 		assertFalse(wishService.getProducts(customer.getAccountID()).isEmpty());
 	}
 	
+	@Test
+	public void getWishlistShouldReturnAWishlistWithValidInput() {
+		assertNotNull(wishService.getWishlist(customer));
+	}
+	
 	
 	@After
 	public void teardown() {

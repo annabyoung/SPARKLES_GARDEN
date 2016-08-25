@@ -58,7 +58,6 @@ public class AddressServiceTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void anotherCreateAddressShouldThrowIllegalExceptionForInvalidInput() {
-		System.out.println("Another one.");
 		System.out.println("Testing anotherCreateAddressShouldThrowIllegalExceptionForInvalidInput");
 		addService.createAddress(null, null);
 	}

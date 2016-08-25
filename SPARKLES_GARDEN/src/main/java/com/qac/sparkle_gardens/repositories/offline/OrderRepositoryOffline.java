@@ -21,26 +21,16 @@ public class OrderRepositoryOffline
 	implements OrderRepository
 {
 	@Inject
-	private OrderInitialData initialData;
-
-	public OrderRepositoryOffline() 
+	private OrderInitialData initialData = new OrderInitialData();
+	
+	public void persistOrder(Order order) 
 	{
-		initialData = new OrderInitialData();
+		
+		initialData.addOrder(order);
 	}
 	
-	public void persistOrder(Order o) 
-	{
-		List<Order> orders = initialData.getOrders();
-		orders.add(o);
-		initialData.setOrders(orders);
-	}
-	
-	public void persistOrders(List<Order> o) 
-	{
-		List<Order> orders = initialData.getOrders();
-		for (Order or: o){
-			orders.add(or);
-		}
+	public void persistOrders(List<Order> orders) 
+	{	
 		initialData.setOrders(orders);
 	}
 	
@@ -59,6 +49,16 @@ public class OrderRepositoryOffline
 	public List<Order> getOrders() 
 	{
 		return initialData.getOrders();
+	}
+	
+	public void updateOrder(Order order) {
+		List<Order> orders = initialData.getOrders();
+		for (int index = 0; index < orders.size(); index++) {
+			if (order.getOrderID() == orders.get(index).getOrderID()) {
+				orders.set(index, order);
+			}
+		}
+		initialData.setOrders(orders);
 	}
 	
 	public void removeOrder(long orderID) 

@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.inject.Singleton;
 
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Order;
+import com.qac.sparkle_gardens.util.CreditStatus;
 
 /**
  * OrderInitialData contains initial data that will hold orders offline.
@@ -17,25 +19,26 @@ import com.qac.sparkle_gardens.entities.Order;
 public class OrderInitialData 
 {
 	private List<Order> orders = new ArrayList<Order>();
-	
+	private Customer customer1 = new Customer(4, "Luke", "Skywalker", "theForce@deathstar.com", CreditStatus.VALID, "password01", "2468097531");
+	private Customer customer2 = new Customer();
 	/**
 	 * Default constructor for OrderInitialData; constructs
 	 * data from relevant entities.
 	 */
 	public OrderInitialData()
 	{
-//		orders.add(OrderSamples.shoes());
-//		orders.add(OrderSamples.kinky());
-//		orders.add(OrderSamples.food());
+		orders.add(new Order(3, customer1));
+		orders.add(new Order(6, customer2));
+		
 	}
 	
 	/**
 	 * Add an order to list of orders
 	 * @param o
 	 */
-	public void addOrder(Order o)
+	public void addOrder(Order order)
 	{
-		this.orders.add(o);
+		orders.add(order);
 	}
 	
 	/**
