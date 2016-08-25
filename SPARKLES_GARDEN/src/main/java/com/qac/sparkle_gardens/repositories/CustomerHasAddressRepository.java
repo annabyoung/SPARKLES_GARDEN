@@ -3,12 +3,14 @@ package com.qac.sparkle_gardens.repositories;
 import java.util.List;
 
 import com.qac.sparkle_gardens.entities.Address;
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.CustomerHasAddress;
 
 /**
  * 
  * @author Allen Su
- *
+ * updated by Tyler Deans
+ * I needed to be able to get a specific customer has address object
  */
 public interface CustomerHasAddressRepository {
 	/**
@@ -47,14 +49,21 @@ public interface CustomerHasAddressRepository {
 	 * @param c
 	 */
 	public void removeCustomerHasAddress(CustomerHasAddress c);
-
+	
+	/**
+	 * Retrieves a specific instance of Customer Has Address
+	 * @param address
+	 * @param customer
+	 * @return
+	 */
+	public CustomerHasAddress getCustomerHasAddress(Address address, Customer customer);
 
 	/**
 	 * Finds instances of Customer Owning Addresss by Customers.
 	 * @param customerID
 	 * @return
 	 */
-	public List<CustomerHasAddress> findByAccountId(long customerId);
+	public List<CustomerHasAddress> findByAccountId(long accountId);
 	
 	/**
 	 * Finds instances of Customer Owning Addresss by Address.
