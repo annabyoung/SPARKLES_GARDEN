@@ -36,6 +36,39 @@ import com.qac.sparkle_gardens.util.PaymentStatus;
 @Table (name = "Order")
 public class Order 
 {
+	public class OrderLinePairs {
+		
+		@Column
+		@NotNull
+		private int quantity;
+		
+		@Column
+		@NotNull 
+		private Product product;
+		//check quantity is 1 
+		public OrderLinePairs(int quantity, Product product) {
+			this.quantity = quantity;
+			this.product = product;
+		}
+		public OrderLinePairs(Product product) {
+			this.quantity = 1;
+			this.product = product;
+		}
+		public int getQuantity() {
+			return quantity;
+		}
+		public void setQuantity(int quantity) {
+			this.quantity = quantity;
+		}
+		public Product getProduct() {
+			return product;
+		}
+		public void setProduct(Product product) {
+			this.product = product;
+		}
+	}//order line pairs 	
+	
+	
 	@Id
 	@NotNull
 	@Column (name = "orderID", nullable = false)
@@ -63,15 +96,12 @@ public class Order
 	private Card card;
 	
 	// List of orderlines in the order
-	private List<OrderLine> lines = new ArrayList<OrderLine>();
+	public List<OrderLinePairs> lines = new ArrayList<OrderLinePairs>();
 	
 	/**
 	 * Default constructor
 	 */
-	public Order()
-	{
-		this(0, new Customer());
-	}
+	public Order(){}
 	
 	/**
 	 * Construct Order with credentials such as orderID and customerID.
@@ -96,6 +126,21 @@ public class Order
 		this.card = card;
 	}
 	
+	
+	
+	public void add(Product product){
+		OrderLinePairs e = new OrderLinePairs(product);
+		lines.add(e);
+	}
+	
+	public void add( int quantity, Product product){
+		OrderLinePairs e = new OrderLinePairs(quantity, product);
+		lines.add(e);
+	}
+	
+	
+	// getters and setters
+	
 	/**
 	 * Get the order ID
 	 * @return orderID
@@ -119,7 +164,7 @@ public class Order
 	 * an order. See OrderLine for what it contains.
 	 * @param ol
 	 */
-	public void addOrderLine(OrderLine ol)
+	public void addOrderLine(OrderLinePairs ol)
 	{
 		lines.add(ol);
 	}
@@ -128,7 +173,7 @@ public class Order
 	 * Remove an OrderLine object from the list.
 	 * @param ol
 	 */
-	public void removeOrderLine(OrderLine ol)
+	public void removeOrderLine(OrderLinePairs ol)
 	{
 		lines.remove(ol);
 	}
@@ -137,7 +182,7 @@ public class Order
 	 * Get all the OrderLines in the Order
 	 * @return lines
 	 */
-	public List<OrderLine> getOrderLines()
+	public List<OrderLinePairs> getOrderLines()
 	{
 		return lines;
 	}
@@ -201,4 +246,9 @@ public class Order
 	}
 	
 	
+	
+
 }
+
+
+

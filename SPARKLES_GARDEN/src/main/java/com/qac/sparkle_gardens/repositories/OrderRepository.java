@@ -45,4 +45,10 @@ public interface OrderRepository
 	 * @param orderID
 	 */
 	public void removeOrder(long orderID);
+	
+	/**
+	 * Updates an order
+	 * @param order
+	 */
+	public void updateOrder(Order order);
 }

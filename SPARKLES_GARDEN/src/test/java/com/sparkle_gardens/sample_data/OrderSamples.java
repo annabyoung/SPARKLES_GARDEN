@@ -1,5 +1,5 @@
 package com.sparkle_gardens.sample_data;
-
+/**
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,6 +10,7 @@ import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.OrderLine;
 import com.sparkle_gardens.sample_data.ProductSamples;
 
+@Deprecated
 @Ignore
 public class OrderSamples 
 {
@@ -60,3 +61,4 @@ public class OrderSamples
 		return Arrays.asList(shoes(), kinky(), food());
 	}
 }
+**/

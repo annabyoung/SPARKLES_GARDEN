@@ -11,11 +11,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.qac.sparkle_gardens.controllers.BasketController;
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.entities.Wishlist;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
+import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.services.WishlistService;
 
 /**
@@ -35,7 +36,7 @@ public class WishlistRESTController {
     @Inject
     private CustomerRepository customerRepository;  
     @Inject 
-    private BasketController basket;
+    private OrderService orderService;
     
     @POST
     @Consumes("text/plain")
@@ -64,16 +65,14 @@ public class WishlistRESTController {
     }
     
     /**
-     * Adds a product from the wishlist to the basket
+     * Adds a product in the wishlist to the basket
      * @param product
      */
-    public void addProductToBasket(Product product) {
-        //orderService.addProductToBasket(product.getproductID());
+    public boolean addProductToBasket(Product product, Order order) {
+    	int quantity = orderService.getQuanity(product);
+    	return orderService.addProductToBasket(order, product, quantity);
     }
     
-    public void addProductToBasket(long productId) {
-        //orderService.addProductToBasket(productId);
-    }
     /**
      * Overloading addProductToWishlist method because 
      * a customer object can be passed or the account ID.

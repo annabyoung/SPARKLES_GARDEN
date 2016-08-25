@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.qac.sparkle_gardens.entities.Customer;
+import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.repositories.CustomerRepository;
 import com.qac.sparkle_gardens.services.OrderService;
@@ -29,7 +30,7 @@ public class WishlistController {
     @Inject
     private CustomerRepository customerRepository;
     @Inject 
-    private BasketController basket;
+    private OrderService orderService;
     
     /**
      * 
@@ -42,6 +43,15 @@ public class WishlistController {
     
     public void createWishlist(Customer customer, List<Product> products) {
         wishlistService.createWishlist(customer, products);
+    }
+    
+    /**
+     * Adds a product in the wishlist to the basket
+     * @param product
+     */
+    public boolean addProductToBasket(Product product, Order order) {
+    	int quantity = orderService.getQuanity(product);
+    	return orderService.addProductToBasket(order, product, quantity);
     }
     
     /**

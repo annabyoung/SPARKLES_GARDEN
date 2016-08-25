@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import com.qac.sparkle_gardens.entities.Product;
 import com.qac.sparkle_gardens.services.OrderService;
 import com.qac.sparkle_gardens.services.ProductService;
-
+@Deprecated 
 public class BasketController 
 {
 	@Inject
