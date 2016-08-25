@@ -126,6 +126,21 @@ public class Order
 		this.card = card;
 	}
 	
+	
+	
+	public void add(Product product){
+		OrderLinePairs e = new OrderLinePairs(product);
+		lines.add(e);
+	}
+	
+	public void add( int quantity, Product product){
+		OrderLinePairs e = new OrderLinePairs(quantity, product);
+		lines.add(e);
+	}
+	
+	
+	// getters and setters
+	
 	/**
 	 * Get the order ID
 	 * @return orderID

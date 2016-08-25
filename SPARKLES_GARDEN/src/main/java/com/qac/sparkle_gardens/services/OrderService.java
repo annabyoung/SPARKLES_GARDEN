@@ -35,7 +35,6 @@ public class OrderService
 	@Inject
 	CardService cService;
 	
-	Order basket = new Order();
 	
 	/**
 	 * Default constructor
@@ -72,7 +71,7 @@ public class OrderService
 	 * Is basket empty?
 	 * @return
 	 */
-	public boolean isBasketEmpty()
+	public boolean isBasketEmpty(Order basket)
 	{
 		return basket.lines.isEmpty();
 	}
@@ -81,7 +80,7 @@ public class OrderService
 	 * Clears all 
 	 * @return
 	 */
-	public void clearBasket()
+	public void clearBasket(Order basket)
 	{
 		basket.lines.clear();
 		
@@ -94,7 +93,7 @@ public class OrderService
 	 * @param price
 	 * @return true if the order passes, false if otherwise
 	 */
-	public boolean isValid(int quantity, double price, int stocklevel)
+	public boolean isValid(Order basket,int quantity, double price, int stocklevel)
 	{
 		if (quantity <= 0 || price <= 0.0 || 
 		  stocklevel <= 0 || quantity > stocklevel)
@@ -108,7 +107,7 @@ public class OrderService
 	 * @param lines - The list of OrderLines to be passed
 	 * @return
 	 */
-	public double getTotalPrice()
+	public double getTotalPrice(Order basket)
 	{
 		double totalPrice = 0;
 		
@@ -128,7 +127,7 @@ public class OrderService
 	 * @param orderID
 	 * @return This function will return a String which will be the invoice itself.
 	 */
-	public String generateInvoice(long orderID)
+	public String generateInvoice(Order basket, long orderID)
 	{
 //		String invoice = "";
 //		List<OrderLine> lines = repository.getOrder(orderID).getOrderLines();
@@ -172,16 +171,16 @@ public class OrderService
 	 * @param quantity Desired quantity
 	 * @return If product can be added or not
 	 */
-	//added order to paraamaters.... STILL TINKERING DUNNO IF WORK DO SCIENCE DANK MEME.GIF
-	public boolean addProductToBasket(Order basket, Product p, int quantity)
+	//added order to paramaters.... STILL TINKERING DUNNO IF WORK DO SCIENCE DANK MEME.GIF
+	public boolean addProductToBasket(Order basket, Product product, int quantity)
 	{
-		if (p == null)
+		if (product == null)
 			return false;
 		
-		if (!isValid(quantity, p.getPrice(), p.getStockLevel()))
+		if (!isValid(basket, quantity, product.getPrice(), product.getStockLevel()))
 			return false;
 		
-	//basket.lines.add(new OrderLinePairs(quantity, p));
+		basket.add(quantity, product);
 		//TODO: FIX 
 		
 		return true;
@@ -192,9 +191,9 @@ public class OrderService
 	 * @param p Product to be removed
 	 * @return
 	 */
-	public boolean removeItemFromBasket(Product p)
+	public boolean removeItemFromBasket(Order basket, Product p)
 	{
-		if (isBasketEmpty())
+		if (isBasketEmpty(basket))
 			return false;
 		
 		for (int i = 0; i < basket.lines.size(); i++)
@@ -214,7 +213,7 @@ public class OrderService
 	/**
 	 * Returns the basket
 	 */
-	public List<OrderLinePairs> getBasket()
+	public List<OrderLinePairs> getBasket(Order basket)
 	{
 		return basket.lines;
 	}
@@ -225,7 +224,9 @@ public class OrderService
 	 * @param customerID
 	 * @return
 	 */
-	public boolean createOrder(boolean payLater)
+	
+	/// WHAT THE HELL IS THIS NOISE 
+	public boolean createOrder(Order basket, boolean payLater)
 	{
 		if (basket.lines.isEmpty())
 			return false;
@@ -244,7 +245,7 @@ public class OrderService
 		order.setOrderStatus(OrderStatus.PLACED);
 		repository.persistOrder(order);
 		
-		this.clearBasket();
+		//this.clearBasket();
 		
 		return true;
 	}
@@ -292,22 +293,32 @@ public class OrderService
 		return false;
 	}
 	
-	public boolean amendOrder(long orderID, long productID, int quantity)
+	public Order amendOrder(Order order, long orderID, long productID, int quantity)
 	{
-		Order o = repository.getOrder(orderID);
+		//Order o = repository.getOrder(orderID);
 		
-		if (o.getOrderStatus() == OrderStatus.DISPATCHED)
-			return false;
+		if (order.getOrderStatus() == OrderStatus.DISPATCHED)
+			return null;
+		   //send error message. order dispatched too late to amend 
 		
-		for (int i = 0; i < o.getOrderLines().size(); i++)
+		for (int i = 0; i < order.getOrderLines().size(); i++)
 		{
-			if (o.getOrderLines().get(i).getProduct().getProductID() == productID)
-				o.getOrderLines().get(i).setQuantity(quantity);
+			if (order.getOrderLines().get(i).getProduct().getProductID() == productID)
+				order.getOrderLines().get(i).setQuantity(quantity);
 			
-			return true;
+			return order;
 		}
-		return false;
+		return null;
 	}
+	
+	/**
+	 *  returning an order to warehouse. 
+	 *  
+	 * @param orderID
+	 * @param cardNumber
+	 * @param expirationDate
+	 * @return
+	 */
 	
 	public boolean returnOrder(long orderID, String cardNumber, String expirationDate)
 	{
@@ -334,6 +345,7 @@ public class OrderService
 		 Order order = repository.getOrder(1);
 		for( OrderLinePairs orderline : order.getOrderLines() )
 		{
+			//presumes product is not on multiple order lines.
 			if (orderline.getProduct().equals(p))
       			return orderline.getQuantity();	
 		}
