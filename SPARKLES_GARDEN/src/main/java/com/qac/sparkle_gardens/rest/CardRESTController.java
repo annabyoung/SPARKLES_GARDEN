@@ -39,11 +39,11 @@ public class CardRESTController {
     @POST
     @Path("/registerCard")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createNewCard(@FormParam("cardOwnerName") String cardOwnerName, 
+    public String createNewCard(@FormParam("cardOwnerName") String cardOwnerName, 
     		@FormParam("cardNumber") String cardNumber, @FormParam("expirationDate") String expirationDate){
     	log.info("creating new card");
     	Card newCard = cardService.setupCard(cardOwnerName, cardNumber, expirationDate);
     	cardService.registerCard(newCard, customerService.getCustomerByID(currentUserController.getCustomerId()));
-    	//return;
+    	return "registerPayment.xhtml";
     }
 }

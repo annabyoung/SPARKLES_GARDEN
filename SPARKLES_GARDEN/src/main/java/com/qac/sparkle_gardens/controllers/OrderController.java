@@ -31,9 +31,7 @@ public class OrderController
 	@Inject
 	private PayByCard pay;
 	
-	private String invoice = "";
 	
-	private int quantity;
 	 
 	public OrderController()
 	{
@@ -62,7 +60,7 @@ public class OrderController
 	 * @param orderID
 	 * @return
 	 */
-	@MethodAuthor (author = "Annabelle Young")
+	@MethodAuthor (author = "Annabelle Young") 
 	public String cancelOrder(long orderID)
 	{
 		Order order = service.getOrder(orderID);
@@ -79,17 +77,6 @@ public class OrderController
 		return "order_cancelled";
 	}
 	
-	/**
-	 * Generate an invoice once an order has been placed
-	 * @param orderID
-	 * @return
-	 */
-	public String createInvoice(long orderID)
-	{
-		invoice = service.generateInvoice(orderID);
-		
-		return "orders";
-	}
 	
 	/**
 	 * This function checks whether the Order is eligible for a refund 
@@ -105,17 +92,6 @@ public class OrderController
 		return "order_return_rejected";
 	}
 	
-	public String getInvoice()
-	{
-		return invoice;
-	}
-	
-	public int getQuantity()
-	{
-		return quantity;
-	}
-
-
 	
 	/**
 	 * Add product to the basket
@@ -123,19 +99,17 @@ public class OrderController
 	 * @param quantity The quantity thereof
 	 * @return
 	 */
-	public String addItem(long productID, int quantity)
+	public String addItem(long orderID, long productID, int quantity)
 	{
+		Product product = pService.getProductByID(productID);
 		if (quantity < 1)
-			return "product_quantity_invalid";
+			return "Quantity must be greater than zero";
 		
-		Product p = pService.getProductByID(productID);
+		if (!pService.checkIfEnoughQuantity(product, quantity))
+			return "Not enough stock of product";
 
-		if (!pService.checkInStock(p))
-			return "product_not_in_stock";
-
-		service.addProductToBasket(p, quantity);
-		
-		return "product_successfully_added";
+		service.addProductToBasket(service.getOrder(orderID), product, quantity);
+		return "Added item successfully";
 	}
 	
 	/**
@@ -145,13 +119,12 @@ public class OrderController
 	 */
 	public String removeItem(long productID)
 	{
-		if (!service.isBasketEmpty())
-		{
-			service.removeItemFromBasket(pService.getProductByID(productID));
-			return "successfully_removed_item";
-		}
+		if (service.isBasketEmpty())
+			return "basket_is_empty";
 		
-		return "basket_is_empty";
+		service.removeItemFromBasket(pService.getProductByID(productID));
+		return "successfully_removed_item";
+		
 	}
 	
 	/**
@@ -162,24 +135,14 @@ public class OrderController
 	 * @param quantity
 	 * @return
 	 */
-	public String modifyItemQuantity(long productID, int quantity)
+	public String modifyItemQuantity(long orderID, long productID, int quantity)
 	{
 		this.removeItem(productID);
 		this.addItem(productID, quantity);
 		return "modified quantity";
 	}
 	
-	/**
-	 * Clear basket, emptying the contents therein
-	 * @return
-	 */
-	public String clearBasket()
-	{
-		if (!service.clearBasket())
-			return "basket_already_empty";
-		return "basket_emptied";
-	}
-	
+
 	/**
 	 * Place order with order ID and option to pay later
 	 * @param orderID The order ID Order pertains to
