@@ -45,7 +45,7 @@ public class AddressRESTController {
 	@POST
 	@Consumes ("text/plain")
 	@Path (value = "new_address")
-	public void createAddress(Customer customer, Address newAddress) {
+	public void createAddress(Customer customer, @FormParam("address") Address newAddress) {
 		addService.createAddress(customer, newAddress);
 	}
 	
