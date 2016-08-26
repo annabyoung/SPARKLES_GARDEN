@@ -1,0 +1,28 @@
+<ui:composition xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="templates/noSearchTemplate.xhtml">
+	<ui:define name="mainContent">
+		<meta charset="utf-8" />
+		<f:view>
+			<h:body>
+				<div class="container-fluid" id="loginContainer">
+					<form method="POST" action="login">
+						Email: <input type="text" name="email"></input>
+						<br></br>
+						<p>Password:</p>
+						<input type="text" name="password"></input>
+						<input type="submit"></input>
+					</form>
+					<p>This Updated</p>
+					<div>
+						<p id="contact">
+							<h:outputLink value="contact.xhtml">Contact</h:outputLink>
+						</p>
+					</div>
+				</div>
+			</h:body>
+		</f:view>
+	</ui:define>
+</ui:composition>

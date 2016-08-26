@@ -1,0 +1,93 @@
+<ui:composition xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="templates/noSearchTemplate.xhtml">
+	<ui:define name="mainContent">
+		<meta charset="utf-8" />
+		<f:view>
+			<h:body>
+				<div class="container-fluid">
+					<h:form class="form-horizontal center_div" role="form" id="formdiv">
+						<h2>Add Address</h2>
+						<div>
+							<p id="errorMessage"></p>
+						</div>
+						<div>
+							<p id="addressCount"></p>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">*House number/
+								name:</label>
+							<div class="col-sm-4">
+								<h:inputText id="houseID" name="houseName" required="true" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">*Address Line 1:</label>
+							<div class="col-sm-4">
+								<h:inputText id="ad1" name="ad1" required="true" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">Address Line 2:</label>
+							<div class="col-sm-4">
+								<h:inputText name="ad2" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">*City:</label>
+							<div class="col-sm-4">
+								<h:inputText id="city" name="city" required="true" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">County:</label>
+							<div class="col-sm-4">
+								<h:inputText name="county" required="true" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">*Country:</label>
+							<div class="col-sm-4">
+								<h:inputText id="country" name="country" required="true" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">*Postcode:</label>
+							<div class="col-sm-4">
+								<h:inputText id="postcode" name="postcode" required="true" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">Address Type:</label>
+							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<h:selectOneMenu class="form-control" name="addressType">
+									<f:selectItem itemValue="Billing" itemlabel="Billing" />
+									<f:selectItem itemValue="Shipping" itemlabel="Shipping" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+					</h:form>
+					<div id= "clonePoint">
+					</div>
+					<div>
+						<span> <h:commandButton value="Add Another Address"
+								class="btn btn-primary" role="button" id="extraForm" />
+						</span> <span> <h:commandButton class="btn btn-primary"
+								type="button" role="button" value="Continue to add payment"
+								onclick="addressValidation()" />
+						</span>
+					</div>
+				</div>
+				<div>
+					<p id="contact">
+						<a href="contact.xhtml">Contact</a>
+					</p>
+				</div>
+				<script src="..\js\addressValidation.js"></script>
+				<script src="..\js\formReplication.js"></script>
+			</h:body>
+		</f:view>
+	</ui:define>
+</ui:composition>

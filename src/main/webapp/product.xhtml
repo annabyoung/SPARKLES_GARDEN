@@ -1,0 +1,55 @@
+<ui:composition xmlns="https://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="templates/navbar_Template.xhtml">
+	<ui:define name="mainContent">
+		<div class="container-fluid" id="formdiv">
+			<div class="col-sm-3 col-lg-3 col-md-3">
+				<div class="thumbnail">
+					<img id="prodimg" src="/img/gnome1.jpg" alt="" width="640 px"
+						height="360 px" />
+				</div>
+			</div>
+			<div id="buttonArea" class="pull-right col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding:1%">
+				<table style="width: 100%">
+					<tr>
+						<th></th>
+					</tr>
+					<tr>
+						<td><h:commandButton class="center-block col-xs-10 col-sm-10 col-md-10 col-lg-10" id="addToBasket"
+									value="Add To Basket" role="button" /></td>
+					</tr>
+					<tr><td><p> </p></td></tr>
+					<tr>
+						<td><h:commandButton class="center-block col-xs-10 col-sm-10 col-md-10 col-lg-10" id="addToWishlist"
+									value="Add To Wishlist" role="button"/></td>
+					</tr>
+				</table>
+			</div>
+			<div id="productname">
+				<a href="#">Red Gnome</a>
+			</div>
+			<div id="stocklevel">
+				<p align="left">17 in stock</p>
+			</div>
+
+			<div id="productdesc">
+				<p>This is a longer description. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit.</p>
+			</div>
+			
+		</div>
+	</ui:define>
+</ui:composition>
