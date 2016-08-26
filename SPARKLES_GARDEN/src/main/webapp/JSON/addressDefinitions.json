@@ -9,7 +9,8 @@
 				"city": {"type": "string"},
 				"county": {"type": "string"},
 				"country": {"type": "string"},
-				"postcode": {"type": "string"}
+				"postcode": {"type": "string"},
+				"addressType": {"type": "string"}
 			},
 	
 			"required": ["houseNum", "line1", "city", "country", "postcode"]
