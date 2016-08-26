@@ -1,3 +1,16 @@
+$("#theBody").ready(function() {
+	getListOfProducts();
+/*	$("#extraForm").click(function(){
+		$("#formdiv").clone().appendTo("#clonePoint");
+		addressCount.html("Address" + count);
+	})
+*/
+});
+
+
+
+
+
 function addProductToHomepage(productToAdd, i){	
 	//Create img
 	var elem = document.createElement("img");
@@ -86,4 +99,8 @@ function getDataElement(product){
 	}
 	tags+=finalTag;
 	console.log("Tags = " + tags);
+	while (desc.includes(" %2C")){
+		desc = desc.replace(" %2C", ",");
+	}
+	console.log("Desc After Loop = " + desc);
 }

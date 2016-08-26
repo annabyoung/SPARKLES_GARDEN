@@ -102,7 +102,7 @@ public class ProductInitialData {
 		p5.addProductTags("value");
 		p5.addProductTags("gnome");
 		p5.addProductTags("kitty_kreationz");
-		p5.setProductDescription("It's bad, and we know it's bad, but we needed something for Kitty to do so she designed this crap.");
+		p5.setProductDescription("It's bad %2C and we know it's bad %2C but we needed something for Kitty to do so she designed this crap.");
 		products.add(p5);
 	}
 	
