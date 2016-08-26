@@ -49,8 +49,9 @@ public class WishlistController {
      * Adds a product in the wishlist to the basket
      * @param product
      */
-    public boolean addProductToBasket(Product product, Order order) {
+    public boolean addProductToBasket(Product product, Order order, Customer customer) {
     	int quantity = orderService.getQuanity(product);
+    	wishlistService.removeProduct(product, customer.getAccountID());
     	return orderService.addProductToBasket(order, product, quantity);
     }
     

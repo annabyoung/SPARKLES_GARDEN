@@ -124,6 +124,7 @@ public class WishlistService {
 		return wishlistRepository.getProducts(customer.getAccountID());
 	}
 	
+	// Gets a list of products
 	public List<Product> getProducts(long accountId) {
 		if (accountId <= 0) {
 			throw new IllegalArgumentException();

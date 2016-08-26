@@ -30,21 +30,21 @@ public class AddressRESTController {
 	
 	@POST
 	@Consumes ("text/plain")
-	@Path (value = "new_address")
+	@Path (value = "new_address_1")
 	public void createAddress(Customer customer, @FormParam("buildingNum")String buildingNum, @FormParam("addressLine1") String addressLine1, @FormParam("city") String city, @FormParam("county") String county, @FormParam("country") String country, @FormParam("postCode") String postCode, @FormParam("addressType") String addressType) {
 		addService.createAddress(customer, buildingNum, addressLine1, city, county, country, postCode, addressType);
 	}
 	
 	@POST
 	@Consumes ("text/plain")
-	@Path (value = "new_address")
+	@Path (value = "new_address_2")
 	public void createAddress(Customer customer, @FormParam("buildingNum")String buildingNum, @FormParam("addressLine1") String addressLine1, @FormParam("addressLine2") String addressLine2, @FormParam("city") String city, @FormParam("county") String county, @FormParam("country") String country, @FormParam("postCode") String postCode, @FormParam("addressType") String addressType) {
 		addService.createAddress(customer, buildingNum, addressLine1, addressLine2, city, county, country, postCode, addressType);
 	}
 	
 	@POST
 	@Consumes ("text/plain")
-	@Path (value = "new_address")
+	@Path (value = "new_address_3")
 	public void createAddress(Customer customer, @FormParam("address") Address newAddress) {
 		addService.createAddress(customer, newAddress);
 	}
