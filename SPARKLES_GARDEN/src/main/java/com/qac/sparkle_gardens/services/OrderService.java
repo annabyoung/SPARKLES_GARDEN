@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+
+import com.qac.sparkle_gardens.entities.Card;
+import com.qac.sparkle_gardens.entities.Customer;
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.entities.Order.OrderLinePairs;
 import com.qac.sparkle_gardens.entities.OrderLine;
@@ -50,22 +53,22 @@ public class OrderService
 	 * @param orderID
 	 * @return
 	 */
-	public boolean isOrderEmpty(long orderID)
-	{
-		List<OrderLinePairs> lines = repository.getOrder(orderID).getOrderLines();
-		int totalQuantity = 0;
-		
-		for (OrderLinePairs i : lines )
-		{
-			totalQuantity += i.getQuantity();
-		}
-		
-		if (totalQuantity == 0)
-			return true;
-		
-		return false;
-	}
-	
+//	public boolean isOrderEmpty(long orderID)
+//	{
+//		List<OrderLinePairs> lines = repository.getOrder(orderID).getOrderLines();
+//		int totalQuantity = 0;
+//		
+//		for (OrderLinePairs i : lines )
+//		{
+//			totalQuantity += i.getQuantity();
+//		}
+//		
+//		if (totalQuantity == 0)
+//			return true;
+//		
+//		return false;
+//	}
+//	
 	
 	/**
 	 * Is basket empty?
@@ -242,28 +245,33 @@ public class OrderService
 	 */
 	
 	/// WHAT THE HELL IS THIS NOISE 
-	public boolean createOrder(Order basket, boolean payLater)
+	public Order createOrder()
 	{
-		if (basket.lines.isEmpty())
-			return false;
-		
 		Order order = new Order();
-		order.setPayLater(payLater);
+		return order;
 		
-		for (OrderLinePairs i : basket.getOrderLines())
-		{
-			order.addOrderLine(i);
-			
-			if (w_repository.inWishlist(i.getProduct(), order.getCustomer().getAccountID()))
-				w_repository.removeProduct(i.getProduct(), order.getCustomer().getAccountID());
-		}
-		
-		order.setOrderStatus(OrderStatus.PLACED);
-		repository.persistOrder(order);
-		
-		//this.clearBasket();
-		
-		return true;
+//		//dunno what this is for.
+//		//if (basket.lines.isEmpty())
+//			//return false;
+//		
+//		Order order = new Order();
+//		// why is this a thing and not in the constructor?
+//		order.setPayLater(payLater);
+//		
+//		for (OrderLinePairs i : basket.getOrderLines())
+//		{
+//			order.addOrderLine(i);
+//			
+//			if (w_repository.inWishlist(i.getProduct(), order.getCustomer().getAccountID()))
+//				w_repository.removeProduct(i.getProduct(), order.getCustomer().getAccountID());
+//		}
+//		
+//		order.setOrderStatus(OrderStatus.PLACED);
+//		repository.persistOrder(order);
+//		
+//		//this.clearBasket();
+//		
+//		return true;
 	}
 	
 	/**
@@ -301,19 +309,19 @@ public class OrderService
 		Order order = repository.getOrder(orderID);
 		OrderStatus orderStatus = order.getOrderStatus();
 		
-		if (orderStatus == OrderStatus.PLACED || 
-			orderStatus == OrderStatus.PACKING)
+		if (orderStatus == OrderStatus.DISPATCHED|| 
+			orderStatus == OrderStatus.DELIVERED)
 		{
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
-	public Order amendOrder(Order order,  long productID, int quantity)
+	public Order amendOrder(Order order, long productID, int quantity)
 	{
 		//Order o = repository.getOrder(orderID);
 		
-		if (order.getOrderStatus() == OrderStatus.DISPATCHED)
+		if (order.getOrderStatus() == OrderStatus.DISPATCHED || order.getOrderStatus() == OrderStatus.DELIVERED)
 			return null;
 		   //send error message. order dispatched too late to amend 
 		
@@ -366,6 +374,50 @@ public class OrderService
       			return orderline.getQuantity();	
 		}
 		return 0; 
+		
+	}
+	
+	public boolean placeOrder(Order order, Card card)
+	{	
+		//check if there is valid data.
+		cService.cardChecker(card);
+		// i'd like it is card checker returned a boolean so i could verify it checks out.
+		order.setOrderStatus(OrderStatus.PLACED);
+		
+		//charge card stub call make science.
+		
+		return false;
+		
+	}	
+	
+	
+	/**
+	 * warehouse may send message to change order to be procc
+	 * 
+	 * @param OrderID
+	 * @param orderstatus
+	 * @return
+	 */
+	public boolean amendOrderStatus(long OrderID, OrderStatus orderstatus){
+		
+		//should do science and make it 
+		
+		return false;
+	}
+	
+	public List<Order> getOrdersByCustomer(Customer customer){
+		List<Order> ordersByCustomers = new ArrayList<Order>();
+		List<Order> orders= repository.getOrders();
+		
+		for(Order order: orders){
+			if (order.getCustomer() == customer){
+				ordersByCustomers.add(order);
+			}
+			
+		}
+			return ordersByCustomers;
+		
+		
 		
 	}
 }
