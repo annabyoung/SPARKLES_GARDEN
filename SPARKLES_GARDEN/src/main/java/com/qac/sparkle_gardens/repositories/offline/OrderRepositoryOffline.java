@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import com.qac.sparkle_gardens.entities.Order;
 import com.qac.sparkle_gardens.repositories.OrderRepository;
+import com.qac.sparkle_gardens.test_data.InitialData;
 import com.qac.sparkle_gardens.test_data.OrderInitialData;
 
 /**
@@ -21,16 +22,21 @@ public class OrderRepositoryOffline
 	implements OrderRepository
 {
 	@Inject
-	private OrderInitialData initialData = new OrderInitialData();
+	private InitialData initialData = new InitialData();
 	
 	public void persistOrder(Order order) 
 	{
-		
-		initialData.addOrder(order);
+		List<Order> orders = initialData.getOrders();
+		orders.add(order);
+		initialData.setOrders(orders);
 	}
 	
 	public void persistOrders(List<Order> orders) 
 	{	
+		List<Order> retrievedOrders = initialData.getOrders();
+		for(Order order: orders){
+			retrievedOrders.add(order);
+		}
 		initialData.setOrders(orders);
 	}
 	

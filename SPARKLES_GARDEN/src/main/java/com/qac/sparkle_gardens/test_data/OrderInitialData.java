@@ -27,8 +27,8 @@ public class OrderInitialData
 	 */
 	public OrderInitialData()
 	{
-		orders.add(new Order(3, customer1));
-		orders.add(new Order(6, customer2));
+		orders.add(new Order(1, customer1));
+		orders.add(new Order(2, customer2));
 		
 	}
 	
