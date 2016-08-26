@@ -33,7 +33,7 @@ public class WishlistController {
     private OrderService orderService;
     
     /**
-     * 
+     * Creates a wishlist where only one product id added
      * @param accountId
      * @param product
      */
@@ -41,13 +41,22 @@ public class WishlistController {
         wishlistService.createWishlist(customerRepository.findByID(customer.getAccountID()), product);
     }
     
+    /**
+     * Creates a wishlist where a list of products are added
+     * @param customer
+     * @param products
+     */
     public void createWishlist(Customer customer, List<Product> products) {
         wishlistService.createWishlist(customer, products);
     }
     
+    
+    
     /**
      * Adds a product in the wishlist to the basket
      * @param product
+     * @param order
+     * @param customer
      */
     public boolean addProductToBasket(Product product, Order order, Customer customer) {
     	int quantity = orderService.getQuanity(product);

@@ -23,7 +23,7 @@ import com.qac.sparkle_gardens.services.AddressService;
  * This controller creates, deletes, updates, and retrieves addresses
  */
 
-@Path (value = "/")
+@Path (value = "/address")
 @RequestScoped
 public class AddressRESTController {
 	@Inject private AddressService addService;
@@ -43,7 +43,7 @@ public class AddressRESTController {
 	}
 	
 	@POST
-	@Consumes ("text/plain")
+	@Consumes (MediaType.APPLICATION_JSON)
 	@Path (value = "new_address_3")
 	public void createAddress(Customer customer, @FormParam("address") Address newAddress) {
 		addService.createAddress(customer, newAddress);
