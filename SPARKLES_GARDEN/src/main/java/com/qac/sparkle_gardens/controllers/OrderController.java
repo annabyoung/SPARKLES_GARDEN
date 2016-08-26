@@ -47,7 +47,7 @@ public class OrderController
 	 */
 	public String amendOrder(long orderID, long productID, int quantity)
 	{
-		if (service.amendOrder(orderID, productID, quantity))
+		if (service.amendOrder(service.getOrder(orderID), productID, quantity) != null)
 			return "order_amended";
 		return "order_not_amended";
 	}
@@ -101,10 +101,10 @@ public class OrderController
 	 */
 	public String addItem(long orderID, long productID, int quantity)
 	{
-		Product product = pService.getProductByID(productID);
 		if (quantity < 1)
 			return "Quantity must be greater than zero";
-		
+
+		Product product = pService.getProductByID(productID);
 		if (!pService.checkIfEnoughQuantity(product, quantity))
 			return "Not enough stock of product";
 
@@ -117,13 +117,15 @@ public class OrderController
 	 * @param productID ID of product to remove
 	 * @return
 	 */
-	public String removeItem(long productID)
+	public String removeItem(long orderID, long productID)
 	{
-		if (service.isBasketEmpty())
-			return "basket_is_empty";
-		
-		service.removeItemFromBasket(pService.getProductByID(productID));
-		return "successfully_removed_item";
+		/**
+		 * Don't have to check if product is empty because remove item
+		 * doesn't care if it's there or not.
+		 */
+		if (service.removeItemFromBasket(service.getOrder(orderID), pService.getProductByID(productID)))
+			return "Successfully removed item!";
+		return "Item was not in basket!";
 		
 	}
 	
@@ -137,9 +139,9 @@ public class OrderController
 	 */
 	public String modifyItemQuantity(long orderID, long productID, int quantity)
 	{
-		this.removeItem(productID);
-		this.addItem(productID, quantity);
-		return "modified quantity";
+		if (service.amendOrder(service.getOrder(orderID), productID, quantity) != null)
+			return "modified quantity";
+		return "Failed to modify item quantity";
 	}
 	
 
@@ -149,6 +151,7 @@ public class OrderController
 	 * @param payLater Do you want to buy-now-pay-later?
 	 * @return
 	 */
+	//WHAT IS THIS NONSENSE!!!?!?!?!?!??????!??!?!??!
 	public String placeOrder(boolean payLater, String cardName, 
 			String cardNumber, String cvs, String expirationDate)
 	{
