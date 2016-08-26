@@ -27,7 +27,7 @@ import com.qac.sparkle_gardens.services.WishlistService;
  * 
  */
 
-@Path (value = "/")
+@Path (value = "/wishlist")
 @RequestScoped
 public class WishlistRESTController {
     
@@ -38,6 +38,12 @@ public class WishlistRESTController {
     @Inject 
     private OrderService orderService;
     
+    /**
+     * A customer automatically has a wishlist 
+     * so it is not manually created. So the account ID is only required
+     * Products can be added to the list whenever the customer wants to
+     * @param accountId
+     */
     @POST
     @Consumes("text/plain")
     @Path("new_wishlist")
@@ -86,6 +92,11 @@ public class WishlistRESTController {
         wishlistService.addProduct(product, accountId);
     }
     
+    /**
+     * 
+     * @param product
+     * @param customer
+     */
     public void addProductToWishlist(Product product, Customer customer) {
         wishlistService.addProduct(product, customer.getAccountID());
     }
@@ -93,12 +104,20 @@ public class WishlistRESTController {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("wishlist")
+    /**
+     * 
+     * @param customer
+     * @return
+     */
     public Wishlist getWishlist(Customer customer) {
         return wishlistService.getWishlist(customer);
     }
     
     /**
      * Removes a product from the wishlist
+     * On the frint end they could pass a customer object or an
+     * account ID
+     * 
      * @param product
      * @param wishlistName
      */
@@ -106,6 +125,11 @@ public class WishlistRESTController {
         wishlistService.removeProduct(product, accountId);
     }
     
+    /**
+     * 
+     * @param product
+     * @param customer
+     */
     public void removeProductFromWishlist(Product product, Customer customer) {
         wishlistService.removeProduct(product, customer.getAccountID());
     }
