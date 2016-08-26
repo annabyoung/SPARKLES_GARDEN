@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -68,7 +69,7 @@ public class Order
 		}
 	}//order line pairs 	
 	
-	
+
 	@Id
 	@NotNull
 	@Column (name = "orderID", nullable = false)
@@ -108,7 +109,7 @@ public class Order
 	 */
 	public Order(long orderID, Customer customer)
 	{
-		this.orderStatus = OrderStatus.EMPTY;
+		this.orderStatus = OrderStatus.BASKET;
 		this.paymentStatus = PaymentStatus.UNPAID;
 		this.orderID = orderID;
 		this.customer = customer;

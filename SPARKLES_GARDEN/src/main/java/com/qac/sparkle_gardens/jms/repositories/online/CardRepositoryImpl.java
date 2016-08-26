@@ -38,22 +38,29 @@ public class CardRepositoryImpl implements CardRepository{
 
 	@Override
 	public Card findByID(long id) {
-		// TODO Auto-generated method stub
 		EntityManager em = pm.CreateEntityManager();
-		return (Card) em.createQuery("1 from Cards c Where c.id equals " + id).getResultList().get(0);
-		//pm.CloseEntityManager(em);
+		Card result =  (Card) em.createQuery("1 from Cards c Where c.id equals " + id).getResultList().get(0);
+		pm.CloseEntityManager(em);
+		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Card> getCards() {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = pm.CreateEntityManager();
+		List<Card> result = em.createQuery("Select c from Cards c").getResultList();
+		pm.CloseEntityManager(em);
+		return result;
 	}
 
 	@Override
 	public void removeCard(Card c) {
-		// TODO Auto-generated method stub
-		//em.createQuery("DELETE from Cards c Where c.id equals + id");
+		long id = c.getCardID();
+		EntityManager em = pm.CreateEntityManager();
+		em.getTransaction().begin();
+		em.createQuery("DELETE from Cards c Where c.id equals" + id);
+		em.getTransaction().commit();
+		pm.CloseEntityManager(em);
 	}
 
 	@Override

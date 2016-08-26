@@ -13,7 +13,13 @@ public enum OrderStatus
 	/**
 	 * The order is a null state with no items in it
 	 */
-	EMPTY,
+	//EMPTY,
+	//not going to use this
+	/**
+	 * Order has items in it but has not made it to checkout yet 
+	 */
+	
+	BASKET,
 	
 	/**
 	 * The order has been placed, whether it's paid now or not
@@ -21,15 +27,15 @@ public enum OrderStatus
 	PLACED,
 	
 	/**
-	 * The order is in the process of being packed and dispatched
+	 * The order is packed and awaiting dispatch
 	 */
-	PACKING,
+	PROCESSED,
 	
 	/**
-	 * The order has been cancelled before it is dispatched
+	 * the order has been cancled by the user. 
+	 * NOTE: After an order is DISPATCHED it cannot be CANCELED
 	 */
-	CANCELLED,
-	
+	CANCELED, 
 	/**
 	 * The order has been handed over to the courier for dispatch
 	 */
