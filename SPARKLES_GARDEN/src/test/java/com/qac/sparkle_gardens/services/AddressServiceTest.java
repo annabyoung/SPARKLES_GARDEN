@@ -75,6 +75,11 @@ public class AddressServiceTest {
 		assertFalse(addService.getAddress(customer.getAccountID()).isEmpty());
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void updateAddressShouldThrowIllegalExceptionForInvalidInput() {
+		addService.updateAddress(null, address);
+	}
+	
 	@After
 	public void teardown() {
 		System.out.println("Test done. PEACE OUT!!");
